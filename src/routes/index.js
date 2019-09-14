@@ -1,4 +1,5 @@
 import express from 'express';
+import {user} from '../controllers/index.js';
 
 const routes = express.Router();
 
@@ -11,5 +12,8 @@ routes.all('*', function(req, res, next){
 routes.get('/', function(req, res) {
     return res.status(200).json({message: `Hotels API`});
 })
+
+// user routes
+routes.route('/user').post(user.createUser);
 
 export default routes;
