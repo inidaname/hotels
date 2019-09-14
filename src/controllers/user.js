@@ -36,3 +36,23 @@ export async function login(req, res){
         return res.status(error.status || 500).json({message: error.message});
     }
 }
+
+export async function getUserById (req, res) {
+    try {
+        const {id} = req.params
+        
+        if (!id) {
+            throw {message: `User was not found`, status: 404}
+        }
+
+        const findUser = await userModel.findById(id).lean().populate('-password -__v').exec();
+
+        if(!findUser) {
+            throw {message: `User was not found`, status: 404}
+        }
+
+        return res.status(200).json({message: `User found`, data: findUser});
+    } catch (error) {
+        return res.status(error.status || 500).json({message: error.message});
+    }
+}
