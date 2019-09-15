@@ -56,3 +56,38 @@ export async function getUserById (req, res) {
         return res.status(error.status || 500).json({message: error.message});
     }
 }
+
+export async function updateUser (req, res) {
+    try {
+        const {id} = req.params;
+
+        if (!id) {
+            throw {message: `Please provide user to update`, status: 402}
+        }
+
+		let options = req.body;
+		const updates = {};
+
+		for (const option of Object.keys(options)) {
+			updates[option] = options[option];
+        }
+
+        delete updates.password
+        
+        if (!updates) {
+            throw {message: `Please provide data to update`, status: 400}
+        }
+
+        const checkUser = await userModel.findByIdAndUpdate(id, updates, {new: true}).lean().select('-__v').exec();
+
+        if (!checkUser) {
+            throw {message: `User does not exist`, status: 404}
+        }
+
+        return res.status(201).json({message: `Data updated successfully`, data: checkUser});
+        // @TODO: to implement more logic
+
+    } catch (error) {
+        return res.status(error.status || 500).json({message: error.message});
+    }
+}

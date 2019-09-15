@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import * as muv from 'mongoose-unique-validator';
 
-mongoose.Promise = global.Promise;
 
 const userSchema = new mongoose.Schema({
     email: {
@@ -34,4 +33,4 @@ userSchema.pre('save', function(next) {
 	});
 })
 
-export const userModel = mongoose.model('User', userSchema, 'user');
+export default mongoose.model('User', userSchema, 'user');

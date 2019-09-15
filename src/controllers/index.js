@@ -1,2 +1,3 @@
 import  * as user from './user.js';
-export {user}
+import * as counter from './counter.js';
+export {user, counter}
