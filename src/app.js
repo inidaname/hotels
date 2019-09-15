@@ -6,6 +6,7 @@ import logger from 'morgan';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import db from './utils/db.js'
 
 mongoose.Promise = global.Promise;
 

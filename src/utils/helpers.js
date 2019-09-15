@@ -1,1 +1,0 @@
-export function checkPassword(plainPassword, hashedPassword)
