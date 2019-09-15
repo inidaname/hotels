@@ -1,4 +1,4 @@
-import { customer, userModel } from '../models';
+import { customer, userModel } from '../models/index.js';
 
 export async function createCustomer (req, res) {
     try {

@@ -1,4 +1,4 @@
-import {counterModel, userModel} from '../models';
+import {counterModel, userModel} from '../models/index.js';
 
 export async function createCounter (req, res){
     try {

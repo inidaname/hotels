@@ -1,4 +1,4 @@
-import { roomsModel } from '../models';
+import { roomsModel } from '../models/index.js';
 
 
 export async function createRoom (req, res) {

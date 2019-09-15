@@ -1,5 +1,5 @@
 import express from 'express';
-import {user, counter, admin, customer, rooms} from '../controllers';
+import {user, counter, admin, customer, rooms} from '../controllers/index.js';
 
 const routes = express.Router();
 
@@ -11,7 +11,7 @@ const routes = express.Router();
 //     }
 // });
 
-routes.get('/', function(req, res) {
+routes.all('/', function(req, res) {
     return res.status(200).json({message: `Hotels API`});
 });
 

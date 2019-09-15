@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
-import * as muv from 'mongoose-unique-validator';
+import muv from 'mongoose-unique-validator';
+
 
 const counterSchema = new mongoose.Schema({
     userId: {
