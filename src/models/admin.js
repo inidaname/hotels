@@ -2,11 +2,10 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import * as muv from 'mongoose-unique-validator';
 
-const counterSchema = new mongoose.Schema({
+const adminSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Types.ObjectId,
-        required: [true, `Please Select user`],
-        ref: 'User'
+        required: [true, `Please provide User`]
     },
     fullName: {
         required: [true, `Please provide your Full Name`],
@@ -21,6 +20,6 @@ const counterSchema = new mongoose.Schema({
     }
 }, {timestamps: true});
 
-counterSchema.plugin(muv);
+adminSchema.plugin(muv);
 
-export default mongoose.model('Counter', counterSchema, 'counter');
+export default mongoose.model('Admin', adminSchema, 'admin');
