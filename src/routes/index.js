@@ -1,5 +1,5 @@
 import express from 'express';
-import {user, counter, admin, customer} from '../controllers';
+import {user, counter, admin, customer, rooms} from '../controllers';
 
 const routes = express.Router();
 
@@ -40,7 +40,21 @@ routes.route('/admin/?:id')
     .get(admin.getAdminById)
     .patch(admin.updateData);
 
-routes.route('/customer')
+routes.route('/customer/?:id')
     .post(customer.createCustomer)
-    .get(customer.getCustomer);
+    .get(customer.getCustomer)
+    .patch(customer.updateCustomer);
+
+routes.route('/room')
+    .post(rooms.createRoom)
+    .get(rooms.getAllRooms);
+
+routes.route('/room/name')
+    .get(rooms.getRoomByName);
+
+routes.route('/room/number')
+    .get(rooms.getRoomByNumber);
+
+routes.route('/room/?:id')
+    .get(rooms.updateRoom);
 export default routes;

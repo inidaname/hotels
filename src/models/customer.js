@@ -23,10 +23,14 @@ const customerSchema = new mongoose.Schema({
     address: {
         type: String
     },
-    rooms: [{
+    previousRooms: [{
         type: mongoose.Types.ObjectId,
         ref: 'Rooms'
-    }]
+    }],
+    room: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Rooms'
+    }
 }, {timestamps: true});
 
 customerSchema.plugin(muv);
