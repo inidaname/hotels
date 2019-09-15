@@ -1,4 +1,4 @@
-import {adminModel} from '../models/index.js';
+import {adminModel} from '../models';
 
 export async function createAdmin (req, res) {
     try {
