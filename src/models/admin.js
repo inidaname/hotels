@@ -5,7 +5,8 @@ import * as muv from 'mongoose-unique-validator';
 const adminSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Types.ObjectId,
-        required: [true, `Please provide User`]
+        required: [true, `Please provide User`],
+        ref: 'User'
     },
     fullName: {
         required: [true, `Please provide your Full Name`],
