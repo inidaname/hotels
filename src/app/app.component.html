@@ -1,15 +1,4 @@
-<header>
-  <div class="logo">
-    <h1>{{title}}</h1>
-  </div>
-  <nav>
-    <ul>
-      <li>Home</li>
-      <li>Profile</li>
-      <li>Settings</li>
-    </ul>
-  </nav>
-</header>
+<app-header [title]="title"></app-header>
 <main>
   <router-outlet></router-outlet>
 </main>
