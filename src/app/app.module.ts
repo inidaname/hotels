@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { NotFoundComponent } from './home/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    NotFoundComponent
   ],
   imports: [
     AppRoutingModule,
