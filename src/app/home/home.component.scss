@@ -3,6 +3,10 @@
     width: 200px;
 }
 
+section {
+    min-height: 86vh !important;
+}
+
 li {
     padding: 21px;
     border-bottom: 1px solid #ccc;
@@ -10,4 +14,9 @@ li {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+}
+
+.topcon {
+    width: 350px;
+    height: 120px;
 }

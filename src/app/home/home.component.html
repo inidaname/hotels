@@ -2,18 +2,52 @@
     <section class="sidebar border">
         <nav class="h-100 ml-4 mt-4 d-flex flex-column align-items-end">
             <ul class="list-unstyled w-100 d-flex flex-column mr-0 justify-content-around align-items-end">
-                <li><fa-icon [icon]="faDoorOpen"></fa-icon>Dashboard</li>
-                <li><fa-icon [icon]="faCheckSquare"></fa-icon>Check Ins</li>
-                <li><fa-icon [icon]="faEnvelope"></fa-icon>Message</li>
-                <li><fa-icon [icon]="faUser"></fa-icon>Settings</li>
-                <li><fa-icon [icon]="faSignOutAlt"></fa-icon>Log Out</li>
+                <li>
+                    <fa-icon [icon]="faDoorOpen"></fa-icon>Dashboard
+                </li>
+                <li>
+                    <fa-icon [icon]="faCheckSquare"></fa-icon>Check Ins
+                </li>
+                <li>
+                    <fa-icon [icon]="faEnvelope"></fa-icon>Message
+                </li>
+                <li>
+                    <fa-icon [icon]="faUser"></fa-icon>Settings
+                </li>
+                <li>
+                    <fa-icon [icon]="faSignOutAlt"></fa-icon>Log Out
+                </li>
             </ul>
         </nav>
     </section>
-    <section class="mainbar">
-        <div class="d-flex flex-column justify-content-around align-items-center w-100 h-100">
-            <div class="topcon shadow-sm">
-                
+    <section class="mainbar w-100 h-100">
+        <div class="d-flex flex-column">
+            <div class="d-flex flex-row justify-content-around align-items-center w-100 ">
+                <div class="topcon shadow-sm rounded d-flex flex-column justify-content-around align-items-center m-2">
+                    <h3>Current Rooms</h3>
+                    <div class="btn-group-sm w-100 d-flex flex-row justify-content-around align-items-center">
+                        <button type="button" class="btn shadow-sm btn-success btn-sm">
+                            Available <span class="badge badge-light">4</span>
+                        </button>
+                        <button type="button" class="btn shadow-sm btn-danger btn-sm">
+                            Occupied <span class="badge badge-light">4</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="topcon d-flex shadow-sm flex-column justify-content-around align-items-center">
+                    <h3>Reservations</h3>
+                    <div class="btn-group-sm w-100 d-flex flex-row justify-content-around align-items-center">
+                        <button type="button" class="btn shadow-sm btn-success btn-sm">
+                            Available <span class="badge badge-light">4</span>
+                        </button>
+                        <button type="button" class="btn shadow-sm btn-danger btn-sm">
+                            Occupied <span class="badge badge-light">4</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="w-75 m-auto">
+                See what
             </div>
         </div>
     </section>
