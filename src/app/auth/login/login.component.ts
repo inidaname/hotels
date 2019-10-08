@@ -11,6 +11,7 @@ import { User } from '@shared/interface';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  user: User;
 
   constructor(
     private auth: AuthService,
@@ -29,9 +30,9 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       return this.auth.loginUser(this.loginForm.value)
         .subscribe(
-          (result) => result,
+          (result) => this.user = result,
           (err) => err
-        )
+        );
     }
   }
 
