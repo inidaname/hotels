@@ -20,8 +20,9 @@
     ],
     "resolveJsonModule": true,
     "paths": {
-      "@shared/*": ["app/shared/*"],
       "@environments/*": ["environments/*"],
+      "@interceptors/*": ["app/shared/interceptor/*"],
+      "@shared/*": ["app/shared/*"],
       "@services/*": ["app/shared/services/*"]
     }
   },

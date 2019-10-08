@@ -1,21 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
 import { User } from '@shared/interface';
-import { Observable } from 'rxjs';
 
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  api: string = environment.api;
+  private api: string = environment.api;
   constructor(private http: HttpClient) { }
 
-  registerUser(): Observable<User> {
-    const obs = this.http.post();
-    return obs;
+  registerUser(user: User): Observable<User> {
+    return this.http
+          .post<User>(this.api, user)
+          .pipe(tap(), catchError(this.handleError));
+  }
+
+  private handleError(err: HttpErrorResponse) {
+    let errorMessage = '';
+    if (err.error instanceof ErrorEvent) {
+      errorMessage = `An error occurred: ${err.error.message}`;
+    } else {
+      errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
+    }
+    return throwError(errorMessage);
   }
 }
