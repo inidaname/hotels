@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '@shared/interface';
 import { AuthService } from '@shared/services/auth.service';
-import { Observable } from 'rxjs';
+
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MustMatch } from './match';
 
@@ -27,11 +27,10 @@ export class RegisterComponent implements OnInit {
       phoneNumber: ['', Validators.required]
     }, {
       validator: MustMatch('password', 'confirmPassword')
-  });
+    });
   }
 
   private registerUser() {
-    console.log('Yes you are')
     if (this.registerForm.valid) {
       return this.auth.registerUser(this.registerForm.value).subscribe(
         (result: User) => (result),

@@ -1,24 +1,43 @@
 <section class="login-section m-auto rounded shadow p-5">
-  <form class="d-flex flex-column">
+  <form class="d-flex flex-column" [formGroup]="loginForm">
     <h2>Login Here</h2>
     <div class="form-group">
-      <label for="email">Username/Email</label>
-      <input type="text" class="form-control" name="email" id="email" aria-describedby="emailLogin" placeholder="Email">
+      <label for="email">Email</label>
+      <input type="email"
+      class="form-control"
+      formControlName="email"
+      name="email" id="email"
+      [ngClass]="{'is-invalid': f.email.touched && f.email.invalid}" 
+      aria-describedby="emailLogin"
+      placeholder="Email">
       <small id="emailLogin" class="form-text text-muted">Help text</small>
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="password" class="form-control" name="password" id="password" aria-describedby="passwordLogin"
-        placeholder="Password">
+      <input type="password" 
+      class="form-control"
+      formControlName="password"
+      name="password" id="password"
+      [ngClass]="{'is-invalid': f.password.touched && f.password.invalid}" 
+      aria-describedby="passwordLogin"
+      placeholder="Password">
       <small id="passwordLogin" class="form-text text-muted">Help text</small>
     </div>
     <div class="form-check">
       <label class="form-check-label">
-        <input type="checkbox" class="form-check-input" name="remember" id="remember" value="remember" checked>
+        <input type="checkbox" 
+        class="form-check-input"
+        formControlName="rememberMe"
+        name="remember" id="remember"
+        value="remember">
         Remember Me
       </label>
     </div>
-    <button type="button" name="" id="" class="btn btn-primary">Login</button>
+    <button type="button"
+     name="loginBtn" id="loginBtn"
+     [disabled]="!loginForm.valid"
+     (click)="loginUser()"
+     class="btn btn-primary">Login</button>
     <p class="form-text text-muted">
       <span>Forgot Password</span>
       <span> <a [routerLink]="[ '../register' ]">Register</a></span>

@@ -17,8 +17,14 @@ export class AuthService {
 
   registerUser(user: User): Observable<User> {
     return this.http
-          .post<User>(this.api, user)
-          .pipe(tap(), catchError(this.handleError));
+      .post<User>(this.api, user)
+      .pipe(tap(), catchError(this.handleError));
+  }
+
+  loginUser(login: object): Observable<User> {
+    return this.http
+      .post<User>(this.api, login)
+      .pipe(tap(), catchError(this.handleError));
   }
 
   private handleError(err: HttpErrorResponse) {
