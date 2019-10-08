@@ -2,29 +2,54 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
-import { User } from '@shared/interface';
+import { User, UserData } from '@shared/interface';
 
-import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private currentUserSubject: BehaviorSubject<UserData>;
+  public currentUser: Observable<UserData>;
 
   private api: string = environment.api;
-  constructor(private http: HttpClient) { }
-
-  registerUser(user: User): Observable<User> {
-    return this.http
-      .post<User>(this.api, user)
-      .pipe(tap(), catchError(this.handleError));
+  constructor(private http: HttpClient) {
+    this.currentUserSubject = new BehaviorSubject<UserData>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  loginUser(login: object): Observable<User> {
+  registerUser(userReg: User): Observable<UserData> {
     return this.http
-      .post<User>(this.api, login)
-      .pipe(tap(), catchError(this.handleError));
+      .post<UserData>(`${this.api}/user`, userReg)
+      .pipe(map(user => {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.currentUserSubject.next(user);
+        return user;
+      }), tap(), catchError(this.handleError));
+  }
+
+  public get currentUserValue(): UserData {
+    return this.currentUserSubject.value;
+  }
+
+  loginUser(login: object): Observable<UserData> {
+    return this.http
+      .post<UserData>(`${this.api}/login`, login)
+      .pipe(map(user => {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.currentUserSubject.next(user);
+        return user;
+      }), tap(), catchError(this.handleError));
+  }
+
+  logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
   }
 
   private handleError(err: HttpErrorResponse) {

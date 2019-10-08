@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HeaderInterceptor } from './interceptor';
+import { HeaderInterceptor, JwtInterceptor } from './interceptor';
 
 
 @NgModule({
@@ -14,6 +14,7 @@ import { HeaderInterceptor } from './interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInterceptor
     },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ]
 })
 export class SharedModule { }
