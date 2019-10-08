@@ -28,7 +28,7 @@ export class AuthService {
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);
         return user;
-      }), tap(), catchError(this.handleError));
+      }), catchError(this.handleError));
   }
 
   public get currentUserValue(): UserData {
@@ -43,7 +43,7 @@ export class AuthService {
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);
         return user;
-      }), tap(), catchError(this.handleError));
+      }), catchError(this.handleError));
   }
 
   logout() {
