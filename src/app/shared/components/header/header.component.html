@@ -1,1 +1,14 @@
-<p>header works!</p>
+<header class="d-flex flex-row justify-content-between align-items-center w-100 border px-4">
+    <div class="logo d-flex flex-row justify-content-around">
+        <span><fa-icon [icon]="faBars"></fa-icon></span>
+        <div>Search</div>
+    </div>
+    <nav>
+        <div>
+            <span><fa-icon [icon]="faBell"></fa-icon></span>
+            <span><fa-icon [icon]="faEnvelope"></fa-icon></span>
+        </div>
+        <div>Profile</div>
+        <div>Settings</div>
+    </nav>
+</header>
