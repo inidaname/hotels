@@ -5,14 +5,15 @@ import { HomeRoutingModule } from './home-routing.module';
 import { SharedModule } from '@shared/shared.module';
 
 import { HomeComponent } from './home.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class HomeModule { }
