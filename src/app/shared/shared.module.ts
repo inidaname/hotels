@@ -8,10 +8,11 @@ import { HeaderInterceptor, JwtInterceptor } from './interceptor';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
+import { TopHighlightComponent } from './components/top-highlight/top-highlight.component';
 
 
 @NgModule({
-  declarations: [HeaderComponent, SidebarComponent],
+  declarations: [HeaderComponent, SidebarComponent, TopHighlightComponent],
   imports: [
     CommonModule,
     FontAwesomeModule,
@@ -19,7 +20,9 @@ import { RouterModule } from '@angular/router';
   ],
   exports: [
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    TopHighlightComponent,
+    FontAwesomeModule
   ],
   providers: [
     {

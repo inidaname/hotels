@@ -1,1 +1,173 @@
-<p>dashboard works!</p>
+<article class="p-3 d-flex flex-column justify-content-around align-items-center">
+    <section class="d-flex flex-row justify-content-around align-items-center">
+        <!-- <app-top-highlight></app-top-highlight> -->
+        <div *ngFor="let item of highLights" class="d-flex flex-row justify-content-around align-items-center">
+            <div class="border-right border-info p-3">
+                <fa-icon [icon]="item.icon"></fa-icon>
+            </div>
+            <div class="ml-3">
+                <h6>{{item.heading}}</h6>
+                <p>See details</p>
+            </div>
+        </div>
+    </section>
+    <section class="shadow shadow-lg p-4">
+        <table class="table table-striped table-inverse">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Check In</th>
+                    <th>Check Out</th>
+                    <th>Room Type</th>
+                    <th>Amount Paid</th>
+                    <th>Checked in By</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td scope="row"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+        </table>
+    </section>
+    <section class=" p-4 d-flex flex-row justify-content-around align-item-center">
+        <div class="table-side">
+            <h4>Restuarant</h4>
+            <table class="table table-bordered table-hover table-inverse">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>No</th>
+                        <th>Item Purchased</th>
+                        <th>Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+            </table>
+        </div>
+        <div class="table-side">
+            <h4>Expenses</h4>
+            <table class="table table-bordered table-hover table-inverse">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>No</th>
+                        <th>Item Purchased</th>
+                        <th>Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+            </table>
+        </div>
+    </section>
+    <section class=" p-4 d-flex flex-row justify-content-around align-item-center">
+        <div>
+            <h4>Unread Messages</h4>
+            <table class="table table-striped">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>From</th>
+                        <th>Subject</th>
+                        <th>Time</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+            </table>
+        </div>
+        <div>
+            <h4>Customer Feedbacks</h4>
+            <table class="table table-striped">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>From</th>
+                        <th>Subject</th>
+                        <th>Time</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+            </table>
+        </div>
+        <div>
+            <h4>Unread Notifications</h4>
+            <table class="table table-striped">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>From</th>
+                        <th>Subject</th>
+                        <th>Time</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td scope="row"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+            </table>
+        </div>
+    </section>
+</article>
