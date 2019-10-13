@@ -9,9 +9,11 @@ import { AccountingComponent } from './accounting/accounting.component';
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { MessagesComponent } from './messages/messages.component';
 import { SettingsComponent } from './settings/settings.component';
+import { ReportsComponent } from './reports/reports.component';
+import { PathNotFoundComponent } from '@shared/path-not-found/path-not-found.component';
 
 const routes: Routes = [
-  // { path: '', component: HomeComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'management', component: ManagementComponent },
   { path: 'bookings', component: BookingsComponent },
@@ -19,6 +21,8 @@ const routes: Routes = [
   { path: 'restaurant', component: RestaurantComponent },
   { path: 'messages', component: MessagesComponent },
   { path: 'settings', component: SettingsComponent },
+  { path: 'reports', component: ReportsComponent },
+  { path: '**', component: PathNotFoundComponent }
 ];
 
 @NgModule({

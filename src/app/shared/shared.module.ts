@@ -9,10 +9,16 @@ import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { TopHighlightComponent } from './components/top-highlight/top-highlight.component';
+import { PathNotFoundComponent } from './path-not-found/path-not-found.component';
 
 
 @NgModule({
-  declarations: [HeaderComponent, SidebarComponent, TopHighlightComponent],
+  declarations: [
+    HeaderComponent,
+    SidebarComponent,
+    TopHighlightComponent,
+    PathNotFoundComponent
+  ],
   imports: [
     CommonModule,
     FontAwesomeModule,
