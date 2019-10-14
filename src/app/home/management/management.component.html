@@ -6,7 +6,8 @@
                     <img [src]=item.image class="figure-img img-fluid rounded" [alt]="item.position">
                     <figcaption class="figure-caption text-xs-right">{{item.position}}</figcaption>
                 </figure>
-                <details class="align-self-start w-50">
+                <details open class="align-self-start w-50">
+                    <summary>Employee Detail</summary>
                     <span>Name: {{item.fullName}},</span><br>
                     <span>Contact: {{item.contact}}</span><br>
                     <span>Status: {{item.status}}</span>
