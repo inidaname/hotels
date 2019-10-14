@@ -19,7 +19,8 @@ routes.all('/', function(req, res) {
 routes.route('/user/?:id')
     .post(user.createUser)
     .get(user.getUserById)
-    .patch(user.updateUser);
+    .patch(user.updateUser)
+    .put(user.changePassword);
 
 routes.route('/login')
     .post(user.login);
