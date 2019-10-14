@@ -11,7 +11,6 @@ import { BookingsComponent } from './bookings/bookings.component';
 import { AccountingComponent } from './accounting/accounting.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SignoutComponent } from './signout/signout.component';
-import { MessagesComponent } from './messages/messages.component';
 import { ReportsComponent } from './reports/reports.component';
 
 
@@ -24,7 +23,6 @@ import { ReportsComponent } from './reports/reports.component';
     AccountingComponent,
     SettingsComponent,
     SignoutComponent,
-    MessagesComponent,
     ReportsComponent
   ],
   imports: [
