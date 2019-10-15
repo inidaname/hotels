@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
 import { HomeComponent } from './home/home.component';
 import { PathNotFoundComponent } from '@shared/path-not-found/path-not-found.component';
+import { FrontdeskComponent } from './frontdesk/frontdesk.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home/dashboard' },
