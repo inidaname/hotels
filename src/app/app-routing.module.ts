@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home/dashboard' },
   { path: 'auth', component: AuthComponent, loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule) },
   { path: 'home', component: HomeComponent, loadChildren: () => import('./home/home.module').then((m) => m.HomeModule) },
+  { path: 'frontdesk', component: FrontdeskComponent, loadChildren: () => import('./frontdesk/frontdesk.module').then(m => m.FrontdeskModule) },
   { path: '**', component: PathNotFoundComponent }
 ];
 
