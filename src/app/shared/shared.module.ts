@@ -10,6 +10,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { TopHighlightComponent } from './components/top-highlight/top-highlight.component';
 import { PathNotFoundComponent } from './path-not-found/path-not-found.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { PathNotFoundComponent } from './path-not-found/path-not-found.component
     HeaderComponent,
     SidebarComponent,
     TopHighlightComponent,
-    PathNotFoundComponent
+    PathNotFoundComponent,
+    ProductDetailComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { PathNotFoundComponent } from './path-not-found/path-not-found.component
     HeaderComponent,
     SidebarComponent,
     TopHighlightComponent,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ProductDetailComponent
   ],
   providers: [
     {
