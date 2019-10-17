@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
 import { HomeComponent } from './home/home.component';
 import { FrontdeskComponent } from './frontdesk/frontdesk.component';
+import { HotelServicesComponent } from './hotel-services/hotel-services.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     HomeComponent,
-    FrontdeskComponent
+    FrontdeskComponent,
+    HotelServicesComponent
   ],
   imports: [
     BrowserModule,
