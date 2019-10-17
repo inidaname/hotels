@@ -33,6 +33,7 @@ const routes: Routes = [
     loadChildren: () => import('./hotel-services/hotel-services.module').then(m => m.HotelServicesModule)
   },
   { path: '**', component: PathNotFoundComponent },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
 ];
 
 @NgModule({
