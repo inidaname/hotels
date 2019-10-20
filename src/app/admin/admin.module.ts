@@ -2,14 +2,26 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
-import { AdminComponent } from './admin.component';
+import { SharedModule } from '@shared/shared.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { StockComponent } from './stock/stock.component';
+import { ManagementComponent } from './management/management.component';
+import { RoomComponent } from './room/room.component';
+import { ReportComponent } from './report/report.component';
 
 
 @NgModule({
-  declarations: [AdminComponent],
+  declarations: [
+    DashboardComponent,
+    StockComponent,
+    ManagementComponent,
+    RoomComponent,
+    ReportComponent
+  ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    SharedModule
   ]
 })
 export class AdminModule { }

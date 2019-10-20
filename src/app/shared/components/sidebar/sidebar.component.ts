@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {
   faTachometerAlt,
   faUserTie,
@@ -9,6 +9,7 @@ import {
   faCogs,
   faSignOutAlt
 } from '@fortawesome/free-solid-svg-icons';
+import { NavList } from '@shared/interface';
 
 @Component({
   selector: 'app-sidebar',
@@ -26,9 +27,12 @@ export class SidebarComponent implements OnInit {
   faCogs = faCogs;
   faSignOutAlt = faSignOutAlt;
 
+  @Input() navList: NavList[];
+
   constructor() { }
 
   ngOnInit() {
+    console.log(this.navList)
   }
 
 }
