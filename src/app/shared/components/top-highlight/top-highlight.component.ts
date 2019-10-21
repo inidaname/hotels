@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-top-highlight',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./top-highlight.component.scss']
 })
 export class TopHighlightComponent implements OnInit {
+
+  @Input() item: any;
 
   constructor() { }
 

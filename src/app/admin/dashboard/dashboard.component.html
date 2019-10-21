@@ -1,1 +1,8 @@
-<p>dashboard works!</p>
+<article class="m-auto p-4">
+  <section class="d-flex flex-row justify-content-around align-items-center">
+      <app-top-highlight *ngFor="let item of highLights" [item]="item"></app-top-highlight>
+  </section>
+  <section class="shadow shadow-lg p-4">
+    <app-rooms-table></app-rooms-table>
+  </section>
+</article>

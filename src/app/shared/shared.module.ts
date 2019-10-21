@@ -11,6 +11,8 @@ import { RouterModule } from '@angular/router';
 import { TopHighlightComponent } from './components/top-highlight/top-highlight.component';
 import { PathNotFoundComponent } from './path-not-found/path-not-found.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { StaffTableComponent } from './components/staff-table/staff-table.component';
+import { RoomsTableComponent } from './components/rooms-table/rooms-table.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     SidebarComponent,
     TopHighlightComponent,
     PathNotFoundComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    StaffTableComponent,
+    RoomsTableComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +35,9 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     SidebarComponent,
     TopHighlightComponent,
     FontAwesomeModule,
-    ProductDetailComponent
+    ProductDetailComponent,
+    StaffTableComponent,
+    RoomsTableComponent
   ],
   providers: [
     {

@@ -3,14 +3,6 @@ article {
     section {
         width: 100%;
         margin: 40px auto;
-        &:nth-child(1) > div {
-            box-shadow: 0px 0px 5px #ccc;
-            padding: 15px;
-            border-radius: 6px;
-            width: 223px;
-            height: 102px;
-            margin-top: 32px;
-        }
         &:nth-child(3), &:nth-child(4) {
             box-shadow: 0px 0px 5px #ccc;
             border-radius: 6px;
