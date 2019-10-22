@@ -1,0 +1,16 @@
+section {
+  margin: 20px auto;
+  padding: 0.8em;
+  border-radius: 6px;
+  box-shadow: 0px 0px 5px #ccc;
+  .staff {
+      height: 300px;
+      div{
+          width: 45%;
+          height: 125px;
+          box-shadow: 0px 0px 5px #ccc;
+          margin: 12px;
+          border-radius: 6px;
+      }
+  }
+}

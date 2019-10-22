@@ -1,0 +1,16 @@
+<section class="d-flex flex-row justify-content-around align-items-center w-100">
+    <div class="staff w-100 d-flex flex-wrap justify-content-around align-content-center p-5">
+        <div *ngFor="let item of staffData" class="d-flex flex-row justify-content-around align-items-center">
+            <figure class="figure">
+                <img [src]=item.image class="figure-img img-fluid rounded" [alt]="item.position">
+                <figcaption class="figure-caption text-xs-right">{{item.position}}</figcaption>
+            </figure>
+            <details open class="align-self-start w-50">
+                <summary>Employee Detail</summary>
+                <span>Name: {{item.fullName}},</span><br>
+                <span>Contact: {{item.contact}}</span><br>
+                <span>Status: {{item.status}}</span>
+            </details>
+        </div>
+    </div>
+</section>
