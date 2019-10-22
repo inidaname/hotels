@@ -14,6 +14,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { StaffTableComponent } from './components/staff-table/staff-table.component';
 import { RoomsTableComponent } from './components/rooms-table/rooms-table.component';
 import { TopStaffComponent } from './components/top-staff/top-staff.component';
+import { MessagesComponent } from './components/messages/messages.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { TopStaffComponent } from './components/top-staff/top-staff.component';
     ProductDetailComponent,
     StaffTableComponent,
     RoomsTableComponent,
-    TopStaffComponent
+    TopStaffComponent,
+    MessagesComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +42,8 @@ import { TopStaffComponent } from './components/top-staff/top-staff.component';
     ProductDetailComponent,
     StaffTableComponent,
     RoomsTableComponent,
-    TopStaffComponent
+    TopStaffComponent,
+    MessagesComponent
   ],
   providers: [
     {
