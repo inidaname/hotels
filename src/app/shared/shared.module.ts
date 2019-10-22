@@ -13,6 +13,7 @@ import { PathNotFoundComponent } from './path-not-found/path-not-found.component
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { StaffTableComponent } from './components/staff-table/staff-table.component';
 import { RoomsTableComponent } from './components/rooms-table/rooms-table.component';
+import { TopStaffComponent } from './components/top-staff/top-staff.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { RoomsTableComponent } from './components/rooms-table/rooms-table.compon
     PathNotFoundComponent,
     ProductDetailComponent,
     StaffTableComponent,
-    RoomsTableComponent
+    RoomsTableComponent,
+    TopStaffComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import { RoomsTableComponent } from './components/rooms-table/rooms-table.compon
     FontAwesomeModule,
     ProductDetailComponent,
     StaffTableComponent,
-    RoomsTableComponent
+    RoomsTableComponent,
+    TopStaffComponent
   ],
   providers: [
     {
