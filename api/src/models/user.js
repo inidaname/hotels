@@ -2,20 +2,35 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import muv from 'mongoose-unique-validator';
 
-
-const userSchema = new mongoose.Schema({
-    email: {
-        type: String,
-        required: [true, `Please provide an email`],
-        trim: true,
-        lowercase: true,
-        unique: true
+const userSchema = new mongoose.Schema(
+	{
+    username: {
+      type: String,
+      trim: true,
+      unique: true
     },
-    password: {
-        type: String,
-        required: [true, `Please provide a password`]
-    }
-}, {timestamps: true});
+    fullName: {
+      type: String
+    },
+		email: {
+			type: String,
+			required: [ true, `Please provide an email` ],
+			trim: true,
+			lowercase: true,
+			unique: true
+		},
+		userType: {
+			type: String,
+			enum: [ 'Admin', 'Worker', 'Customer' ],
+			default: 'Admin'
+		},
+		password: {
+			type: String,
+			required: [ true, `Please provide a password` ]
+		}
+	},
+	{ timestamps: true }
+);
 
 userSchema.plugin(muv);
 
@@ -31,6 +46,6 @@ userSchema.pre('save', function(next) {
 		this.password = hash;
 		next();
 	});
-})
+});
 
 export default mongoose.model('User', userSchema, 'user');
