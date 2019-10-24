@@ -4,6 +4,8 @@ import bcrypt from 'bcryptjs';
 export async function createUser(req, res) {
 	try {
 		const createU = await userModel.create({ ...req.body });
+
+
 		if (createU) {
 			return res.status(200).json({ data: createU });
 		}
