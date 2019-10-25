@@ -8,6 +8,7 @@ import { StockComponent } from './stock/stock.component';
 import { ManagementComponent } from './management/management.component';
 import { RoomComponent } from './room/room.component';
 import { ReportComponent } from './report/report.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ReportComponent } from './report/report.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    SharedModule
+    SharedModule,
+    NgbModule
   ]
 })
 export class AdminModule { }
