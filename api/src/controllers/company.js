@@ -1,10 +1,9 @@
-import { userModel } from '../models/index.js';
+import { companyModel } from '../models/index.js';
 import bcrypt from 'bcryptjs';
 
-export async function createUser(req, res) {
+export async function createCompany(req, res) {
 	try {
-		const createU = await userModel.create({ ...req.body });
-
+		const createU = await companyModel.create({ ...req.body });
 		if (createU) {
 			return res.status(200).json({ data: createU });
 		}
@@ -16,7 +15,7 @@ export async function createUser(req, res) {
 export async function login(req, res) {
 	try {
 		const { email, password } = req.body;
-		const findUser = await userModel.findOne({ email });
+		const findUser = await companyModel.findOne({ email });
 
 		if (!email || !password) {
 			throw { message: `Please provide login details`, status: 401 };
@@ -38,7 +37,7 @@ export async function login(req, res) {
 	}
 }
 
-export async function getUserById(req, res) {
+export async function getCompanyById(req, res) {
 	try {
 		const { id } = req.params;
 
@@ -46,7 +45,7 @@ export async function getUserById(req, res) {
 			throw { message: `User was not found`, status: 404 };
 		}
 
-		const findUser = await userModel.findById(id).lean().populate('-password -__v').exec();
+		const findUser = await companyModel.findById(id).lean().populate('-password -__v').exec();
 
 		if (!findUser) {
 			throw { message: `User was not found`, status: 404 };
@@ -58,7 +57,7 @@ export async function getUserById(req, res) {
 	}
 }
 
-export async function updateUser(req, res) {
+export async function updateCompany(req, res) {
 	try {
 		const { id } = req.params;
 
@@ -79,7 +78,7 @@ export async function updateUser(req, res) {
 			throw { message: `Please provide data to update`, status: 400 };
 		}
 
-		const checkUser = await userModel.findByIdAndUpdate(id, updates, { new: true }).lean().select('-__v').exec();
+		const checkUser = await companyModel.findByIdAndUpdate(id, updates, { new: true }).lean().select('-__v').exec();
 
 		if (!checkUser) {
 			throw { message: `User does not exist`, status: 404 };
@@ -102,7 +101,7 @@ export async function changePassword(req, res) {
 			throw { message: `Provide details for change of Password`, status: 401 };
 		}
 
-		const getUser = await userModel.findById(id).lean();
+		const getUser = await companyModel.findById(id).lean();
 
 		if (!getUser) {
 			throw { message: `User does not exist`, status: 404 };
@@ -120,7 +119,7 @@ export async function changePassword(req, res) {
 			throw { message: `Error while saving your password`, status: 500 };
 		}
 
-		const updatePassword = await userModel
+		const updatePassword = await companyModel
 			.findByIdAndUpdate(id, { password: hashPassword }, { new: true })
 			.lean()
 			.select('-password -__v')

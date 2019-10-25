@@ -1,5 +1,5 @@
 import express from 'express';
-import {user, counter, admin, customer, rooms} from '../controllers/index.js';
+import {user, counter, admin, customer, rooms, company} from '../controllers/index.js';
 
 const routes = express.Router();
 
@@ -24,6 +24,15 @@ routes.route('/user/?:id')
 
 routes.route('/login')
     .post(user.login);
+
+// company routes
+routes.route('/company/login')
+    .post(company.login);
+routes.route('/company/?:id')
+    .post(company.createCompany)
+    .get(company.getCompanyById)
+    .patch(company.updateCompany)
+    .put(company.changePassword);
 
 routes.route('/counter/user/?:id')
     .get(counter.getCounterByUserId);
