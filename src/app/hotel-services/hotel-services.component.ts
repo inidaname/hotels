@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavList } from '@shared/interface';
 
 @Component({
   selector: 'app-hotel-services',
@@ -32,7 +33,7 @@ export class HotelServicesComponent implements OnInit {
       link: 'logout',
       name: 'Logout'
     }
-  ]
+  ];
 
   constructor() { }
 
