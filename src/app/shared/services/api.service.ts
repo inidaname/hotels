@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-
-import { environment } from '@environments/environment';
-import { User, UserData } from '@shared/interface';
-
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { UserData, User } from '@shared/interface';
+import { environment } from '@environments/environment';
+import { map, catchError } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class ApiService {
+
   private currentUserSubject: BehaviorSubject<UserData>;
   public currentUser: Observable<UserData>;
 

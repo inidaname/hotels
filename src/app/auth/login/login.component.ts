@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '@services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-import { User } from '@shared/interface';
+import { ApiService } from '@services/api.service';
+import { ShareService } from '@services/share.service';
 
 @Component({
   templateUrl: './login.component.html',
@@ -10,32 +9,25 @@ import { User } from '@shared/interface';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup;
-  user: User;
+  login: FormGroup;
 
   constructor(
-    private auth: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private share: ShareService,
+    private api: ApiService
   ) { }
 
   ngOnInit() {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      rememberMe: ['']
+    this.login = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-  private loginUser() {
-    if (this.loginForm.valid) {
-      return this.auth.loginUser(this.loginForm.value)
-        .subscribe(
-          (result) => this.user = result,
-          (err) => err
-        );
-    }
-  }
+  get f() { return this.login.controls; }
 
-  get f() { return this.loginForm.controls; }
+  loginUser() {
+    this.share.changeValueOfStatus(true)
+  }
 
 }

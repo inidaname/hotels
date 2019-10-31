@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '@shared/interface';
-import { AuthService } from '@services/auth.service';
-
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ApiService } from '@services/api.service';
+import { ShareService } from '@services/share.service';
 import { MustMatch } from './match';
 
 @Component({
@@ -11,32 +10,30 @@ import { MustMatch } from './match';
 })
 export class RegisterComponent implements OnInit {
 
-  registerForm: FormGroup;
+  register: FormGroup;
 
   constructor(
-    private auth: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private apiService: ApiService,
+    private share: ShareService
   ) { }
 
   ngOnInit() {
-    this.registerForm = this.fb.group({
+    // Compare two passwords
+    this.register = this.fb.group({
       fullName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required],
-      phoneNumber: ['', Validators.required]
-    }, {
-      validator: MustMatch('password', 'confirmPassword')
+      password: ['', Validators.required],
+      email: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      username: ['']
     });
   }
 
-  private registerUser() {
-    if (this.registerForm.valid) {
-      return this.auth.registerUser(this.registerForm.value).subscribe(
-        (result: User) => (result),
-        (error) => error
-      );
-    }
+  get f() { return this.register.controls; }
+
+  registerUser() {
+    this.share.changeValueOfStatus(true);
+    // this.apiService.registerUser(this.register.value);
+    console.log('Registered');
   }
-  get f() { return this.registerForm.controls; }
 }
