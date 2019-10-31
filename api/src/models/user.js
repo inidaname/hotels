@@ -1,38 +1,49 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
-import muv from 'mongoose-unique-validator';
+import validator from 'mongoose-unique-validator';
 
-const userSchema = new mongoose.Schema(
-	{
-    username: {
-      type: String,
-      trim: true,
-      unique: true
-    },
-    fullName: {
-      type: String
-    },
-		email: {
-			type: String,
-			required: [ true, `Please provide an email` ],
-			trim: true,
-			lowercase: true,
-			unique: true
-		},
-		userType: {
-			type: String,
-			enum: [ 'Admin', 'Worker', 'Customer' ],
-			default: 'Admin'
-		},
-		password: {
-			type: String,
-			required: [ true, `Please provide a password` ]
-		}
-	},
-	{ timestamps: true }
-);
+const userSchema = new mongoose.Schema({
+  fullName: {
+    type: String,
+    required: [true, `Please provide your Full Name`]
+  },
+  password: {
+    type: String,
+    required: [true, `Please provide password`]
+  },
+  email: {
+    type: String,
+    unique: true,
+    trim: true,
+    lowercase: true,
+    required: [true, `Please provide your Email address`]
+  },
+  phoneNumber: {
+    type: String,
+    unique: true,
+    required: [true, `Please provide your Phone Number`]
+  },
+  username: {
+    type: String,
+    unique: true
+  },
+  userType: {
+    type: String,
+    enum: [
+      'admin',
+      'account',
+      'stock',
+      'user'
+    ],
+    default: 'user'
+  },
+  dataId: {
+    type: mongoose.Types.ObjectId,
+    ref: 'Data'
+  }
+}, { timestamps: true });
 
-userSchema.plugin(muv);
+userSchema.plugin(validator);
 
 userSchema.pre('save', function(next) {
 	if (this.p && !this.isModified('password')) {

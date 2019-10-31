@@ -1,70 +1,57 @@
 import express from 'express';
-import {user, counter, admin, customer, rooms, company} from '../controllers/index.js';
+import {
+  createAuth,
+  room,
+  product,
+  salesLog,
+  expenditure,
+  supply,
+  inventory,
+  roomLogs
+} from '../controllers/index.js';
 
 const routes = express.Router();
 
-// routes.all('*', function(req, res, next){
-//     if (!req.header('token')){
-//         return res.status(400).json({message: `Please provide a token`});
-//     } else {
-//         next();
-//     }
-// });
-
-routes.all('/', function(req, res) {
-    return res.status(200).json({message: `Hotels API`});
+routes.all('/', function (req, res) {
+  res.status(200).json({
+    message: `You are on Hotel`
+  });
 });
 
-// user routes
-routes.route('/user/?:id')
-    .post(user.createUser)
-    .get(user.getUserById)
-    .patch(user.updateUser)
-    .put(user.changePassword);
+// Create Hotel and user
+routes.post('/create/hotel', createAuth.createHotel);
+routes.post('/create/user', createAuth.createUser);
 
-routes.route('/login')
-    .post(user.login);
+// Create product and room
+routes.post('/room', room.createRoom);
+routes.put('/room/:id', room.editRoom);
+routes.delete('/room/:id', room.deleteRoom);
 
-// company routes
-routes.route('/company/login')
-    .post(company.login);
-routes.route('/company/?:id')
-    .post(company.createCompany)
-    .get(company.getCompanyById)
-    .patch(company.updateCompany)
-    .put(company.changePassword);
+routes.post('/product', product.createProduct);
+routes.put('/product/:id', product.editProduct);
+routes.delete('/product/:id', product.deleteProduct);
 
-routes.route('/counter/user/?:id')
-    .get(counter.getCounterByUserId);
+// Sales routes
+routes.post('/sales', salesLog.createSaleLog);
+routes.put('/sales/:id', salesLog.editSales);
+routes.delete('/sales/:id', salesLog.deleteLog);
 
-routes.route('/counter/?:id')
-    .post(counter.createCounter)
-    .get(counter.getCounterById)
-    .patch(counter.updateData);
+// Expenditure routes
+routes.post('/expenditure', expenditure.createExpen);
+routes.put('/expenditure/:id', expenditure.editExpenditure);
+routes.delete('/expenditure/:id', expenditure.deleteExpenditure);
 
-routes.route('/admin/user/?:id')
-    .get(admin.getAdminByUserId);
+// Supply
+routes.post('/supply', supply.createSupply);
 
-routes.route('/admin/?:id')
-    .post(admin.createAdmin)
-    .get(admin.getAdminById)
-    .patch(admin.updateData);
+// Inventory
+routes.post('/inventory', inventory.createInventory);
+routes.put('/inventory/:id', inventory.editInvenotry);
+routes.delete('/inventory/:id', inventory.deleteInventory);
 
-routes.route('/customer/?:id')
-    .post(customer.createCustomer)
-    .get(customer.getCustomer)
-    .patch(customer.updateCustomer);
+// Room logs for booking and reservation
+routes.post('/roomlodge', roomLogs.createLogs);
+routes.put('/roomlodge/:id', roomLogs.editRoom);
+routes.delete('/roomlodge/:id', roomLogs.deleteRoom);
 
-routes.route('/room')
-    .post(rooms.createRoom)
-    .get(rooms.getAllRooms);
-
-routes.route('/room/name')
-    .get(rooms.getRoomByName);
-
-routes.route('/room/number')
-    .get(rooms.getRoomByNumber);
-
-routes.route('/room/?:id')
-    .get(rooms.updateRoom);
 export default routes;

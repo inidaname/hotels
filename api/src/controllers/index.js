@@ -1,7 +1,19 @@
-import * as user from './user.js';
-import * as counter from './counter.js';
-import * as admin from './admin.js';
-import * as customer from './customer.js';
-import * as rooms from './rooms.js';
-import * as company from './company.js';
-export { admin, user, counter, customer, rooms, company };
+import * as createAuth from './createAuth.js';
+import * as room from './room.js';
+import * as product from './product.js';
+import * as salesLog from './salesLog.js';
+import * as expenditure from './expenditure.js';
+import * as supply from './supply.js';
+import * as inventory from './inventory.js';
+import * as roomLogs from './roomLogs.js';
+
+export {
+  createAuth,
+  room,
+  product,
+  salesLog,
+  expenditure,
+  supply,
+  inventory,
+  roomLogs
+};

@@ -1,15 +1,23 @@
+import hotelModel from './hotel.js';
 import userModel from './user.js';
-import counterModel from './counter.js';
-import adminModel from './admin.js';
-import customer from './customer.js';
-import roomsModel from './rooms.js';
-import companyModel from './company.js';
+import dataModel from './data.js';
+import roomModel from './room.js';
+import productModel from './product.js';
+import salesLogModel from './salesLog.js';
+import expenditureModel from './expenditure.js';
+import supplyModel from './supply.js';
+import inventoryModel from './inventory.js';
+import roomLogsModel from './roomLogs.js';
 
 export {
-    adminModel,
-    userModel,
-    counterModel,
-    customer,
-    roomsModel,
-    companyModel
+  userModel,
+  hotelModel,
+  dataModel,
+  roomModel,
+  productModel,
+  salesLogModel,
+  expenditureModel,
+  supplyModel,
+  inventoryModel,
+  roomLogsModel
 };
