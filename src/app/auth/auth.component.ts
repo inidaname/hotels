@@ -18,7 +18,7 @@ export class AuthComponent implements OnInit, AfterViewChecked, AfterViewInit {
     private routes: Router
   ) {
     this.routes.events.subscribe(val => {
-      if (val instanceof NavigationEnd && val.urlAfterRedirects !== '/auth/login') {
+      if (val instanceof NavigationEnd && val.urlAfterRedirects === '/auth') {
         this.routes.navigateByUrl('/auth/login');
       }
     });
@@ -40,11 +40,15 @@ export class AuthComponent implements OnInit, AfterViewChecked, AfterViewInit {
           {
             type: 'ball-scale-pulse',
             size: 'large',
-            bdColor: 'rgba(105,105,105, .8)',
-            color: 'white',
+            bdColor: 'rgba(105,105,105, .0)',
+            color: 'grey',
             fullScreen: false
           }
         );
+      }
+
+      if (st === false) {
+        this.spinner.hide('N')
       }
     });
   }

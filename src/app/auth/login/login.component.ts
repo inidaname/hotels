@@ -11,6 +11,10 @@ export class LoginComponent implements OnInit {
 
   login: FormGroup;
 
+  message: string;
+  alertType: string;
+  alert: boolean;
+
   constructor(
     private fb: FormBuilder,
     private share: ShareService,
@@ -18,6 +22,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.alert = true;
     this.login = this.fb.group({
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -27,10 +32,22 @@ export class LoginComponent implements OnInit {
   get f() { return this.login.controls; }
 
   loginUser() {
-    this.share.changeValueOfStatus(true),
+    this.share.changeValueOfStatus(true);
     this.api.loginUser(this.login.value).subscribe(val => {
-      console.log(val)
-    }, err => console.log(err))
+      this.message = val.message;
+      this.alertType = 'success';
+      this.share.changeValueOfStatus(false);
+    }, err => {
+      console.log(err)
+      this.share.changeValueOfStatus(false)
+      this.message = err.message;
+      this.alertType = 'danger';
+    });
+  }
+
+  close() {
+    this.alert = false;
+    this.message = null;
   }
 
 }

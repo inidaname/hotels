@@ -11,6 +11,8 @@ import { MustMatch } from './match';
 export class RegisterComponent implements OnInit {
 
   register: FormGroup;
+  message: string;
+  alertType: string;
 
   constructor(
     private fb: FormBuilder,
@@ -33,7 +35,22 @@ export class RegisterComponent implements OnInit {
 
   registerUser() {
     this.share.changeValueOfStatus(true);
-    // this.apiService.registerUser(this.register.value);
+    this.apiService.registerUser(this.register.value).subscribe(
+      val => {
+        this.share.changeValueOfStatus(false);
+        this.alertType = 'success';
+        this.message = val.message;
+      },
+      err => {
+        this.share.changeValueOfStatus(false);
+        this.alertType = 'danger';
+        this.message = err.message;
+      }
+    );
     console.log('Registered');
+  }
+
+  close() {
+    this.message = null;
   }
 }

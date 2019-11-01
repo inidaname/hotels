@@ -1,4 +1,7 @@
 <section class="col-10 offset-1 p-5 my-3 rounded rounded-lg w-auto shadow">
+  <ngb-alert *ngIf="message" [dismissible]="true" (close)="close()" [type]="alertType">
+    {{message}}
+  </ngb-alert>
   <form class="w-100 mx-auto" [formGroup]="login">
     <div class="form-group">
       <label for="username">Username</label>
