@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -9,13 +9,11 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   declarations: [],
   imports: [
     CommonModule,
-    NgxSpinnerModule,
     FormsModule,
     ReactiveFormsModule
   ],
   exports: [
     CommonModule,
-    NgxSpinnerModule,
     FormsModule,
     ReactiveFormsModule
   ]

@@ -27,7 +27,10 @@ export class LoginComponent implements OnInit {
   get f() { return this.login.controls; }
 
   loginUser() {
-    this.share.changeValueOfStatus(true)
+    this.share.changeValueOfStatus(true),
+    this.api.loginUser(this.login.value).subscribe(val => {
+      console.log(val)
+    }, err => console.log(err))
   }
 
 }

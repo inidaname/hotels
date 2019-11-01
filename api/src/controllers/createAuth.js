@@ -81,12 +81,8 @@ export async function login(req, res) {
       throw { message: `Please provide all required details for login`, status: 401 };
     }
 
-    const checkDetail = Promise.all([
-      await hotelModel
-        .findOne({ $or: [{ username }, { email: username }, { phoneNumber: username }] }),
-      await userModel
-        .findOne({ $or: [{ username }, { email: username }, { phoneNumber: username }] })
-    ]);
+    const checkDetail = await userModel
+        .findOne({ $or: [{ username }, { email: username }, { phoneNumber: username }] });
 
     if (!checkDetail) {
       throw { message: `Incorrect details provided for login`, status: 400 };

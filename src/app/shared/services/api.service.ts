@@ -22,7 +22,7 @@ export class ApiService {
 
   registerUser(userReg: User): Observable<UserData> {
     return this.http
-      .post<UserData>(`${this.api}/user`, userReg)
+      .post<UserData>(`${this.api}/create/user`, userReg)
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentUser', JSON.stringify(user));
@@ -53,11 +53,12 @@ export class ApiService {
   }
 
   private handleError(err: HttpErrorResponse) {
+    console.log(err)
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
       errorMessage = `An error occurred: ${err.error.message}`;
     } else {
-      errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
+      errorMessage = `Server returned code: ${err.status}, error message is: ${err.error.message}`;
     }
     return throwError(errorMessage);
   }

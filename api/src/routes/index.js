@@ -22,6 +22,8 @@ routes.all('/', function (req, res) {
 routes.post('/create/hotel', createAuth.createHotel);
 routes.post('/create/user', createAuth.createUser);
 
+routes.route('/login').post(createAuth.login);
+
 // Create product and room
 routes.post('/room', room.createRoom);
 routes.put('/room/:id', room.editRoom);
