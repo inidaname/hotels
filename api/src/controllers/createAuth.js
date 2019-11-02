@@ -48,24 +48,33 @@ export async function createUser(req, res) {
     // to be really worked on IMPORTANT
     const { email, phoneNumber, username } = req.body;
 
+    console.log(req.body, 'Body sent here');
+
     const checkUser = await hotelModel
       .findOne({ $or: [{ username }, { email }, { phoneNumber }] });
+    console.log(checkUser, `User here`)
 
     if (checkUser) {
       throw { message: `User with detail already exist`, status: 400 };
     }
 
     const createU = await userModel.create({ ...req.body });
+    console.log(createU, `User created`);
 
     if (createU) {
-      const data = createU.toObject();
-      delete data.password;
-      delete data.__v;
 
-      const mainData = await dataModel.create({ sourceId: data._id, createdBy: req.params.id, status: 'active' });
-      createU.update({ dataId: mainData._id });
+      const mainData = await dataModel.create({ sourceId: createU._id, createdBy: req.params.id, status: 'active' });
+      console.log(mainData, `Data object here`)
+      const userUpdate = await createU.updateOne({ dataId: mainData._id });
 
-      const token = await jwt.sign(createU, process.env.SECRET);
+      const data = await createU.populate('dataId', '-__v').toObject();
+      if (userUpdate) {
+        delete data.password;
+        delete data.__v;
+        console.log(data, `We are here`)
+      }
+      const token = await jwt.sign(data, process.env.SECRET);
+
       return res.status(200).json({ message: `User created successfully`, token, data });
     }
   } catch (error) {
@@ -82,7 +91,7 @@ export async function login(req, res) {
     }
 
     const checkDetail = await userModel
-        .findOne({ $or: [{ username }, { email: username }, { phoneNumber: username }] });
+      .findOne({ $or: [{ username }, { email: username }, { phoneNumber: username }] });
 
     if (!checkDetail) {
       throw { message: `Incorrect details provided for login`, status: 400 };
@@ -103,6 +112,7 @@ export async function login(req, res) {
     return res.status(200).json({ message: `Logged in successfully`, data, token });
 
   } catch (error) {
+    console.log(error)
     return res.status(error.status || 500).json({ message: error.message });
   }
 }

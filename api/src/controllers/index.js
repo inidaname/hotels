@@ -6,6 +6,7 @@ import * as expenditure from './expenditure.js';
 import * as supply from './supply.js';
 import * as inventory from './inventory.js';
 import * as roomLogs from './roomLogs.js';
+export * from './user.js'
 
 export {
   createAuth,

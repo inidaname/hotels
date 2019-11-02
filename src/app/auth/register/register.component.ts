@@ -37,11 +37,13 @@ export class RegisterComponent implements OnInit {
     this.share.changeValueOfStatus(true);
     this.apiService.registerUser(this.register.value).subscribe(
       val => {
+        console.log(val);
         this.share.changeValueOfStatus(false);
         this.alertType = 'success';
         this.message = val.message;
       },
       err => {
+        console.log(err);
         this.share.changeValueOfStatus(false);
         this.alertType = 'danger';
         this.message = err.message;

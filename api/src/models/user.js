@@ -39,7 +39,8 @@ const userSchema = new mongoose.Schema({
   },
   dataId: {
     type: mongoose.Types.ObjectId,
-    ref: 'Data'
+    ref: 'Data',
+    default: null
   }
 }, { timestamps: true });
 

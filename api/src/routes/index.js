@@ -7,7 +7,10 @@ import {
   expenditure,
   supply,
   inventory,
-  roomLogs
+  roomLogs,
+  getAllUser,
+  deleteUser,
+  getData
 } from '../controllers/index.js';
 
 const routes = express.Router();
@@ -22,7 +25,13 @@ routes.all('/', function (req, res) {
 routes.post('/create/hotel', createAuth.createHotel);
 routes.post('/create/user', createAuth.createUser);
 
+// Login
 routes.route('/login').post(createAuth.login);
+
+// User routes
+routes.route('/users').get(getAllUser);
+routes.route('/users/:id').delete(deleteUser);
+routes.route('/users/alldata').get(getData);
 
 // Create product and room
 routes.post('/room', room.createRoom);

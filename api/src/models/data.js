@@ -1,7 +1,10 @@
 import mongoose from 'mongoose';
 
 const dataSchema = new mongoose.Schema({
-  sourceId: mongoose.Types.ObjectId,
+  sourceId: {
+    type: mongoose.Types.ObjectId,
+    ref: 'User'
+  },
   address: String,
   status: {
     type: String,

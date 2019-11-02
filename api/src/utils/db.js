@@ -19,7 +19,7 @@ const options = {
 };
 
 // Connect to our Database and handle an bad connections
-mongoose.connect(process.env.mndb, options)
+mongoose.connect(process.env.MONGODB_URI, options)
   .then(
       () => console.info("MongoDB connected succesfully"),
       err => console.error('connection error:', err)
