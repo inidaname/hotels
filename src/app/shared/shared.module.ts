@@ -4,10 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { PathNotFoundComponent } from '@components/path-not-found/path-not-found.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    PathNotFoundComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -18,7 +21,8 @@ import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbAlertModule
+    NgbAlertModule,
+    PathNotFoundComponent
   ]
 })
 export class SharedModule { }

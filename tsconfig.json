@@ -22,8 +22,9 @@
     "paths": {
       "@environments/*": ["environments/*"],
       "@interceptors/*": ["app/shared/interceptor/*"],
-      "@shared/*": ["app/shared/*"],
-      "@services/*": ["app/shared/services/*"]
+      "@components/*": ["app/shared/components/*"],
+      "@services/*": ["app/shared/services/*"],
+      "@shared/*": ["app/shared/*"]
     }
   },
   "angularCompilerOptions": {
