@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from '@services/api.service';
 import { ShareService } from '@services/share.service';
 import { MustMatch } from './match';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './register.component.html',
@@ -17,7 +18,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private apiService: ApiService,
-    private share: ShareService
+    private share: ShareService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -37,10 +39,10 @@ export class RegisterComponent implements OnInit {
     this.share.changeValueOfStatus(true);
     this.apiService.registerUser(this.register.value).subscribe(
       val => {
-        console.log(val);
         this.share.changeValueOfStatus(false);
         this.alertType = 'success';
         this.message = val.message;
+        this.router.navigateByUrl('/home');
       },
       err => {
         console.log(err);

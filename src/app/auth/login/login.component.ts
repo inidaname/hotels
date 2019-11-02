@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from '@services/api.service';
 import { ShareService } from '@services/share.service';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './login.component.html',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private share: ShareService,
-    private api: ApiService
+    private api: ApiService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -37,6 +39,7 @@ export class LoginComponent implements OnInit {
       this.message = val.message;
       this.alertType = 'success';
       this.share.changeValueOfStatus(false);
+      this.router.navigateByUrl('/home');
     }, err => {
       console.log(err)
       this.share.changeValueOfStatus(false)
