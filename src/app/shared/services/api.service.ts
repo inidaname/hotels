@@ -26,6 +26,7 @@ export class ApiService {
       .post<UserData>(`${this.api}/create/user`, userReg)
       .pipe(map(user => {
         this.auth.setUser(user);
+        this.getUserById().subscribe();
         return user;
       }), catchError(this.handleError));
   }
@@ -35,6 +36,7 @@ export class ApiService {
       .post<UserData>(`${this.api}/login`, login)
       .pipe(map(user => {
         this.auth.setUser(user);
+        this.getUserById().subscribe();
         return user;
       }), catchError(this.handleError));
   }

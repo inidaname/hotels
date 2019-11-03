@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     }, err => {
       console.log(err)
       this.share.changeValueOfStatus(false)
-      this.message = err.message;
+      this.message = err.error.message;
       this.alertType = 'danger';
     });
   }

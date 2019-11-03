@@ -26,11 +26,17 @@ export class AuthenticateGuard implements CanActivate, CanActivateChild, CanLoad
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
     if (route.path === 'auth') {
-      if (this.auth.getUser() !== null) {
+      if (localStorage.getItem('token') !== null) {
         this.router.navigateByUrl('/home');
         return false;
       }
     }
+
+    if (localStorage.getItem('token') === null && route.path !== 'auth') {
+      this.router.navigateByUrl('/auth');
+      return false;
+    }
+
     return true;
   }
 }

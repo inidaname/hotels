@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '@services/user-data.service';
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -12,12 +13,21 @@ export class HeaderComponent implements OnInit {
   email: string;
 
   constructor(
-    private data: UserDataService
+    private data: UserDataService,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
     this.data.currentUser.subscribe(er => {
       this.fullName = er.fullName;
     });
+  }
+
+  userLogout(): void {
+    const logout = this.auth.clearUser();
+
+    if (logout.valueOf) {
+      console.log(localStorage);
+    }
   }
 }

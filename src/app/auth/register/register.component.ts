@@ -45,10 +45,9 @@ export class RegisterComponent implements OnInit {
         this.router.navigateByUrl('/home');
       },
       err => {
-        console.log(err);
         this.share.changeValueOfStatus(false);
         this.alertType = 'danger';
-        this.message = err.message;
+        this.message = err.error.message;
       }
     );
     console.log('Registered');
