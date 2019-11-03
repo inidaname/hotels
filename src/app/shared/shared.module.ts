@@ -5,24 +5,29 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { PathNotFoundComponent } from '@components/path-not-found/path-not-found.component';
+import { HeaderComponent } from './components/header/header.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   declarations: [
-    PathNotFoundComponent
+    PathNotFoundComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbAlertModule
+    NgbAlertModule,
+    RouterModule
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     NgbAlertModule,
-    PathNotFoundComponent
+    PathNotFoundComponent,
+    HeaderComponent
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,17 @@
+<header class="w-100 d-flex flex-row justify-content-between align-content-center align-items-center">
+  <h1 class="h1 pl-3">Hotel Management</h1>
+  <!-- search bar here -->
+  <nav class="col-6">
+    <ul class="nav justify-content-end" *ngIf="fullName">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="[ './profile' ]" routerLinkActive="active" [innerText]="fullName"></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="[ './notifications' ]" routerLinkActive="active">Notifications</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="[ './logout' ]" routerLinkActive="active">Log Out</a>
+      </li>
+    </ul>
+  </nav>
+</header>
