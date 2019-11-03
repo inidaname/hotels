@@ -1,29 +1,23 @@
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
-import { AuthService } from '@services/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { UserDataService } from '@services/user-data.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, AfterViewChecked {
+export class HeaderComponent implements OnInit {
 
   fullName: string;
   email: string;
 
   constructor(
-    private data: AuthService
+    private data: UserDataService
   ) { }
 
   ngOnInit() {
-    console.log(this.data.getData());
-    if (this.data.getData()) {
-      this.fullName = this.data.getData().fullName;
-    }
+    this.data.currentUser.subscribe(er => {
+      this.fullName = er.fullName;
+    });
   }
-
-  ngAfterViewChecked() {
-
-  }
-
 }

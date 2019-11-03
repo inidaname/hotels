@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from '@shared/interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserDataService {
 
-  private currentStatusSubject: BehaviorSubject<boolean>;
-  public currentStatus: Observable<boolean>;
+  private currentUserSubject: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  public currentUser: Observable<User> = this.currentUserSubject.asObservable();
 
-  constructor() {
-    this.currentStatusSubject = new BehaviorSubject<boolean>(false);
-    this.currentStatus = this.currentStatusSubject.asObservable();
+  constructor() { }
+
+  public setUserData(user: User) {
+    return this.currentUserSubject.next(user);
   }
+
 }
