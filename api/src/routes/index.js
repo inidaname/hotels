@@ -8,9 +8,7 @@ import {
   supply,
   inventory,
   roomLogs,
-  getAllUser,
-  deleteUser,
-  getData
+  user
 } from '../controllers/index.js';
 
 const routes = express.Router();
@@ -29,9 +27,9 @@ routes.post('/create/user', createAuth.createUser);
 routes.route('/login').post(createAuth.login);
 
 // User routes
-routes.route('/users').get(getAllUser);
-routes.route('/users/:id').delete(deleteUser);
-routes.route('/users/alldata').get(getData);
+routes.route('/users').get(user.getAllUser);
+routes.route('/users/alldata').get(user.getData);
+routes.route('/users/:id').delete(user.deleteUser).get(user.getUserById);
 
 // Create product and room
 routes.post('/room', room.createRoom);
