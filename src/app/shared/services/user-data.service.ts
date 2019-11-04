@@ -16,4 +16,8 @@ export class UserDataService {
     return this.currentUserSubject.next(user);
   }
 
+  public clearData() {
+    return this.currentUserSubject.next(null);
+  }
+
 }

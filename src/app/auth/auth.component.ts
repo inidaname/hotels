@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewChecked, AfterViewInit } from '@angular/cor
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ShareService } from '@services/share.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { UserDataService } from '@services/user-data.service';
 
 @Component({
   selector: 'app-auth',
@@ -15,7 +16,8 @@ export class AuthComponent implements OnInit, AfterViewChecked, AfterViewInit {
   constructor(
     private spinner: NgxSpinnerService,
     private loadStatus: ShareService,
-    private routes: Router
+    private routes: Router,
+    private data: UserDataService
   ) {
     this.routes.events.subscribe(val => {
       if (val instanceof NavigationEnd && val.urlAfterRedirects === '/auth') {
@@ -25,6 +27,7 @@ export class AuthComponent implements OnInit, AfterViewChecked, AfterViewInit {
   }
 
   ngOnInit() {
+    this.data.clearData();
   }
 
   ngAfterViewInit(): void {

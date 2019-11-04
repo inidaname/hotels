@@ -4,6 +4,7 @@ import { ApiService } from '@services/api.service';
 import { ShareService } from '@services/share.service';
 import { MustMatch } from './match';
 import { Router } from '@angular/router';
+import { UserDataService } from '@services/user-data.service';
 
 @Component({
   templateUrl: './register.component.html',
@@ -19,7 +20,8 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private apiService: ApiService,
     private share: ShareService,
-    private router: Router
+    private router: Router,
+    private data: UserDataService
   ) { }
 
   ngOnInit() {
@@ -42,6 +44,7 @@ export class RegisterComponent implements OnInit {
         this.share.changeValueOfStatus(false);
         this.alertType = 'success';
         this.message = val.message;
+        this.data.setUserData(val.data);
         this.router.navigateByUrl('/home');
       },
       err => {

@@ -7,7 +7,7 @@ export class HeaderInterceptor implements HttpInterceptor {
   constructor() { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('Intercept')
+    // @Todo: Token decode and encode
     const headers = req.headers
       .set('Content-Type', 'application/json');
     const authReq = req.clone({ headers });

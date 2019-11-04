@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '@services/user-data.service';
 import { AuthService } from '@services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,15 +12,20 @@ export class HeaderComponent implements OnInit {
 
   fullName: string;
   email: string;
+  status = false;
 
   constructor(
     private data: UserDataService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.data.currentUser.subscribe(er => {
-      this.fullName = er.fullName;
+      if (er !== null) {
+        this.status = true;
+        this.fullName = er.fullName;
+      }
     });
   }
 
@@ -27,7 +33,7 @@ export class HeaderComponent implements OnInit {
     const logout = this.auth.clearUser();
 
     if (logout.valueOf) {
-      console.log(localStorage);
+      this.router.navigateByUrl('/auth');
     }
   }
 }
