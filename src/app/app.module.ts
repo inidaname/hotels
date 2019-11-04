@@ -1,22 +1,24 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule  } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HeaderInterceptor } from '@interceptors/header.interceptor';
+import { SharedModule } from '@shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
 import { HomeComponent } from './home/home.component';
-import { SharedModule } from '@shared/shared.module';
+import { PointOfSalesComponent } from './point-of-sales/point-of-sales.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
-    HomeComponent
+    HomeComponent,
+    PointOfSalesComponent
   ],
   imports: [
     BrowserModule,
