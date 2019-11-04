@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '@services/api.service';
 import { UserDataService } from '@services/user-data.service';
 import { Router } from '@angular/router';
+import { NavList } from '@shared/interface';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +11,19 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
+  navList: NavList[] = [
+    {
+      name: 'Dashboard',
+      link: './dashboard'
+    },
+    {
+      name: 'Setting',
+      link: './setting'
+    }
+  ];
+
   constructor(
     private api: ApiService,
-    private data: UserDataService,
-    private router: Router
   ) { }
 
   ngOnInit() {

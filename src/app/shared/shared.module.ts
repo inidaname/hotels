@@ -7,12 +7,14 @@ import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { PathNotFoundComponent } from '@components/path-not-found/path-not-found.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
 
 
 @NgModule({
   declarations: [
     PathNotFoundComponent,
-    HeaderComponent
+    HeaderComponent,
+    SideBarComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     NgbAlertModule,
     PathNotFoundComponent,
-    HeaderComponent
+    HeaderComponent,
+    SideBarComponent
   ]
 })
 export class SharedModule { }

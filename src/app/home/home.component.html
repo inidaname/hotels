@@ -1,4 +1,5 @@
 <app-header></app-header>
-<main class="container-fluid border my-auto">
-  <router-outlet></router-outlet>
+<main class="border my-auto d-flex align-items-center position-relative justify-content-between flex-row">
+    <app-side-bar [items]="navList"></app-side-bar>
+    <router-outlet></router-outlet>
 </main>
