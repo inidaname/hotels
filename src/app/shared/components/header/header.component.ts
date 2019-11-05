@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserDataService } from '@services/user-data.service';
 import { AuthService } from '@services/auth.service';
 import { Router } from '@angular/router';
@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   fullName: string;
   email: string;
   status = false;
+  @Input() userPlace?: string;
 
   constructor(
     private data: UserDataService,

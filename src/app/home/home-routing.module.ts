@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { PathNotFoundComponent } from '@components/path-not-found/path-not-found.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { StockComponent } from './stock/stock.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent
+  },
+  {
+    path: 'stock',
+    component: StockComponent
   },
   {
     path: '**',

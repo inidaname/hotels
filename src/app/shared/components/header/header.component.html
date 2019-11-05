@@ -1,6 +1,7 @@
 <header class="bg-white w-100 d-flex flex-row justify-content-between align-content-center align-items-center position-fixed">
   <h1 class="h1 pl-3">Hotel Management</h1>
   <!-- search bar here -->
+  <div *ngIf="userPlace"> <a [routerLink]="['/pointofsales']"  class="btn btn-success" role="button">{{userPlace}}</a></div>
   <nav class="col-6" *ngIf="status === true">
     <ul class="nav justify-content-end">
       <li class="nav-item">
