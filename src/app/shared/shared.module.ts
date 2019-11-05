@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { NgxSpinnerModule } from 'ngx-spinner';
-import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlertModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { PathNotFoundComponent } from '@components/path-not-found/path-not-found.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -24,6 +23,7 @@ import { ProductFormComponent } from './components/product-form/product-form.com
     FormsModule,
     ReactiveFormsModule,
     NgbAlertModule,
+    NgbModalModule,
     RouterModule
   ],
   exports: [
@@ -31,10 +31,12 @@ import { ProductFormComponent } from './components/product-form/product-form.com
     FormsModule,
     ReactiveFormsModule,
     NgbAlertModule,
+    NgbModalModule,
     PathNotFoundComponent,
     HeaderComponent,
     SideBarComponent,
     ProductFormComponent
-  ]
+  ],
+  entryComponents: [ProductFormComponent]
 })
 export class SharedModule { }
