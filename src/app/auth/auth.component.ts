@@ -51,7 +51,7 @@ export class AuthComponent implements OnInit, AfterViewChecked, AfterViewInit {
       }
 
       if (st === false) {
-        this.spinner.hide('N')
+        this.spinner.hide('N');
       }
     });
   }

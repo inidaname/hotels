@@ -44,8 +44,8 @@ export class LoginComponent implements OnInit {
       this.data.setUserData(val.data);
       this.router.navigateByUrl('/home');
     }, err => {
-      console.log(err)
-      this.share.changeValueOfStatus(false)
+      console.log(err);
+      this.share.changeValueOfStatus(false);
       this.message = err.error.message;
       this.alertType = 'danger';
     });
