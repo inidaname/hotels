@@ -12,10 +12,12 @@ import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
 import { HomeComponent } from './home/home.component';
 import { PointOfSalesComponent } from './point-of-sales/point-of-sales.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AdminComponent,
     AuthComponent,
     HomeComponent,
     PointOfSalesComponent
