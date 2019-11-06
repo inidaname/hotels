@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { NgbAlertModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlertModule, NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { PathNotFoundComponent } from '@components/path-not-found/path-not-found.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
+import { SortableDirective } from './directives/sortable.directive';
 
 
 @NgModule({
@@ -16,22 +17,21 @@ import { ProductFormComponent } from './components/product-form/product-form.com
     PathNotFoundComponent,
     HeaderComponent,
     SideBarComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    SortableDirective
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbAlertModule,
-    NgbModalModule,
+    NgbModule,
     RouterModule
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbAlertModule,
-    NgbModalModule,
+    NgbModule,
     PathNotFoundComponent,
     HeaderComponent,
     SideBarComponent,

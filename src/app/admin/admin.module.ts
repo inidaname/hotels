@@ -8,6 +8,7 @@ import { StockComponent } from './stock/stock.component';
 import { ReportComponent } from './report/report.component';
 import { StaffComponent } from './staff/staff.component';
 import { AccountComponent } from './account/account.component';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AccountComponent } from './account/account.component';
   ],
   imports: [
     AdminRoutingModule,
-    SharedModule
+    SharedModule,
+    // NgbPaginationModule
   ]
 })
 export class AdminModule { }
