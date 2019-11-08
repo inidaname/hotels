@@ -25,7 +25,7 @@ export class StockComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.openModal();
+    // this.openModal();
   }
 
   openModal() {

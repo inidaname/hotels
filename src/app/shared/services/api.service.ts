@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { UserData, User } from '@shared/interface';
+import { UserData, User, ProductData, Products } from '@shared/interface';
 import { environment } from '@environments/environment';
 import { map, catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
@@ -13,8 +13,8 @@ import { UserDataService } from './user-data.service';
 })
 export class ApiService {
 
-
   private api: string = environment.api;
+
   constructor(
     private http: HttpClient,
     private auth: AuthService,
@@ -54,6 +54,15 @@ export class ApiService {
       .pipe(map(user => {
         this.userData.setUserData(user.data);
         return user;
+      }), catchError(this.handleError));
+  }
+
+  createProduct(product: Products): Observable<ProductData> {
+    const id = localStorage.getItem('currentUser');
+    return this.http
+      .post<ProductData>(`${this.api}/product`, product)
+      .pipe(map(productData => {
+        return productData;
       }), catchError(this.handleError));
   }
 

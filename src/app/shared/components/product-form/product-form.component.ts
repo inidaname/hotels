@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from '@services/api.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-product-form',
@@ -21,6 +21,25 @@ export class ProductFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.content = this.fb.group({
+      productName: ['', Validators.required],
+      productCategory: [''],
+      productCat: [''],
+      productImage: [''],
+      productPrice: ['', [Validators.required]],
+      seriel: [''],
+      manufacturer: ['', Validators.required],
+      quantity: ['', Validators.required],
+      manufacturedDate: ['', Validators.required],
+      expiryDate: ['', Validators.required]
+    });
   }
 
+  get f() { return this.content.controls; }
+
+  submitForm() {
+    if(this.content.valid) {
+      console.log(this.content.value);
+    }
+  }
 }

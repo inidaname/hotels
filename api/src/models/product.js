@@ -35,7 +35,7 @@ const productSchema = new mongoose.Schema({
   quantity: {
     type: Number
   }
-}, {timestamps: true});
+}, { timestamps: { createdAt: 'added_on', updatedAt: 'edited_on' } });
 
 // consider return policy for products
 
