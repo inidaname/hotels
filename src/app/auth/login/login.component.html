@@ -2,7 +2,7 @@
   <ngb-alert *ngIf="message" [dismissible]="true" (close)="close()" [type]="alertType">
     {{message}}
   </ngb-alert>
-  <form class="w-100 mx-auto" [formGroup]="login" (submit)="loginUser()">
+  <form class="w-100 mx-auto" [formGroup]="login">
     <div class="form-group">
       <label for="username">Username</label>
       <input
