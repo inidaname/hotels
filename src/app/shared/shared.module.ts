@@ -10,6 +10,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { SortableDirective } from './directives/sortable.directive';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { SortableDirective } from './directives/sortable.directive';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    RouterModule
+    RouterModule,
+    NgxSpinnerModule
   ],
   exports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { SortableDirective } from './directives/sortable.directive';
     PathNotFoundComponent,
     HeaderComponent,
     SideBarComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    NgxSpinnerModule
   ],
   entryComponents: [ProductFormComponent]
 })

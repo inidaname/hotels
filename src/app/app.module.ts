@@ -4,7 +4,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
-import { NgxSpinnerModule } from 'ngx-spinner';
 import { HeaderInterceptor } from '@interceptors/header.interceptor';
 import { SharedModule } from '@shared/shared.module';
 
@@ -28,7 +27,6 @@ import { AdminComponent } from './admin/admin.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxSpinnerModule,
     SharedModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

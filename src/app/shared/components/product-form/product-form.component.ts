@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from '@services/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-product-form',
@@ -17,7 +18,8 @@ export class ProductFormComponent implements OnInit {
   constructor(
     public modal: NgbActiveModal,
     private api: ApiService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -39,7 +41,12 @@ export class ProductFormComponent implements OnInit {
 
   submitForm() {
     if(this.content.valid) {
-      console.log(this.content.value);
+      this.spinner.show();
+      const obs = this.api.createProduct(this.content.value)
+      obs.subscribe(cl => {
+        console.log(cl)
+        this.spinner.hide();
+      })
     }
   }
 }
