@@ -28,7 +28,7 @@ export class StockComponent implements OnInit {
   }
 
   openModal() {
-    const newModal = this.modal.open(ProductFormComponent);
+    const newModal = this.modal.open(ProductFormComponent, {keyboard: false});
     newModal.componentInstance.name = 'Get';
   }
 

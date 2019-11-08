@@ -1,7 +1,96 @@
-<div class="card text-left">
-  <img class="card-img-top" src="holder.js/100px180/" alt="">
-  <div class="card-body">
-    <h4 class="card-title">{{name}}</h4>
-    <p class="card-text">Body</p>
+<div class="modal-header">
+  <h4 class="modal-title">Add New Product</h4>
+  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container">
+    <div class="container">
+      <form>
+        <div class="form-group row">
+          <label for="productName" class="col-sm-5 col-form-label">Product Name</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" name="productName" id="productName" placeholder="Product Name">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="productCategory" class="col-sm-5 col-form-label">Product Category</label>
+          <div class="col-sm-6">
+            <select class="form-control" name="productCategory" id="productCategory">
+              <option>First</option>
+              <option>Second</option>
+              <option>Third</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="productCategory" class="col-sm-5 col-form-label">Product Department</label>
+          <div class="col-sm-6">
+            <select class="form-control" name="productCategory" id="productCategory">
+              <option>First</option>
+              <option>Second</option>
+              <option>Third</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="productImage" class="col-sm-5">Product Image</label>
+          <div class="col-sm-6">
+            <input type="file" class="form-control-file" name="productImage" id="productImage" placeholder="Product Image" aria-describedby="image">
+            <small id="image" class="form-text text-muted">Help text</small>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="productPrice" class="col-sm-5">Product Unit Price</label>
+          <div class="col-sm-6">
+            <input type="number" class="form-control" name="productPrice" id="productPrice" aria-describedby="unitPrice" placeholder="Amount Unit Price">
+            <small id="unitPrice" class="form-text text-muted">Amount</small>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="seriel" class="col-sm-5">Seriel Number</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" name="seriel" id="seriel" aria-describedby="seriel" placeholder="Seriel Number">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="manufacturer" class="col-sm-5">Manufacturer</label>
+          <div class="col-sm-6">
+            <input type="text" name="manufacturer" id="manufacturer" class="form-control" placeholder="Product Manufacturer" aria-describedby="helpId">
+            <small id="helpId" class="text-muted">Help text</small>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="" class="col-sm-2">Dates:</label>
+          <div class="input-group col-sm-5">
+            <input type="text" name="" id="" class="form-control" ngbDatepicker #manufact="ngbDatepicker" placeholder="Manufatured: dd/mm/yyyy">
+            <div class="input-group-append">
+              <button class="btn btn-outline-success calendar" (click)="manufact.toggle()" type="button"></button>
+            </div>
+          </div>
+          <div class="input-group col-sm-5">
+            <input type="text" name="" id="" class="form-control" ngbDatepicker #expired="ngbDatepicker" placeholder="Expiry Date: dd/mm/yyyy">
+            <div class="input-group-append">
+              <button class="btn btn-outline-success calendar" (click)="expired.toggle()" type="button"></button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="quantity" class="col-sm-5">Quantity</label>
+          <div class="col-sm-6">
+            <input type="number" name="quantity" id="quantity" class="form-control" placeholder="Quantity in Units">
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="offset-sm-4 col-sm-8">
+            <button type="submit" class="btn btn-primary">Action</button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
 </div>
