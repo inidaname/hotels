@@ -25,10 +25,11 @@ export class StockComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.openModal();
   }
 
   openModal() {
-    const newModal = this.modal.open(ProductFormComponent, {keyboard: false});
+    const newModal = this.modal.open(ProductFormComponent);
     newModal.componentInstance.name = 'Get';
   }
 

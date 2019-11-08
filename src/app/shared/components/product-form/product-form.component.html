@@ -7,11 +7,11 @@
 <div class="modal-body">
   <div class="container">
     <div class="container">
-      <form>
+      <form [formGroupName]="content">
         <div class="form-group row">
           <label for="productName" class="col-sm-5 col-form-label">Product Name</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" name="productName" id="productName" placeholder="Product Name">
+            <input type="text" class="form-control" foto="productName" id="productName" placeholder="Product Name">
           </div>
         </div>
         <div class="form-group row">
