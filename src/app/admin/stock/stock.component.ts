@@ -54,7 +54,6 @@ export class StockComponent implements OnInit {
     newModal.componentInstance.name = 'Get';
     newModal.componentInstance.product = id;
     newModal.componentInstance.productHere = true;
-    console.log(id);
   }
 
   trackById(i, da) {

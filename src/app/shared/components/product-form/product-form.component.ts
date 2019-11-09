@@ -49,14 +49,12 @@ export class ProductFormComponent implements OnInit {
       this.spinner.show();
       const obs = this.api.createProduct(this.content.value)
       obs.subscribe(cl => {
-        console.log(cl)
         this.spinner.hide();
         this.alertType = 'success';
         this.message = cl.message;
         this.productHere = true;
       },
         er => {
-          console.log(er);
           this.spinner.hide();
           this.alertType = 'danger';
           this.message = er.error.message;
