@@ -1,37 +1,136 @@
 <ngx-spinner></ngx-spinner>
 
-<div class="modal-header">
-  <h4 class="modal-title">Add New Product</h4>
-  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body">
-  <div class="container">
+<ng-container *ngIf="productHere;else noProduct">
+  <div class="modal-header">
+    <h4 class="modal-title">Something Detail</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
     <div class="container">
-      <form [formGroup]="content" (submit)="submitForm()">
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="row">
+            <div class="col-sm-6">
+              Product Name:
+            </div>
+            <div class="col-sm-6">
+              SomeThing
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              Manufacturer:
+            </div>
+            <div class="col-sm-6">
+              Some Company
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              Type:
+            </div>
+            <div class="col-sm-6">
+              Perishable
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              Department:
+            </div>
+            <div class="col-sm-6">
+              Restaurant
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              Unit Price:
+            </div>
+            <div class="col-sm-6">
+              N3.50
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              Best Before:
+            </div>
+            <div class="col-sm-6">
+                {{'2019/12/21' | date}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              Quantity:
+            </div>
+            <div class="col-sm-6">
+                324
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              Serial Number:
+            </div>
+            <div class="col-sm-6">
+                324GH23
+            </div>
+          </div>
+        </div>
+        <div class="col-sm 3">
+          <figure class="figure">
+            <img src="assets/" class="figure-img img-fluid rounded shadow col-sm-12" alt="Product Image">
+            <figcaption class="figure-caption text-xs-right"></figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+
+  </div>
+</ng-container>
+
+<ng-template #noProduct>
+  <div class="modal-header">
+    <h4 class="modal-title">Add New Product</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container">
+      <div class="row">
+        <ngb-alert *ngIf="message" [dismissible]="true" (close)="close()" [type]="alertType">
+          {{message}}
+        </ngb-alert>
+      </div>
+      <form [formGroup]="content">
         <div class="form-group row">
           <label for="productName" class="col-sm-5 col-form-label">Product Name</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" formControlName="productName" [ngClass]="{'is-invalid': f.productName.touched && f.productName.invalid}" id="productName" placeholder="Product Name" aria-describedby="nameReq">
-            <small id="nameReq" class="form-text d-none text-muted" [ngClass]="{'d-block': f.productName.touched && f.productName.invalid}">Please provide a product name</small>
+            <input type="text" class="form-control" formControlName="productName"
+              [ngClass]="{'is-invalid': f.productName.touched && f.productName.invalid}" id="productName"
+              placeholder="Product Name" aria-describedby="nameReq">
+            <small id="nameReq" class="form-text d-none text-muted"
+              [ngClass]="{'d-block': f.productName.touched && f.productName.invalid}">Please provide a product
+              name</small>
 
           </div>
         </div>
         <div class="form-group row">
-          <label for="productCategory" class="col-sm-5 col-form-label">Product Category</label>
+          <label for="productType" class="col-sm-5 col-form-label">Product Type</label>
           <div class="col-sm-6">
-            <select class="form-control" formControlName="productCategory" id="productCategory">
-              <option>First</option>
-              <option>Second</option>
-              <option>Third</option>
+            <select class="form-control" [ngClass]="{'is-invalid': f.productType.touched && f.productType.invalid}"
+              formControlName="productType" id="productType">
+              <option value="Perishable">Perishable</option>
+              <option value="Non-Perishable">Non-Perishable</option>
             </select>
           </div>
         </div>
         <div class="form-group row">
           <label for="productCategory" class="col-sm-5 col-form-label">Product Department</label>
           <div class="col-sm-6">
-            <select class="form-control" formControlName="productCat" id="productCategory">
+            <select class="form-control" formControlName="productDept" id="productCategory">
               <option>First</option>
               <option>Second</option>
               <option>Third</option>
@@ -41,40 +140,52 @@
         <div class="form-group row">
           <label for="productImage" class="col-sm-5">Product Image</label>
           <div class="col-sm-6">
-            <input type="file" class="form-control-file" formControlName="productImage" id="productImage" placeholder="Product Image" aria-describedby="image">
-            <small id="image" class="form-text text-muted">Help text</small>
+            <input type="file" class="form-control-file" formControlName="productImage" id="productImage"
+              placeholder="Product Image" aria-describedby="image">
           </div>
         </div>
         <div class="form-group row">
           <label for="productPrice" class="col-sm-5">Product Unit Price</label>
           <div class="col-sm-6">
-            <input type="number" class="form-control" [ngClass]="{'is-invalid': f.productPrice.touched && f.productPrice.invalid}" formControlName="productPrice" id="productPrice" aria-describedby="unitPrice" placeholder="Amount Unit Price">
-            <small id="unitPrice" class="form-text text-muted d-none" [ngClass]="{'d-block': f.productPrice.touched && f.productPrice.invalid}">Please provide Unit Price Amount</small>
+            <input type="number" class="form-control"
+              [ngClass]="{'is-invalid': f.productPrice.touched && f.productPrice.invalid}"
+              formControlName="productPrice" id="productPrice" aria-describedby="unitPrice"
+              placeholder="Amount Unit Price">
+            <small id="unitPrice" class="form-text text-muted d-none"
+              [ngClass]="{'d-block': f.productPrice.touched && f.productPrice.invalid}">Please provide Unit Price
+              Amount</small>
           </div>
         </div>
         <div class="form-group row">
           <label for="seriel" class="col-sm-5">Seriel Number</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" formControlName="seriel" id="seriel" aria-describedby="seriel" placeholder="Seriel Number">
+            <input type="text" class="form-control" formControlName="serialNumber" id="seriel" aria-describedby="seriel"
+              placeholder="Seriel Number">
           </div>
         </div>
         <div class="form-group row">
           <label for="manufacturer" class="col-sm-5">Manufacturer</label>
           <div class="col-sm-6">
-            <input type="text" formControlName="manufacturer" id="manufacturer" class="form-control" [ngClass]="{'is-invalid': f.manufacturer.touched && f.manufacturer.invalid}" placeholder="Product Manufacturer" aria-describedby="helpId">
-            <small id="helpId" class="text-muted d-none" [ngClass]="{'d-block': f.manufacturer.touched && f.manufacturer.invalid}">Please provide name of Manufacturer</small>
+            <input type="text" formControlName="manufacturer" id="manufacturer" class="form-control"
+              [ngClass]="{'is-invalid': f.manufacturer.touched && f.manufacturer.invalid}"
+              placeholder="Product Manufacturer" aria-describedby="helpId">
+            <small id="helpId" class="text-muted d-none"
+              [ngClass]="{'d-block': f.manufacturer.touched && f.manufacturer.invalid}">Please provide name of
+              Manufacturer</small>
           </div>
         </div>
         <div class="form-group row">
           <label for="" class="col-sm-2">Dates:</label>
           <div class="input-group col-sm-5">
-            <input type="text" formControlName="manufacturedDate" class="form-control" ngbDatepicker #manufact="ngbDatepicker" placeholder="Manufatured: dd/mm/yyyy">
+            <input type="text" formControlName="manufacturedDate" class="form-control" ngbDatepicker
+              #manufact="ngbDatepicker" placeholder="Manufatured: dd/mm/yyyy">
             <div class="input-group-append">
               <button class="btn btn-outline-success calendar" (click)="manufact.toggle()" type="button"></button>
             </div>
           </div>
           <div class="input-group col-sm-5">
-            <input type="text" formControlName="expiryDate"  class="form-control" ngbDatepicker #expired="ngbDatepicker" placeholder="Expiry Date: dd/mm/yyyy">
+            <input type="text" formControlName="expiryDate" class="form-control" ngbDatepicker #expired="ngbDatepicker"
+              placeholder="Expiry Date: dd/mm/yyyy">
             <div class="input-group-append">
               <button class="btn btn-outline-success calendar" (click)="expired.toggle()" type="button"></button>
             </div>
@@ -83,19 +194,23 @@
         <div class="form-group row">
           <label for="quantity" class="col-sm-5">Quantity</label>
           <div class="col-sm-6">
-            <input type="number" formControlName="quantity" id="quantity" [ngClass]="{'is-invalid': f.quantity.touched && f.quantity.invalid}" class="form-control" placeholder="Quantity in Units">
-            <small class="text-muted d-none" [ngClass]="{'d-block': f.quantity.touched && f.quantity.invalid}">Please provide quantity of product</small>
+            <input type="number" formControlName="quantity" id="quantity"
+              [ngClass]="{'is-invalid': f.quantity.touched && f.quantity.invalid}" class="form-control"
+              placeholder="Quantity in Units">
+            <small class="text-muted d-none" [ngClass]="{'d-block': f.quantity.touched && f.quantity.invalid}">Please
+              provide quantity of product</small>
           </div>
         </div>
         <div class="form-group row">
           <div class="offset-sm-4 col-sm-8">
-            <button type="submit" class="btn btn-primary" [disabled]="!content.valid" (click)="submitForm()">Action</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!content.valid"
+              (click)="submitForm()">Action</button>
           </div>
         </div>
       </form>
     </div>
   </div>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-</div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>

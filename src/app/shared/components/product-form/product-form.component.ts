@@ -14,7 +14,9 @@ export class ProductFormComponent implements OnInit {
   items: any[];
   @Input() name: string;
   content: FormGroup;
-
+  message: string;
+  alertType: string;
+  productHere: boolean;
   constructor(
     public modal: NgbActiveModal,
     private api: ApiService,
@@ -23,13 +25,14 @@ export class ProductFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.productHere = true;
     this.content = this.fb.group({
       productName: ['', Validators.required],
-      productCategory: [''],
-      productCat: [''],
+      productType: ['', Validators.required],
+      productDept: [''],
       productImage: [''],
       productPrice: ['', [Validators.required]],
-      seriel: [''],
+      serialNumber: [''],
       manufacturer: ['', Validators.required],
       quantity: ['', Validators.required],
       manufacturedDate: ['', Validators.required],
@@ -40,13 +43,27 @@ export class ProductFormComponent implements OnInit {
   get f() { return this.content.controls; }
 
   submitForm() {
-    if(this.content.valid) {
+    if (this.content.valid) {
       this.spinner.show();
       const obs = this.api.createProduct(this.content.value)
       obs.subscribe(cl => {
         console.log(cl)
         this.spinner.hide();
-      })
+        this.alertType = 'success';
+        this.message = cl.message;
+        this.productHere = true;
+      },
+        er => {
+          console.log(er);
+          this.spinner.hide();
+          this.alertType = 'danger';
+          this.message = er.error.message;
+          this.productHere = false;
+        })
     }
+  }
+
+  close() {
+    this.message = null;
   }
 }

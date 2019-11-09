@@ -1,7 +1,7 @@
 export interface Products {
   readonly productName: string;
   readonly productCategory: string;
-  readonly productCat: string;
+  readonly productDept: string;
   readonly productImage: string;
   readonly productPrice: number;
   readonly serialNumber: string;
