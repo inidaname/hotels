@@ -4,41 +4,9 @@ import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 
 import {DecimalPipe} from '@angular/common';
 import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
-import {SortDirection} from '@directives/sortable.directive';
+import { State, SortDirection, SearchResult } from '@shared/interface';
+import { sort, matches } from '@shared/functions/sort.function';
 
-interface SearchResult {
-  countries: any[];
-  total: number;
-}
-
-interface State {
-  page: number;
-  pageSize: number;
-  searchTerm: string;
-  sortColumn: string;
-  sortDirection: SortDirection;
-}
-
-function compare(v1, v2) {
-  return v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
-}
-
-function sort(countries: any[], column: string, direction: string): any[] {
-  if (direction === '') {
-    return countries;
-  } else {
-    return [...countries].sort((a, b) => {
-      const res = compare(a[column], b[column]);
-      return direction === 'asc' ? res : -res;
-    });
-  }
-}
-
-function matches(country: any, term: string, pipe: PipeTransform) {
-  return country.name.toLowerCase().includes(term.toLowerCase())
-    || pipe.transform(country.area).includes(term)
-    || pipe.transform(country.population).includes(term);
-}
 
 @Injectable({providedIn: 'root'})
 export class CountryService {

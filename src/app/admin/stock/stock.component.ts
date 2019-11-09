@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { SortableDirective, SortEvent } from '@directives/sortable.directive';
+import { SortableDirective } from '@directives/sortable.directive';
 import { ProductFormComponent } from '@components/product-form/product-form.component';
 import { CountryService } from '@services/countries.service';
 import { Observable } from 'rxjs';
-import { ProductInfo } from '@shared/interface';
+import { ProductInfo, SortEvent } from '@shared/interface';
 import { ApiService } from '@services/api.service';
 
 @Component({
@@ -25,7 +25,10 @@ export class StockComponent implements OnInit {
     private modal: NgbModal,
     public service: CountryService,
     private api: ApiService
-  ) {}
+  ) {
+    this.products = service.countries$;
+    this.total$ = service.total$;
+  }
 
   ngOnInit() {
     // this.openModal();

@@ -1,12 +1,8 @@
 import { Directive, Input, Output, EventEmitter } from '@angular/core';
+import { SortDirection, SortEvent } from '@shared/interface';
 
-export type SortDirection = 'asc' | 'desc' | '';
 const rotate: {[key: string]: SortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };
 
-export interface SortEvent {
-  column: string;
-  direction: SortDirection;
-}
 
 @Directive({
   selector: '[appSortable]',
