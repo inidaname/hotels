@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { UserData, User, ProductData, Products } from '@shared/interface';
+import { UserData, User, ProductData, Products, ProductInfo } from '@shared/interface';
 import { environment } from '@environments/environment';
 import { map, catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
@@ -66,6 +66,13 @@ export class ApiService {
       }), catchError(this.handleError));
   }
 
+  getProduct(id?: string): Observable<ProductInfo[] | ProductInfo> {
+    return this.http
+      .get(`${this.api}/product/?${id}`)
+      .pipe(
+        map((prod: ProductData) => prod.data), catchError(this.handleError));
+  }
+
 
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';
@@ -74,7 +81,7 @@ export class ApiService {
     } else {
       errorMessage = `Server returned code: ${err.status}, error message is: ${err.error.message}`;
     }
-    console.log(errorMessage)
+    console.log(errorMessage);
     return throwError(err);
   }
 }

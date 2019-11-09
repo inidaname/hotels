@@ -2,7 +2,7 @@
   <section class="w-100 shadow-sm rounded p-4 row">
     <h3 class="col-12 text-center mb-1">Add and Edit Products</h3>
     <div class="row my-3 col-12">
-      <div class="col-xl-3">
+      <!-- <div class="col-xl-3">
         <div class="card text-left">
           <img class="card-img-top" src="" alt="">
           <div class="card-body">
@@ -10,8 +10,8 @@
             <p class="card-text">Descript, Category, Department and Price</p>
           </div>
         </div>
-      </div>
-      <div class="col-9 card">
+      </div> -->
+      <div class="col-sm-12 card">
           <form class="p-3">
               <div class="form-group form-inline">
                   Full text search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="service.searchTerm"/>
@@ -23,19 +23,25 @@
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
-                  <th scope="col" sortable="area" (sort)="onSort($event)">Area</th>
-                  <th scope="col" sortable="population" (sort)="onSort($event)">Population</th>
+                  <th scope="col" sortable="manufacturer" (sort)="onSort($event)">Manufactured By</th>
+                  <th scope="col" sortable="area" (sort)="onSort($event)">Quantity</th>
+                  <th scope="col" sortable="population" (sort)="onSort($event)">Unit Price</th>
+                  <th scope="col">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let country of countries$ | async">
-                  <th scope="row">{{ country.id }}</th>
+                <tr *ngFor="let product of products | async; let i = index;" (click)="justOpen(product)">
+                  <th scope="row">{{i.valueOf() + 1}}</th>
                   <td>
-                    <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
-                    <ngb-highlight [result]="country.name" [term]="service.searchTerm"></ngb-highlight>
+                    <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + product.flag" class="mr-2" style="width: 20px">
+                    <ngb-highlight [result]="product.productName" [term]="service.searchTerm"></ngb-highlight>
                   </td>
-                  <td><ngb-highlight [result]="country.area | number" [term]="service.searchTerm"></ngb-highlight></td>
-                  <td><ngb-highlight [result]="country.population | number" [term]="service.searchTerm"></ngb-highlight></td>
+                  <td><ngb-highlight [result]="product.manufacturer" [term]="service.searchTerm"></ngb-highlight></td>
+                  <td><ngb-highlight [result]="product.quantity | number" [term]="service.searchTerm"></ngb-highlight></td>
+                  <td><ngb-highlight [result]="product.productPrice | currency: 'NGN' : 'symbol-narrow'" [term]="service.searchTerm"></ngb-highlight></td>
+                  <td>
+                    <a name="" id="" class="btn btn-primary" href="#" role="button"></a>
+                  </td>
                 </tr>
                 </tbody>
               </table>

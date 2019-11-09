@@ -7,6 +7,7 @@ import { ProductFormComponent } from '@components/product-form/product-form.comp
 import { CountryService } from '@services/countries.service';
 import { Observable } from 'rxjs';
 import { ProductInfo } from '@shared/interface';
+import { ApiService } from '@services/api.service';
 
 @Component({
   templateUrl: './stock.component.html',
@@ -17,16 +18,18 @@ export class StockComponent implements OnInit {
 
   @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
 
-  products: Observable<ProductInfo[]>;
+  products: Observable<ProductInfo[] | ProductInfo>;
   total$: Observable<number>;
 
   constructor(
     private modal: NgbModal,
-    public service: CountryService
+    public service: CountryService,
+    private api: ApiService
   ) {}
 
   ngOnInit() {
     // this.openModal();
+    this.products = this.api.getProduct();
   }
 
   openModal() {
@@ -44,6 +47,19 @@ export class StockComponent implements OnInit {
 
     this.service.sortColumn = column;
     this.service.sortDirection = direction;
+  }
+
+  justOpen(id: ProductInfo){
+    const newModal = this.modal.open(ProductFormComponent);
+    newModal.componentInstance.name = 'Get';
+    newModal.componentInstance.product = id;
+    newModal.componentInstance.productHere = true;
+    console.log(id);
+  }
+
+  trackById(i, da) {
+    console.log(da)
+    return da._id
   }
 
 }

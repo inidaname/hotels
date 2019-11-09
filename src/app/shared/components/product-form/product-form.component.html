@@ -2,7 +2,7 @@
 
 <ng-container *ngIf="productHere;else noProduct">
   <div class="modal-header">
-    <h4 class="modal-title">Something Detail</h4>
+    <h4 class="modal-title">Detail for {{product.productName}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -16,7 +16,7 @@
               Product Name:
             </div>
             <div class="col-sm-6">
-              SomeThing
+              {{product.productName}}
             </div>
           </div>
           <div class="row">
@@ -24,7 +24,7 @@
               Manufacturer:
             </div>
             <div class="col-sm-6">
-              Some Company
+              {{product.manufacturer}}
             </div>
           </div>
           <div class="row">
@@ -32,7 +32,7 @@
               Type:
             </div>
             <div class="col-sm-6">
-              Perishable
+              {{product.productType}}
             </div>
           </div>
           <div class="row">
@@ -40,7 +40,7 @@
               Department:
             </div>
             <div class="col-sm-6">
-              Restaurant
+              {{product.productDept}}
             </div>
           </div>
           <div class="row">
@@ -48,7 +48,7 @@
               Unit Price:
             </div>
             <div class="col-sm-6">
-              N3.50
+              {{product.productPrice | currency: 'NGN' : 'symbol-narrow'}}
             </div>
           </div>
           <div class="row">
@@ -56,7 +56,7 @@
               Best Before:
             </div>
             <div class="col-sm-6">
-                {{'2019/12/21' | date}}
+                {{product.expiryDate | date}}
             </div>
           </div>
           <div class="row">
@@ -64,7 +64,7 @@
               Quantity:
             </div>
             <div class="col-sm-6">
-                324
+                {{product.quantity | number}}
             </div>
           </div>
           <div class="row">
@@ -72,7 +72,7 @@
               Serial Number:
             </div>
             <div class="col-sm-6">
-                324GH23
+                {{product.serialNumber}}
             </div>
           </div>
         </div>
@@ -86,7 +86,8 @@
     </div>
   </div>
   <div class="modal-footer">
-
+    <button type="button" name="" id="" class="btn btn-outline-success btn-sm">Edit</button>
+    <button type="button" name="" id="" class="btn btn-outline-secondary btn-sm" (click)="modal.close('Close click')">Close</button>
   </div>
 </ng-container>
 

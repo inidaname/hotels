@@ -36,9 +36,8 @@ routes.post('/room', room.createRoom);
 routes.put('/room/:id', room.editRoom);
 routes.delete('/room/:id', room.deleteRoom);
 
-routes.post('/product', product.createProduct);
-routes.put('/product/:id', product.editProduct);
-routes.delete('/product/:id', product.deleteProduct);
+routes.route('/product').post(product.createProduct).get(product.getAllProduct);
+routes.route('/product/:id').put(product.editProduct).get(product.getProductById).delete(product.deleteProduct);
 
 // Sales routes
 routes.post('/sales', salesLog.createSaleLog);

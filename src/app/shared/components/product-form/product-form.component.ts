@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from '@services/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ProductInfo } from '@shared/interface';
 
 @Component({
   selector: 'app-product-form',
@@ -16,7 +17,9 @@ export class ProductFormComponent implements OnInit {
   content: FormGroup;
   message: string;
   alertType: string;
-  productHere: boolean;
+  @Input() productHere: boolean;
+  @Input() product: ProductInfo;
+
   constructor(
     public modal: NgbActiveModal,
     private api: ApiService,
@@ -25,7 +28,6 @@ export class ProductFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.productHere = true;
     this.content = this.fb.group({
       productName: ['', Validators.required],
       productType: ['', Validators.required],
