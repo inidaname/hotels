@@ -11,7 +11,7 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: [true, `Please provide product manufacturer`]
   },
-  unitPrice: {
+  productPrice: {
     type: Number,
     required: [true, `Please provide the unit Price`]
   },
@@ -29,11 +29,15 @@ const productSchema = new mongoose.Schema({
   },
   image: String,
   serialNumber: {
-    type: Number,
+    type: String,
     required: [true, `Please provide the Serial Number`]
   },
   quantity: {
     type: Number
+  },
+  productDept: {
+    type: String,
+    required: [true, `Please provide the department product belong to`]
   }
 }, { timestamps: { createdAt: 'added_on', updatedAt: 'edited_on' } });
 

@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { SortableDirective, SortEvent } from '@directives/sortable.directive';
 import { ProductFormComponent } from '@components/product-form/product-form.component';
 import { CountryService } from '@services/countries.service';
 import { Observable } from 'rxjs';
-import { DecimalPipe } from '@angular/common';
+import { ProductInfo } from '@shared/interface';
 
 @Component({
   templateUrl: './stock.component.html',
@@ -16,7 +17,7 @@ export class StockComponent implements OnInit {
 
   @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
 
-  countries$: Observable<any[]>;
+  products: Observable<ProductInfo[]>;
   total$: Observable<number>;
 
   constructor(
