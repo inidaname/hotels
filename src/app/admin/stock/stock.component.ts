@@ -28,7 +28,6 @@ export class StockComponent implements OnInit {
   ) {
     this.products = service.countries$;
     this.total$ = service.total$;
-    console.log(this.products)
   }
 
   ngOnInit() {

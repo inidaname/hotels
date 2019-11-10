@@ -1,6 +1,6 @@
 <article class="p-4 bg-white container">
-  <section class="col-12 shadow-sm rounded p-4 row bg-danger my-5">
-    <h3 class="col-12 text-center mb-1 bg-dark">Add and Edit Products</h3>
+  <section class="col-12 shadow-sm rounded p-4 row bg-white my-5">
+    <h3 class="col-12 text-center mb-1 bg-white">Add and Edit Products</h3>
     <div class="row my-3 col-12">
       <!-- <div class="col-xl-3">
         <div class="card text-left">
@@ -15,7 +15,7 @@
           <form class="p-3">
               <div class="form-group form-inline">
                   Full text search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="service.searchTerm"/>
-                  <span class="ml-3" *ngIf="service.loading$ | async">Loading...</span>
+                  <span class="ml-3" *ngIf="service.loading$ | async">Loading List of Products...</span>
               </div>
 
               <table class="table table-striped">
@@ -30,17 +30,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let product of products | async; let i = index;" (click)="justOpen(product)">
+                <tr *ngFor="let product of products | async; let i = index;">
                   <th scope="row">{{i.valueOf() + 1}}</th>
                   <td>
                     <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + product.flag" class="mr-2" style="width: 20px">
                     <ngb-highlight [result]="product.productName" [term]="service.searchTerm"></ngb-highlight>
                   </td>
-                  <td><ngb-highlight [result]="product.manufacturer" [term]="service.searchTerm"></ngb-highlight></td>
+                  <td><ngb-highlight [result]="product.manufacturer | uppercase" [term]="service.searchTerm"></ngb-highlight></td>
                   <td><ngb-highlight [result]="product.quantity | number" [term]="service.searchTerm"></ngb-highlight></td>
                   <td><ngb-highlight [result]="product.productPrice | currency: 'NGN' : 'symbol-narrow'" [term]="service.searchTerm"></ngb-highlight></td>
                   <td>
-                    <a name="" id="" class="btn btn-primary" href="#" role="button"></a>
+                    <button type="button" class="btn btn-sm btn-outline-primary mx-2">Supplies</button>
+                    <button type="button" class="btn btn-sm btn-outline-success mx-2" (click)="justOpen(product)">Edit</button>
                   </td>
                 </tr>
                 </tbody>
@@ -62,7 +63,7 @@
     </div>
     <button type="button" name="" id="" class="btn btn-secondary offset-5" (click)="openModal()">Add New</button>
   </section>
-  <section class="w-100 shadow-sm rounded p-4 row my-5 bg-success">
-
+  <section class="w-100 shadow-sm rounded p-4 row my-5 bg-WHITE">
+    <h3 class="col-12 text-center">Add and Edit Inventory of the Hotel</h3>
   </section>
 </article>

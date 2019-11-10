@@ -19,5 +19,5 @@ export function sort(countries: ProductInfo[], column: string, direction: string
 export function matches(country: ProductInfo, term: string, pipe: PipeTransform) {
   return country.productName.toLowerCase().includes(term.toLowerCase())
     || pipe.transform(country.quantity).includes(term)
-    || pipe.transform(country.manufacturer).includes(term);
+    || country.manufacturer.toLowerCase().includes(term.toLowerCase())
 }
