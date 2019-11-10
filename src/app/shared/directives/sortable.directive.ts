@@ -5,7 +5,7 @@ const rotate: {[key: string]: SortDirection} = { 'asc': 'desc', 'desc': '', '': 
 
 
 @Directive({
-  selector: '[appSortable]',
+  selector: 'th[sortable]',
   host: {
     '[class.asc]': 'direction === "asc"',
     '[class.desc]': 'direction === "desc"',
@@ -17,8 +17,6 @@ export class SortableDirective {
   @Input() sortable: string;
   @Input() direction: SortDirection = '';
   @Output() sort = new EventEmitter<SortEvent>();
-
-  constructor() { }
 
   rotate() {
     this.direction = rotate[this.direction];

@@ -38,7 +38,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HeaderComponent,
     SideBarComponent,
     ProductFormComponent,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    SortableDirective
   ],
   entryComponents: [ProductFormComponent]
 })

@@ -1,15 +1,17 @@
-import {Injectable, PipeTransform} from '@angular/core';
+import { Injectable, PipeTransform } from '@angular/core';
 
-import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 
-import {DecimalPipe} from '@angular/common';
-import {debounceTime, delay, switchMap, tap} from 'rxjs/operators';
-import { State, SortDirection, SearchResult } from '@shared/interface';
+import { DecimalPipe } from '@angular/common';
+import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
+import { State, SortDirection, SearchResult, ProductInfo } from '@shared/interface';
 import { sort, matches } from '@shared/functions/sort.function';
+import { ApiService } from './api.service';
 
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class CountryService {
+  private products: BehaviorSubject<ProductInfo[]>;
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
   private _countries$ = new BehaviorSubject<any[]>([]);
@@ -23,7 +25,11 @@ export class CountryService {
     sortDirection: ''
   };
 
-  constructor(private pipe: DecimalPipe) {
+  constructor(private pipe: DecimalPipe, private api: ApiService) {
+    this.products = new BehaviorSubject(null);
+    this.api.getProduct().subscribe((products: ProductInfo[]) => {
+      this.products.next(products);
+    });
     this._search$.pipe(
       tap(() => this._loading$.next(true)),
       debounceTime(200),
@@ -45,11 +51,11 @@ export class CountryService {
   get pageSize() { return this._state.pageSize; }
   get searchTerm() { return this._state.searchTerm; }
 
-  set page(page: number) { this._set({page}); }
-  set pageSize(pageSize: number) { this._set({pageSize}); }
-  set searchTerm(searchTerm: string) { this._set({searchTerm}); }
-  set sortColumn(sortColumn: string) { this._set({sortColumn}); }
-  set sortDirection(sortDirection: SortDirection) { this._set({sortDirection}); }
+  set page(page: number) { this._set({ page }); }
+  set pageSize(pageSize: number) { this._set({ pageSize }); }
+  set searchTerm(searchTerm: string) { this._set({ searchTerm }); }
+  set sortColumn(sortColumn: string) { this._set({ sortColumn }); }
+  set sortDirection(sortDirection: SortDirection) { this._set({ sortDirection }); }
 
   private _set(patch: Partial<State>) {
     Object.assign(this._state, patch);
@@ -57,17 +63,16 @@ export class CountryService {
   }
 
   private _search(): Observable<SearchResult> {
-    const {sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
+    const { sortColumn, sortDirection, pageSize, page, searchTerm } = this._state;
 
     // 1. sort
-    let countries = sort([], sortColumn, sortDirection);
-
+    let countries = sort(this.products.value, sortColumn, sortDirection);
     // 2. filter
     countries = countries.filter(country => matches(country, searchTerm, this.pipe));
     const total = countries.length;
 
     // 3. paginate
     countries = countries.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
-    return of({countries, total});
+    return of({ countries, total });
   }
 }

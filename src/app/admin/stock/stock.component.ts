@@ -16,10 +16,10 @@ import { ApiService } from '@services/api.service';
 })
 export class StockComponent implements OnInit {
 
-  @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
-
   products: Observable<ProductInfo[] | ProductInfo>;
   total$: Observable<number>;
+
+  @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
 
   constructor(
     private modal: NgbModal,
@@ -28,11 +28,10 @@ export class StockComponent implements OnInit {
   ) {
     this.products = service.countries$;
     this.total$ = service.total$;
+    console.log(this.products)
   }
 
   ngOnInit() {
-    // this.openModal();
-    this.products = this.api.getProduct();
   }
 
   openModal() {

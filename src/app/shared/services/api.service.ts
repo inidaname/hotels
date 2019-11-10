@@ -69,8 +69,7 @@ export class ApiService {
   getProduct(id?: string): Observable<ProductInfo[] | ProductInfo> {
     return this.http
       .get(`${this.api}/product/?${id}`)
-      .pipe(
-        map((prod: ProductData) => prod.data), catchError(this.handleError));
+      .pipe(map((prod: ProductData) => prod.data), catchError(this.handleError));
   }
 
 
