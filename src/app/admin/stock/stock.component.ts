@@ -1,65 +1,14 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-import { SortableDirective } from '@directives/sortable.directive';
-import { ProductFormComponent } from '@components/product-form/product-form.component';
-import { CountryService } from '@services/countries.service';
-import { Observable } from 'rxjs';
-import { ProductInfo, SortEvent } from '@shared/interface';
-import { ApiService } from '@services/api.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   templateUrl: './stock.component.html',
-  styleUrls: ['./stock.component.scss'],
-  providers: [CountryService, DecimalPipe]
+  styleUrls: ['./stock.component.scss']
 })
 export class StockComponent implements OnInit {
 
-  products: Observable<ProductInfo[] | ProductInfo>;
-  total$: Observable<number>;
-
-  @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
-
-  constructor(
-    private modal: NgbModal,
-    public service: CountryService,
-    private api: ApiService
-  ) {
-    this.products = service.countries$;
-    this.total$ = service.total$;
-  }
+  constructor() {}
 
   ngOnInit() {
-  }
-
-  openModal() {
-    const newModal = this.modal.open(ProductFormComponent);
-    newModal.componentInstance.name = 'Get';
-  }
-
-  onSort({column, direction}: SortEvent) {
-    // resetting other headers
-    this.headers.forEach(header => {
-      if (header.sortable !== column) {
-        header.direction = '';
-      }
-    });
-
-    this.service.sortColumn = column;
-    this.service.sortDirection = direction;
-  }
-
-  justOpen(id: ProductInfo){
-    const newModal = this.modal.open(ProductFormComponent);
-    newModal.componentInstance.name = 'Get';
-    newModal.componentInstance.product = id;
-    newModal.componentInstance.productHere = true;
-  }
-
-  trackById(i, da) {
-    console.log(da)
-    return da._id
   }
 
 }

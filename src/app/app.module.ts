@@ -12,6 +12,7 @@ import { AuthComponent } from './auth/auth.component';
 import { HomeComponent } from './home/home.component';
 import { PointOfSalesComponent } from './point-of-sales/point-of-sales.component';
 import { AdminComponent } from './admin/admin.component';
+import { RoomServiceComponent } from './room-service/room-service.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AdminComponent } from './admin/admin.component';
     AdminComponent,
     AuthComponent,
     HomeComponent,
-    PointOfSalesComponent
+    PointOfSalesComponent,
+    RoomServiceComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { PathNotFoundComponent } from '@components/path-not-found/path-not-found.component';
 import { PointOfSalesComponent } from './point-of-sales/point-of-sales.component';
 import { AdminComponent } from './admin/admin.component';
+import { RoomServiceComponent } from './room-service/room-service.component';
 
 const routes: Routes = [
   {
@@ -38,9 +39,14 @@ const routes: Routes = [
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   },
   {
+    path: 'roomservice',
+    component: RoomServiceComponent,
+    loadChildren: () => import('./room-service/room-service.module').then(m => m.RoomServiceModule)
+  },
+  {
     path: '**',
     component: PathNotFoundComponent
-  },
+  }
 ];
 
 @NgModule({

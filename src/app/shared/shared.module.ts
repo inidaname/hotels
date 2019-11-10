@@ -11,6 +11,7 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { SortableDirective } from './directives/sortable.directive';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { SortableComponent } from './components/sortable/sortable.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HeaderComponent,
     SideBarComponent,
     ProductFormComponent,
-    SortableDirective
+    SortableDirective,
+    SortableComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +41,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     SideBarComponent,
     ProductFormComponent,
     NgxSpinnerModule,
-    SortableDirective
+    SortableDirective,
+    SortableComponent
   ],
   entryComponents: [ProductFormComponent]
 })
