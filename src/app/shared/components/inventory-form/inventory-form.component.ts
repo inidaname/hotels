@@ -42,4 +42,28 @@ export class InventoryFormComponent implements OnInit {
 
   get f() { return this.content.controls; }
 
+  submitForm() {
+    if (this.content.valid) {
+      this.spinner.show();
+      const obs = this.api.createInventory(this.content.value)
+      obs.subscribe(cl => {
+        this.spinner.hide();
+        this.alertType = 'success';
+        this.message = cl.message;
+        this.inventoryHere = true;
+      },
+        er => {
+          this.spinner.hide();
+          this.alertType = 'danger';
+          this.message = er.error.message;
+          this.inventoryHere = false;
+          // @TODO: send back data
+        });
+    }
+  }
+
+  close() {
+    this.message = null;
+  }
+
 }

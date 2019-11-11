@@ -21,6 +21,8 @@ const inventorySchema = new mongoose.Schema({
   serialNumber: {
     type: Number
   },
+  manufacturer: String,
+  valuePrice: Number,
   image: String
 }, { timestamps: true });
 

@@ -2,7 +2,7 @@
 
 <ng-container *ngIf="inventoryHere;else noProduct">
   <div class="modal-header">
-    <h4 class="modal-title">Detail for {{inventory.productName}}</h4>
+    <h4 class="modal-title">Detail for {{inventory.stockName}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -16,7 +16,7 @@
               Product Name:
             </div>
             <div class="col-sm-6">
-              {{inventory.productName}}
+              {{inventory.stockName}}
             </div>
           </div>
           <div class="row">
@@ -32,7 +32,7 @@
               Type:
             </div>
             <div class="col-sm-6">
-              {{inventory.productType}}
+              {{inventory.description}}
             </div>
           </div>
           <div class="row">
@@ -40,7 +40,7 @@
               Department:
             </div>
             <div class="col-sm-6">
-              {{inventory.productDept}}
+              {{inventory.department}}
             </div>
           </div>
           <div class="row">
@@ -48,15 +48,15 @@
               Unit Price:
             </div>
             <div class="col-sm-6">
-              {{inventory.condition | currency: 'NGN' : 'symbol-narrow'}}
+              {{inventory.valuePrice | currency: 'NGN' : 'symbol-narrow'}}
             </div>
           </div>
           <div class="row">
             <div class="col-sm-6">
-              Best Before:
+              Condition
             </div>
             <div class="col-sm-6">
-                {{inventory.expiryDate | date}}
+              {{inventory.condition}}
             </div>
           </div>
           <div class="row">
@@ -64,7 +64,7 @@
               Quantity:
             </div>
             <div class="col-sm-6">
-                {{inventory.quantity | number}}
+              {{inventory.quantity | number}}
             </div>
           </div>
           <div class="row">
@@ -72,7 +72,7 @@
               Serial Number:
             </div>
             <div class="col-sm-6">
-                {{inventory.serialNumber}}
+              {{inventory.serialNumber}}
             </div>
           </div>
         </div>
@@ -87,7 +87,8 @@
   </div>
   <div class="modal-footer">
     <button type="button" name="" id="" class="btn btn-outline-success btn-sm">Edit</button>
-    <button type="button" name="" id="" class="btn btn-outline-secondary btn-sm" (click)="modal.close('Close click')">Close</button>
+    <button type="button" name="" id="" class="btn btn-outline-secondary btn-sm"
+      (click)="modal.close('Close click')">Close</button>
   </div>
 </ng-container>
 
@@ -137,19 +138,18 @@
         <div class="form-group row">
           <label for="image" class="col-sm-5">Product Image</label>
           <div class="col-sm-6">
-            <input type="file" class="form-control-file" formControlName="image" id="image"
-              placeholder="Product Image">
+            <input type="file" class="form-control-file" formControlName="image" id="image" placeholder="Product Image">
           </div>
         </div>
         <div class="form-group row">
           <label for="condition" class="col-sm-5">Condition</label>
           <div class="col-sm-6">
             <input type="text" class="form-control"
-              [ngClass]="{'is-invalid': f.condition.touched && f.condition.invalid}"
-              formControlName="condition" id="condition" aria-describedby="unitPrice"
-              placeholder="Amount Unit Price">
+              [ngClass]="{'is-invalid': f.condition.touched && f.condition.invalid}" formControlName="condition"
+              id="condition" aria-describedby="unitPrice" placeholder="Amount Unit Price">
             <small id="unitPrice" class="form-text text-muted d-none"
-              [ngClass]="{'d-block': f.condition.touched && f.condition.invalid}">Please provide condition of the property</small>
+              [ngClass]="{'d-block': f.condition.touched && f.condition.invalid}">Please provide condition of the
+              property</small>
           </div>
         </div>
         <div class="form-group row">

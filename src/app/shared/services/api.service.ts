@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { UserData, User, ProductData, Products, ProductInfo } from '@shared/interface';
+import { UserData, User, ProductData, Products, ProductInfo, Inventory, InventoryData, InventoryInfo } from '@shared/interface';
 import { environment } from '@environments/environment';
 import { map, catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
@@ -66,10 +66,10 @@ export class ApiService {
       }), catchError(this.handleError));
   }
 
-  createInventory(product: any): Observable<any> {
+  createInventory(product: Inventory): Observable<InventoryData> {
     const id = localStorage.getItem('currentUser');
     return this.http
-      .post<any>(`${this.api}/inventory`, product)
+      .post<InventoryData>(`${this.api}/inventory`, product)
       .pipe(map(productData => {
         return productData;
       }), catchError(this.handleError));
