@@ -6,6 +6,7 @@ import { StockComponent } from './stock/stock.component';
 import { ReportComponent } from './report/report.component';
 import { StaffComponent } from './staff/staff.component';
 import { AccountComponent } from './account/account.component';
+import { RoomsRestaurantComponent } from './rooms-restaurant/rooms-restaurant.component';
 
 import { PathNotFoundComponent } from '@components/path-not-found/path-not-found.component';
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'report', component: ReportComponent },
   { path: 'staff', component: StaffComponent },
   { path: 'account', component: AccountComponent },
+  { path: 'rooms_restaurant', component: RoomsRestaurantComponent },
   { path: '**', component: PathNotFoundComponent }
 ];
 

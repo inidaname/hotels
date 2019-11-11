@@ -35,6 +35,18 @@ export async function editInvenotry(req, res) {
   }
 }
 
+export async function getAllInventory(req, res) {
+  try {
+    const getAll = await inventoryModel.find().select('-__v').exec();
+
+    if (getAll) {
+      return res.status(200).json({message: `All List of Inventory`, data: getAll});
+    }
+  } catch (error) {
+    return res.status(error.status || 500).json({message: error.message});
+  }
+}
+
 export async function deleteInventory(req, res) {
   try {
     const { id } = req.params;

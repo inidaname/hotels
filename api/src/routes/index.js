@@ -53,7 +53,7 @@ routes.delete('/expenditure/:id', expenditure.deleteExpenditure);
 routes.post('/supply', supply.createSupply);
 
 // Inventory
-routes.post('/inventory', inventory.createInventory);
+routes.route('/inventory').post(inventory.createInventory).get(inventory.getAllInventory);
 routes.put('/inventory/:id', inventory.editInvenotry);
 routes.delete('/inventory/:id', inventory.deleteInventory);
 

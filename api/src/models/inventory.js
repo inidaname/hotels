@@ -15,7 +15,7 @@ const inventorySchema = new mongoose.Schema({
   department: {
     type: String
   },
-  Condition: {
+  condition: {
     type: String
   },
   serialNumber: {

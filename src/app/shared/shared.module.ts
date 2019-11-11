@@ -12,6 +12,7 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 import { SortableDirective } from './directives/sortable.directive';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SortableComponent } from './components/sortable/sortable.component';
+import { InventoryFormComponent } from './components/inventory-form/inventory-form.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { SortableComponent } from './components/sortable/sortable.component';
     SideBarComponent,
     ProductFormComponent,
     SortableDirective,
-    SortableComponent
+    SortableComponent,
+    InventoryFormComponent
   ],
   imports: [
     CommonModule,
@@ -40,10 +42,14 @@ import { SortableComponent } from './components/sortable/sortable.component';
     HeaderComponent,
     SideBarComponent,
     ProductFormComponent,
+    InventoryFormComponent,
     NgxSpinnerModule,
     SortableDirective,
     SortableComponent
   ],
-  entryComponents: [ProductFormComponent]
+  entryComponents: [
+    ProductFormComponent,
+    InventoryFormComponent
+  ]
 })
 export class SharedModule { }

@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, Input, OnChanges } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { SortableDirective } from '@directives/sortable.directive';
 import { ProductFormComponent } from '@components/product-form/product-form.component';
+import { InventoryFormComponent } from '@components/inventory-form/inventory-form.component';
 import { CountryService } from '@services/countries.service';
 import { Observable } from 'rxjs';
 import { ProductInfo, SortEvent } from '@shared/interface';
@@ -22,21 +23,25 @@ export class SortableComponent implements OnInit {
 
   @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
 
+  @Input() purpose: string;
+  component: typeof ProductFormComponent | typeof InventoryFormComponent;
 
   constructor(
     private modal: NgbModal,
     public service: CountryService,
     private api: ApiService
-  ) {
-    this.products = service.countries$;
-    this.total$ = service.total$;
-  }
+    ) {
+      this.total$ = service.total$;
+      this.products = service.countries$;
+    }
 
-  ngOnInit() {
+    ngOnInit() {
+      console.log(this.purpose);
+      this.component = (this.purpose === 'product') ? ProductFormComponent : InventoryFormComponent;
   }
 
   openModal() {
-    const newModal = this.modal.open(ProductFormComponent);
+    const newModal = this.modal.open(this.component);
     newModal.componentInstance.name = 'Get';
   }
 

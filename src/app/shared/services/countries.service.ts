@@ -12,6 +12,7 @@ import { ApiService } from './api.service';
 @Injectable({ providedIn: 'root' })
 export class CountryService {
   private products: BehaviorSubject<ProductInfo[]>;
+  private inventory: BehaviorSubject<ProductInfo[]>;
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
   private _countries$ = new BehaviorSubject<any[]>([]);
@@ -27,9 +28,14 @@ export class CountryService {
 
   constructor(private pipe: DecimalPipe, private api: ApiService) {
     this.products = new BehaviorSubject(null);
+    this.inventory = new BehaviorSubject(null)
+
     this.api.getProduct().subscribe((products: ProductInfo[]) => {
       this.products.next(products);
     });
+
+    this.api.getInventory().subscribe(s => console.log(s));
+
     this._search$.pipe(
       tap(() => this._loading$.next(true)),
       debounceTime(200),

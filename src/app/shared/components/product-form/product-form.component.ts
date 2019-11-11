@@ -59,7 +59,7 @@ export class ProductFormComponent implements OnInit {
           this.alertType = 'danger';
           this.message = er.error.message;
           this.productHere = false;
-        })
+        });
     }
   }
 

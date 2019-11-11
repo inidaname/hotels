@@ -66,12 +66,26 @@ export class ApiService {
       }), catchError(this.handleError));
   }
 
+  createInventory(product: any): Observable<any> {
+    const id = localStorage.getItem('currentUser');
+    return this.http
+      .post<any>(`${this.api}/inventory`, product)
+      .pipe(map(productData => {
+        return productData;
+      }), catchError(this.handleError));
+  }
+
   getProduct(id?: string): Observable<ProductInfo[] | ProductInfo> {
     return this.http
       .get(`${this.api}/product/?${id}`)
       .pipe(map((prod: ProductData) => prod.data), catchError(this.handleError));
   }
 
+  getInventory(id?: string): Observable<any> {
+    return this.http
+      .get(`${this.api}/inventory/?${id}`)
+      .pipe(map((prod: any) => prod), catchError(this.handleError));
+  }
 
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';
