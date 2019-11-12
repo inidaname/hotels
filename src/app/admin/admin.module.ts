@@ -9,7 +9,8 @@ import { ReportComponent } from './report/report.component';
 import { StaffComponent } from './staff/staff.component';
 import { AccountComponent } from './account/account.component';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-import { RoomsRestaurantComponent } from './rooms-restaurant/rooms-restaurant.component';
+import { RoomsComponent } from './rooms/rooms.component';
+import { RestaurantComponent } from './restaurant/restaurant.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { RoomsRestaurantComponent } from './rooms-restaurant/rooms-restaurant.co
     ReportComponent,
     StaffComponent,
     AccountComponent,
-    RoomsRestaurantComponent
+    RoomsComponent,
+    RestaurantComponent
   ],
   imports: [
     AdminRoutingModule,

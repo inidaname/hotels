@@ -13,8 +13,12 @@ export class AdminComponent implements OnInit {
       link: './dashboard'
     },
     {
-      name: 'Rooms & Restaurant',
-      link: './rooms_restaurant'
+      name: 'Rooms',
+      link: './rooms'
+    },
+    {
+      name: 'Restaurant',
+      link: './restaurant'
     },
     {
       name: 'Stock',
