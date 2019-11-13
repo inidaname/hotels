@@ -4,17 +4,17 @@ import { BehaviorSubject, Observable, of, Subject, asyncScheduler } from 'rxjs';
 
 import { DecimalPipe } from '@angular/common';
 import { debounceTime, delay, switchMap, tap, observeOn } from 'rxjs/operators';
-import { State, SortDirection, SearchResult, ProductInfo } from '@shared/interface';
+import { State, SortDirection, SearchResult, InventoryInfo } from '@shared/interface';
 import { sort, matches } from '@shared/functions/sort.function';
 import { ApiService } from './api.service';
 
 
 @Injectable({ providedIn: 'root' })
-export class CountryService {
-  private products: BehaviorSubject<ProductInfo[]>;
+export class InventoryService {
+  private inventories: BehaviorSubject<InventoryInfo[]>;
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
-  private _products$ = new BehaviorSubject<any[]>([]);
+  private _inventories$ = new BehaviorSubject<any[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
 
   private _state: State = {
@@ -26,12 +26,12 @@ export class CountryService {
   };
 
   constructor(private pipe: DecimalPipe, private api: ApiService) {
-    this.products = new BehaviorSubject(null);
+    this.inventories = new BehaviorSubject(null)
 
-    this.api.getProduct().subscribe((products: ProductInfo[]) => {
-      this.products.next(products)
-      this.products.complete();
-      this.products.pipe(observeOn(asyncScheduler));
+    this.api.getInventory().subscribe((inventories: InventoryInfo[]) => {
+      this.inventories.next(inventories)
+      this.inventories.complete();
+      this.inventories.pipe(observeOn(asyncScheduler));
     });
 
     this._search$.pipe(
@@ -41,14 +41,14 @@ export class CountryService {
       delay(200),
       tap(() => this._loading$.next(false))
     ).subscribe(result => {
-      this._products$.next(result.content);
+      this._inventories$.next(result.content);
       this._total$.next(result.total);
     });
 
     this._search$.next();
   }
 
-  get products$() { return this._products$.asObservable(); }
+  get inventories$() { return this._inventories$.asObservable(); }
   get total$() { return this._total$.asObservable(); }
   get loading$() { return this._loading$.asObservable(); }
   get page() { return this._state.page; }
@@ -70,9 +70,9 @@ export class CountryService {
     const { sortColumn, sortDirection, pageSize, page, searchTerm } = this._state;
 
     // 1. sort
-    let content = sort(this.products.value, sortColumn, sortDirection);
+    let content = sort(this.inventories.value, sortColumn, sortDirection);
     // 2. filter
-    content = content.filter(country => matches(country, searchTerm, this.pipe));
+    content = content.filter(inventory => matches(inventory, searchTerm, this.pipe));
     const total = content.length;
 
     // 3. paginate

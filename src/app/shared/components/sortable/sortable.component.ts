@@ -9,6 +9,7 @@ import { CountryService } from '@services/countries.service';
 import { Observable } from 'rxjs';
 import { ProductInfo, SortEvent } from '@shared/interface';
 import { ApiService } from '@services/api.service';
+import { InventoryService } from '@services/inventory.service';
 
 @Component({
   selector: 'app-sortable',
@@ -29,15 +30,16 @@ export class SortableComponent implements OnInit {
   constructor(
     private modal: NgbModal,
     public service: CountryService,
+    public inventory: InventoryService,
     private api: ApiService
     ) {
       this.total$ = service.total$;
-      this.products = service.countries$;
     }
 
     ngOnInit() {
       console.log(this.purpose);
       this.component = (this.purpose === 'product') ? ProductFormComponent : InventoryFormComponent;
+      this.products = (this.purpose === 'product') ? this.service.products$ : this.inventory.inventories$;
   }
 
   openModal() {

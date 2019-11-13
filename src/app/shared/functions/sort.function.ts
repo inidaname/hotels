@@ -5,7 +5,7 @@ export function compare(v1, v2) {
   return v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 }
 
-export function sort(countries: ProductInfo[], column: string, direction: string): any[] {
+export function sort(countries: any, column: string, direction: string): any[] {
   if (direction === '') {
     return countries;
   } else {
@@ -17,7 +17,12 @@ export function sort(countries: ProductInfo[], column: string, direction: string
 }
 
 export function matches(country: ProductInfo, term: string, pipe: PipeTransform) {
-  return country.productName.toLowerCase().includes(term.toLowerCase())
-    || pipe.transform(country.quantity).includes(term)
-    || country.manufacturer.toLowerCase().includes(term.toLowerCase())
+  const values = Object.values(country);
+
+  return values.map(f => {
+    if (typeof f === 'number') {
+     return pipe.transform(f).includes(term);
+    }
+    return f.toLowerCase().includes(term.toLowerCase());
+  });
 }

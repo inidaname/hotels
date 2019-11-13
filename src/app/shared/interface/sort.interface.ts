@@ -7,7 +7,7 @@ export interface SortEvent {
 
 
 export interface SearchResult {
-  countries: any[];
+  content: any[];
   total: number;
 }
 

@@ -81,10 +81,10 @@ export class ApiService {
       .pipe(map((prod: ProductData) => prod.data), catchError(this.handleError));
   }
 
-  getInventory(id?: string): Observable<any> {
+  getInventory(id?: string): Observable<InventoryInfo[] | InventoryInfo> {
     return this.http
       .get(`${this.api}/inventory/?${id}`)
-      .pipe(map((prod: any) => prod), catchError(this.handleError));
+      .pipe(map((inventory: InventoryData) => inventory.data), catchError(this.handleError));
   }
 
   private handleError(err: HttpErrorResponse) {
