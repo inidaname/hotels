@@ -13,6 +13,7 @@ import { SortableDirective } from './directives/sortable.directive';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SortableComponent } from './components/sortable/sortable.component';
 import { InventoryFormComponent } from './components/inventory-form/inventory-form.component';
+import { RoomsTableComponent } from './components/rooms-table/rooms-table.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { InventoryFormComponent } from './components/inventory-form/inventory-fo
     ProductFormComponent,
     SortableDirective,
     SortableComponent,
-    InventoryFormComponent
+    InventoryFormComponent,
+    RoomsTableComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +47,8 @@ import { InventoryFormComponent } from './components/inventory-form/inventory-fo
     InventoryFormComponent,
     NgxSpinnerModule,
     SortableDirective,
-    SortableComponent
+    SortableComponent,
+    RoomsTableComponent
   ],
   entryComponents: [
     ProductFormComponent,
