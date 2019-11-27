@@ -1,5 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
@@ -50,10 +50,10 @@ import { RoomsTableComponent } from './components/rooms-table/rooms-table.compon
     SortableComponent,
     RoomsTableComponent
   ],
+  providers: [DecimalPipe],
   entryComponents: [
     ProductFormComponent,
-    InventoryFormComponent,
-    RoomsTableComponent
+    InventoryFormComponent
   ]
 })
 export class SharedModule { }
