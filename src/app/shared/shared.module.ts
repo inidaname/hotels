@@ -52,7 +52,8 @@ import { RoomsTableComponent } from './components/rooms-table/rooms-table.compon
   ],
   entryComponents: [
     ProductFormComponent,
-    InventoryFormComponent
+    InventoryFormComponent,
+    RoomsTableComponent
   ]
 })
 export class SharedModule { }
