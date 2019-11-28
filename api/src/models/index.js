@@ -8,6 +8,7 @@ import expenditureModel from './expenditure.js';
 import supplyModel from './supply.js';
 import inventoryModel from './inventory.js';
 import roomLogsModel from './roomLogs.js';
+import restaurantModel from './restaurant.js';
 
 export {
   userModel,
@@ -19,5 +20,6 @@ export {
   expenditureModel,
   supplyModel,
   inventoryModel,
-  roomLogsModel
+  roomLogsModel,
+  restaurantModel
 };

@@ -7,6 +7,7 @@ import * as supply from './supply.js';
 import * as inventory from './inventory.js';
 import * as roomLogs from './roomLogs.js';
 import * as user from './user.js'
+import * as restaurant from './restaurant.js';
 
 export {
   createAuth,
@@ -17,5 +18,6 @@ export {
   supply,
   inventory,
   roomLogs,
-  user
+  user,
+  restaurant
 };
