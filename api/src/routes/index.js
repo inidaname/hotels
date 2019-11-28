@@ -32,9 +32,8 @@ routes.route('/users/alldata').get(user.getData);
 routes.route('/users/:id').delete(user.deleteUser).get(user.getUserById);
 
 // Create product and room
-routes.post('/room', room.createRoom);
-routes.put('/room/:id', room.editRoom);
-routes.delete('/room/:id', room.deleteRoom);
+routes.route('/room').post(room.createRoom).get(room.getAllRooms);
+routes.route('/room/:id').get(room.getRoomById).put(room.editRoom).delete(room.deleteRoom);
 
 routes.route('/product').post(product.createProduct).get(product.getAllProduct);
 routes.route('/product/:id').put(product.editProduct).get(product.getProductById).delete(product.deleteProduct);

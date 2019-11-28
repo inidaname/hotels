@@ -5,16 +5,16 @@ import { SortableDirective } from '@directives/sortable.directive';
 import { ProductFormComponent } from '@components/product-form/product-form.component';
 import { InventoryFormComponent } from '@components/inventory-form/inventory-form.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CountryService } from '@services/countries.service';
 import { InventoryService } from '@services/inventory.service';
 import { ApiService } from '@services/api.service';
 import { DecimalPipe } from '@angular/common';
+import { RoomService } from '@services/room.service';
 
 @Component({
   selector: 'app-rooms-table',
   templateUrl: './rooms-table.component.html',
   styleUrls: ['./rooms-table.component.scss'],
-  providers: [CountryService, DecimalPipe]
+  providers: [RoomService, DecimalPipe]
 })
 export class RoomsTableComponent implements OnInit {
 
@@ -28,7 +28,7 @@ export class RoomsTableComponent implements OnInit {
 
   constructor(
     private modal: NgbModal,
-    public service: CountryService,
+    public service: RoomService,
     public inventory: InventoryService,
     private api: ApiService
     ) {

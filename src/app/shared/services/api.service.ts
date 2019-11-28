@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { UserData, User, ProductData, Products, ProductInfo, Inventory, InventoryData, InventoryInfo } from '@shared/interface';
+import { UserData, User, ProductData, Products, ProductInfo, Inventory, InventoryData, InventoryInfo, Room, RoomData, RoomInfo } from '@shared/interface';
 import { environment } from '@environments/environment';
 import { map, catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
@@ -75,6 +75,13 @@ export class ApiService {
       }), catchError(this.handleError));
   }
 
+  createRoom(room: Room): Observable<RoomData> {
+    const id = localStorage.getItem('currentUser');
+    return this.http
+      .post<RoomData>(`${this.api}/room`, room)
+      .pipe(map((room: RoomData) => room), catchError(this.handleError));
+  }
+
   getProduct(id?: string): Observable<ProductInfo[] | ProductInfo> {
     return this.http
       .get(`${this.api}/product/?${id}`)
@@ -87,14 +94,20 @@ export class ApiService {
       .pipe(map((inventory: InventoryData) => inventory.data), catchError(this.handleError));
   }
 
+  getRooms(id?: string): Observable<RoomInfo[] | RoomInfo> {
+    return this.http
+      .get(`${this.api}/room/?${id}`)
+      .pipe(map((room: RoomData) => room.data), catchError(this.handleError));
+  }
+
   private handleError(err: HttpErrorResponse) {
+    console.log(err);
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {
       errorMessage = `An error occurred: ${err.error.message}`;
     } else {
       errorMessage = `Server returned code: ${err.status}, error message is: ${err.error.message}`;
     }
-    console.log(errorMessage);
     return throwError(err);
   }
 }
