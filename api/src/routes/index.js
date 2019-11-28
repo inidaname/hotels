@@ -8,7 +8,8 @@ import {
   supply,
   inventory,
   roomLogs,
-  user
+  user,
+  restaurant
 } from '../controllers/index.js';
 
 const routes = express.Router();
@@ -37,6 +38,10 @@ routes.route('/room/:id').get(room.getRoomById).put(room.editRoom).delete(room.d
 
 routes.route('/product').post(product.createProduct).get(product.getAllProduct);
 routes.route('/product/:id').put(product.editProduct).get(product.getProductById).delete(product.deleteProduct);
+
+// restuarant routes
+
+routes.route('/restaurant').post(restaurant.createMeal).get(restaurant.getAllMeal);
 
 // Sales routes
 routes.post('/sales', salesLog.createSaleLog);

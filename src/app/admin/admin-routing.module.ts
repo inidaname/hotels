@@ -7,6 +7,7 @@ import { ReportComponent } from './report/report.component';
 import { StaffComponent } from './staff/staff.component';
 import { AccountComponent } from './account/account.component';
 import { RoomsComponent } from './rooms/rooms.component';
+import { RestaurantComponent } from './restaurant/restaurant.component';
 
 import { PathNotFoundComponent } from '@components/path-not-found/path-not-found.component';
 
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'staff', component: StaffComponent },
   { path: 'account', component: AccountComponent },
   { path: 'rooms', component: RoomsComponent },
+  { path: 'restaurant', component: RestaurantComponent },
   { path: '**', component: PathNotFoundComponent }
 ];
 

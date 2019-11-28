@@ -21,7 +21,8 @@ const roomSchema = new mongoose.Schema({
   roomPrice: {
     type: Number,
     required: [true, `Please provide the price for the room`]
-  }
+  },
+  image: String
 }, {timestamps: true});
 
 roomSchema.plugin(validator);

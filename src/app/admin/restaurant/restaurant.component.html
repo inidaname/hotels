@@ -1,1 +1,54 @@
-<p>restaurant works!</p>
+<article class="m-4 row bg-white p-4">
+  <section class="row my-5 p-4 shadow col-12 mx-auto rounded-lg">
+    <h4 class="col-12 text-center">Create and Manage Restaurant Menu</h4>
+    <div class="container">
+      <form [formGroup]="mealForm" class="row m-auto align-items-center justify-content-around">
+        <div class="form-group col-3">
+          <label for="mealName">Meal Name</label>
+          <input type="text" formControlName="mealName" id="mealName" class="form-control"
+            [ngClass]="{'is-invalid': f.mealName.touched && f.mealName.invalid}" placeholder="Meal Name"
+            aria-describedby="mealHelp">
+          <small id="mealHelp" class="text-muted">Provide the Name of the meal</small>
+        </div>
+        <div class="form-group col-3">
+          <label for="mealType">Meal Type</label>
+          <input type="text" formControlName="mealType" id="mealType" class="form-control"
+            [ngClass]="{'is-invalid': f.mealType.touched && f.mealType.invalid}" placeholder="Meal Type"
+            aria-describedby="typeHelp">
+          <small id="typeHelp" class="text-muted">Please provide the meal type</small>
+        </div>
+        <div class="form-group col-3">
+          <label for="mealNumber">Meal Number</label>
+          <input type="text" formControlName="mealNumber" id="mealNumber" class="form-control"
+            [ngClass]="{'is-invalid': f.mealNumber.touched && f.mealNumber.invalid}" placeholder="Meal Number"
+            aria-describedby="numberHelp">
+          <small id="numberHelp" class="text-muted">A Meal Number must be provided</small>
+        </div>
+        <div class="form-group col-5">
+          <label for="mealDescription">Description</label>
+          <textarea formControlName="mealDescription" id="mealDescription" class="form-control" cols="10"
+            rows="5"></textarea>
+        </div>
+        <div class="form-group col-3">
+          <label for="mealPrice">Meal Price</label>
+          <input type="text" formControlName="mealPrice" id="mealPrice" class="form-control"
+            [ngClass]="{'is-invalid': f.mealPrice.touched && f.mealPrice.invalid}" placeholder="Meal Price"
+            aria-describedby="priceHelp">
+          <small id="priceHelp" class="text-muted">Please provide meal price</small>
+        </div>
+        <!-- <div class="form-group col-3">
+          <label for="mealCondition">Meal Condition</label>
+          <select class="form-control" formControlName="mealCondition" id="mealCondition">
+            <option></option>
+            <option></option>
+            <option></option>
+          </select>
+        </div> -->
+        <div class="form-group col-12 text-center my-5">
+          <button type="submit" class="btn btn-success" [disabled]="!mealForm.valid"
+            (click)="createMeal()">Submit</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</article>
