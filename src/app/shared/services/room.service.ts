@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, of, Subject, asyncScheduler } from 'rxjs';
 
 import { DecimalPipe } from '@angular/common';
 import { debounceTime, delay, switchMap, tap, observeOn } from 'rxjs/operators';
-import { State, SortDirection, SearchResult, ProductInfo } from '@shared/interface';
+import { State, SortDirection, SearchResult, RoomInfo } from '@shared/interface';
 import { sort, matches } from '@shared/functions/sort.function';
 import { ApiService } from './api.service';
 
@@ -14,10 +14,10 @@ import { ApiService } from './api.service';
 })
 export class RoomService {
 
-  private products: BehaviorSubject<ProductInfo[]>;
+  private rooms: BehaviorSubject<RoomInfo[]>;
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
-  private _products$ = new BehaviorSubject<any[]>([]);
+  private rooms$ = new BehaviorSubject<any[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
 
   private _state: State = {
@@ -29,12 +29,12 @@ export class RoomService {
   };
 
   constructor(private pipe: DecimalPipe, private api: ApiService) {
-    this.products = new BehaviorSubject(null);
+    this.rooms = new BehaviorSubject(null);
 
-    this.api.getRooms().subscribe((products: ProductInfo[]) => {
-      this.products.next(products)
-      this.products.complete();
-      this.products.pipe(observeOn(asyncScheduler));
+    this.api.getRooms().subscribe((rooms: RoomInfo[]) => {
+      this.rooms.next(rooms)
+      this.rooms.complete();
+      this.rooms.pipe(observeOn(asyncScheduler));
     });
 
     this._search$.pipe(
@@ -44,14 +44,14 @@ export class RoomService {
       delay(200),
       tap(() => this._loading$.next(false))
     ).subscribe(result => {
-      this._products$.next(result.content);
+      this.rooms$.next(result.content);
       this._total$.next(result.total);
     });
 
     this._search$.next();
   }
 
-  get products$() { return this._products$.asObservable(); }
+  get products$() { return this.rooms$.asObservable(); }
   get total$() { return this._total$.asObservable(); }
   get loading$() { return this._loading$.asObservable(); }
   get page() { return this._state.page; }
@@ -73,7 +73,7 @@ export class RoomService {
     const { sortColumn, sortDirection, pageSize, page, searchTerm } = this._state;
 
     // 1. sort
-    let content = sort(this.products.value, sortColumn, sortDirection);
+    let content = sort(this.rooms.value, sortColumn, sortDirection);
     // 2. filter
     content = content.filter(country => matches(country, searchTerm, this.pipe));
     const total = content.length;

@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChildren, QueryList, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductInfo, SortEvent } from '@shared/interface';
+import { SortEvent, RoomInfo } from '@shared/interface';
 import { SortableDirective } from '@directives/sortable.directive';
 import { ProductFormComponent } from '@components/product-form/product-form.component';
 import { InventoryFormComponent } from '@components/inventory-form/inventory-form.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { InventoryService } from '@services/inventory.service';
 import { ApiService } from '@services/api.service';
 import { DecimalPipe } from '@angular/common';
 import { RoomService } from '@services/room.service';
@@ -18,7 +17,7 @@ import { RoomService } from '@services/room.service';
 })
 export class RoomsTableComponent implements OnInit {
 
-  products: Observable<ProductInfo[] | ProductInfo>;
+  rooms: Observable<RoomInfo[] | RoomInfo>;
   total$: Observable<number>;
 
   @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
@@ -29,15 +28,13 @@ export class RoomsTableComponent implements OnInit {
   constructor(
     private modal: NgbModal,
     public service: RoomService,
-    public inventory: InventoryService,
     private api: ApiService
-    ) {
-      this.total$ = service.total$;
-    }
+  ) {
+    this.total$ = service.total$;
+  }
 
-    ngOnInit() {
-      console.log(this.purpose);
-      this.component = (this.purpose === 'product') ? ProductFormComponent : InventoryFormComponent;
+  ngOnInit() {
+    this.rooms = this.service.products$;
   }
 
   openModal() {
@@ -45,7 +42,7 @@ export class RoomsTableComponent implements OnInit {
     newModal.componentInstance.name = 'Get';
   }
 
-  onSort({column, direction}: SortEvent) {
+  onSort({ column, direction }: SortEvent) {
     // resetting other headers
     this.headers.forEach(header => {
       if (header.sortable !== column) {
@@ -57,10 +54,10 @@ export class RoomsTableComponent implements OnInit {
     this.service.sortDirection = direction;
   }
 
-  justOpen(id: ProductInfo){
+  justOpen(id: RoomInfo) {
     const newModal = this.modal.open(ProductFormComponent);
     newModal.componentInstance.name = 'Get';
-    newModal.componentInstance.product = id;
+    // newModal.componentInstance.product = id;
     newModal.componentInstance.productHere = true;
   }
 
