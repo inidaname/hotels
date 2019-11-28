@@ -82,6 +82,13 @@ export class ApiService {
       .pipe(map((room: RoomData) => room), catchError(this.handleError));
   }
 
+  createMeal(meal) {
+    const id = localStorage.getItem('currentUser');
+    return this.http
+      .post(`${this.api}/restaurant`, meal)
+      .pipe(map((meal) => meal), catchError(this.handleError));
+  }
+
   getProduct(id?: string): Observable<ProductInfo[] | ProductInfo> {
     return this.http
       .get(`${this.api}/product/?${id}`)

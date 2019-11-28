@@ -40,8 +40,8 @@ routes.route('/product').post(product.createProduct).get(product.getAllProduct);
 routes.route('/product/:id').put(product.editProduct).get(product.getProductById).delete(product.deleteProduct);
 
 // restuarant routes
-
 routes.route('/restaurant').post(restaurant.createMeal).get(restaurant.getAllMeal);
+routes.route('/restaurant/:id').put(restaurant.editMeal).delete(restaurant.deleteMeal).get(restaurant.getMealById);
 
 // Sales routes
 routes.post('/sales', salesLog.createSaleLog);

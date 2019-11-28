@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ApiService } from '@services/api.service';
 
 @Component({
   templateUrl: './restaurant.component.html',
@@ -10,7 +11,8 @@ export class RestaurantComponent implements OnInit {
   mealForm: FormGroup;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private api: ApiService
   ) { }
 
   ngOnInit() {
@@ -26,7 +28,7 @@ export class RestaurantComponent implements OnInit {
   get f() { return this.mealForm.controls; }
 
   createMeal() {
-    console.log(this.mealForm.value);
+    this.api.createMeal(this.mealForm.value).subscribe(e => console.log(e));
   }
 
 }
