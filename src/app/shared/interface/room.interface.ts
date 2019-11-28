@@ -3,7 +3,7 @@ export interface Room {
   roomNumber: number;
   roomType: string;
   roomDescription: string;
-  roomStatus: string;
+  roomStatus?: string;
   roomCondition: string;
   roomPrice: number;
 }

@@ -19,7 +19,7 @@ const roomSchema = new mongoose.Schema({
   },
   roomCondition: String,
   roomPrice: {
-    type: String,
+    type: Number,
     required: [true, `Please provide the price for the room`]
   }
 }, {timestamps: true});
