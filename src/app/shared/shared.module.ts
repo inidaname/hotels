@@ -14,6 +14,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { SortableComponent } from './components/sortable/sortable.component';
 import { InventoryFormComponent } from './components/inventory-form/inventory-form.component';
 import { RoomsTableComponent } from './components/rooms-table/rooms-table.component';
+import { SideUserComponent } from './components/side-user/side-user.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { RoomsTableComponent } from './components/rooms-table/rooms-table.compon
     SortableDirective,
     SortableComponent,
     InventoryFormComponent,
-    RoomsTableComponent
+    RoomsTableComponent,
+    SideUserComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +50,8 @@ import { RoomsTableComponent } from './components/rooms-table/rooms-table.compon
     NgxSpinnerModule,
     SortableDirective,
     SortableComponent,
-    RoomsTableComponent
+    RoomsTableComponent,
+    SideUserComponent
   ],
   providers: [DecimalPipe],
   entryComponents: [

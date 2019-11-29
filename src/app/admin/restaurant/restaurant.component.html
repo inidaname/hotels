@@ -1,4 +1,12 @@
 <article class="m-4 row bg-white p-4">
+  <section class="mt-2 mb-5 shadow col-12 p-4 rounded-lg">
+    <h4 class="col-12 text-center">List of Meals</h4>
+    <app-rooms-table [purpose]="'product'"></app-rooms-table>
+  </section>
+  <section class="row my-5 mx-auto col-12 p-4 rounded-lg shadow">
+    <h4 class="col-12 text-center">Sale Made <small>For the day</small></h4>
+    <app-rooms-table [purpose]="'product'"></app-rooms-table>
+  </section>
   <section class="row my-5 p-4 shadow col-12 mx-auto rounded-lg">
     <h4 class="col-12 text-center">Create and Manage Restaurant Menu</h4>
     <div class="container">
@@ -36,14 +44,6 @@
             aria-describedby="priceHelp">
           <small id="priceHelp" class="text-muted">Please provide meal price</small>
         </div>
-        <!-- <div class="form-group col-3">
-          <label for="mealCondition">Meal Condition</label>
-          <select class="form-control" formControlName="mealCondition" id="mealCondition">
-            <option></option>
-            <option></option>
-            <option></option>
-          </select>
-        </div> -->
         <div class="form-group col-12 text-center my-5">
           <button type="submit" class="btn btn-success" [disabled]="!mealForm.valid"
             (click)="createMeal()">Submit</button>

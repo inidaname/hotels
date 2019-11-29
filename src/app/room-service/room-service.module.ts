@@ -6,7 +6,9 @@ import { RoomListComponent } from './room-list/room-list.component';
 
 
 @NgModule({
-  declarations: [RoomListComponent],
+  declarations: [
+    RoomListComponent
+  ],
   imports: [
     SharedModule,
     RoomServiceRoutingModule

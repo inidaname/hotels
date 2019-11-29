@@ -1,5 +1,11 @@
 <app-header></app-header>
-<main>
-  <app-side-bar [items]="[]"></app-side-bar>
-  <router-outlet></router-outlet>
+<main class="d-flex flex-column justify-content-between align-items-start p-4">
+  <section class="mb-2 w-100">
+    Top
+  </section>
+
+  <section class="d-flex flex-row w-100 justify-content-between">
+    <app-side-user></app-side-user>
+    <router-outlet></router-outlet>
+  </section>
 </main>
