@@ -1,46 +1,49 @@
-<article class="shadow rounded-lg p-3 d-flex flex-column justify-content-around align-items-center">
+<article class="shadow rounded-lg p-3 d-flex flex-column justify-content-start align-items-center">
   <h5 class="text-uppercase">Booking Details</h5>
   <section class="h-75 my-2 shadow-sm w-100 p-3 container">
-    <div class="container">
-     <div class="container">
-      <form [formGroup]="roomForm" class="row m-auto align-items-center justify-content-around">
-        <div class="form-group col-3">
-          <label for="roomName">Customer Name</label>
-          <input type="text" formControlName="roomName" id="roomName" class="form-control" [ngClass]="{'is-invalid': f.roomName.touched && f.roomName.invalid}" placeholder="Customer Name" aria-describedby="roomHelp">
+    <form [formGroup]="customerForm" class="row m-auto align-items-start justify-content-around">
+        <app-rooms-table></app-rooms-table>
+        <p class="col-12">Serve Break fast</p>
+      <hr class="my-5 w-100">
+      <div class="col-12 row">
+        <div class="form-group col-4 mx-auto my-4">
+          <label for="customerName">Customer Name</label>
+          <input type="text" formControlName="customerName" id="customerName" class="form-control"
+            [ngClass]="{'is-invalid': f.customerName.touched && f.customerName.invalid}" placeholder="Customer Name"
+            aria-describedby="roomHelp">
           <small id="roomHelp" class="text-muted">Provide the Customer's name</small>
         </div>
-        <div class="form-group col-3">
-          <label for="roomType">Room Type</label>
-          <input type="text" formControlName="roomType" id="roomType" class="form-control" [ngClass]="{'is-invalid': f.roomType.touched && f.roomType.invalid}" placeholder="Room Type" aria-describedby="typeHelp">
+        <div class="form-group col-4 mx-auto my-4">
+          <label for="customerID">Customer's ID Number</label>
+          <input type="text" formControlName="customerID" id="customerID" class="form-control"
+            [ngClass]="{'is-invalid': f.customerID.touched && f.customerID.invalid}" placeholder="Customer's ID Number"
+            aria-describedby="typeHelp">
           <small id="typeHelp" class="text-muted">Please provide the room type</small>
         </div>
-        <div class="form-group col-3">
-          <label for="roomNumber">Room Number</label>
-          <input type="text" formControlName="roomNumber" id="roomNumber" class="form-control" [ngClass]="{'is-invalid': f.roomNumber.touched && f.roomNumber.invalid}" placeholder="Room Number" aria-describedby="numberHelp">
+        <div class="form-group col-4 mx-auto my-4">
+          <label for="customerEmail">Customer's Email</label>
+          <input type="email" formControlName="customerEmail" id="customerEmail" class="form-control"
+            [ngClass]="{'is-invalid': f.customerEmail.touched && f.customerEmail.invalid}" placeholder="Email Address"
+            aria-describedby="typeHelp">
+          <small id="typeHelp" class="text-muted">Please provide the room type</small>
+        </div>
+        <div class="form-group col-4 mx-auto my-4">
+          <label for="customerAddress">Address</label>
+          <textarea formControlName="customerAddress" id="customerAddress" class="form-control" cols="10"
+            rows="5"></textarea>
+        </div>
+        <div class="form-group col-4 mx-auto my-4">
+          <label for="customerNumber">Customer's Number</label>
+          <input type="text" formControlName="customerNumber" id="customerNumber" class="form-control"
+            [ngClass]="{'is-invalid': f.customerNumber.touched && f.customerNumber.invalid}" placeholder="Room Number"
+            aria-describedby="numberHelp">
           <small id="numberHelp" class="text-muted">A Room Number must be provided</small>
         </div>
-        <div class="form-group col-5">
-          <label for="roomDescription">Description</label>
-          <textarea formControlName="roomDescription" id="roomDescription" class="form-control" cols="10" rows="5"></textarea>
-        </div>
-        <div class="form-group col-3">
-          <label for="roomPrice">Room Price</label>
-          <input type="text" formControlName="roomPrice" id="roomPrice" class="form-control" [ngClass]="{'is-invalid': f.roomPrice.touched && f.roomPrice.invalid}" placeholder="Room Price" aria-describedby="priceHelp">
-          <small id="priceHelp" class="text-muted">Please provide room price</small>
-        </div>
-        <div class="form-group col-3">
-          <label for="roomCondition">Room Condition</label>
-          <select class="form-control" formControlName="roomCondition" id="roomCondition">
-            <option></option>
-            <option></option>
-            <option></option>
-          </select>
-        </div>
-        <div class="form-group col-12 text-center my-5">
-          <button type="submit" class="btn btn-success" [disabled]="!roomForm.valid" (click)="createRoom()">Submit</button>
-        </div>
-      </form>
-     </div>
-    </div>
+      </div>
+      <div class="form-group col-12 text-center my-5">
+        <button type="submit" class="btn btn-success" [disabled]="!customerForm.valid"
+          (click)="bookARoom()">Submit</button>
+      </div>
+    </form>
   </section>
 </article>
