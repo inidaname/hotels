@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList, Input } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SortEvent, RoomInfo } from '@shared/interface';
 import { SortableDirective } from '@directives/sortable.directive';
@@ -21,6 +21,7 @@ export class RoomsTableComponent implements OnInit {
   total$: Observable<number>;
 
   @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
+  @Output() tapRoom = new EventEmitter<boolean>();
 
   @Input() purpose: string;
   component: typeof ProductFormComponent | typeof InventoryFormComponent;
@@ -62,7 +63,7 @@ export class RoomsTableComponent implements OnInit {
   }
 
   trackById(i, da) {
-    console.log(da)
-    return da._id
+    console.log(da);
+    return da._id;
   }
 }
