@@ -36,9 +36,7 @@ export class RoomListComponent implements OnInit {
       name: this.customerForm.controls.customerName.value,
       address: this.customerForm.controls.customerAddress.value,
       phone: this.customerForm.controls.customerNumber.value,
-      email: this.customerForm.controls.customerEmail.value,
-      room: this.customerForm.controls.customerRoom.value,
-      otherservice: this.customerForm.controls.customerOtherservice.value,
+      email: this.customerForm.controls.customerEmail.value
      });
   }
 
