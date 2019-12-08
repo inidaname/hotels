@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RoomsService } from '@services/rooms.service';
+import { RoomInfo } from '@shared/interface';
 
 @Component({
   templateUrl: './room-list.component.html',
@@ -29,6 +30,13 @@ export class RoomListComponent implements OnInit {
 
   bookARoom() {
     console.log(this.customerForm.value);
+  }
+
+  theClick(st: RoomInfo){
+    this.roomService.setData({
+      room: st.roomNumber,
+      price: st.roomPrice
+    });
   }
 
   checkValue() {

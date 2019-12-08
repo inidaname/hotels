@@ -26,6 +26,7 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
         this.data.email = data.email;
         this.data.room = data.room;
         this.data.otherservice = data.otherservice;
+        this.data.price = data.price;
       }
     });
   }

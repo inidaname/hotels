@@ -26,7 +26,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let room of rooms | async; let i = index;">
+            <tr *ngFor="let room of rooms | async; let i = index;" (click)="clickMe(room)">
               <th scope="row">{{i.valueOf() + 1}}</th>
               <td>
                 <!-- <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + room.flag" class="mr-2" style="width: 20px"> -->

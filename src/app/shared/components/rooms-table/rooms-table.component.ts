@@ -21,7 +21,7 @@ export class RoomsTableComponent implements OnInit {
   total$: Observable<number>;
 
   @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
-  @Output() tapRoom = new EventEmitter<boolean>();
+  @Output() tapRoom = new EventEmitter<any>();
 
   @Input() purpose: string;
   component: typeof ProductFormComponent | typeof InventoryFormComponent;
@@ -36,6 +36,10 @@ export class RoomsTableComponent implements OnInit {
 
   ngOnInit() {
     this.rooms = this.service.products$;
+  }
+
+  clickMe(value) {
+    this.tapRoom.emit(value);
   }
 
   openModal() {

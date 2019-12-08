@@ -14,7 +14,7 @@ import { ApiService } from './api.service';
 })
 export class RoomService {
 
-  private rooms: BehaviorSubject<RoomInfo[]>;
+  private rooms = new BehaviorSubject<RoomInfo[]>([]);
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
   private rooms$ = new BehaviorSubject<any[]>([]);
@@ -29,12 +29,9 @@ export class RoomService {
   };
 
   constructor(private pipe: DecimalPipe, private api: ApiService) {
-    this.rooms = new BehaviorSubject(null);
 
     this.api.getRooms().subscribe((rooms: RoomInfo[]) => {
-      this.rooms.next(rooms)
-      this.rooms.complete();
-      this.rooms.pipe(observeOn(asyncScheduler));
+      this.rooms.next(rooms);
     });
 
     this._search$.pipe(
@@ -51,6 +48,7 @@ export class RoomService {
     this._search$.next();
   }
 
+  get roomsGet$() { return this.rooms.asObservable(); }
   get products$() { return this.rooms$.asObservable(); }
   get total$() { return this._total$.asObservable(); }
   get loading$() { return this._loading$.asObservable(); }
