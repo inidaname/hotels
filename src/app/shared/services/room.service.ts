@@ -14,7 +14,7 @@ import { ApiService } from './api.service';
 })
 export class RoomService {
 
-  private rooms = new BehaviorSubject<RoomInfo[]>([]);
+  private rooms: BehaviorSubject<RoomInfo[]>;
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
   private rooms$ = new BehaviorSubject<any[]>([]);
@@ -30,7 +30,10 @@ export class RoomService {
 
   constructor(private pipe: DecimalPipe, private api: ApiService) {
 
+    this.rooms = new BehaviorSubject<RoomInfo[]>([]);
+
     this.api.getRooms().subscribe((rooms: RoomInfo[]) => {
+      console.log(rooms);
       this.rooms.next(rooms);
     });
 

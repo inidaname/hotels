@@ -19,6 +19,7 @@ export class RoomsTableComponent implements OnInit {
 
   rooms: Observable<RoomInfo[] | RoomInfo>;
   total$: Observable<number>;
+  checkContent: boolean;
 
   @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
   @Output() tapRoom = new EventEmitter<any>();
@@ -32,10 +33,12 @@ export class RoomsTableComponent implements OnInit {
     private api: ApiService
   ) {
     this.total$ = service.total$;
+    this.checkContent = false;
   }
 
   ngOnInit() {
-    this.rooms = this.service.products$;
+    this.rooms = this.service.roomsGet$;
+    this.rooms.subscribe(re => console.log(re))
   }
 
   clickMe(value) {
