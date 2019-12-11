@@ -32,10 +32,10 @@ export class RoomListComponent implements OnInit {
     console.log(this.customerForm.value);
   }
 
-  theClick(st: RoomInfo){
-    this.roomService.setData({
-      room: st.roomNumber,
-      price: st.roomPrice
+  selectRoom(st: RoomInfo) {
+    this.roomService.setRoom({
+      roomNumber: st.roomNumber,
+      roomPrice: st.roomPrice
     });
   }
 

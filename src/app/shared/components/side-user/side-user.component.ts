@@ -9,6 +9,7 @@ import { RoomsService } from '@services/rooms.service';
 export class SideUserComponent implements OnInit, AfterViewChecked {
 
   data: any = {  };
+  room: any = {  };
 
   constructor(
     private roomService: RoomsService
@@ -24,11 +25,16 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
         this.data.address = data.address;
         this.data.phone = data.phone;
         this.data.email = data.email;
-        this.data.room = data.room;
         this.data.otherservice = data.otherservice;
-        this.data.price = data.price;
       }
     });
+
+    this.roomService.currentRoom.subscribe(data => {
+      if (data) {
+        this.room.price = data.roomPrice;
+        this.room.roomNumber = data.roomNumber;
+      }
+    })
   }
 
 }

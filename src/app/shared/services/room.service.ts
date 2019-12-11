@@ -33,7 +33,6 @@ export class RoomService {
     this.rooms = new BehaviorSubject<RoomInfo[]>([]);
 
     this.api.getRooms().subscribe((rooms: RoomInfo[]) => {
-      console.log(rooms);
       this.rooms.next(rooms);
     });
 

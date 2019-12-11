@@ -2,7 +2,7 @@
   <h5 class="text-uppercase">Booking Details</h5>
   <section class="h-75 my-2 shadow-sm w-100 p-3 container">
     <form [formGroup]="customerForm" class="row m-auto align-items-start justify-content-around">
-        <app-rooms-table (tapRoom)="theClick($event)"></app-rooms-table>
+        <app-rooms-table (tapRoom)="selectRoom($event)"></app-rooms-table>
         <p class="col-12">Serve Break fast</p>
       <hr class="my-5 w-100">
       <div class="col-12 row">

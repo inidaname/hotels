@@ -1,6 +1,17 @@
 <article class="shadow rounded-lg p-3 d-flex flex-column justify-content-start align-items-center">
   <h5>Check Out</h5>
-  <section class="h-75 my-2 shadow-sm w-100 p-3 container">
-    See you here
+  <section class="my-4 shadow-sm w-100 p-3 container rounded-lg">
+    <form class="form-inline w-100">
+      <div class="form-group">
+        <label for="searchCheck">Search</label>
+        <input type="search" name="searchCheck" id="searchCheck" class="form-control ml-3" placeholder="Check Out"
+          aria-describedby="chSeach">
+        <small id="chSeach" class="text-muted"></small>
+      </div>
+      <button type="submit" class="btn btn-dark mx-3"> Search</button>
+    </form>
+  </section>
+  <section class="my-4 shadow-sm w-100 p-3 container rounded-lg">
+    Result
   </section>
 </article>

@@ -38,7 +38,6 @@ export class RoomsTableComponent implements OnInit {
 
   ngOnInit() {
     this.rooms = this.service.roomsGet$;
-    this.rooms.subscribe(re => console.log(re))
   }
 
   clickMe(value) {
@@ -70,7 +69,6 @@ export class RoomsTableComponent implements OnInit {
   }
 
   trackById(i, da) {
-    console.log(da);
     return da._id;
   }
 }
