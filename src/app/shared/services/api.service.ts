@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { UserData, User, ProductData, Products, ProductInfo, Inventory, InventoryData, InventoryInfo, Room, RoomData, RoomInfo } from '@shared/interface';
 import { environment } from '@environments/environment';
@@ -14,6 +14,12 @@ import { UserDataService } from './user-data.service';
 export class ApiService {
 
   private api: string = environment.api;
+  private headersOpt = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      authorization: `${localStorage.getItem('token')}`
+    })
+  };
 
   constructor(
     private http: HttpClient,
@@ -35,6 +41,7 @@ export class ApiService {
     return this.http
       .post<UserData>(`${this.api}/login`, login)
       .pipe(map(user => {
+        console.log(user)
         this.auth.setUser(user);
         this.getUserById().subscribe();
         return user;
@@ -50,7 +57,7 @@ export class ApiService {
   getUserById(): Observable<UserData> {
     const id = localStorage.getItem('currentUser');
     return this.http
-      .get<UserData>(`${this.api}/users/${id}`)
+      .get<UserData>(`${this.api}/users/${id}`, this.headersOpt)
       .pipe(map(user => {
         this.userData.setUserData(user.data);
         return user;

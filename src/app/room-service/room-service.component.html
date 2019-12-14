@@ -1,10 +1,10 @@
 <app-header></app-header>
 <main class="d-flex flex-column justify-content-between align-items-start p-4">
   <section class="mb-2 w-100">
-    <nav class="nav justify-content-center">
-      <a class="nav-link btn btn-info" href="#">Active link</a>
-      <a class="nav-link btn btn-group-vertical" href="#">Link</a>
-      <a class="nav-link disabled" href="#">Disabled link</a>
+    <nav class="nav nav-tabs justify-content-left">
+      <a [routerLink]="['./roomslist']" routerLinkActive="active" class="nav-link">Reservation</a>
+      <a [routerLink]="['./otherservice']" routerLinkActive="active" class="nav-link">Room Services</a>
+      <a [routerLink]="['./checkout']" routerLinkActive="active" class="nav-link">Check Out</a>
     </nav>
   </section>
 
