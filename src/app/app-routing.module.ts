@@ -9,6 +9,9 @@ import { PathNotFoundComponent } from '@components/path-not-found/path-not-found
 import { PointOfSalesComponent } from './point-of-sales/point-of-sales.component';
 import { AdminComponent } from './admin/admin.component';
 import { RoomServiceComponent } from './room-service/room-service.component';
+import { AdminGuard } from '@shared/guards/admin.guard';
+import { AuthorizationGuard } from '@shared/guards/authorization.guard';
+import { SuperAdminGuard } from '@shared/guards/super-admin.guard';
 
 const routes: Routes = [
   {
@@ -26,22 +29,25 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
-    canLoad: [AuthenticateGuard]
+    canLoad: [AuthenticateGuard, SuperAdminGuard]
   },
   {
     path: 'pointofsales',
     component: PointOfSalesComponent,
     loadChildren: () => import('./point-of-sales/point-of-sales.module').then(m => m.PointOfSalesModule),
+    canLoad: [AuthenticateGuard, AuthorizationGuard]
   },
   {
     path: 'admin',
     component: AdminComponent,
-    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    canLoad: [AdminGuard, AuthenticateGuard]
   },
   {
     path: 'roomservice',
     component: RoomServiceComponent,
-    loadChildren: () => import('./room-service/room-service.module').then(m => m.RoomServiceModule)
+    loadChildren: () => import('./room-service/room-service.module').then(m => m.RoomServiceModule),
+    canLoad: [AuthenticateGuard, AuthorizationGuard]
   },
   {
     path: '**',
