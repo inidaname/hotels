@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from '@services/api.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { InventoryInfo } from '@shared/interface';
 
@@ -29,15 +29,13 @@ export class InventoryFormComponent implements OnInit {
 
   ngOnInit() {
     this.content = this.fb.group({
-      stockName: [''],
+      name: ['', Validators.required],
       description: [''],
-      quantity: [''],
-      department: [''],
-      condition: [''],
-      serialNumber: [''],
+      quantity: ['', Validators.required],
       image: [''],
-      manufacturer: ['']
-    })
+      manufacturer: ['', Validators.required],
+      valuePrice: ['', Validators.required]
+    });
   }
 
   get f() { return this.content.controls; }
@@ -46,7 +44,8 @@ export class InventoryFormComponent implements OnInit {
     if (this.content.valid) {
       this.spinner.show();
       const obs = this.api.createInventory(this.content.value)
-      obs.subscribe(cl => {
+      obs.subscribe((cl: any) => {
+        this.inventory = cl.data;
         this.spinner.hide();
         this.alertType = 'success';
         this.message = cl.message;

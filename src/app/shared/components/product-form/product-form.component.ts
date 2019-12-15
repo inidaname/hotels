@@ -29,15 +29,13 @@ export class ProductFormComponent implements OnInit {
 
   ngOnInit() {
     this.content = this.fb.group({
-      productName: ['', Validators.required],
+      name: ['', Validators.required],
       productType: ['', Validators.required],
       productDept: [''],
       productImage: [''],
-      productPrice: ['', [Validators.required]],
-      serialNumber: [''],
+      valuePrice: ['', [Validators.required]],
       manufacturer: ['', Validators.required],
       quantity: ['', Validators.required],
-      manufacturedDate: ['', Validators.required],
       expiryDate: ['', Validators.required]
     });
   }
@@ -45,10 +43,12 @@ export class ProductFormComponent implements OnInit {
   get f() { return this.content.controls; }
 
   submitForm() {
+    console.log(this.content.value);
     if (this.content.valid) {
       this.spinner.show();
       const obs = this.api.createProduct(this.content.value)
-      obs.subscribe(cl => {
+      obs.subscribe((cl: any) => {
+        this.product = cl;
         this.spinner.hide();
         this.alertType = 'success';
         this.message = cl.message;

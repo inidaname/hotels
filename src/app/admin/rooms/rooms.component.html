@@ -9,31 +9,56 @@
   </section>
   <section class="row my-5 p-4 shadow col-12 mx-auto rounded-lg">
     <h4 class="col-12 text-center">Create and Manage Rooms</h4>
+    <div class="col-12 my-3">
+      <button class="btn btn-primary" (click)="openModal(content)">Edit Room Types</button>
+    </div>
+    <ng-template #content>
+      <div class="modal-body">
+        <div class="container">
+          <form [formGroup]="roomTypeForm">
+            <div class="form-group col-12">
+              <label for="roomType">Room Type</label>
+              <input type="text" formControlName="roomType" id="roomType" class="form-control"
+                [ngClass]="{'is-invalid': g.roomType.touched && g.roomType.invalid}" placeholder="Room Type"
+                aria-describedby="typeHelp">
+              <small id="typeHelp" class="text-muted">Please provide the room type</small>
+            </div>
+            <div class="form-group col-12">
+              <label for="roomDescription">Description</label>
+              <textarea formControlName="roomDescription" id="roomDescription" class="form-control" cols="10"
+                rows="5"></textarea>
+            </div>
+            <div class="form-group col-12">
+              <label for="roomPrice">Room Price</label>
+              <input type="text" formControlName="roomPrice" id="roomPrice" class="form-control"
+                [ngClass]="{'is-invalid': g.roomPrice.touched && g.roomPrice.invalid}" placeholder="Room Price"
+                aria-describedby="priceHelp">
+              <small id="priceHelp" class="text-muted">Please provide room price</small>
+            </div>
+            <div class="form-group row">
+              <div class="offset-sm-2 col-sm-10">
+                <button type="submit" class="btn btn-primary" (click)="createType()">Create Room</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </ng-template>
     <div class="container">
       <form [formGroup]="roomForm" class="row m-auto align-items-center justify-content-around">
         <div class="form-group col-3">
-          <label for="roomName">Room Name</label>
-          <input type="text" formControlName="roomName" id="roomName" class="form-control" [ngClass]="{'is-invalid': f.roomName.touched && f.roomName.invalid}" placeholder="Room Name" aria-describedby="roomHelp">
-          <small id="roomHelp" class="text-muted">Provide the Name of the room</small>
-        </div>
-        <div class="form-group col-3">
-          <label for="roomType">Room Type</label>
-          <input type="text" formControlName="roomType" id="roomType" class="form-control" [ngClass]="{'is-invalid': f.roomType.touched && f.roomType.invalid}" placeholder="Room Type" aria-describedby="typeHelp">
-          <small id="typeHelp" class="text-muted">Please provide the room type</small>
+          <label for="roomTypeId">Room Type</label>
+          <select formControlName="roomTypeId" class="form-control" id="roomTypeId" [ngClass]="{'is-invalid': f.roomTypeId.touched && f.roomTypeId.invalid}">
+            <option></option>
+            <option *ngFor="let item of typeList | async as list" [value]="item._id">{{item.roomType}}</option>
+          </select>
         </div>
         <div class="form-group col-3">
           <label for="roomNumber">Room Number</label>
-          <input type="text" formControlName="roomNumber" id="roomNumber" class="form-control" [ngClass]="{'is-invalid': f.roomNumber.touched && f.roomNumber.invalid}" placeholder="Room Number" aria-describedby="numberHelp">
+          <input type="text" formControlName="roomNumber" id="roomNumber" class="form-control"
+            [ngClass]="{'is-invalid': f.roomNumber.touched && f.roomNumber.invalid}" placeholder="Room Number"
+            aria-describedby="numberHelp">
           <small id="numberHelp" class="text-muted">A Room Number must be provided</small>
-        </div>
-        <div class="form-group col-5">
-          <label for="roomDescription">Description</label>
-          <textarea formControlName="roomDescription" id="roomDescription" class="form-control" cols="10" rows="5"></textarea>
-        </div>
-        <div class="form-group col-3">
-          <label for="roomPrice">Room Price</label>
-          <input type="text" formControlName="roomPrice" id="roomPrice" class="form-control" [ngClass]="{'is-invalid': f.roomPrice.touched && f.roomPrice.invalid}" placeholder="Room Price" aria-describedby="priceHelp">
-          <small id="priceHelp" class="text-muted">Please provide room price</small>
         </div>
         <div class="form-group col-3">
           <label for="roomCondition">Room Condition</label>
@@ -44,7 +69,8 @@
           </select>
         </div>
         <div class="form-group col-12 text-center my-5">
-          <button type="submit" class="btn btn-success" [disabled]="!roomForm.valid" (click)="createRoom()">Submit</button>
+          <button type="submit" class="btn btn-success" [disabled]="!roomForm.valid"
+            (click)="createRoom()">Submit</button>
         </div>
       </form>
     </div>

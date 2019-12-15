@@ -93,7 +93,7 @@ export class ApiService {
   createInventory(product: Inventory): Observable<InventoryData> {
     const id = localStorage.getItem('currentUser');
     return this.http
-      .post<InventoryData>(`${this.api}/inventory`, product)
+      .post<InventoryData>(`${this.api}/stock`, product)
       .pipe(map(productData => {
         return productData;
       }), catchError(this.handleError));
@@ -103,6 +103,19 @@ export class ApiService {
     const id = localStorage.getItem('currentUser');
     return this.http
       .post<RoomData>(`${this.api}/room`, room)
+      .pipe(map((room: RoomData) => room), catchError(this.handleError));
+  }
+
+  getRoomTypes() {
+    return this.http
+      .get(`${this.api}/roomtype`)
+      .pipe(map((roomtype: any) => roomtype.data), catchError(this.handleError));
+  }
+
+  createRoomType(room: Room): Observable<RoomData> {
+    const id = localStorage.getItem('currentUser');
+    return this.http
+      .post<RoomData>(`${this.api}/roomtype`, room)
       .pipe(map((room: RoomData) => room), catchError(this.handleError));
   }
 
@@ -121,7 +134,7 @@ export class ApiService {
 
   getInventory(id?: string): Observable<InventoryInfo[] | InventoryInfo> {
     return this.http
-      .get(`${this.api}/inventory/?${id}`)
+      .get(`${this.api}/stock/?${id}`)
       .pipe(map((inventory: InventoryData) => inventory.data), catchError(this.handleError));
   }
 

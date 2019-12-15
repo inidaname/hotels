@@ -19,7 +19,7 @@ import { InventoryService } from '@services/inventory.service';
 })
 export class SortableComponent implements OnInit {
 
-  products: Observable<ProductInfo[] | ProductInfo>;
+  products: Observable<any>;
   total$: Observable<number>;
 
   @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
@@ -38,7 +38,7 @@ export class SortableComponent implements OnInit {
 
     ngOnInit() {
       this.component = (this.purpose === 'product') ? ProductFormComponent : InventoryFormComponent;
-      this.products = (this.purpose === 'product') ? this.service.products$ : this.inventory.inventories$;
+      this.products = (this.purpose === 'product') ? this.service.product$ : this.inventory.inventory$;
   }
 
   openModal() {
