@@ -18,8 +18,6 @@ export class RestaurantComponent implements OnInit {
   ngOnInit() {
     this.mealForm = this.fb.group({
       mealName: ['', Validators.required],
-      mealType: ['', Validators.required],
-      mealNumber: ['', Validators.required],
       mealDescription: [''],
       mealPrice: ['', Validators.required]
     });
@@ -28,7 +26,9 @@ export class RestaurantComponent implements OnInit {
   get f() { return this.mealForm.controls; }
 
   createMeal() {
-    this.api.createMeal(this.mealForm.value).subscribe(e => console.log(e));
+    if (this.mealForm.valid) {
+      this.api.createMeal(this.mealForm.value).subscribe(e => console.log(e));
+    }
   }
 
 }

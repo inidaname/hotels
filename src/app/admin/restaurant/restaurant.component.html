@@ -1,11 +1,11 @@
 <article class="m-4 row bg-white p-4">
   <section class="mt-2 mb-5 shadow col-12 p-4 rounded-lg">
     <h4 class="col-12 text-center">List of Meals</h4>
-    <app-rooms-table [purpose]="'product'"></app-rooms-table>
+    <app-meal-list [purpose]="'inventory'"></app-meal-list>
   </section>
   <section class="row my-5 mx-auto col-12 p-4 rounded-lg shadow">
     <h4 class="col-12 text-center">Sale Made <small>For the day</small></h4>
-    <app-rooms-table [purpose]="'product'"></app-rooms-table>
+    <app-meal-list [purpose]="'sales'"></app-meal-list>
   </section>
   <section class="row my-5 p-4 shadow col-12 mx-auto rounded-lg">
     <h4 class="col-12 text-center">Create and Manage Restaurant Menu</h4>
@@ -17,20 +17,6 @@
             [ngClass]="{'is-invalid': f.mealName.touched && f.mealName.invalid}" placeholder="Meal Name"
             aria-describedby="mealHelp">
           <small id="mealHelp" class="text-muted">Provide the Name of the meal</small>
-        </div>
-        <div class="form-group col-3">
-          <label for="mealType">Meal Type</label>
-          <input type="text" formControlName="mealType" id="mealType" class="form-control"
-            [ngClass]="{'is-invalid': f.mealType.touched && f.mealType.invalid}" placeholder="Meal Type"
-            aria-describedby="typeHelp">
-          <small id="typeHelp" class="text-muted">Please provide the meal type</small>
-        </div>
-        <div class="form-group col-3">
-          <label for="mealNumber">Meal Number</label>
-          <input type="text" formControlName="mealNumber" id="mealNumber" class="form-control"
-            [ngClass]="{'is-invalid': f.mealNumber.touched && f.mealNumber.invalid}" placeholder="Meal Number"
-            aria-describedby="numberHelp">
-          <small id="numberHelp" class="text-muted">A Meal Number must be provided</small>
         </div>
         <div class="form-group col-5">
           <label for="mealDescription">Description</label>

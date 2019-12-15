@@ -16,6 +16,7 @@ import { InventoryFormComponent } from './components/inventory-form/inventory-fo
 import { RoomsTableComponent } from './components/rooms-table/rooms-table.component';
 import { SideUserComponent } from './components/side-user/side-user.component';
 import { StaffListComponent } from './components/staff-list/staff-list.component';
+import { MealListComponent } from './components/meal-list/meal-list.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { StaffListComponent } from './components/staff-list/staff-list.component
     InventoryFormComponent,
     RoomsTableComponent,
     SideUserComponent,
-    StaffListComponent
+    StaffListComponent,
+    MealListComponent
   ],
   imports: [
     CommonModule,
@@ -54,7 +56,8 @@ import { StaffListComponent } from './components/staff-list/staff-list.component
     SortableComponent,
     RoomsTableComponent,
     SideUserComponent,
-    StaffListComponent
+    StaffListComponent,
+    MealListComponent
   ],
   providers: [DecimalPipe],
   entryComponents: [

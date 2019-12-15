@@ -144,6 +144,12 @@ export class ApiService {
       .pipe(map((room: RoomData) => room.data), catchError(this.handleError));
   }
 
+  getMeals(id?: string): Observable<RoomInfo[] | RoomInfo> {
+    return this.http
+      .get(`${this.api}/restaurant/?${id}`)
+      .pipe(map((meals: any) => meals.data), catchError(this.handleError));
+  }
+
   private handleError(err: HttpErrorResponse) {
     console.log(err);
     let errorMessage = '';
