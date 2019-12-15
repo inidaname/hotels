@@ -37,7 +37,6 @@ export class SortableComponent implements OnInit {
     }
 
     ngOnInit() {
-      console.log(this.purpose);
       this.component = (this.purpose === 'product') ? ProductFormComponent : InventoryFormComponent;
       this.products = (this.purpose === 'product') ? this.service.products$ : this.inventory.inventories$;
   }

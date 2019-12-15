@@ -13,7 +13,7 @@ export class AdminGuard implements CanActivate, CanActivateChild, CanLoad {
     private auth: AuthService,
     private router: Router,
     private jwt: JwtHelperService
-  ) {}
+  ) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -28,7 +28,7 @@ export class AdminGuard implements CanActivate, CanActivateChild, CanLoad {
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.jwt.decodeToken().userType !== 'admin' || this.jwt.decodeToken().userType !== 'superadmin') {
+    if (this.jwt.decodeToken().userType !== 'superadmin' && this.jwt.decodeToken().userType !== 'admin') {
       this.router.navigateByUrl('/roomservice');
       return false;
     }

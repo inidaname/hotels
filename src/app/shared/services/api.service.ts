@@ -37,6 +37,15 @@ export class ApiService {
       }), catchError(this.handleError));
   }
 
+  createStaff(userReg: User): Observable<UserData> {
+    console.log(userReg)
+    return this.http
+      .post<UserData>(`${this.api}/create/user`, userReg)
+      .pipe(map(user => {
+        return user;
+      }), catchError(this.handleError));
+  }
+
   loginUser(login: object): Observable<UserData> {
     return this.http
       .post<UserData>(`${this.api}/login`, login)
@@ -61,6 +70,15 @@ export class ApiService {
       .pipe(map(user => {
         this.userData.setUserData(user.data);
         return user;
+      }), catchError(this.handleError));
+  }
+
+  getAllStaff(): Observable<User> {
+    return this.http
+      .get<UserData>(`${this.api}/users`, this.headersOpt)
+      .pipe(map(user => {
+        console.log(user)
+        return user.data;
       }), catchError(this.handleError));
   }
 

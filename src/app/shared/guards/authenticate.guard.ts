@@ -50,12 +50,6 @@ export class AuthenticateGuard implements CanActivate, CanActivateChild, CanLoad
     //   }
     // }
 
-    if (this.jwt.isTokenExpired()) {
-      this.auth.clearUser();
-      this.router.navigateByUrl('/auth');
-      return false;
-    }
-
     if (localStorage.getItem('token') === null && route.path !== 'auth') {
       this.router.navigateByUrl('/auth');
       return false;
