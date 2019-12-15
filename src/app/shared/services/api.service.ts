@@ -38,7 +38,6 @@ export class ApiService {
   }
 
   createStaff(userReg: User): Observable<UserData> {
-    console.log(userReg)
     return this.http
       .post<UserData>(`${this.api}/create/user`, userReg)
       .pipe(map(user => {
