@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RoomsService } from '@services/rooms.service';
 import { RoomInfo, Country } from '@shared/interface';
 import { COUNTRIES } from '@shared/json/countries';
+import { ApiService } from '@services/api.service';
 
 @Component({
   templateUrl: './room-list.component.html',
@@ -14,18 +15,19 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
   countries: Country[] = COUNTRIES;
   default = 'Nigeria';
   setClass: boolean;
-  @ViewChild('passportNumber', {static: true}) passportNumber: ElementRef;
+  @ViewChild('passportNumber', { static: true }) passportNumber: ElementRef;
 
   constructor(
     private fb: FormBuilder,
     private roomService: RoomsService,
-    private cdRef: ChangeDetectorRef
-  ) {}
+    private api: ApiService
+  ) { }
 
   ngOnInit() {
     this.customerForm = this.fb.group({
       customerName: ['', Validators.required],
-      customerID: ['', Validators.required],
+      city: [''],
+      country: [''],
       customerEmail: ['', [Validators.required, Validators.email]],
       customerProfession: ['', Validators.required],
       customerAddress: [''],
@@ -34,11 +36,10 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
       comingFrom: ['', Validators.required],
       nextDestination: ['', Validators.required],
       passportNumber: ['', Validators.required],
-      passportIssue: [''],
-      issueDate: [''],
+      issuedAt: [''],
+      issuedDate: [''],
       representation: [''],
       companyName: [''],
-      companyEmail: [''],
       companyNumber: [''],
       companyAddress: [''],
       paymentMethod: ['', Validators.required],
@@ -47,14 +48,17 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
       nextOfKinNumber: [''],
       nextOfKinRelation: [''],
       arrivalDate: ['', Validators.required],
-      departureDate: ['', Validators.required]
+      departureDate: ['', Validators.required],
+      room: [''],
+      checkedInBy: [localStorage.getItem('currentUser')],
+      numberOfPersons: [''],
+      checkedInStatus: ['', Validators.required],
+      amountPaid: ['']
     });
-    this.customerForm.controls.nationality.setValue(this.default, {onlySelf: true});
+    this.customerForm.controls.nationality.setValue(this.default, { onlySelf: true });
   }
 
   ngAfterViewChecked(): void {
-
-    this.cdRef.detectChanges();
 
     this.customerForm.controls.nationality.valueChanges.subscribe(checked => {
       if (checked !== 'Nigeria') {
@@ -94,9 +98,15 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
 
   bookARoom() {
     console.log(this.customerForm.value);
+    // if (this.customerForm.valid) {
+    console.log('valid')
+    this.api.createRoomLodge(this.customerForm.value).subscribe(e => console.log(e), er => console.log(er));
+    // }
   }
 
   selectRoom(st: RoomInfo) {
+    this.customerForm.controls.room.setValue(st._id);
+    this.customerForm.controls.amountPaid.setValue(st.roomTypeId.roomPrice);
     this.roomService.setRoom({
       roomNumber: st.roomNumber,
       roomPrice: st.roomTypeId.roomPrice
@@ -109,7 +119,7 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
       address: this.customerForm.controls.customerAddress.value,
       phone: this.customerForm.controls.customerNumber.value,
       email: this.customerForm.controls.customerEmail.value
-     });
+    });
   }
 
 }

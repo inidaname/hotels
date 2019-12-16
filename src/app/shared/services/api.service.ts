@@ -103,7 +103,17 @@ export class ApiService {
     const id = localStorage.getItem('currentUser');
     return this.http
       .post<RoomData>(`${this.api}/room`, room)
-      .pipe(map((room: RoomData) => room), catchError(this.handleError));
+      .pipe(map((rtRoom: RoomData) => rtRoom), catchError(this.handleError));
+  }
+
+  createRoomLodge(log): Observable<any> {
+    console.log('it came')
+    return this.http
+      .post(`${this.api}/roomlodge`, log)
+      .pipe(map((lodged: any) => {
+        console.log(lodged)
+        return lodged;
+      }), catchError(this.handleError));
   }
 
   getRoomTypes() {

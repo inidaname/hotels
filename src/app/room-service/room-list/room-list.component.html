@@ -37,11 +37,25 @@
             cols="5" rows="5"></textarea>
         </div>
         <div class="form-group col-6 mx-auto my-4">
-          <label for="customerEmail">Nationality</label>
+          <label for="nationality">Nationality</label>
           <select class="form-control" formControlName="nationality">
             <option *ngFor="let item of countries" [value]="item.name">{{item.name}}</option>
           </select>
           <small id="typeHelp" class="text-muted">Please provide Nationality</small>
+        </div>
+        <div class="form-group col-6 mx-auto my-4">
+          <label for="country">Country</label>
+          <select class="form-control" formControlName="country">
+            <option *ngFor="let item of countries" [value]="item.name">{{item.name}}</option>
+          </select>
+          <small id="typeHelp" class="text-muted">Please provide Country</small>
+        </div>
+        <div class="form-group col-5 mx-auto my-4">
+          <label for="comingFrom">City</label>
+          <input type="text" formControlName="city" id="city" class="form-control"
+            [ngClass]="{'is-invalid': f.city.touched && f.city.invalid}" placeholder="Phone Number"
+            aria-describedby="numberHelp">
+          <small id="numberHelp" class="text-muted">A Phone Number must be provided</small>
         </div>
         <div class="form-group col-3 mx-auto my-4">
           <label for="comingFrom">Coming From</label>
@@ -67,16 +81,16 @@
               <small id="numberHelp" class="text-muted">A Phone Number must be provided</small>
             </div>
             <div class="form-group col-3 mx-auto my-4">
-              <label for="passportIssue">Issue At</label>
-              <input type="text" formControlName="passportIssue" id="passportIssue" class="form-control"
-                [ngClass]="{ 'is-invalid': f.passportIssue.touched && f.passportIssue.invalid }"
+              <label for="issuedAt">Issue At</label>
+              <input type="text" formControlName="issuedAt" id="issuedAt" class="form-control"
+                [ngClass]="{ 'is-invalid': f.issuedAt.touched && f.issuedAt.invalid }"
                 placeholder="Phone Number" aria-describedby="numberHelp">
               <small id="numberHelp" class="text-muted">A Phone Number must be provided</small>
             </div>
             <div class="form-group col-3 mx-auto my-4">
-              <label for="passportNumber">Issue Date</label>
+              <label for="issuedDate">Issue Date</label>
               <div class="input-group">
-                <input type="text" formControlName="issueDate" class="form-control" ngbDatepicker #issue="ngbDatepicker"
+                <input type="text" formControlName="issuedDate" class="form-control" ngbDatepicker #issue="ngbDatepicker"
                   placeholder="Expiry Date: dd/mm/yyyy">
                 <div class="input-group-append">
                   <button class="btn btn-outline-success calendar" (click)="issue.toggle()" type="button"></button>
@@ -125,13 +139,6 @@
                   [ngClass]="{'is-invalid': f.companyName.touched && f.companyName.invalid}" (change)="checkValue()"
                   placeholder="Company's Name" aria-describedby="roomHelp">
                 <small id="roomHelp" class="text-muted">Provide the Customer's name</small>
-              </div>
-              <div class="form-group col-3 mx-auto my-4">
-                <label for="companyEmail">Company's Email</label>
-                <input type="email" formControlName="companyEmail" id="companyEmail" class="form-control"
-                  [ngClass]="{'is-invalid': f.companyEmail.touched && f.companyEmail.invalid}" placeholder="Email Address"
-                  aria-describedby="typeHelp">
-                <small id="typeHelp" class="text-muted">Please provide the room type</small>
               </div>
               <div class="form-group col-3 mx-auto my-4">
                 <label for="companyNumber">Company's Number</label>
@@ -190,12 +197,12 @@
         </div>
         <div class="form-check form-check-inline">
           <label class="form-check-label">
-            <input class="form-check-input" type="radio" name="checkIn" id="checkIn" value="reserved"> Reservation
+            <input class="form-check-input" type="radio" formControlName="checkedInStatus" id="checkIn" value="reserved"> Reservation
           </label>
         </div>
         <div class="form-check form-check-inline">
           <label class="form-check-label">
-            <input class="form-check-input" type="radio" name="checkIn" id="checkIn" value="CheckIn"> Check In
+            <input class="form-check-input" type="radio" formControlName="checkedInStatus" id="checkIn" value="occupied"> Check In
           </label>
         </div>
       </div>
@@ -203,8 +210,16 @@
       <hr class="my-5 w-100">
       <app-rooms-table (tapRoom)="selectRoom($event)"></app-rooms-table>
 
+      <hr class="my-5 w-100">
+      <div class="form-group col-3 mx-auto my-4">
+        <label for="numberOfPersons">Number of Persons</label>
+        <input type="number" formControlName="numberOfPersons" id="numberOfPersons" class="form-control"
+          [ngClass]="{'is-invalid': f.numberOfPersons.touched && f.numberOfPersons.invalid}" placeholder="Email Address"
+          aria-describedby="typeHelp">
+        <small id="typeHelp" class="text-muted">Please provide the room type</small>
+      </div>
       <div class="form-group col-12 text-center my-5">
-        <button type="submit" class="btn btn-success" [disabled]="!customerForm.valid"
+        <button type="submit" class="btn btn-success" [disabled]="!customerForm.valid && !f.room.value"
           (click)="bookARoom()">Submit</button>
       </div>
     </form>
