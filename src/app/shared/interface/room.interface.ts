@@ -1,11 +1,14 @@
 export interface Room {
-  roomName: string;
   roomNumber: number;
-  roomType: string;
-  roomDescription: string;
   roomStatus?: string;
   roomCondition: string;
+  roomTypeId: RoomType;
+}
+
+export interface RoomType {
   roomPrice: number;
+  roomType: string;
+  roomDescription: string;
 }
 
 export interface RoomInfo extends Room {

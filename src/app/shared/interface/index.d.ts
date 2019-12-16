@@ -5,3 +5,4 @@ export * from './sort.interface';
 export * from './inventory.interface';
 export * from './room.interface';
 export * from './restaurant.interface';
+export * from './country.interface';
