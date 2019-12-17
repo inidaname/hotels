@@ -1,6 +1,7 @@
 <aside class="shadow rounded p-3 d-flex flex-column justify-content-around align-items-center overflow-auto">
   <h5 class="text-uppercase">Payment Details</h5>
-  <div class="h-75 my-2 shadow-sm w-100 p-3 container">
+  <ng-container *ngIf="purpose === 'roomservice'; else pointofsale">
+    <div class="h-75 my-2 shadow-sm w-100 p-3 container">
       <form>
         <div class="row mb-3">
           <span class="col-sm-6 small border-right">Full Name</span>
@@ -44,11 +45,30 @@
           </div>
         </div>
       </form>
-  </div>
-  <div class="w-100 mx-2 shadow-sm">
-    <p>Payable amount or deposit</p>
-  </div>
-  <div class="w-100 mt-2 shadow-sm">
-    <p> Current Total: {{ room.price | currency: 'NGN' : 'symbol-narrow' }}</p>
-  </div>
+    </div>
+    <div class="w-100 mx-2 shadow-sm">
+      <p>Payable amount or deposit</p>
+    </div>
+    <div class="w-100 mt-2 shadow-sm">
+      <p> Current Total: {{ room.price | currency: 'NGN' : 'symbol-narrow' }}</p>
+    </div>
+  </ng-container>
+  <ng-template #pointofsale>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>&#8358;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of product; let i = index">
+          <td>{{item.productName}}</td>
+          <td><input type="number" size="4" [(ngModel)]="product[i]" value="1" #ctrl="ngModel"></td>
+          <td>{{item.productPrice * ctrl.value}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-template>
 </aside>

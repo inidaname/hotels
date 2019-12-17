@@ -1,9 +1,10 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { NgbAlertModule, NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { PathNotFoundComponent } from '@components/path-not-found/path-not-found.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -39,7 +40,8 @@ import { MealListComponent } from './components/meal-list/meal-list.component';
     ReactiveFormsModule,
     NgbModule,
     RouterModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    FontAwesomeModule
   ],
   exports: [
     CommonModule,
