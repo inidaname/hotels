@@ -9,7 +9,7 @@ import { RoomsService } from '@services/rooms.service';
 export class ProductListsComponent implements OnInit {
 
   productsList;
-  cartProd: any[];
+  cartProd: {product: any, quantity: number}[];
   @ViewChild('quantity', {static: true}) quantity;
 
   constructor(
@@ -21,11 +21,15 @@ export class ProductListsComponent implements OnInit {
 
   ngOnInit() {
     this.productsList = this.products.product$;
-    console.log(this.quantity);
   }
 
-  setProduct(set) {
-    this.cartProd.push(set);
+  setProduct(set, ctr) {
+    const index = this.cartProd.findIndex(val => val.product._id === set._id);
+    if (index >= 0) {
+      this.cartProd[index].quantity = ctr;
+    } else {
+      this.cartProd.push({product: set, quantity: ctr});
+    }
     this.productService.setProduct(this.cartProd);
   }
 

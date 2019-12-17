@@ -15,6 +15,8 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
   room: any = {};
   @Input() purpose: string;
   product: any = [];
+  sumPrice: number;
+  sumQuantity: number;
 
   constructor(
     private roomService: RoomsService
@@ -44,10 +46,10 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
     }
 
 
-    this.roomService.getProduct().subscribe(da => {
+    this.roomService.currentProduct.subscribe((da) => {
       if (da) {
         this.product = da;
-        console.log(da)
+        this.sumQuantity = da.reduce((a, b) => a + b.quantity, 0);
       }
     })
   }

@@ -7,12 +7,15 @@
         <p class="card-text">Some text</p>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Stock Left: {{item.quantity | number}}</li>
+        <li class="list-group-item">Quantity: <input type="number" [(ngModel)]="productsList[i]" #ctrl="ngModel"
+            class="form-control"></li>
         <li class="list-group-item">Price: {{item.productPrice | currency: 'NGN' : 'symbol-narrow'}}</li>
+        <li class="list-group-item">Total Price:
+          {{ ctrl.value * item.productPrice | currency: 'NGN' : 'symbol-narrow' }} </li>
       </ul>
       <div class="card-body">
-        <button class="btn btn-sm btn-primary"  (click)="setProduct(item)">Add to Cart</button>
-        <button class="btn btn-sm btn-danger" (click)="setProduct(item)">Remove</button>
+        <button class="btn btn-primary" [disabled]="!ctrl.value || ctrl.value === 0" (click)="setProduct(item, ctrl.value)">Add to Cart</button>
+        <button class="btn btn-danger" [disabled]="!ctrl.value || ctrl.value === 0" (click)="setProduct(item, ctrl.value)">Remove</button>
       </div>
     </div>
   </div>

@@ -63,12 +63,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of product; let i = index">
-          <td>{{item.productName}}</td>
-          <td><input type="number" size="4" [(ngModel)]="product[i]" value="1" #ctrl="ngModel"></td>
-          <td>{{item.productPrice * ctrl.value}}</td>
+        <tr *ngFor="let item of product">
+          <td>{{item.product.productName}}</td>
+          <td>{{item.quantity}}</td>
+          <td>{{item.product.productPrice * item.quantity}}</td>
         </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <td>Total:</td>
+          <td [innerText]="sumQuantity"></td>
+          <td [innerText]="sumPrice"></td>
+        </tr>
+      </tfoot>
     </table>
   </ng-template>
 </aside>
