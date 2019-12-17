@@ -9,14 +9,16 @@ import { RoomsService } from '@services/rooms.service';
 export class ProductListsComponent implements OnInit {
 
   productsList;
-  cartProd: {product: any, quantity: number}[];
-  @ViewChild('quantity', {static: true}) quantity;
+  cartProd: { product: any, quantity: number }[];
+  @ViewChild('quantity', { static: true }) quantity;
+  productSold: any;
 
   constructor(
     private products: CountryService,
     private productService: RoomsService
   ) {
     this.cartProd = [];
+    this.productSold = [];
   }
 
   ngOnInit() {
@@ -25,11 +27,19 @@ export class ProductListsComponent implements OnInit {
 
   setProduct(set, ctr) {
     const index = this.cartProd.findIndex(val => val.product._id === set._id);
+    const ind = this.productSold.findIndex(val => val.productDetail === set._id);
+
+    if (ind >= 0) {
+      this.productSold[ind].productQuantity = ctr;
+    } else {
+      this.productSold.push({productDetail: set._id, productQuantity: ctr})
+    }
     if (index >= 0) {
       this.cartProd[index].quantity = ctr;
     } else {
-      this.cartProd.push({product: set, quantity: ctr});
+      this.cartProd.push({ product: set, quantity: ctr });
     }
+    this.productService.setTotalPrice(this.productSold);
     this.productService.setProduct(this.cartProd);
   }
 

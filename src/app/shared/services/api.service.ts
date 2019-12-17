@@ -37,6 +37,12 @@ export class ApiService {
       }), catchError(this.handleError));
   }
 
+  makePurchase(data) {
+    return this.http
+    .post(`${this.api}/sales`, data)
+    .pipe(map((data: any) => data.data), catchError(this.handleError));
+  }
+
   createStaff(userReg: User): Observable<UserData> {
     return this.http
       .post<UserData>(`${this.api}/create/user`, userReg)

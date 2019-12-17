@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewChecked, Input } from '@angular/core';
 import { RoomsService } from '@services/rooms.service';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { ApiService } from '@services/api.service';
 
 @Component({
   selector: 'app-side-user',
@@ -17,12 +18,25 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
   product: any = [];
   sumPrice: number;
   sumQuantity: number;
+  productSold: any[] = [];
 
   constructor(
-    private roomService: RoomsService
+    private roomService: RoomsService,
+    private api: ApiService
   ) { }
 
   ngOnInit() {
+  }
+
+  makePurchase() {
+    const purchase = {
+      sellerId: localStorage.getItem('currentUser'),
+      productSold: this.roomService.getTotalPrice(),
+      amountPaid: this.sumPrice,
+      paymentMethod: ''
+    };
+
+    this.api.makePurchase(purchase).subscribe(e => console.log(e))
   }
 
   ngAfterViewChecked() {
@@ -50,8 +64,9 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
       if (da) {
         this.product = da;
         this.sumQuantity = da.reduce((a, b) => a + b.quantity, 0);
+        this.sumPrice = da.reduce((a,b) => a +(b.product.productPrice * b.quantity), 0);
       }
-    })
+    });
   }
 
 }

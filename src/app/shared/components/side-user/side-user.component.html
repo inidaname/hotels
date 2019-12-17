@@ -63,7 +63,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of product">
+        <tr *ngFor="let item of product; let i = index;">
           <td>{{item.product.productName}}</td>
           <td>{{item.quantity}}</td>
           <td>{{item.product.productPrice * item.quantity}}</td>
@@ -77,5 +77,6 @@
         </tr>
       </tfoot>
     </table>
+    <button class="btn btn-success" (click)="makePurchase()">Sale</button>
   </ng-template>
 </aside>
