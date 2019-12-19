@@ -19,6 +19,7 @@ import { SideUserComponent } from './components/side-user/side-user.component';
 import { StaffListComponent } from './components/staff-list/staff-list.component';
 import { MealListComponent } from './components/meal-list/meal-list.component';
 import { SalesLogComponent } from './components/sales-log/sales-log.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { SalesLogComponent } from './components/sales-log/sales-log.component';
     SideUserComponent,
     StaffListComponent,
     MealListComponent,
-    SalesLogComponent
+    SalesLogComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -62,7 +64,8 @@ import { SalesLogComponent } from './components/sales-log/sales-log.component';
     SideUserComponent,
     StaffListComponent,
     MealListComponent,
-    SalesLogComponent
+    SalesLogComponent,
+    FooterComponent
   ],
   providers: [DecimalPipe],
   entryComponents: [
