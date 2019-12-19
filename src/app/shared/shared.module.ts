@@ -18,6 +18,7 @@ import { RoomsTableComponent } from './components/rooms-table/rooms-table.compon
 import { SideUserComponent } from './components/side-user/side-user.component';
 import { StaffListComponent } from './components/staff-list/staff-list.component';
 import { MealListComponent } from './components/meal-list/meal-list.component';
+import { SalesLogComponent } from './components/sales-log/sales-log.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { MealListComponent } from './components/meal-list/meal-list.component';
     RoomsTableComponent,
     SideUserComponent,
     StaffListComponent,
-    MealListComponent
+    MealListComponent,
+    SalesLogComponent
   ],
   imports: [
     CommonModule,
@@ -59,7 +61,8 @@ import { MealListComponent } from './components/meal-list/meal-list.component';
     RoomsTableComponent,
     SideUserComponent,
     StaffListComponent,
-    MealListComponent
+    MealListComponent,
+    SalesLogComponent
   ],
   providers: [DecimalPipe],
   entryComponents: [

@@ -1,1 +1,14 @@
-<p>account works!</p>
+<article class="shadow rounded-lg p-3 mt-2 mx-5 d-flex flex-column justify-content-start align-items-center">
+  <section class="shadow-sm w-100 p-5">
+    <h2>Sales Log</h2>
+    <app-sales-log [purpose]="'sales'"></app-sales-log>
+  </section>
+  <section class="shadow-sm w-100 p-5">
+    <h2>Restaurant Log</h2>
+    <app-sales-log [purpose]="'restaurant'"></app-sales-log>
+  </section>
+  <section class="shadow-sm w-100 p-5">
+    <h2>Restaurant Log</h2>
+    <app-sales-log [purpose]="'rooms'"></app-sales-log>
+  </section>
+</article>

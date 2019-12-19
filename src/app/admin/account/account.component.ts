@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminApiService } from '@services/admin-api.service';
 
 @Component({
   templateUrl: './account.component.html',
@@ -6,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private api: AdminApiService
+  ) { }
 
   ngOnInit() {
+    this.api.getAccounts().subscribe(er => console.log(er));
+    this.api.getRestaurant().subscribe(er => console.log(er));
   }
 
 }
