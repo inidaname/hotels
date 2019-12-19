@@ -18,6 +18,8 @@ export class SalesLogComponent implements OnInit {
 
   @Input() purpose: string;
   soldProduct: any[];
+  restaurant: Observable<any[]>;
+  rooms: Observable<any[]>;
 
   constructor(
     public service: AdminSalesService,
@@ -25,21 +27,18 @@ export class SalesLogComponent implements OnInit {
   ) {
     this.total$ = service.total$;
     this.soldProduct = [];
-    this.sales = this.service.roomsGet$;
 
-    if (this.purpose === 'sales') {
-      this.sales = this.service.salesGet$;
-     } else if (this.purpose === 'restaurant') {
-      this.sales = this.service.mealsGet$;
-     } else {
-       this.sales = this.service.roomsGet$;
-     }
+    // this.sales = null;
+
+    this.sales = this.service.salesGet$;
+    this.rooms = this.service.roomsGet$;
+    this.restaurant = this.service.mealsGet$;
 
   }
 
   ngOnInit() {
+    this.rooms.subscribe(re => console.log(re))
     this.sales.subscribe((er: any[]) => {
-      console.log(er, this.purpose)
       if (er.length > 0) {
         for (let i = 0; i < er.length; i++) {
           const element = er[i];

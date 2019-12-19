@@ -13,10 +13,6 @@ export class HomeComponent implements OnInit {
 
   navList: NavList[] = [
     {
-      name: 'Dashboard',
-      link: './dashboard'
-    },
-    {
       name: 'Stocks',
       link: 'stock'
     },

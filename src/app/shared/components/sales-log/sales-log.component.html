@@ -1,37 +1,112 @@
 <div class="row my-3">
   <div class="col-sm-12 card">
-    <form class="p-3">
-      <div class="form-group form-inline">
-        Full text search: <input class="form-control ml-2" type="text" name="searchTerm"
-          [(ngModel)]="service.searchTerm" />
-        <span class="ml-3" *ngIf="service.loading$ | async">Loading List of Products...</span>
-      </div>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Number of Items</th>
-            <th scope="col" sortable="sellerId.fullName" (sort)="onSort($event)">Sold By</th>
-            <th scope="col" sortable="soldProduct" (sort)="onSort($event)">Total Quantity</th>
-            <th scope="col" sortable="amountPaid" (sort)="onSort($event)">Amount Paid</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let sale of sales | async; let i = index;">
-            <th scope="row">{{i.valueOf() + 1}}</th>
-            <td class="text-center"><ngb-highlight [result]="sale.productSold.length" [term]="service.searchTerm"></ngb-highlight></td>
-            <td><ngb-highlight [result]="sale.sellerId.fullName" [term]="service.searchTerm"></ngb-highlight></td>
-            <td class="text-center"><ngb-highlight [result]="soldProduct[i] | number" [term]="service.searchTerm"></ngb-highlight></td>
-            <td><ngb-highlight [result]="sale.amountPaid| currency: 'NGN' : 'symbol-narrow'" [term]="service.searchTerm"></ngb-highlight></td>
-            <td>
-              <button type="button" class="btn btn-sm btn-outline-primary mx-2">Supplies</button>
-              <button type="button" class="btn btn-sm btn-outline-success mx-2">Edit</button>
-            </td>
-          </tr>
-          </tbody>
+    <ng-container *ngIf="purpose === 'rooms'; else elseTemplate">
+      <form class="p-3">
+        <div class="form-group form-inline">
+          Full text search: <input class="form-control ml-2" type="text" name="searchTerm"
+            [(ngModel)]="service.searchTerm" />
+          <span class="ml-3" *ngIf="service.loading$ | async">Loading List of Products...</span>
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Number of Items</th>
+              <th scope="col" sortable="sellerId.fullName" (sort)="onSort($event)">Sold By</th>
+              <th scope="col" sortable="soldProduct" (sort)="onSort($event)">Total Quantity</th>
+              <th scope="col" sortable="amountPaid" (sort)="onSort($event)">Amount Paid</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sale of restaurant | async; let i = index;">
+              <th scope="row">{{i.valueOf() + 1}}</th>
+              <td class="text-center"><ngb-highlight [result]="sale.productSold.length" [term]="service.searchTerm"></ngb-highlight></td>
+              <td><ngb-highlight [result]="sale.sellerId.fullName" [term]="service.searchTerm"></ngb-highlight></td>
+              <td class="text-center"><ngb-highlight [result]="soldProduct[i] | number" [term]="service.searchTerm"></ngb-highlight></td>
+              <td><ngb-highlight [result]="sale.amountPaid| currency: 'NGN' : 'symbol-narrow'" [term]="service.searchTerm"></ngb-highlight></td>
+              <td>
+                <button type="button" class="btn btn-sm btn-outline-primary mx-2">Supplies</button>
+                <button type="button" class="btn btn-sm btn-outline-success mx-2">Edit</button>
+              </td>
+            </tr>
+            </tbody>
 
-      </table>
-    </form>
+        </table>
+      </form>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <ng-container *ngIf="purpose ==='restaurant' else thenTemplate;">
+        <form class="p-3">
+          <div class="form-group form-inline">
+            Full text search: <input class="form-control ml-2" type="text" name="searchTerm"
+              [(ngModel)]="service.searchTerm" />
+            <span class="ml-3" *ngIf="service.loading$ | async">Loading List of Products...</span>
+          </div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Total Rooms</th>
+                <th scope="col" sortable="sellerId.fullName" (sort)="onSort($event)">Booked By</th>
+                <th scope="col" sortable="soldProduct" (sort)="onSort($event)">Method of Payment</th>
+                <th scope="col" sortable="amountPaid" (sort)="onSort($event)">Amount Paid</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sale of rooms | async; let i = index;">
+                <th scope="row">{{i.valueOf() + 1}}</th>
+                <td class="text-center"><ngb-highlight [result]="sale.room.length" [term]="service.searchTerm"></ngb-highlight></td>
+                <td><ngb-highlight [result]="sale.checkedInBy.fullName" [term]="service.searchTerm"></ngb-highlight></td>
+                <td class="text-center"><ngb-highlight [result]="sale.paymentMethod" [term]="service.searchTerm"></ngb-highlight></td>
+                <td><ngb-highlight [result]="sale.amountPaid | currency: 'NGN' : 'symbol-narrow'" [term]="service.searchTerm"></ngb-highlight></td>
+                <td>
+                  <button type="button" class="btn btn-sm btn-outline-primary mx-2">Supplies</button>
+                  <button type="button" class="btn btn-sm btn-outline-success mx-2">Edit</button>
+                </td>
+              </tr>
+              </tbody>
+
+          </table>
+        </form>
+
+      </ng-container>
+      <ng-template #thenTemplate>
+        <form class="p-3">
+          <div class="form-group form-inline">
+            Full text search: <input class="form-control ml-2" type="text" name="searchTerm"
+              [(ngModel)]="service.searchTerm" />
+            <span class="ml-3" *ngIf="service.loading$ | async">Loading List of Products...</span>
+          </div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Number of Items</th>
+                <th scope="col" sortable="sellerId.fullName" (sort)="onSort($event)">Sold By</th>
+                <th scope="col" sortable="soldProduct" (sort)="onSort($event)">Total Quantity</th>
+                <th scope="col" sortable="amountPaid" (sort)="onSort($event)">Amount Paid</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sale of sales | async; let i = index;">
+                <th scope="row">{{i.valueOf() + 1}}</th>
+                <td class="text-center"><ngb-highlight [result]="sale.productSold.length" [term]="service.searchTerm"></ngb-highlight></td>
+                <td><ngb-highlight [result]="sale.sellerId.fullName" [term]="service.searchTerm"></ngb-highlight></td>
+                <td class="text-center"><ngb-highlight [result]="soldProduct[i] | number" [term]="service.searchTerm"></ngb-highlight></td>
+                <td><ngb-highlight [result]="sale.amountPaid| currency: 'NGN' : 'symbol-narrow'" [term]="service.searchTerm"></ngb-highlight></td>
+                <td>
+                  <button type="button" class="btn btn-sm btn-outline-primary mx-2">Supplies</button>
+                  <button type="button" class="btn btn-sm btn-outline-success mx-2">Edit</button>
+                </td>
+              </tr>
+              </tbody>
+
+          </table>
+        </form>
+      </ng-template>
+    </ng-template>
   </div>
 </div>

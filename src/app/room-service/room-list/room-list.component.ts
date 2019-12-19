@@ -50,7 +50,7 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
       arrivalDate: ['', Validators.required],
       departureDate: ['', Validators.required],
       room: [''],
-      checkedInBy: [localStorage.getItem('currentUser')],
+      checkedInBy: [''],
       numberOfPersons: [''],
       checkedInStatus: ['', Validators.required],
       amountPaid: ['']
@@ -99,7 +99,7 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
   bookARoom() {
     console.log(this.customerForm.value);
     // if (this.customerForm.valid) {
-    console.log('valid')
+    this.customerForm.controls.checkedInBy.setValue(localStorage.getItem('currentUser'));
     this.api.createRoomLodge(this.customerForm.value).subscribe(e => console.log(e), er => console.log(er));
     // }
   }
