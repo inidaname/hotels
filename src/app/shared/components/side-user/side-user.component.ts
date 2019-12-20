@@ -26,6 +26,8 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
   paymentMethod: NgModel;
   roomNumber: string;
   guestName: any;
+  userAdmin: any[];
+  compli: NgModel;
 
   constructor(
     private roomService: RoomsService,
@@ -34,6 +36,9 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
   ) {
     this.message = null;
     this.guestName = null;
+    this.userAdmin = [];
+    this.paymentMethod = null;
+    this.compli = null;
   }
 
   ngOnInit() {
@@ -41,20 +46,19 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
 
   checkRoom(value) {
     this.spinner.show('check',
-    {
-      type: 'ball-scale-pulse',
-      size: 'large',
-      bdColor: 'rgba(105,105,105, .3)',
-      color: 'grey',
-      fullScreen: true
-    }
-  );
+      {
+        type: 'ball-scale-pulse',
+        size: 'large',
+        bdColor: 'rgba(105,105,105, .3)',
+        color: 'grey',
+        fullScreen: true
+      }
+    );
     if (value && value.length >= 3) {
       this.api.searchGuest(value).subscribe((guest: any) => {
-        console.log(guest)
         this.guestName = guest.data.customerName;
-        this.spinner.hide('check')
-      }, (err)=> this.guestName = `Error:${err.message}`);
+        this.spinner.hide('check');
+      }, (err) => this.guestName = `Error:${err.message}`);
     }
   }
 
@@ -62,39 +66,50 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
     this.message = null;
   }
 
+  checkUser() {
+    this.api.getAllStaff().subscribe((st: any) => {
+      if (st !== null) {
+        this.userAdmin = st.filter(val => {
+          if (val.userType === 'admin' || val.userType === 'superadmin') {
+            return val;
+          }
+        });
+      }
+    });
+  }
+
   makePurchase() {
     const purchase = {
       sellerId: localStorage.getItem('currentUser'),
       productSold: this.roomService.getTotalPrice(),
       amountPaid: this.sumPrice,
-      paymentMethod: ''
+      paymentMethod: this.paymentMethod,
+      complimentVal: this.compli
     };
 
     this.spinner.show('sales',
-    {
-      type: 'ball-scale-pulse',
-      size: 'large',
-      bdColor: 'rgba(105,105,105, .3)',
-      color: 'grey',
-      fullScreen: true
-    }
-  );
+      {
+        type: 'ball-scale-pulse',
+        size: 'large',
+        bdColor: 'rgba(105,105,105, .3)',
+        color: 'grey',
+        fullScreen: true
+      }
+    );
     this.api.makePurchase(purchase).subscribe((sale: any) => {
-
       if (sale) {
         this.message = 'Success';
         this.alertType = 'success';
         this.spinner.hide('sales');
       }
     },
-    (er: any) => {
-      if (er) {
-        this.spinner.hide('sales');
-        this.message = 'Error: Something went wrong please try again';
-        this.alertType = 'danger';
-      }
-
-    });
+      (er: any) => {
+        if (er) {
+          this.spinner.hide('sales');
+          this.message = 'Error: Something went wrong please try again';
+          this.alertType = 'danger';
+        }
+      });
   }
 
   ngAfterViewChecked() {
@@ -122,7 +137,7 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
       if (da) {
         this.product = da;
         this.sumQuantity = da.reduce((a, b) => a + b.quantity, 0);
-        this.sumPrice = da.reduce((a,b) => a +(b.product.productPrice * b.quantity), 0);
+        this.sumPrice = da.reduce((a, b) => a + (b.product.productPrice * b.quantity), 0);
       }
     });
   }

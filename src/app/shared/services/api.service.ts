@@ -88,7 +88,6 @@ export class ApiService {
     return this.http
       .get<UserData>(`${this.api}/users`, this.headersOpt)
       .pipe(map(user => {
-        console.log(user)
         return user.data;
       }), catchError(this.handleError));
   }

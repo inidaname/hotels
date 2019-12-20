@@ -83,7 +83,7 @@
     <div class="container w-100">
       <div class="form-group">
         <label for="paymentMethod">Method of Payment</label>
-        <select class="form-control" [(ngModel)]="paymentMethod" #payMent="ngModel" id="paymentMethod">
+        <select class="form-control" [(ngModel)]="paymentMethod" #payMent="ngModel" id="paymentMethod" (ngModelChange)="checkUser()">
           <option>Cash</option>
           <option>Card</option>
           <option>Bill</option>
@@ -91,7 +91,8 @@
         </select>
       </div>
     </div>
-    <ng-container *ngIf="payMent.value === 'Bill'">
+    <span [ngSwitch]="payMent.value">
+    <ng-container *ngSwitchCase="'Bill'">
       {{'Guest Name: ' + '' || guestName }}
         <div class="form-inline form-group">
           <input type="text"
@@ -99,6 +100,19 @@
             <button class="btn btn-outline-primary btn-sm" (click)="checkRoom(roomNum.value)" [innerText]="">Search</button>
         </div>
     </ng-container>
+    <ng-container *ngSwitchCase="'Complimentry'">
+      <div class="form-group">
+        <label for="compli">Compli</label>
+        <select class="form-control" [(ngModel)]="compli" id="compli">
+          <option>Room Service</option>
+          <option *ngFor="let item of userAdmin" [value]="item._id">{{item.fullName}}</option>
+        </select>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+
+    </ng-container>
+    </span>
     <button class="btn btn-success" (click)="makePurchase()">Sale</button>
 
   </ng-template>
