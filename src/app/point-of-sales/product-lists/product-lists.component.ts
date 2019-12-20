@@ -43,4 +43,11 @@ export class ProductListsComponent implements OnInit {
     this.productService.setProduct(this.cartProd);
   }
 
+  removeProduct(item, val) {
+    const index = this.cartProd.findIndex(val => val.product._id === item._id);
+
+    this.cartProd.splice(index, 1);
+    this.productService.setProduct(this.cartProd);
+  }
+
 }

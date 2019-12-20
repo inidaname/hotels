@@ -37,6 +37,12 @@ export class ApiService {
       }), catchError(this.handleError));
   }
 
+  searchGuest(roomNumber: number) {
+    return this.http
+      .get(`${this.api}/roomlodge/room/${roomNumber}`)
+      .pipe(map((ret) => ret), catchError(this.handleError));
+  }
+
   makePurchase(data) {
     return this.http
     .post(`${this.api}/sales`, data)

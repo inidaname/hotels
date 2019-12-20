@@ -8,14 +8,14 @@
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item bg-light">Quantity: <input type="number" [(ngModel)]="productsList[i]" #ctrl="ngModel"
-            class="form-control"></li>
+            class=""></li>
         <li class="list-group-item bg-light">Price: {{item.productPrice | currency: 'NGN' : 'symbol-narrow'}}</li>
         <li class="list-group-item bg-light">Total Price:
-          {{ ctrl.value * item.productPrice | currency: 'NGN' : 'symbol-narrow' }} </li>
+         <span *ngIf="ctrl.value > 0">  {{ ctrl.value * item.productPrice | currency: 'NGN' : 'symbol-narrow' }}  </span></li>
       </ul>
-      <div class="card-body">
-        <button class="btn btn-primary" [disabled]="!ctrl.value || ctrl.value === 0" (click)="setProduct(item, ctrl.value)">Add to Cart</button>
-        <button class="btn btn-danger" [disabled]="!ctrl.value || ctrl.value === 0" (click)="setProduct(item, ctrl.value)">Remove</button>
+      <div class="card-body text-center">
+        <button class="btn btn-primary mx-2" [disabled]="!ctrl.value || ctrl.value < 1" (click)="setProduct(item, ctrl.value)" [innerText]="">Add to Cart</button>
+        <button class="btn btn-danger mx-2" [disabled]="!ctrl.value || ctrl.value < 1" (click)="removeProduct(item, ctrl.value)">Remove</button>
       </div>
     </div>
   </div>

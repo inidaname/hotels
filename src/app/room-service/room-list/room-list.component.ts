@@ -53,7 +53,8 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
       checkedInBy: [''],
       numberOfPersons: [''],
       checkedInStatus: ['', Validators.required],
-      amountPaid: ['']
+      amountPaid: [''],
+      roomNumber: ['']
     });
     this.customerForm.controls.nationality.setValue(this.default, { onlySelf: true });
   }
@@ -97,7 +98,6 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
   get f() { return this.customerForm.controls; }
 
   bookARoom() {
-    console.log(this.customerForm.value);
     // if (this.customerForm.valid) {
     this.customerForm.controls.checkedInBy.setValue(localStorage.getItem('currentUser'));
     this.api.createRoomLodge(this.customerForm.value).subscribe(e => console.log(e), er => console.log(er));
@@ -105,6 +105,7 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
   }
 
   selectRoom(st: RoomInfo) {
+    this.customerForm.controls.roomNumber.setValue(st.roomNumber);
     this.customerForm.controls.room.setValue(st._id);
     this.customerForm.controls.amountPaid.setValue(st.roomTypeId.roomPrice);
     this.roomService.setRoom({

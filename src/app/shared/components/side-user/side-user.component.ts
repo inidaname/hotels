@@ -2,6 +2,8 @@ import { Component, OnInit, AfterViewChecked, Input } from '@angular/core';
 import { RoomsService } from '@services/rooms.service';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '@services/api.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-side-user',
@@ -19,13 +21,45 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
   sumPrice: number;
   sumQuantity: number;
   productSold: any[] = [];
+  message: string;
+  alertType: string;
+  paymentMethod: NgModel;
+  roomNumber: string;
+  guestName: any;
 
   constructor(
     private roomService: RoomsService,
-    private api: ApiService
-  ) { }
+    private api: ApiService,
+    private spinner: NgxSpinnerService
+  ) {
+    this.message = null;
+    this.guestName = null;
+  }
 
   ngOnInit() {
+  }
+
+  checkRoom(value) {
+    this.spinner.show('check',
+    {
+      type: 'ball-scale-pulse',
+      size: 'large',
+      bdColor: 'rgba(105,105,105, .3)',
+      color: 'grey',
+      fullScreen: true
+    }
+  );
+    if (value && value.length >= 3) {
+      this.api.searchGuest(value).subscribe((guest: any) => {
+        console.log(guest)
+        this.guestName = guest.data.customerName;
+        this.spinner.hide('check')
+      }, (err)=> this.guestName = `Error:${err.message}`);
+    }
+  }
+
+  close() {
+    this.message = null;
   }
 
   makePurchase() {
@@ -36,7 +70,31 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
       paymentMethod: ''
     };
 
-    this.api.makePurchase(purchase).subscribe(e => console.log(e))
+    this.spinner.show('sales',
+    {
+      type: 'ball-scale-pulse',
+      size: 'large',
+      bdColor: 'rgba(105,105,105, .3)',
+      color: 'grey',
+      fullScreen: true
+    }
+  );
+    this.api.makePurchase(purchase).subscribe((sale: any) => {
+
+      if (sale) {
+        this.message = 'Success';
+        this.alertType = 'success';
+        this.spinner.hide('sales');
+      }
+    },
+    (er: any) => {
+      if (er) {
+        this.spinner.hide('sales');
+        this.message = 'Error: Something went wrong please try again';
+        this.alertType = 'danger';
+      }
+
+    });
   }
 
   ngAfterViewChecked() {

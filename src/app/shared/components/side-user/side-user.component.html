@@ -54,6 +54,9 @@
     </div>
   </ng-container>
   <ng-template #pointofsale>
+    <ngb-alert *ngIf="message" [dismissible]="true" (close)="close()" [type]="alertType">
+      {{message}}
+    </ngb-alert>
     <table class="table">
       <thead>
         <tr>
@@ -72,11 +75,33 @@
       <tfoot>
         <tr>
           <td>Total:</td>
-          <td [innerText]="sumQuantity"></td>
-          <td [innerText]="sumPrice"></td>
+          <td [innerText]="sumQuantity || ''"></td>
+          <td [innerText]="sumPrice || ''"></td>
         </tr>
       </tfoot>
     </table>
+    <div class="container w-100">
+      <div class="form-group">
+        <label for="paymentMethod">Method of Payment</label>
+        <select class="form-control" [(ngModel)]="paymentMethod" #payMent="ngModel" id="paymentMethod">
+          <option>Cash</option>
+          <option>Card</option>
+          <option>Bill</option>
+          <option>Complimentry</option>
+        </select>
+      </div>
+    </div>
+    <ng-container *ngIf="payMent.value === 'Bill'">
+      {{'Guest Name: ' + '' || guestName }}
+        <div class="form-inline form-group">
+          <input type="text"
+            class="form-control form-control-sm" [(ngModel)]="roomNumber" #roomNum="ngModel" aria-describedby="helpId" placeholder="Room Number">
+            <button class="btn btn-outline-primary btn-sm" (click)="checkRoom(roomNum.value)" [innerText]="">Search</button>
+        </div>
+    </ng-container>
     <button class="btn btn-success" (click)="makePurchase()">Sale</button>
+
   </ng-template>
+  <ngx-spinner name="sales"></ngx-spinner>
+
 </aside>
