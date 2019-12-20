@@ -1,9 +1,12 @@
 <header class="position-fixed d-flex flex-row border-bottom border-warning justify-content-between align-items-center row col-12 m-0 p-0 bg-white">
   <div class="logo d-flex flex-row justify-content-between align-items-center m-0 col-4">
-    <img src="/assets/logo-sm.png" width="100" alt=""> <h1 class="text-warning">Golden Sand Hotels and Suites</h1>
+   <a [routerLink]="['/']" class="text-decoration-none"> <img src="/assets/logo-sm.png" width="100" alt=""></a> <a [routerLink]="['/']" class="text-decoration-none"> <h1 class="text-warning">Golden Sand Hotels and Suites</h1></a>
   </div>
     <nav class="col-7" *ngIf="status === true">
       <ul class="nav justify-content-end text-dark">
+        <li *ngIf="userPlace === 'admin' || userPlace === 'superadmin'" class="nav-item mx-3 shadow-sm">
+          <a class="nav-link text-dark btn btn-link btn-outline-warning" [routerLink]="[ '/admin' ]" routerLinkActive="active" [innerText]="'Admin Section'"></a>
+        </li>
         <li class="nav-item mx-3 shadow-sm">
           <a class="nav-link text-dark btn btn-link btn-outline-warning" [routerLink]="[ '/pointofsales/products' ]" routerLinkActive="active" [innerText]="'Point of Sales'"></a>
         </li>

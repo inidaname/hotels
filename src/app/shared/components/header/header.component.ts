@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { UserDataService } from '@services/user-data.service';
 import { AuthService } from '@services/auth.service';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-header',
@@ -18,10 +19,12 @@ export class HeaderComponent implements OnInit {
   constructor(
     private data: UserDataService,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private jwt: JwtHelperService
   ) { }
 
   ngOnInit() {
+    this.userPlace = this.jwt.decodeToken().userType;
     this.data.currentUser.subscribe(er => {
       if (er !== null) {
         this.status = true;

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '@services/api.service';
-import { UserDataService } from '@services/user-data.service';
-import { Router } from '@angular/router';
 import { NavList } from '@shared/interface';
 
 @Component({

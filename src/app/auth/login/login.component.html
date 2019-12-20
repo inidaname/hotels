@@ -4,12 +4,12 @@
   </ngb-alert>
   <form class="w-100 mx-auto" [formGroup]="login">
     <div class="form-group">
-      <label for="username">Username</label>
+      <label for="username">Email or Phone Number</label>
       <input
       type="text"
       formControlName="username"
       [ngClass]="{'is-invalid': f.username.touched && f.username.invalid}"
-      id="username" class="form-control" placeholder="Username" aria-describedby="user">
+      id="username" class="form-control" placeholder="Email or Phone Number" aria-describedby="user">
       <small id="user" class="text-muted d-none text-danger" [ngClass]="{'d-block': f.username.touched && f.username.invalid}">Login with your username or email</small>
     </div>
     <div class="form-group">
