@@ -14,7 +14,7 @@ export class ProductListsComponent implements OnInit {
   productSold: any;
 
   constructor(
-    private products: CountryService,
+    public products: CountryService,
     private productService: RoomsService
   ) {
     this.cartProd = [];

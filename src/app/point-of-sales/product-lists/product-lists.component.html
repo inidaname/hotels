@@ -1,21 +1,29 @@
 <article class="container shadow p-3 rounded-lg m-2 bg-white border border-warning">
   <div class="row">
-    <div *ngFor="let item of productsList | async; let i = index;" class="card col-4 mx-auto bg-light border border-warning" style="width: 18rem;">
+    <div class="form-group form-inline col-12 m-5">
+      Search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="products.searchTerm" />
+      <span class="ml-3" *ngIf="products.loading$ | async">Loading List of Product...</span>
+    </div>
+    <div *ngFor="let item of productsList | async; let i = index;"
+      class="card col-4 mx-auto bg-light border border-warning" style="width: 18rem;">
       <img src="..." class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title">{{item.productName}} title</h5>
         <p class="card-text">Some text</p>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item bg-light">Quantity: <input type="number" [(ngModel)]="productsList[i]" #ctrl="ngModel"
-            class=""></li>
+        <li class="list-group-item bg-light">Quantity: <input type="number" [(ngModel)]="productsList[i]"
+            #ctrl="ngModel" class=""></li>
         <li class="list-group-item bg-light">Price: {{item.productPrice | currency: 'NGN' : 'symbol-narrow'}}</li>
         <li class="list-group-item bg-light">Total Price:
-         <span *ngIf="ctrl.value > 0">  {{ ctrl.value * item.productPrice | currency: 'NGN' : 'symbol-narrow' }}  </span></li>
+          <span *ngIf="ctrl.value > 0"> {{ ctrl.value * item.productPrice | currency: 'NGN' : 'symbol-narrow' }} </span>
+        </li>
       </ul>
       <div class="card-body text-center">
-        <button class="btn btn-primary mx-2" [disabled]="!ctrl.value || ctrl.value < 1" (click)="setProduct(item, ctrl.value)" [innerText]="">Add to Cart</button>
-        <button class="btn btn-danger mx-2" [disabled]="!ctrl.value || ctrl.value < 1" (click)="removeProduct(item, ctrl.value)">Remove</button>
+        <button class="btn btn-primary mx-2" [disabled]="!ctrl.value || ctrl.value < 1"
+          (click)="setProduct(item, ctrl.value)" [innerText]="">Add to Cart</button>
+        <button class="btn btn-danger mx-2" [disabled]="!ctrl.value || ctrl.value < 1"
+          (click)="removeProduct(item, ctrl.value)">Remove</button>
       </div>
     </div>
   </div>
