@@ -4,7 +4,7 @@ import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '@services/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgModel } from '@angular/forms';
-import { Router } from '@angular/router';
+import { PrinterService } from '@services/printer.service';
 
 @Component({
   selector: 'app-side-user',
@@ -34,7 +34,7 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
     private roomService: RoomsService,
     private api: ApiService,
     private spinner: NgxSpinnerService,
-    private router: Router
+    private printer: PrinterService
   ) {
     this.message = null;
     this.guestName = null;
@@ -99,8 +99,10 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
       }
     );
     this.api.makePurchase(purchase).subscribe((sale: any) => {
-      window.open('/print', "_blank");
       if (sale) {
+        console.log(purchase)
+        this.printer.setData(purchase);
+        window.open('/print', "_blank");
         this.message = 'Success';
         this.alertType = 'success';
         this.spinner.hide('sales');

@@ -23,6 +23,8 @@ export class ProductListsComponent implements OnInit {
 
   ngOnInit() {
     this.productsList = this.products.product$;
+    this.productService.setTotalPrice(null);
+    this.productService.setProduct(null);
   }
 
   setProduct(set, ctr) {

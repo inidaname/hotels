@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { PrinterService } from '@services/printer.service';
+import { Observable } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   templateUrl: './printer.component.html',
@@ -6,10 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrinterComponent implements OnInit {
 
-  constructor() { }
+  printData: Observable<any>;
+  currentUser: any;
+
+  constructor(
+    private printer: PrinterService,
+    private jwt: JwtHelperService
+  ) {
+    this.printData = this.printer.getData;
+    this.currentUser = this.jwt.decodeToken().fullName;
+  }
 
   ngOnInit() {
-    window.print();
+    if (this.printData !== null) {
+      window.print();
+    }
   }
 
 }
