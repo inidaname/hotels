@@ -12,6 +12,7 @@ import { RoomServiceComponent } from './room-service/room-service.component';
 import { AdminGuard } from '@shared/guards/admin.guard';
 import { AuthorizationGuard } from '@shared/guards/authorization.guard';
 import { SuperAdminGuard } from '@shared/guards/super-admin.guard';
+import { PrinterComponent } from '@components/printer/printer.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,7 @@ const routes: Routes = [
     loadChildren: () => import('./room-service/room-service.module').then(m => m.RoomServiceModule),
     canLoad: [AuthenticateGuard, AuthorizationGuard]
   },
+  { path: 'print', component: PrinterComponent },
   {
     path: '**',
     component: PathNotFoundComponent
