@@ -15,6 +15,7 @@ import { PointOfSalesComponent } from './point-of-sales/point-of-sales.component
 import { AdminComponent } from './admin/admin.component';
 import { RoomServiceComponent } from './room-service/room-service.component';
 import { environment } from '@environments/environment';
+import { ProfileComponent } from './profile/profile.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -26,7 +27,8 @@ export function tokenGetter() {
     AuthComponent,
     HomeComponent,
     PointOfSalesComponent,
-    RoomServiceComponent
+    RoomServiceComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
