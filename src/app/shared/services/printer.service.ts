@@ -6,15 +6,22 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class PrinterService {
 
-  private currentDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  public currentData: Observable<any> = this.currentDataSubject.asObservable();
+  private currentDataSubject: BehaviorSubject<any>;
+  public currentData: Observable<any>;
 
   constructor() {
+    this.currentDataSubject = new BehaviorSubject<any>(null);
+    this.currentData = this.currentDataSubject.asObservable();
+
   }
-  get getData() {return this.currentDataSubject.asObservable(); }
+  // get getData() {return this.currentDataSubject.asObservable(); }
 
   setData(data: any): void {
     return this.currentDataSubject.next(data);
+  }
+
+  getData(): void {
+    return this.currentDataSubject.value;
   }
 
 }

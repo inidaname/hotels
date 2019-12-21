@@ -29,6 +29,7 @@
     "ng-bootstrap": "^1.6.3",
     "ngx-socket-io": "^3.0.1",
     "ngx-spinner": "^8.0.3",
+    "print-js": "^1.0.63",
     "rxjs": "~6.5.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

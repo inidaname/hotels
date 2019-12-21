@@ -5,6 +5,8 @@ import { ApiService } from '@services/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgModel } from '@angular/forms';
 import { PrinterService } from '@services/printer.service';
+import * as print from 'print-js';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-side-user',
@@ -34,7 +36,8 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
     private roomService: RoomsService,
     private api: ApiService,
     private spinner: NgxSpinnerService,
-    private printer: PrinterService
+    private printer: PrinterService,
+    private route: Router
   ) {
     this.message = null;
     this.guestName = null;
@@ -44,6 +47,17 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit() {
+    this.data = null;
+    this.route.events.subscribe(n => {
+      if (n instanceof NavigationEnd) {
+        this.product = null;
+        this.productSold = null;
+        this.sumQuantity = null;
+        this.sumPrice = null;
+        this.roomService.setProduct(null);
+        this.roomService.setTotalPrice(null);
+      }
+    });
   }
 
   checkRoom(value) {
@@ -80,13 +94,23 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
     });
   }
 
+  clear() {
+    this.product = null;
+    this.productSold = null;
+    this.sumQuantity = null;
+    this.sumPrice = null;
+    this.roomService.setProduct(null);
+    this.roomService.setTotalPrice(null);
+  }
+
   makePurchase() {
     const purchase = {
       sellerId: localStorage.getItem('currentUser'),
       productSold: this.roomService.getTotalPrice(),
       amountPaid: this.sumPrice,
       paymentMethod: this.paymentMethod,
-      complimentVal: this.compli
+      complimentVal: this.compli,
+      roomNumber: this
     };
 
     this.spinner.show('sales',
@@ -99,13 +123,20 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
       }
     );
     this.api.makePurchase(purchase).subscribe((sale: any) => {
+      localStorage.setItem('print', JSON.stringify(sale));
+      this.printer.setData(purchase)
       if (sale) {
-        console.log(purchase)
-        this.printer.setData(purchase);
-        window.open('/print', "_blank");
+        window.open('/print', '_blank');
         this.message = 'Success';
         this.alertType = 'success';
         this.spinner.hide('sales');
+        this.product = null;
+        this.productSold = null;
+        this.sumQuantity = null;
+        this.sumPrice = null;
+        this.roomService.setProduct(null);
+        this.roomService.setTotalPrice(null);
+        // work.unsubscribe();
       }
     },
       (er: any) => {
@@ -126,6 +157,9 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
           this.data.phone = data.phone;
           this.data.email = data.email;
           this.data.otherservice = data.otherservice;
+        } else {
+          this.productSold = null;
+          this.product = null;
         }
       });
 

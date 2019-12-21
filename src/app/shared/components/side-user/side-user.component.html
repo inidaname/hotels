@@ -91,7 +91,7 @@
         </select>
       </div>
     </div>
-    <span [ngSwitch]="payMent.value">
+    <div [ngSwitch]="payMent.value">
     <ng-container *ngSwitchCase="'Bill'">
       {{'Guest Name: ' + '' || guestName }}
         <div class="form-inline form-group">
@@ -112,8 +112,11 @@
     <ng-container *ngSwitchDefault>
 
     </ng-container>
-    </span>
-    <button class="btn btn-success" (click)="makePurchase()">Sale</button>
+    </div>
+    <div class="btn-group w-100 justify-content-around">
+      <button class="btn btn-success" (click)="makePurchase()">Sale</button>
+      <button class="btn btn-danger" (click)="clear()">Clear</button>
+    </div>
 
   </ng-template>
   <ngx-spinner name="sales"></ngx-spinner>

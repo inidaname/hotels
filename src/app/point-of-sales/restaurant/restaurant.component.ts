@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CountryService } from '@services/countries.service';
 import { RoomsService } from '@services/rooms.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   templateUrl: './restaurant.component.html',
@@ -15,7 +16,8 @@ export class RestaurantComponent implements OnInit {
 
   constructor(
     public products: CountryService,
-    private productService: RoomsService
+    private productService: RoomsService,
+    private route: Router
   ) {
     this.cartProd = [];
     this.productSold = [];
@@ -23,8 +25,12 @@ export class RestaurantComponent implements OnInit {
 
   ngOnInit() {
     this.productsList = this.products.product$;
-    this.productService.setTotalPrice(null);
-    this.productService.setProduct(null);
+    this.route.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.productService.setTotalPrice(null);
+        this.productService.setProduct(null);
+      }
+    });
   }
 
   setProduct(set, ctr) {
