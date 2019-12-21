@@ -1,4 +1,6 @@
-<aside class="shadow rounded p-3 d-flex flex-column justify-content-around align-items-center overflow-auto bg-white border border-warning">
+<aside
+  class="shadow rounded p-3 d-flex flex-column justify-content-around align-items-center overflow-auto bg-white border border-warning"
+  [ngClass]="{'position-fixed': purpose === 'roomservice'}">
   <h5 class="text-uppercase">Payment Details</h5>
   <ng-container *ngIf="purpose === 'roomservice'; else pointofsale">
     <div class="h-75 my-2 shadow-sm w-100 p-3 container">
@@ -34,23 +36,36 @@
           </div>
         </div>
         <div class="row mb-3">
+          <span class="col-sm-6 small border-right">Reservation</span>
+          <div class="col-sm-5">
+            <span
+              class="small font-weight-bold">{{(reserve && reserve.reservation === 'reserved')? 'Reservation' : 'Lodging'}}</span>
+          </div>
+        </div>
+        <div class="row mb-3">
           <span class="col-sm-6 small border-right">Other Services</span>
           <div class="col-sm-5">
             <span class="small font-weight-bold">{{data.otherservice}}</span>
           </div>
         </div>
         <div class="form-group row mt-5">
-          <div class="offset-sm-2 col-sm-10">
-            <button type="submit" class="btn btn-primary">Action</button>
+          <div class="offset-sm-2 col-sm-10" *ngIf="reserve !== null && reserve.reservation === 'reserved'">
+            <select [(ngModel)]="payfull" #pay="ngModel" [ngModelOptions]="{standalone: true}">
+              <option value="fullpayment">Full Payment</option>
+              <option value="reservation">Reservation Payment</option>
+            </select>
           </div>
         </div>
       </form>
     </div>
-    <div class="w-100 mx-2 shadow-sm">
+    <div class="w-100 mx-2 shadow-sm p-2">
+      {{(payfull) ? payfull : 'nothing'}}
       <p>Payable amount or deposit</p>
+      {{(reserve && reserve.reservation === 'reserved' && payfull && payfull === "reservation") ? (5000 | currency: 'NGN' : 'symbol-narrow') : room.price | currency: 'NGN' : 'symbol-narrow'}}
     </div>
-    <div class="w-100 mt-2 shadow-sm">
-      <p> Current Total: {{ room.price | currency: 'NGN' : 'symbol-narrow' }}</p>
+    <div class="w-100 mt-2 shadow-sm p-2">
+      <p> Current Total:</p>
+      {{ (reserve && reserve.reservation === 'reserved' && payfull && payfull === "reservation") ? (5000 | currency: 'NGN' : 'symbol-narrow') :  (room.price | currency: 'NGN' : 'symbol-narrow')}}
     </div>
   </ng-container>
   <ng-template #pointofsale>
@@ -83,7 +98,8 @@
     <div class="container w-100">
       <div class="form-group">
         <label for="paymentMethod">Method of Payment</label>
-        <select class="form-control" [(ngModel)]="paymentMethod" #payMent="ngModel" id="paymentMethod" (ngModelChange)="checkUser()">
+        <select class="form-control" [(ngModel)]="paymentMethod" #payMent="ngModel" id="paymentMethod"
+          (ngModelChange)="checkUser()">
           <option>Cash</option>
           <option>Card</option>
           <option>Bill</option>
@@ -92,26 +108,27 @@
       </div>
     </div>
     <div [ngSwitch]="payMent.value">
-    <ng-container *ngSwitchCase="'Bill'">
-      {{'Guest Name: ' + '' || guestName }}
+      <ng-container *ngSwitchCase="'Bill'">
+        {{'Guest Name: ' + '' || guestName }}
         <div class="form-inline form-group">
-          <input type="text"
-            class="form-control form-control-sm" [(ngModel)]="roomNumber" #roomNum="ngModel" aria-describedby="helpId" placeholder="Room Number">
-            <button class="btn btn-outline-primary btn-sm" (click)="checkRoom(roomNum.value)" [innerText]="">Search</button>
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="roomNumber" #roomNum="ngModel"
+            aria-describedby="helpId" placeholder="Room Number">
+          <button class="btn btn-outline-primary btn-sm" (click)="checkRoom(roomNum.value)"
+            [innerText]="">Search</button>
         </div>
-    </ng-container>
-    <ng-container *ngSwitchCase="'Complimentry'">
-      <div class="form-group">
-        <label for="compli">Compli</label>
-        <select class="form-control" [(ngModel)]="compli" id="compli">
-          <option>Room Service</option>
-          <option *ngFor="let item of userAdmin" [value]="item._id">{{item.fullName}}</option>
-        </select>
-      </div>
-    </ng-container>
-    <ng-container *ngSwitchDefault>
+      </ng-container>
+      <ng-container *ngSwitchCase="'Complimentry'">
+        <div class="form-group">
+          <label for="compli">Compli</label>
+          <select class="form-control" [(ngModel)]="compli" id="compli">
+            <option>Room Service</option>
+            <option *ngFor="let item of userAdmin" [value]="item._id">{{item.fullName}}</option>
+          </select>
+        </div>
+      </ng-container>
+      <ng-container *ngSwitchDefault>
 
-    </ng-container>
+      </ng-container>
     </div>
     <div class="btn-group w-100 justify-content-around">
       <button class="btn btn-success" (click)="makePurchase()">Sale</button>

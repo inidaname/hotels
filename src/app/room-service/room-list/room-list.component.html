@@ -197,12 +197,12 @@
         </div>
         <div class="form-check form-check-inline">
           <label class="form-check-label">
-            <input class="form-check-input" type="radio" formControlName="checkedInStatus" id="checkIn" value="reserved"> Reservation
+            <input class="form-check-input" (change)="sendType()" type="radio" formControlName="checkedInStatus" id="checkIn" value="reserved"> Reservation
           </label>
         </div>
         <div class="form-check form-check-inline">
           <label class="form-check-label">
-            <input class="form-check-input" type="radio" formControlName="checkedInStatus" id="checkIn" value="occupied"> Check In
+            <input class="form-check-input" (change)="sendType()" type="radio" formControlName="checkedInStatus" id="checkIn" value="occupied"> Check In
           </label>
         </div>
       </div>

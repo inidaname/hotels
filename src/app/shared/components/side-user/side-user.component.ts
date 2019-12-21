@@ -31,23 +31,26 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
   guestName: any;
   userAdmin: any[];
   compli: NgModel;
+  reserve: any;
+  payfull: any;
 
   constructor(
     private roomService: RoomsService,
     private api: ApiService,
     private spinner: NgxSpinnerService,
     private printer: PrinterService,
-    private route: Router
+    private route: Router,
   ) {
     this.message = null;
     this.guestName = null;
     this.userAdmin = [];
     this.paymentMethod = null;
     this.compli = null;
+    this.reserve = {reservation: ''};
+    this.payfull = null;
   }
 
   ngOnInit() {
-    this.data = null;
     this.route.events.subscribe(n => {
       if (n instanceof NavigationEnd) {
         this.product = null;
@@ -162,6 +165,11 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
           this.product = null;
         }
       });
+
+      this.roomService.currentReservation.subscribe((res) => {
+        this.reserve = res
+        console.log(this.reserve)
+      } );
 
       this.roomService.currentRoom.subscribe(data => {
         if (data) {

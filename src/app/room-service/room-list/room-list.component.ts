@@ -104,6 +104,12 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
     // }
   }
 
+  sendType() {
+    this.roomService.setReserve({
+      reservation: this.customerForm.controls.checkedInStatus.value
+    });
+  }
+
   selectRoom(st: RoomInfo) {
     this.customerForm.controls.roomNumber.setValue(st.roomNumber);
     this.customerForm.controls.room.setValue(st._id);
