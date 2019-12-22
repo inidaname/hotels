@@ -44,7 +44,6 @@ export class RoomsComponent implements OnInit {
   get g() { return this.roomTypeForm.controls; }
 
   createRoom() {
-    console.log(this.roomForm.value);
     if (this.roomForm.valid) {
       this.api.createRoom(this.roomForm.value).subscribe(er => console.log(er))
     }

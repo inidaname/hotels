@@ -35,6 +35,9 @@ export class OtherServiceComponent implements OnInit {
 
   upDate(doMe) {
     if (doMe === 'checkin') {
+    }
+
+    if (doMe === 'checkout') {
       this.router.navigateByUrl('checkout')
     }
   }

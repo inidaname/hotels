@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { SharedModule } from '@shared/shared.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { StockComponent } from './stock/stock.component';
+import { RoomsComponent } from './rooms/rooms.component';
+import { AccountsComponent } from './accounts/accounts.component';
 
 
 @NgModule({
-  declarations: [DashboardComponent, StockComponent],
+  declarations: [StockComponent, RoomsComponent, AccountsComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
