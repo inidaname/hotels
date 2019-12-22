@@ -57,6 +57,24 @@ export class ApiService {
       }), catchError(this.handleError));
   }
 
+  getallRequest() {
+    return this.http
+      .get(`${this.api}/request`)
+      .pipe(map((re: any) => re.data), catchError(this.handleError));
+  }
+
+  getRequestByUser(id) {
+    return this.http
+      .get(`${this.api}/request/${id}`)
+      .pipe(map((re: any) => re.data), catchError(this.handleError));
+  }
+
+  sendRequest(data) {
+    return this.http
+      .post(`${this.api}/request`, data)
+      .pipe(map(re => re), catchError(this.handleError));
+  }
+
   loginUser(login: object): Observable<UserData> {
     return this.http
       .post<UserData>(`${this.api}/login`, login)

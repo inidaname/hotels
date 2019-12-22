@@ -4,6 +4,7 @@ export interface User {
   readonly password?: string;
   email: string;
   phoneNumber: string;
+  image: string
 }
 
 export interface UserData {

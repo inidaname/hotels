@@ -25,11 +25,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.userPlace = this.jwt.decodeToken().userType;
-    const subs = this.data.currentUser.subscribe(er => {
+    this.data.currentUser.subscribe(er => {
       if (er !== null) {
         this.status = true;
         this.fullName = er.fullName;
-        subs.unsubscribe();
       }
     });
   }

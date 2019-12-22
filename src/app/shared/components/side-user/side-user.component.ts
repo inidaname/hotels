@@ -75,7 +75,8 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
         fullScreen: true
       });
       this.api.searchGuest(value).subscribe((guest: any) => {
-        this.guestName = guest.customerName;
+        console.log(guest)
+        this.guestName = guest.data.customerName;
         this.lodgeId = guest._id;
         this.spinner.hide('check');
       }, (err) => this.guestName = `Error:${err.message}`);

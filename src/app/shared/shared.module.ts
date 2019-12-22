@@ -21,6 +21,7 @@ import { MealListComponent } from './components/meal-list/meal-list.component';
 import { SalesLogComponent } from './components/sales-log/sales-log.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { PrinterComponent } from './components/printer/printer.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { PrinterComponent } from './components/printer/printer.component';
     MealListComponent,
     SalesLogComponent,
     FooterComponent,
-    PrinterComponent
+    PrinterComponent,
+    ImageUploadComponent
   ],
   imports: [
     CommonModule,
@@ -68,7 +70,8 @@ import { PrinterComponent } from './components/printer/printer.component';
     MealListComponent,
     SalesLogComponent,
     FooterComponent,
-    PrinterComponent
+    PrinterComponent,
+    ImageUploadComponent
   ],
   providers: [DecimalPipe],
   entryComponents: [
