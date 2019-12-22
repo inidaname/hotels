@@ -49,6 +49,8 @@ export class ProfileComponent implements OnInit {
       }
     });
 
+    const getRe = this.api.getRequestByUser(this.jwt.decodeToken().userId).subscribe((re: any) => console.log(re))
+
     const adm = this.api.getAllStaff().subscribe( (admins: any) => {
       this.admin = admins.filter( v => v.userType === 'admin' || v.userType === 'superadmin');
       adm.unsubscribe();
