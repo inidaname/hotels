@@ -92,6 +92,16 @@ export class ApiService {
       }), catchError(this.handleError));
   }
 
+  getGuest(id) {
+    console.log(id)
+    return this.http
+      .get(`${this.api}/roomlodge/${id}`)
+      .pipe(map((guest: any) => {
+        console.log(guest)
+        return guest.data;
+      }), catchError(this.handleError));
+  }
+
   createProduct(product: Products): Observable<ProductData> {
     const id = localStorage.getItem('currentUser');
     return this.http

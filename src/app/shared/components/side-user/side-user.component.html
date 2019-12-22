@@ -59,7 +59,6 @@
       </form>
     </div>
     <div class="w-100 mx-2 shadow-sm p-2">
-      {{(payfull) ? payfull : 'nothing'}}
       <p>Payable amount or deposit</p>
       {{(reserve && reserve.reservation === 'reserved' && payfull && payfull === "reservation") ? (5000 | currency: 'NGN' : 'symbol-narrow') : room.price | currency: 'NGN' : 'symbol-narrow'}}
     </div>
@@ -111,10 +110,8 @@
       <ng-container *ngSwitchCase="'Bill'">
         {{'Guest Name: ' + '' || guestName }}
         <div class="form-inline form-group">
-          <input type="text" class="form-control form-control-sm" [(ngModel)]="roomNumber" #roomNum="ngModel"
+          <input type="text" class="form-control form-control-sm" [(ngModel)]="roomNumber" (ngModelChange)="checkRoom(roomNum.value)" #roomNum="ngModel"
             aria-describedby="helpId" placeholder="Room Number">
-          <button class="btn btn-outline-primary btn-sm" (click)="checkRoom(roomNum.value)"
-            [innerText]="">Search</button>
         </div>
       </ng-container>
       <ng-container *ngSwitchCase="'Complimentry'">

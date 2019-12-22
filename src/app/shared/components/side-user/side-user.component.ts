@@ -33,6 +33,7 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
   compli: NgModel;
   reserve: any;
   payfull: any;
+  lodgeId: any;
 
   constructor(
     private roomService: RoomsService,
@@ -64,18 +65,18 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
   }
 
   checkRoom(value) {
-    this.spinner.show('check',
+    if (value && value.length >= 3) {
+      this.spinner.show('check',
       {
         type: 'ball-scale-pulse',
         size: 'large',
         bdColor: 'rgba(105,105,105, .3)',
         color: 'grey',
         fullScreen: true
-      }
-    );
-    if (value && value.length >= 3) {
+      });
       this.api.searchGuest(value).subscribe((guest: any) => {
-        this.guestName = guest.data.customerName;
+        this.guestName = guest.customerName;
+        this.lodgeId = guest._id;
         this.spinner.hide('check');
       }, (err) => this.guestName = `Error:${err.message}`);
     }
@@ -113,7 +114,7 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
       amountPaid: this.sumPrice,
       paymentMethod: this.paymentMethod,
       complimentVal: this.compli,
-      roomNumber: this
+      roomNumber: this.lodgeId
     };
 
     this.spinner.show('sales',

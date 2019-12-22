@@ -8,6 +8,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeaderInterceptor } from '@interceptors/header.interceptor';
 import { SharedModule } from '@shared/shared.module';
 
+import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
+ import * as  Cloudinary from 'cloudinary-core';
+
 import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
 import { HomeComponent } from './home/home.component';
@@ -37,6 +41,7 @@ export function tokenGetter() {
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'ddn9xvzsb'}),
     JwtModule.forRoot({
       config: {
         tokenGetter,

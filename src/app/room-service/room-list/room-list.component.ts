@@ -4,6 +4,8 @@ import { RoomsService } from '@services/rooms.service';
 import { RoomInfo, Country } from '@shared/interface';
 import { COUNTRIES } from '@shared/json/countries';
 import { ApiService } from '@services/api.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './room-list.component.html',
@@ -20,7 +22,9 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
   constructor(
     private fb: FormBuilder,
     private roomService: RoomsService,
-    private api: ApiService
+    private api: ApiService,
+    private spinner: NgxSpinnerService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -75,32 +79,28 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
       }
       this.customerForm.updateValueAndValidity();
     });
-
-    // if (this.customerForm.controls.nationality.value !== 'Nigeria') {
-    //   this.setClass = true;
-    // } else {
-    //   this.customerForm.controls.passportNumber.errors.required = false;
-    //   this.setClass = false;
-    //   this.customerForm.updateValueAndValidity();
-    //   console.log(this.customerForm.controls);
-    // }
-
-    // if (this.setClass && !this.customerForm.controls.passportNumber.value) {
-    //   this.customerForm.controls.passportNumber.setErrors({invalid: true});
-    //   this.passportNumber.nativeElement.classList.add('is-invalid');
-    // } else {
-    //   // this.customerForm.controls.passportNumber.setErrors({invalid: false});
-    //   console.log(this.customerForm.controls.passportNumber.status)
-    //   this.passportNumber.nativeElement.classList.remove('is-invalid');
-    // }
   }
 
   get f() { return this.customerForm.controls; }
 
   bookARoom() {
-    // if (this.customerForm.valid) {
+    this.spinner.show('room',
+    {
+      type: 'ball-scale-pulse',
+      size: 'large',
+      bdColor: 'rgba(105,105,105, .3)',
+      color: 'grey',
+      fullScreen: true
+    }
+  );
+  // if (this.customerForm.valid) {
     this.customerForm.controls.checkedInBy.setValue(localStorage.getItem('currentUser'));
-    this.api.createRoomLodge(this.customerForm.value).subscribe(e => console.log(e), er => console.log(er));
+    this.api.createRoomLodge(this.customerForm.value).subscribe(e => {
+      this.spinner.hide();
+      if(e){
+        this.router.navigateByUrl(`otherservice/${e.data._id}`);
+      }
+    }, er => console.log(er));
     // }
   }
 

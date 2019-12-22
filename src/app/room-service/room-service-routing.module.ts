@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'roomslist' },
   { path: 'roomslist', component: RoomListComponent },
   { path: 'otherservice', component: OtherServiceComponent },
+  { path: 'otherservice/:id', component: OtherServiceComponent },
   { path: 'checkout', component: CheckOutComponent },
   { path: '**', component: PathNotFoundComponent }
 ];
