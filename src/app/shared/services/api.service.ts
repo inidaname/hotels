@@ -37,6 +37,11 @@ export class ApiService {
       }), catchError(this.handleError));
   }
 
+  updateReq(data, id) {
+    return this.http.put(`${this.api}/request/${id}`, data)
+      .pipe(map((dat: any) => dat), catchError(this.handleError))
+  }
+
   searchGuest(roomNumber: number) {
     return this.http
       .get(`${this.api}/roomlodge/room/${roomNumber}`)

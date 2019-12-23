@@ -19,10 +19,9 @@
             <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col" sortable="name" (sort)="onSort($event)">Request By</th>
-              <th scope="col" sortable="manufacturer" (sort)="onSort($event)">Product Request</th>
-              <th scope="col" sortable="quantity" (sort)="onSort($event)">Quantity</th>
-              <th scope="col" sortable="productPrice" (sort)="onSort($event)">Unit Price</th>
+              <th scope="col" sortable="requestedBy.fullName" (sort)="onSort($event)">Request By</th>
+              <th scope="col" sortable="productRequest.length" (sort)="onSort($event)">Product Request</th>
+              <th scope="col" sortable="bar" (sort)="onSort($event)">Quantity</th>
               <th scope="col">Actions</th>
             </tr>
             </thead>
@@ -30,14 +29,13 @@
             <tr *ngFor="let product of products | async; let i = index;">
               <th scope="row">{{i.valueOf() + 1}}</th>
               <td>
-                <ngb-highlight [result]="product.name" [term]="service.searchTerm"></ngb-highlight>
+                <ngb-highlight [result]="product.requestedBy.fullName" [term]="service.searchTerm"></ngb-highlight>
               </td>
-              <td><ngb-highlight [result]="product.manufacturer | uppercase" [term]="service.searchTerm"></ngb-highlight></td>
-              <td><ngb-highlight [result]="product.quantity | number" [term]="service.searchTerm"></ngb-highlight></td>
-              <td><ngb-highlight [result]="product.valuePrice | currency: 'NGN' : 'symbol-narrow'" [term]="service.searchTerm"></ngb-highlight></td>
+              <td><ngb-highlight [result]="product.productRequest.length | number" [term]="service.searchTerm"></ngb-highlight></td>
+              <td><ngb-highlight [result]="product.bar" [term]="service.searchTerm"></ngb-highlight></td>
               <td>
-                <button type="button" class="btn btn-sm btn-outline-primary mx-2">Supplies</button>
-                <button type="button" class="btn btn-sm btn-outline-success mx-2" (click)="justOpen(product)">Edit</button>
+                <button type="button" class="btn btn-sm btn-outline-primary mx-2" (click)="approve(product)">Approve</button>
+                <!-- <button type="button" class="btn btn-sm btn-outline-success mx-2" (click)="justOpen(product)">checkData</button> -->
               </td>
             </tr>
             </tbody>

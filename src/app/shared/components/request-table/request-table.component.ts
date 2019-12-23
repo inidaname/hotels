@@ -8,6 +8,7 @@ import { InventoryService } from '@services/inventory.service';
 import { ApiService } from '@services/api.service';
 import { SortEvent, ProductInfo } from '@shared/interface';
 import { ProductFormComponent } from '@components/product-form/product-form.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-request-table',
@@ -29,7 +30,8 @@ export class RequestTableComponent implements OnInit {
     private modal: NgbModal,
     public service: RequestService,
     public inventory: InventoryService,
-    private api: ApiService
+    private api: ApiService,
+    private spinner: NgxSpinnerService
 
   ) {
     if (this.jwt.decodeToken().userType === 'superadmin'){
@@ -40,6 +42,17 @@ export class RequestTableComponent implements OnInit {
 
     ngOnInit() {
       this.products = this.service.request$;
+  }
+
+  approve(val) {
+    val.status = 'approved';
+    this.spinner.show()
+    const ob = this.api.updateReq(val, val._id).subscribe(er => {
+      if (er) {
+        this.service.updateData();
+      }
+      ob.unsubscribe();
+    })
   }
 
   onSort({column, direction}: SortEvent) {
