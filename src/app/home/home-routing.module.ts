@@ -5,6 +5,7 @@ import { PathNotFoundComponent } from '@components/path-not-found/path-not-found
 import { StockComponent } from './stock/stock.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { AccountsComponent } from './accounts/accounts.component';
+import { StaffComponent } from './staff/staff.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'rooms',
     component: RoomsComponent
+  },
+  {
+    path: 'staff',
+    component: StaffComponent
   },
   {
     path: 'accounts',

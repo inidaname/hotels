@@ -19,6 +19,10 @@ export class HomeComponent implements OnInit {
       link: 'accounts'
     },
     {
+      name: 'Staff',
+      link: 'staff'
+    },
+    {
       name: 'Stocks',
       link: 'stock'
     },

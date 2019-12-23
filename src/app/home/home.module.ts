@@ -6,10 +6,11 @@ import { SharedModule } from '@shared/shared.module';
 import { StockComponent } from './stock/stock.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { AccountsComponent } from './accounts/accounts.component';
+import { StaffComponent } from './staff/staff.component';
 
 
 @NgModule({
-  declarations: [StockComponent, RoomsComponent, AccountsComponent],
+  declarations: [StockComponent, RoomsComponent, AccountsComponent, StaffComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
