@@ -25,6 +25,7 @@
       "@interceptors/*": ["app/shared/interceptor/*"],
       "@components/*": ["app/shared/components/*"],
       "@services/*": ["app/shared/services/*"],
+      "@json/*": ["app/shared/json/*"],
       "@shared/*": ["app/shared/*"]
     }
   },

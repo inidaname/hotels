@@ -4,6 +4,7 @@ import { ApiService } from '@services/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ProductInfo } from '@shared/interface';
+import { CountryService } from '@services/countries.service';
 
 @Component({
   selector: 'app-product-form',
@@ -24,21 +25,21 @@ export class ProductFormComponent implements OnInit {
     public modal: NgbActiveModal,
     private api: ApiService,
     private fb: FormBuilder,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private update: CountryService
   ) { }
 
   ngOnInit() {
     this.content = this.fb.group({
-      productName: ['', Validators.required],
+      name: ['', Validators.required],
       productType: ['', Validators.required],
       productDept: [''],
-      productImage: [''],
-      productPrice: ['', [Validators.required]],
-      serialNumber: [''],
+      valuePrice: ['', [Validators.required]],
       manufacturer: ['', Validators.required],
       quantity: ['', Validators.required],
-      manufacturedDate: ['', Validators.required],
-      expiryDate: ['', Validators.required]
+      expiryDate: ['', Validators.required],
+      poolBarPrice: [''],
+      mainBarPrice: ['']
     });
   }
 
@@ -48,7 +49,10 @@ export class ProductFormComponent implements OnInit {
     if (this.content.valid) {
       this.spinner.show();
       const obs = this.api.createProduct(this.content.value)
-      obs.subscribe(cl => {
+      obs.subscribe((cl: any) => {
+        console.log(cl)
+        this.update.updateData()
+        this.product = cl.data;
         this.spinner.hide();
         this.alertType = 'success';
         this.message = cl.message;

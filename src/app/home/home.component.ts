@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '@services/api.service';
-import { UserDataService } from '@services/user-data.service';
-import { Router } from '@angular/router';
 import { NavList } from '@shared/interface';
 
 @Component({
@@ -13,8 +11,16 @@ export class HomeComponent implements OnInit {
 
   navList: NavList[] = [
     {
-      name: 'Dashboard',
-      link: './dashboard'
+      name: 'Rooms',
+      link: 'rooms'
+    },
+    {
+      name: 'Accounts',
+      link: 'accounts'
+    },
+    {
+      name: 'Staff',
+      link: 'staff'
     },
     {
       name: 'Stocks',

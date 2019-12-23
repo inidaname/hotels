@@ -2,56 +2,214 @@
   <h5 class="text-uppercase">Booking Details</h5>
   <section class="h-75 my-2 shadow-sm w-100 p-3 container">
     <form [formGroup]="customerForm" class="row m-auto align-items-start justify-content-around">
-        <app-rooms-table (tapRoom)="selectRoom($event)"></app-rooms-table>
-        <p class="col-12">Serve Break fast</p>
-      <hr class="my-5 w-100">
       <div class="col-12 row">
-        <div class="form-group col-4 mx-auto my-4">
+        <div class="form-group col-3 mx-auto my-4">
           <label for="customerName">Customer Name</label>
           <input type="text" formControlName="customerName" id="customerName" class="form-control"
-            [ngClass]="{'is-invalid': f.customerName.touched && f.customerName.invalid}" (change)="checkValue()" placeholder="Customer Name"
-            aria-describedby="roomHelp">
+            [ngClass]="{'is-invalid': f.customerName.touched && f.customerName.invalid}" (change)="checkValue()"
+            placeholder="Customer Name" aria-describedby="roomHelp">
           <small id="roomHelp" class="text-muted">Provide the Customer's name</small>
         </div>
-        <div class="form-group col-4 mx-auto my-4">
-          <label for="customerID">Customer's ID Number</label>
-          <input type="text" formControlName="customerID" id="customerID" class="form-control"
-            [ngClass]="{'is-invalid': f.customerID.touched && f.customerID.invalid}" placeholder="Customer's ID Number"
-            aria-describedby="typeHelp">
-          <small id="typeHelp" class="text-muted">Please provide the room type</small>
+        <div class="form-group col-3 mx-auto my-4">
+          <label for="customerProfession">Profession</label>
+          <input type="text" formControlName="customerProfession" id="customerProfession" class="form-control"
+            [ngClass]="{'is-invalid': f.customerProfession.touched && f.customerProfession.invalid}"
+            (change)="checkValue()" placeholder="Profession" aria-describedby="roomHelp">
+          <small id="roomHelp" class="text-muted">Provide the Customer's name</small>
         </div>
-        <div class="form-group col-4 mx-auto my-4">
+        <div class="form-group col-3 mx-auto my-4">
           <label for="customerEmail">Customer's Email</label>
           <input type="email" formControlName="customerEmail" id="customerEmail" class="form-control"
             [ngClass]="{'is-invalid': f.customerEmail.touched && f.customerEmail.invalid}" placeholder="Email Address"
             aria-describedby="typeHelp">
           <small id="typeHelp" class="text-muted">Please provide the room type</small>
         </div>
-        <div class="form-group col-4 mx-auto my-4">
-          <label for="customerAddress">Address</label>
-          <textarea (change)="checkValue()" formControlName="customerAddress" id="customerAddress" class="form-control" cols="10"
-            rows="5"></textarea>
-        </div>
-          <div class="form-check form-check-inline">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="checkIn" id="checkIn" value="reserved"> Reservation
-            </label>
-          </div>
-          <div class="form-check form-check-inline">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="checkIn" id="checkIn" value="CheckIn"> Check In
-            </label>
-          </div>
-        <div class="form-group col-4 mx-auto my-4">
+        <div class="form-group col-3 mx-auto my-4">
           <label for="customerNumber">Customer's Number</label>
           <input type="text" formControlName="customerNumber" id="customerNumber" class="form-control"
-            [ngClass]="{'is-invalid': f.customerNumber.touched && f.customerNumber.invalid}" placeholder="Room Number"
+            [ngClass]="{'is-invalid': f.customerNumber.touched && f.customerNumber.invalid}" placeholder="Phone Number"
             aria-describedby="numberHelp">
-          <small id="numberHelp" class="text-muted">A Room Number must be provided</small>
+          <small id="numberHelp" class="text-muted">A Phone Number must be provided</small>
+        </div>
+        <div class="form-group col-6 mx-auto my-4">
+          <label for="customerAddress">Address</label>
+          <textarea (change)="checkValue()" formControlName="customerAddress" id="customerAddress" class="form-control"
+            cols="5" rows="5"></textarea>
+        </div>
+        <div class="form-group col-6 mx-auto my-4">
+          <label for="nationality">Nationality</label>
+          <select class="form-control" formControlName="nationality">
+            <option *ngFor="let item of countries" [value]="item.name">{{item.name}}</option>
+          </select>
+          <small id="typeHelp" class="text-muted">Please provide Nationality</small>
+        </div>
+        <div class="form-group col-6 mx-auto my-4">
+          <label for="country">Country</label>
+          <select class="form-control" formControlName="country">
+            <option *ngFor="let item of countries" [value]="item.name">{{item.name}}</option>
+          </select>
+          <small id="typeHelp" class="text-muted">Please provide Country</small>
+        </div>
+        <div class="form-group col-5 mx-auto my-4">
+          <label for="comingFrom">City</label>
+          <input type="text" formControlName="city" id="city" class="form-control"
+            [ngClass]="{'is-invalid': f.city.touched && f.city.invalid}" placeholder="City of the Customer"
+            aria-describedby="numberHelp">
+        </div>
+        <div class="form-group col-3 mx-auto my-4">
+          <label for="comingFrom">Coming From</label>
+          <input type="text" formControlName="comingFrom" id="comingFrom" class="form-control"
+            [ngClass]="{'is-invalid': f.comingFrom.touched && f.comingFrom.invalid}" placeholder="Coming from"
+            aria-describedby="numberHelp">
+        </div>
+        <div class="form-group col-3 mx-auto my-4">
+          <label for="nextDestination">Next Destination</label>
+          <input type="text" formControlName="nextDestination" id="nextDestination" class="form-control"
+            [ngClass]="{'is-invalid': f.nextDestination.touched && f.nextDestination.invalid}"
+            placeholder="Destination" aria-describedby="numberHelp">
+        </div>
+        <div class="col-12 row">
+          <ng-container *ngIf="setClass === true">
+            <div class="form-group col-3 mx-auto my-4">
+              <label for="passportNumber">Passport Number</label>
+              <input #passportNumber type="text" formControlName="passportNumber" id="passportNumber" class="form-control"
+                [ngClass]="{ 'is-invalid': f.passportNumber.touched && f.passportNumber.invalid }"
+                placeholder="Passport Number" aria-describedby="numberHelp">
+              <small id="numberHelp" class="text-muted">A Passport Number must be provided</small>
+            </div>
+            <div class="form-group col-3 mx-auto my-4">
+              <label for="issuedAt">Issue At</label>
+              <input type="text" formControlName="issuedAt" id="issuedAt" class="form-control"
+                [ngClass]="{ 'is-invalid': f.issuedAt.touched && f.issuedAt.invalid }"
+                placeholder="Place of Issue" aria-describedby="numberHelp">
+              <small id="numberHelp" class="text-muted">A place of issue must be provided</small>
+            </div>
+            <div class="form-group col-3 mx-auto my-4">
+              <label for="issuedDate">Issue Date</label>
+              <div class="input-group">
+                <input type="text" formControlName="issuedDate" class="form-control" ngbDatepicker #issue="ngbDatepicker"
+                  placeholder="Expiry Date: dd/mm/yyyy">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-success calendar" (click)="issue.toggle()" type="button"></button>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <div class="col-12 row">
+          <div class="form-group col-5 mx-auto my-4">
+            <label for="arrivalDate">Arrival Date</label>
+            <div class="input-group">
+              <input type="text" formControlName="arrivalDate" class="form-control" ngbDatepicker #arrival="ngbDatepicker"
+                placeholder="Arrival Date: dd/mm/yyyy">
+              <div class="input-group-append">
+                <button class="btn btn-outline-success calendar" (click)="arrival.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-5 mx-auto my-4">
+            <label for="departureDate">Departure Date</label>
+            <div class="input-group">
+              <input type="text" formControlName="departureDate" class="form-control" ngbDatepicker #departure="ngbDatepicker"
+                placeholder="Departure Date: dd/mm/yyyy">
+              <div class="input-group-append">
+                <button class="btn btn-outline-success calendar" (click)="departure.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="w-100 my-5">
+        <div class="col-12 mx-auto">
+          <div class="form-group col-6 mx-auto my-4">
+            <label for="representation">Representation</label>
+            <select class="form-control" formControlName="representation">
+              <option value="Personal">Personal</option>
+              <option value="Company">Company</option>
+            </select>
+            <small id="typeHelp" class="text-muted">Please provide Representation</small>
+          </div>
+          <div class="col-12 row">
+            <ng-container *ngIf="f.representation.value === 'Company'">
+              <div class="form-group col-3 mx-auto my-4">
+                <label for="companyName">Company's Name</label>
+                <input type="text" formControlName="companyName" id="companyName" class="form-control"
+                  [ngClass]="{'is-invalid': f.companyName.touched && f.companyName.invalid}" (change)="checkValue()"
+                  placeholder="Company's Name" aria-describedby="roomHelp">
+                <small id="roomHelp" class="text-muted">Provide the Company's name</small>
+              </div>
+              <div class="form-group col-3 mx-auto my-4">
+                <label for="companyNumber">Company's Number</label>
+                <input type="text" formControlName="companyNumber" id="companyNumber" class="form-control"
+                  [ngClass]="{'is-invalid': f.companyNumber.touched && f.companyNumber.invalid}" placeholder="Company Number"
+                  aria-describedby="numberHelp">
+              </div>
+              <div class="form-group col-6 mx-auto my-4">
+                <label for="companyAddress">Address</label>
+                <textarea (change)="checkValue()" formControlName="companyAddress" id="companyAddress" class="form-control"
+                  cols="5" rows="5"></textarea>
+              </div>
+            </ng-container>
+          </div>
+          <div class="form-group col-5 mx-auto my-4">
+            <label for="paymentMethod">Payment Method</label>
+            <select class="form-control" formControlName="paymentMethod">
+              <option value="ATM Card">ATM Card</option>
+              <option *ngIf="f.representation.value === 'Company'" value="Company">Company</option>
+              <option value="Cash">Cash</option>
+            </select>
+          </div>
+        </div>
+        <hr class="w-100 my-5">
+        <div class="col-12 row">
+          <div class="form-group col-3 mx-auto my-4">
+            <label for="purposeOfVisit">Purpose of Visit</label>
+            <input type="text" formControlName="purposeOfVisit" id="purposeOfVisit" class="form-control"
+              [ngClass]="{'is-invalid': f.purposeOfVisit.touched && f.purposeOfVisit.invalid}" placeholder="Purpose of visit"
+              aria-describedby="typeHelp">
+          </div>
+          <div class="form-group col-3 mx-auto my-4">
+            <label for="nextOfKin">Next of Kin</label>
+            <input type="text" formControlName="nextOfKin" id="nextOfKin" class="form-control"
+              [ngClass]="{'is-invalid': f.nextOfKin.touched && f.nextOfKin.invalid}" placeholder="Next of Kin"
+              aria-describedby="typeHelp">
+          </div>
+          <div class="form-group col-3 mx-auto my-4">
+            <label for="nextOfKinNumber">Next of Kin's Number</label>
+            <input type="text" formControlName="nextOfKinNumber" id="nextOfKinNumber" class="form-control"
+              [ngClass]="{'is-invalid': f.nextOfKinNumber.touched && f.nextOfKinNumber.invalid}" placeholder="Next of Kin Number"
+              aria-describedby="typeHelp">
+          </div>
+          <div class="form-group col-3 mx-auto my-4">
+            <label for="nextOfKinRelation">Next of Kin's Relationship</label>
+            <input type="text" formControlName="nextOfKinRelation" id="nextOfKinRelation" class="form-control"
+              [ngClass]="{'is-invalid': f.nextOfKinRelation.touched && f.nextOfKinRelation.invalid}" placeholder="Next of Kin relation"
+              aria-describedby="typeHelp">
+          </div>
+        </div>
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input class="form-check-input" (change)="sendType()" type="radio" formControlName="checkedInStatus" id="checkIn" value="reserved"> Reservation
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input class="form-check-input" (change)="sendType()" type="radio" formControlName="checkedInStatus" id="checkIn" value="occupied"> Check In
+          </label>
         </div>
       </div>
+
+      <hr class="my-5 w-100">
+      <app-rooms-table (tapRoom)="selectRoom($event)"></app-rooms-table>
+
+      <hr class="my-5 w-100">
+      <div class="form-group col-3 mx-auto my-4">
+        <label for="numberOfPersons">Number of Persons</label>
+        <input type="number" formControlName="numberOfPersons" id="numberOfPersons" class="form-control"
+          [ngClass]="{'is-invalid': f.numberOfPersons.touched && f.numberOfPersons.invalid}" placeholder="Number of Person"
+          aria-describedby="typeHelp">
+      </div>
       <div class="form-group col-12 text-center my-5">
-        <button type="submit" class="btn btn-success" [disabled]="!customerForm.valid"
+        <button type="submit" class="btn btn-success" [disabled]="!customerForm.valid && !f.room.value"
           (click)="bookARoom()">Submit</button>
       </div>
     </form>

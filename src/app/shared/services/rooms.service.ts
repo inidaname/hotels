@@ -12,6 +12,15 @@ export class RoomsService {
   private currentRoomSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   public currentRoom: Observable<any> = this.currentRoomSubject.asObservable();
 
+  private currentProductSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public currentProduct: Observable<any> = this.currentProductSubject.asObservable();
+
+  private currentProductSold: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public currentSold: Observable<any> = this.currentProductSold.asObservable();
+
+  private currentReservationBeh: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public currentReservation: Observable<any> = this.currentReservationBeh.asObservable();
+
   constructor() { }
 
   setData(data: any): void {
@@ -20,6 +29,26 @@ export class RoomsService {
 
   setRoom(data: any) {
     return this.currentRoomSubject.next(data);
+  }
+
+  setReserve(data: any) {
+    return this.currentReservationBeh.next(data);
+  }
+
+  setTotalPrice(data: any) {
+    return this.currentProductSold.next(data)
+  }
+
+  getTotalPrice() {
+    return this.currentProductSold.value;
+  }
+
+  setProduct(data: any) {
+    return this.currentProductSubject.next(data);
+  }
+
+  getProduct() {
+    return this.currentProductSubject.value;
   }
 
   getData(): void {

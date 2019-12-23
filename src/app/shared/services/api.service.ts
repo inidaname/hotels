@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { UserData, User, ProductData, Products, ProductInfo, Inventory, InventoryData, InventoryInfo, Room, RoomData, RoomInfo } from '@shared/interface';
 import { environment } from '@environments/environment';
@@ -14,6 +14,12 @@ import { UserDataService } from './user-data.service';
 export class ApiService {
 
   private api: string = environment.api;
+  private headersOpt = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      authorization: `${localStorage.getItem('token')}`
+    })
+  };
 
   constructor(
     private http: HttpClient,
@@ -29,6 +35,44 @@ export class ApiService {
         this.getUserById().subscribe();
         return user;
       }), catchError(this.handleError));
+  }
+
+  searchGuest(roomNumber: number) {
+    return this.http
+      .get(`${this.api}/roomlodge/room/${roomNumber}`)
+      .pipe(map((ret) => ret), catchError(this.handleError));
+  }
+
+  makePurchase(data) {
+    return this.http
+    .post(`${this.api}/sales`, data)
+    .pipe(map((data: any) => data.data), catchError(this.handleError));
+  }
+
+  createStaff(userReg: User): Observable<UserData> {
+    return this.http
+      .post<UserData>(`${this.api}/create/user`, userReg)
+      .pipe(map(user => {
+        return user;
+      }), catchError(this.handleError));
+  }
+
+  getallRequest() {
+    return this.http
+      .get(`${this.api}/request`)
+      .pipe(map((re: any) => re.data), catchError(this.handleError));
+  }
+
+  getRequestByUser(id) {
+    return this.http
+      .get(`${this.api}/request/${id}`)
+      .pipe(map((re: any) => re.data), catchError(this.handleError));
+  }
+
+  sendRequest(data) {
+    return this.http
+      .post(`${this.api}/request`, data)
+      .pipe(map(re => re), catchError(this.handleError));
   }
 
   loginUser(login: object): Observable<UserData> {
@@ -50,10 +94,28 @@ export class ApiService {
   getUserById(): Observable<UserData> {
     const id = localStorage.getItem('currentUser');
     return this.http
-      .get<UserData>(`${this.api}/users/${id}`)
+      .get<UserData>(`${this.api}/users/${id}`, this.headersOpt)
       .pipe(map(user => {
         this.userData.setUserData(user.data);
         return user;
+      }), catchError(this.handleError));
+  }
+
+  getAllStaff(): Observable<User> {
+    return this.http
+      .get<UserData>(`${this.api}/users`, this.headersOpt)
+      .pipe(map(user => {
+        return user.data;
+      }), catchError(this.handleError));
+  }
+
+  getGuest(id) {
+    console.log(id)
+    return this.http
+      .get(`${this.api}/roomlodge/${id}`)
+      .pipe(map((guest: any) => {
+        console.log(guest)
+        return guest.data;
       }), catchError(this.handleError));
   }
 
@@ -69,7 +131,7 @@ export class ApiService {
   createInventory(product: Inventory): Observable<InventoryData> {
     const id = localStorage.getItem('currentUser');
     return this.http
-      .post<InventoryData>(`${this.api}/inventory`, product)
+      .post<InventoryData>(`${this.api}/stock`, product)
       .pipe(map(productData => {
         return productData;
       }), catchError(this.handleError));
@@ -79,6 +141,29 @@ export class ApiService {
     const id = localStorage.getItem('currentUser');
     return this.http
       .post<RoomData>(`${this.api}/room`, room)
+      .pipe(map((rtRoom: RoomData) => rtRoom), catchError(this.handleError));
+  }
+
+  createRoomLodge(log): Observable<any> {
+    console.log('it came')
+    return this.http
+      .post(`${this.api}/roomlodge`, log)
+      .pipe(map((lodged: any) => {
+        console.log(lodged)
+        return lodged;
+      }), catchError(this.handleError));
+  }
+
+  getRoomTypes() {
+    return this.http
+      .get(`${this.api}/roomtype`)
+      .pipe(map((roomtype: any) => roomtype.data), catchError(this.handleError));
+  }
+
+  createRoomType(room: Room): Observable<RoomData> {
+    const id = localStorage.getItem('currentUser');
+    return this.http
+      .post<RoomData>(`${this.api}/roomtype`, room)
       .pipe(map((room: RoomData) => room), catchError(this.handleError));
   }
 
@@ -97,7 +182,7 @@ export class ApiService {
 
   getInventory(id?: string): Observable<InventoryInfo[] | InventoryInfo> {
     return this.http
-      .get(`${this.api}/inventory/?${id}`)
+      .get(`${this.api}/stock/?${id}`)
       .pipe(map((inventory: InventoryData) => inventory.data), catchError(this.handleError));
   }
 
@@ -105,6 +190,12 @@ export class ApiService {
     return this.http
       .get(`${this.api}/room/?${id}`)
       .pipe(map((room: RoomData) => room.data), catchError(this.handleError));
+  }
+
+  getMeals(id?: string): Observable<RoomInfo[] | RoomInfo> {
+    return this.http
+      .get(`${this.api}/restaurant/?${id}`)
+      .pipe(map((meals: any) => meals.data), catchError(this.handleError));
   }
 
   private handleError(err: HttpErrorResponse) {

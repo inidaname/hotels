@@ -2,19 +2,29 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { PathNotFoundComponent } from '@components/path-not-found/path-not-found.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { StockComponent } from './stock/stock.component';
+import { RoomsComponent } from './rooms/rooms.component';
+import { AccountsComponent } from './accounts/accounts.component';
+import { StaffComponent } from './staff/staff.component';
 
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'dashboard'
+    redirectTo: 'rooms'
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent
+    path: 'rooms',
+    component: RoomsComponent
+  },
+  {
+    path: 'staff',
+    component: StaffComponent
+  },
+  {
+    path: 'accounts',
+    component: AccountsComponent
   },
   {
     path: 'stock',

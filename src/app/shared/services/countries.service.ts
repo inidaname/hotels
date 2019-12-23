@@ -29,9 +29,7 @@ export class CountryService {
     this.products = new BehaviorSubject(null);
 
     this.api.getProduct().subscribe((products: ProductInfo[]) => {
-      this.products.next(products)
-      this.products.complete();
-      this.products.pipe(observeOn(asyncScheduler));
+      this.products.next(products);
     });
 
     this._search$.pipe(
@@ -48,6 +46,7 @@ export class CountryService {
     this._search$.next();
   }
 
+  get product$() { return this.products.asObservable(); }
   get products$() { return this._products$.asObservable(); }
   get total$() { return this._total$.asObservable(); }
   get loading$() { return this._loading$.asObservable(); }
@@ -64,6 +63,12 @@ export class CountryService {
   private _set(patch: Partial<State>) {
     Object.assign(this._state, patch);
     this._search$.next();
+  }
+
+  updateData() {
+    return this.api.getProduct().subscribe((products: ProductInfo[]) => {
+      this.products.next(products);
+    });
   }
 
   private _search(): Observable<SearchResult> {

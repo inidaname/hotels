@@ -13,10 +13,8 @@ import { PathNotFoundComponent } from '@components/path-not-found/path-not-found
 
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'rooms' },
   { path: 'stock', component: StockComponent },
-  { path: 'report', component: ReportComponent },
   { path: 'staff', component: StaffComponent },
   { path: 'account', component: AccountComponent },
   { path: 'rooms', component: RoomsComponent },

@@ -1,7 +1,7 @@
-<aside class="bg-white position-fixed d-flex flex-column">
-  <ul class="nav d-flex flex-column justify-content-around align-items-start">
+<aside class="bg-white position-fixed d-flex flex-column border-right border-warning">
+  <ul class="nav d-flex flex-column justify-content-around align-items-start pt-5">
     <li class="nav-item" *ngFor="let item of items">
-      <a class="py-2 nav-link" [routerLink]="[ item.link ]" routerLinkActive="active" [innerText]="item.name"></a>
+      <a class="py-2 nav-link text-dark font-weight-bold cap" [routerLink]="[ item.link ]" routerLinkActive="active" [innerText]="item.name"></a>
     </li>
   </ul>
 </aside>

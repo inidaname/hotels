@@ -1,7 +1,48 @@
 <article class="shadow rounded-lg p-3 d-flex flex-column justify-content-start align-items-center">
-  <h5 class="text-uppercase">Other Services</h5>
+  <h3 class="text-uppercase">Other Services</h3>
   <section class="shadow-sm w-100 p-3 container">
     <div class="row p-4">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="roomNumberSearch">Room Number</label>
+          <input type="text"
+            class="form-control" [(ngModel)]="roomNumberSearch" (ngModelChange)="searchRoom(roomNumberSearch)" id="roomNumberSearch" aria-describedby="helpId" placeholder="Room Number">
+          <small id="helpId" class="form-text text-muted">Search By Room Number {{message}}</small>
+        </div>
+      </div>
+      <div class="col-12">
+        <h5>Guest Name: {{guest$?.customerName}}</h5>
+        <p>Room Number: <span *ngFor="let item of guest$?.room" [innerText]="item.roomNumber"></span></p>
+        <p>Lodged Status:
+        <span [ngSwitch]="guest$?.checkedInStatus">
+        <p *ngSwitchCase="'occupied'">
+          Lodged
+        </p>
+        <p *ngSwitchCase="'reserved'">
+          Reserved
+        </p>
+        <p *ngSwitchCase="'available'">
+          Checked Out
+        </p>
+        <p *ngSwitchDefault>
+          loading
+        </p>
+        </span>
+      </p>
+      </div>
+      <div class="col-12">
+        <span [ngSwitch]="guest$?.checkedInStatus">
+          <p *ngSwitchCase="'occupied'">
+            <button class="btn btn-success" (click)="upDate('checkout')">Check Guest Out</button>
+          </p>
+          <p *ngSwitchCase="'reserved'">
+            <button class="btn btn-success" (click)="upDate('checkin')">Check Guest In</button>
+          </p>
+          <p *ngSwitchDefault>
+            loading
+          </p>
+          </span>
+      </div>
       <figure class="figure rounded col-5 shadow-sm p-3 m-auto offset-5">
         <img src="" class="figure-img img-fluid rounded" alt="">
         <figcaption class="figure-caption text-xs-right">The ID Card</figcaption>

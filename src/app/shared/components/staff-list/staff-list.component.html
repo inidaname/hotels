@@ -1,0 +1,54 @@
+<div class="row">
+  <!-- <div class="col-xl-3">
+    <div class="card text-left">
+      <img class="card-img-top" src="" alt="">
+      <div class="card-body">
+        <h4 class="card-title">Product Name almost finish/damage</h4>
+        <p class="card-text">Descript, Category, Department and Price</p>
+      </div>
+    </div>
+  </div> -->
+  <div class="col-sm-12 card">
+      <form class="p-3">
+          <div class="form-group form-inline">
+              Staff search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="service.searchTerm"/>
+              <span class="ml-3" *ngIf="service.loading$ | async">Loading List of Staff...</span>
+          </div>
+
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col" sortable="fullName" (sort)="onSort($event)">Full Name</th>
+              <th scope="col" sortable="email" (sort)="onSort($event)">Email</th>
+              <th scope="col" sortable="username" (sort)="onSort($event)">Username</th>
+              <th scope="col" sortable="phoneNumber" (sort)="onSort($event)">Phone Number</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let product of products | async; let i = index;">
+              <th scope="row">{{i.valueOf() + 1}}</th>
+              <td>
+                <ngb-highlight [result]="product.fullName" [term]="service.searchTerm"></ngb-highlight>
+              </td>
+              <td><ngb-highlight [result]="product.email| lowercase" [term]="service.searchTerm"></ngb-highlight></td>
+              <td><ngb-highlight [result]="product.username " [term]="service.searchTerm"></ngb-highlight></td>
+              <td><ngb-highlight [result]="product.phoneNumber" [term]="service.searchTerm"></ngb-highlight></td>
+            </tr>
+            </tbody>
+          </table>
+
+          <div class="d-flex justify-content-between p-2">
+            <ngb-pagination
+              [collectionSize]="total$ | async" [(page)]="service.page" [pageSize]="service.pageSize">
+            </ngb-pagination>
+
+            <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+              <option [ngValue]="2">2 items per page</option>
+              <option [ngValue]="4">4 items per page</option>
+              <option [ngValue]="6">6 items per page</option>
+            </select>
+          </div>
+        </form>
+  </div>
+</div>

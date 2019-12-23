@@ -9,10 +9,6 @@ export class AdminComponent implements OnInit {
 
   navList: NavList[] = [
     {
-      name: 'Dashboard',
-      link: './dashboard'
-    },
-    {
       name: 'Rooms',
       link: './rooms'
     },
@@ -23,10 +19,6 @@ export class AdminComponent implements OnInit {
     {
       name: 'Stock',
       link: './stock'
-    },
-    {
-      name: 'Report',
-      link: './report'
     },
     {
       name: 'Staff',

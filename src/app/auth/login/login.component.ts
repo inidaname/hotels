@@ -37,11 +37,12 @@ export class LoginComponent implements OnInit {
 
   loginUser() {
     this.share.changeValueOfStatus(true);
-    this.api.loginUser(this.login.value).subscribe(val => {
+    const login = this.api.loginUser(this.login.value).subscribe(val => {
       this.message = val.message;
       this.alertType = 'success';
       this.share.changeValueOfStatus(false);
       this.data.setUserData(val.data);
+      login.unsubscribe();
       this.router.navigateByUrl('/home');
     }, err => {
       console.log(err);

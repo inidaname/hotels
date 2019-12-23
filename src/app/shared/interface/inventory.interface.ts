@@ -1,10 +1,7 @@
 export interface Inventory {
-  readonly stockName: string;
+  readonly name: string;
   readonly description: string;
   readonly quantity: number;
-  readonly department: string;
-  readonly condition: string;
-  readonly serialNumber: string;
   readonly manufacturer: string;
   readonly image?: string;
   readonly valuePrice: number;

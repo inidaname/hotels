@@ -20,26 +20,21 @@
               <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col" sortable="roomName" (sort)="onSort($event)">Room Name</th>
-                <th scope="col" sortable="roomType" (sort)="onSort($event)">Room Type</th>
+                <th scope="col" sortable="roomTypeId.roomType" (sort)="onSort($event)">Room Type</th>
                 <th scope="col" sortable="roomNumber" (sort)="onSort($event)">Room Number</th>
-                <th scope="col" sortable="roomPrice" (sort)="onSort($event)">Room Price</th>
+                <th scope="col" sortable="roomTypeId.roomPrice" (sort)="onSort($event)">Room Price</th>
                 <th scope="col">Actions</th>
               </tr>
               </thead>
               <tbody>
               <tr *ngFor="let room of rooms | async; let i = index;" (click)="clickMe(room)">
                 <th scope="row">{{i.valueOf() + 1}}</th>
-                <td>
-                  <!-- <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + room.flag" class="mr-2" style="width: 20px"> -->
-                  <ngb-highlight [result]="room.roomName" [term]="service.searchTerm"></ngb-highlight>
-                </td>
-                <td><ngb-highlight [result]="room.roomType | uppercase" [term]="service.searchTerm"></ngb-highlight></td>
+                <td><ngb-highlight [result]="room.roomTypeId.roomType| uppercase" [term]="service.searchTerm"></ngb-highlight></td>
                 <td><ngb-highlight [result]="room.roomNumber" [term]="service.searchTerm"></ngb-highlight></td>
-                <td><ngb-highlight [result]="room.roomPrice | currency: 'NGN' : 'symbol-narrow'" [term]="service.searchTerm"></ngb-highlight></td>
+                <td><ngb-highlight [result]="room.roomTypeId.roomPrice | currency: 'NGN' : 'symbol-narrow'" [term]="service.searchTerm"></ngb-highlight></td>
                 <td>
-                  <button type="button" class="btn btn-sm btn-outline-primary mx-2">Supplies</button>
-                  <button type="button" class="btn btn-sm btn-outline-success mx-2" (click)="justOpen(room)">Edit</button>
+                  <!-- <button type="button" class="btn btn-sm btn-outline-primary mx-2">Supplies</button>
+                  <button type="button" class="btn btn-sm btn-outline-success mx-2" (click)="justOpen(room)">Edit</button> -->
                 </td>
               </tr>
               </tbody>

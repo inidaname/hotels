@@ -30,8 +30,6 @@ export class InventoryService {
 
     this.api.getInventory().subscribe((inventories: InventoryInfo[]) => {
       this.inventories.next(inventories)
-      this.inventories.complete();
-      this.inventories.pipe(observeOn(asyncScheduler));
     });
 
     this._search$.pipe(
@@ -48,6 +46,7 @@ export class InventoryService {
     this._search$.next();
   }
 
+  get inventory$() { return this.inventories.asObservable(); }
   get inventories$() { return this._inventories$.asObservable(); }
   get total$() { return this._total$.asObservable(); }
   get loading$() { return this._loading$.asObservable(); }

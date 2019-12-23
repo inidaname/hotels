@@ -32,8 +32,9 @@ export class RoomService {
 
     this.rooms = new BehaviorSubject<RoomInfo[]>([]);
 
-    this.api.getRooms().subscribe((rooms: RoomInfo[]) => {
+    const getRo = this.api.getRooms().subscribe((rooms: RoomInfo[]) => {
       this.rooms.next(rooms);
+      getRo.unsubscribe();
     });
 
     this._search$.pipe(
@@ -63,6 +64,14 @@ export class RoomService {
   set searchTerm(searchTerm: string) { this._set({ searchTerm }); }
   set sortColumn(sortColumn: string) { this._set({ sortColumn }); }
   set sortDirection(sortDirection: SortDirection) { this._set({ sortDirection }); }
+
+  updateData(){
+    const gt = this.api.getRooms().subscribe((rooms: RoomInfo[]) => {
+      this.rooms.next(rooms);
+      gt.unsubscribe();
+      return;
+    });
+  }
 
   private _set(patch: Partial<State>) {
     Object.assign(this._state, patch);

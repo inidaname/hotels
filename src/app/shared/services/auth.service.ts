@@ -26,8 +26,7 @@ export class AuthService {
   }
 
   public clearUser(): boolean {
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('token');
+    localStorage.clear();
     this.currentToken.next(null);
     return true;
   }

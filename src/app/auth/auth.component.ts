@@ -43,9 +43,9 @@ export class AuthComponent implements OnInit, AfterViewChecked, AfterViewInit {
           {
             type: 'ball-scale-pulse',
             size: 'large',
-            bdColor: 'rgba(105,105,105, .0)',
+            bdColor: 'rgba(105,105,105, .3)',
             color: 'grey',
-            fullScreen: false
+            fullScreen: true
           }
         );
       }

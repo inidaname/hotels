@@ -14,3 +14,21 @@ button.calendar, button.calendar:active {
     background-size: 23px;
     background-position: center;
   }
+  p {
+    font-size: 22px;
+  }
+
+  @media print {
+    @page { size:  72.1mm 297mm !important; margin: 1mm 1mm 1mm 1mm !important;}
+    html, body {
+      width: 72.1mm !important;
+      height: 297mm;
+      margin: 1mm 1mm 1mm 1mm !important;
+      padding-bottom: 30px !important;
+    }
+
+    // p, ul {
+    //   margin: 10px;
+    //   font-size: 42px;
+    // }
+  }

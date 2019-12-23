@@ -2,7 +2,7 @@
 
 <ng-container *ngIf="inventoryHere;else noProduct">
   <div class="modal-header">
-    <h4 class="modal-title">Detail for {{inventory.stockName}}</h4>
+    <h4 class="modal-title">Detail for {{inventory.name}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -10,13 +10,21 @@
   <div class="modal-body">
     <div class="container">
       <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-12">
           <div class="row">
             <div class="col-sm-6">
-              Product Name:
+              Property Name:
             </div>
             <div class="col-sm-6">
-              {{inventory.stockName}}
+              {{inventory.name}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              Unit Price:
+            </div>
+            <div class="col-sm-6">
+              {{inventory.valuePrice | currency: 'NGN' : 'symbol-narrow'}}
             </div>
           </div>
           <div class="row">
@@ -37,56 +45,17 @@
           </div>
           <div class="row">
             <div class="col-sm-6">
-              Department:
-            </div>
-            <div class="col-sm-6">
-              {{inventory.department}}
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              Unit Price:
-            </div>
-            <div class="col-sm-6">
-              {{inventory.valuePrice | currency: 'NGN' : 'symbol-narrow'}}
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              Condition
-            </div>
-            <div class="col-sm-6">
-              {{inventory.condition}}
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
               Quantity:
             </div>
             <div class="col-sm-6">
               {{inventory.quantity | number}}
             </div>
           </div>
-          <div class="row">
-            <div class="col-sm-6">
-              Serial Number:
-            </div>
-            <div class="col-sm-6">
-              {{inventory.serialNumber}}
-            </div>
-          </div>
-        </div>
-        <div class="col-sm 3">
-          <figure class="figure">
-            <img src="assets/" class="figure-img img-fluid rounded shadow col-sm-12" alt="Product Image">
-            <figcaption class="figure-caption text-xs-right"></figcaption>
-          </figure>
         </div>
       </div>
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" name="" id="" class="btn btn-outline-success btn-sm">Edit</button>
     <button type="button" name="" id="" class="btn btn-outline-secondary btn-sm"
       (click)="modal.close('Close click')">Close</button>
   </div>
@@ -94,7 +63,7 @@
 
 <ng-template #noProduct>
   <div class="modal-header">
-    <h4 class="modal-title">Add New Product</h4>
+    <h4 class="modal-title">Add New Inventory</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -108,55 +77,33 @@
       </div>
       <form [formGroup]="content">
         <div class="form-group row">
-          <label for="stockName" class="col-sm-5 col-form-label">Name of Property</label>
+          <label for="name" class="col-sm-5 col-form-label">Name of Property</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" formControlName="stockName"
-              [ngClass]="{'is-invalid': f.stockName.touched && f.stockName.invalid}" id="stockName"
+            <input type="text" class="form-control" formControlName="name"
+              [ngClass]="{'is-invalid': f.name.touched && f.name.invalid}" id="name"
               placeholder="Product Name" aria-describedby="nameReq">
             <small id="nameReq" class="form-text d-none text-muted"
-              [ngClass]="{'d-block': f.stockName.touched && f.stockName.invalid}">Please provide a property
+              [ngClass]="{'d-block': f.name.touched && f.name.invalid}">Please provide a property
               name</small>
 
           </div>
         </div>
         <div class="form-group row">
-          <label for="description" class="col-sm-5 col-form-label">Product Type</label>
+          <label for="productPrice" class="col-sm-5">Property Unit Price</label>
+          <div class="col-sm-6">
+            <input type="number" class="form-control"
+              [ngClass]="{'is-invalid': f.valuePrice.touched && f.valuePrice.invalid}"
+              formControlName="valuePrice" id="productPrice" aria-describedby="unitPrice"
+              placeholder="Amount Unit Price">
+            <small id="unitPrice" class="form-text text-muted d-none"
+              [ngClass]="{'d-block': f.valuePrice.touched && f.valuePrice.invalid}">Please provide Unit Price
+              Amount</small>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="description" class="col-sm-5 col-form-label">Property Description</label>
           <div class="col-sm-6">
             <textarea formControlName="description" id="" cols="30" rows="5"></textarea>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="department" class="col-sm-5 col-form-label">Department</label>
-          <div class="col-sm-6">
-            <select class="form-control" formControlName="department" id="department">
-              <option>First</option>
-              <option>Second</option>
-              <option>Third</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="image" class="col-sm-5">Product Image</label>
-          <div class="col-sm-6">
-            <input type="file" class="form-control-file" formControlName="image" id="image" placeholder="Product Image">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="condition" class="col-sm-5">Condition</label>
-          <div class="col-sm-6">
-            <input type="text" class="form-control"
-              [ngClass]="{'is-invalid': f.condition.touched && f.condition.invalid}" formControlName="condition"
-              id="condition" aria-describedby="unitPrice" placeholder="Amount Unit Price">
-            <small id="unitPrice" class="form-text text-muted d-none"
-              [ngClass]="{'d-block': f.condition.touched && f.condition.invalid}">Please provide condition of the
-              property</small>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="seriel" class="col-sm-5">Seriel Number</label>
-          <div class="col-sm-6">
-            <input type="text" class="form-control" formControlName="serialNumber" id="seriel" aria-describedby="seriel"
-              placeholder="Seriel Number">
           </div>
         </div>
         <div class="form-group row">
@@ -183,7 +130,7 @@
         <div class="form-group row">
           <div class="offset-sm-4 col-sm-8">
             <button type="submit" class="btn btn-primary" [disabled]="!content.valid"
-              (click)="submitForm()">Action</button>
+              (click)="submitForm()">Add Inventory</button>
           </div>
         </div>
       </form>

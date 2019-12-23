@@ -1,9 +1,10 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { NgbAlertModule, NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { PathNotFoundComponent } from '@components/path-not-found/path-not-found.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -15,6 +16,13 @@ import { SortableComponent } from './components/sortable/sortable.component';
 import { InventoryFormComponent } from './components/inventory-form/inventory-form.component';
 import { RoomsTableComponent } from './components/rooms-table/rooms-table.component';
 import { SideUserComponent } from './components/side-user/side-user.component';
+import { StaffListComponent } from './components/staff-list/staff-list.component';
+import { MealListComponent } from './components/meal-list/meal-list.component';
+import { SalesLogComponent } from './components/sales-log/sales-log.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { PrinterComponent } from './components/printer/printer.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { RequestTableComponent } from './components/request-table/request-table.component';
 
 
 @NgModule({
@@ -27,7 +35,14 @@ import { SideUserComponent } from './components/side-user/side-user.component';
     SortableComponent,
     InventoryFormComponent,
     RoomsTableComponent,
-    SideUserComponent
+    SideUserComponent,
+    StaffListComponent,
+    MealListComponent,
+    SalesLogComponent,
+    FooterComponent,
+    PrinterComponent,
+    ImageUploadComponent,
+    RequestTableComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +50,8 @@ import { SideUserComponent } from './components/side-user/side-user.component';
     ReactiveFormsModule,
     NgbModule,
     RouterModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    FontAwesomeModule
   ],
   exports: [
     CommonModule,
@@ -51,7 +67,14 @@ import { SideUserComponent } from './components/side-user/side-user.component';
     SortableDirective,
     SortableComponent,
     RoomsTableComponent,
-    SideUserComponent
+    SideUserComponent,
+    StaffListComponent,
+    MealListComponent,
+    SalesLogComponent,
+    FooterComponent,
+    PrinterComponent,
+    ImageUploadComponent,
+    RequestTableComponent
   ],
   providers: [DecimalPipe],
   entryComponents: [
