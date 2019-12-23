@@ -29,7 +29,6 @@
             <tr *ngFor="let product of products | async; let i = index;">
               <th scope="row">{{i.valueOf() + 1}}</th>
               <td>
-                <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + product.flag" class="mr-2" style="width: 20px">
                 <ngb-highlight [result]="product.fullName" [term]="service.searchTerm"></ngb-highlight>
               </td>
               <td><ngb-highlight [result]="product.email| lowercase" [term]="service.searchTerm"></ngb-highlight></td>

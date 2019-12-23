@@ -67,6 +67,12 @@ export class StaffService {
     this._search$.next();
   }
 
+  public updateUser() {
+    return this.api.getAllStaff().subscribe((user) => {
+      this.users.next(user);
+    });
+  }
+
   private _search(): Observable<SearchResult> {
     const { sortColumn, sortDirection, pageSize, page, searchTerm } = this._state;
 

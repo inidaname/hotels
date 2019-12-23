@@ -79,7 +79,6 @@ export class ApiService {
     return this.http
       .post<UserData>(`${this.api}/login`, login)
       .pipe(map(user => {
-        console.log(user)
         this.auth.setUser(user);
         this.getUserById().subscribe();
         return user;
