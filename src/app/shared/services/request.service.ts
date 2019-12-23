@@ -10,8 +10,8 @@ import { ApiService } from './api.service';
 
 
 @Injectable({ providedIn: 'root' })
-export class CountryService {
-  private products: BehaviorSubject<ProductInfo[]>;
+export class RequestService {
+  private requests: BehaviorSubject<ProductInfo[]>;
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _search$ = new Subject<void>();
   private _products$ = new BehaviorSubject<any[]>([]);
@@ -26,10 +26,10 @@ export class CountryService {
   };
 
   constructor(private pipe: DecimalPipe, private api: ApiService) {
-    this.products = new BehaviorSubject(null);
+    this.requests = new BehaviorSubject(null);
 
-    this.api.getProduct().subscribe((products: ProductInfo[]) => {
-      this.products.next(products);
+    this.api.getallRequest().subscribe((requests: ProductInfo[]) => {
+      this.requests.next(requests);
     });
 
     this._search$.pipe(
@@ -46,7 +46,7 @@ export class CountryService {
     this._search$.next();
   }
 
-  get product$() { return this.products.asObservable(); }
+  get request$() { return this.requests.asObservable(); }
   get products$() { return this._products$.asObservable(); }
   get total$() { return this._total$.asObservable(); }
   get loading$() { return this._loading$.asObservable(); }
@@ -66,8 +66,8 @@ export class CountryService {
   }
 
   updateData() {
-    return this.api.getProduct().subscribe((products: ProductInfo[]) => {
-      this.products.next(products);
+    return this.api.getProduct().subscribe((requests: ProductInfo[]) => {
+      this.requests.next(requests);
     });
   }
 
@@ -75,7 +75,7 @@ export class CountryService {
     const { sortColumn, sortDirection, pageSize, page, searchTerm } = this._state;
 
     // 1. sort
-    let content = sort(this.products.value, sortColumn, sortDirection);
+    let content = sort(this.requests.value, sortColumn, sortDirection);
     // 2. filter
     content = content.filter(country => matches(country, searchTerm, this.pipe));
     const total = content.length;

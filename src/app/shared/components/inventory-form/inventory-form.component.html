@@ -10,7 +10,7 @@
   <div class="modal-body">
     <div class="container">
       <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-12">
           <div class="row">
             <div class="col-sm-6">
               Property Name:
@@ -52,17 +52,10 @@
             </div>
           </div>
         </div>
-        <div class="col-sm 3">
-          <figure class="figure">
-            <img src="assets/" class="figure-img img-fluid rounded shadow col-sm-12" alt="Product Image">
-            <figcaption class="figure-caption text-xs-right"></figcaption>
-          </figure>
-        </div>
       </div>
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" name="" id="" class="btn btn-outline-success btn-sm">Edit</button>
     <button type="button" name="" id="" class="btn btn-outline-secondary btn-sm"
       (click)="modal.close('Close click')">Close</button>
   </div>
@@ -111,12 +104,6 @@
           <label for="description" class="col-sm-5 col-form-label">Property Description</label>
           <div class="col-sm-6">
             <textarea formControlName="description" id="" cols="30" rows="5"></textarea>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="image" class="col-sm-5">Property Image</label>
-          <div class="col-sm-6">
-            <input type="file" class="form-control-file" formControlName="image" id="image" placeholder="Product Image">
           </div>
         </div>
         <div class="form-group row">

@@ -19,8 +19,8 @@
             <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
-              <th scope="col" sortable="manufacturer" (sort)="onSort($event)">Manufactured By</th>
+              <th scope="col" sortable="name" (sort)="onSort($event)">Request By</th>
+              <th scope="col" sortable="manufacturer" (sort)="onSort($event)">Product Request</th>
               <th scope="col" sortable="quantity" (sort)="onSort($event)">Quantity</th>
               <th scope="col" sortable="productPrice" (sort)="onSort($event)">Unit Price</th>
               <th scope="col">Actions</th>
@@ -57,4 +57,3 @@
         </form>
   </div>
 </div>
-<button type="button" name="" id="" class="btn btn-secondary offset-5" (click)="openModal()">Add New</button>

@@ -22,6 +22,7 @@ import { SalesLogComponent } from './components/sales-log/sales-log.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { PrinterComponent } from './components/printer/printer.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { RequestTableComponent } from './components/request-table/request-table.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
     SalesLogComponent,
     FooterComponent,
     PrinterComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    RequestTableComponent
   ],
   imports: [
     CommonModule,
@@ -71,7 +73,8 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
     SalesLogComponent,
     FooterComponent,
     PrinterComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    RequestTableComponent
   ],
   providers: [DecimalPipe],
   entryComponents: [
