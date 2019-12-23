@@ -1,25 +1,27 @@
-import hotelModel from './hotel.js';
-import userModel from './user.js';
-import dataModel from './data.js';
-import roomModel from './room.js';
-import productModel from './product.js';
-import salesLogModel from './salesLog.js';
-import expenditureModel from './expenditure.js';
-import supplyModel from './supply.js';
-import inventoryModel from './inventory.js';
-import roomLogsModel from './roomLogs.js';
-import restaurantModel from './restaurant.js';
+import userModel from './user';
+import roomModel from './room';
+import reservationModel from './reservation'
+import roomTypeModel from './roomType'
+import productModel from './product';
+import salesLogModel from './salesLog';
+import expenditureModel from './expenditure';
+import stockModel from './stock';
+import roomLogsModel from './roomLogs';
+import restaurantModel from './restaurant';
+import restaurantLogModel from './restaurantLog'
+import productRequestModel from './productRequest'
 
 export {
   userModel,
-  hotelModel,
-  dataModel,
   roomModel,
+  reservationModel,
+  roomTypeModel,
   productModel,
   salesLogModel,
   expenditureModel,
-  supplyModel,
-  inventoryModel,
+  stockModel,
   roomLogsModel,
-  restaurantModel
+  restaurantModel,
+  restaurantLogModel,
+  productRequestModel
 };

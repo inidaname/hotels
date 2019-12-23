@@ -3,9 +3,17 @@ import bcrypt from 'bcryptjs';
 import validator from 'mongoose-unique-validator';
 
 const userSchema = new mongoose.Schema({
+  registeredBy:{
+    type: mongoose.Types.ObjectId,
+    ref: 'User'
+  },
   fullName: {
     type: String,
     required: [true, `Please provide your Full Name`]
+  },
+  username: {
+    type: String,
+    unique: true
   },
   password: {
     type: String,
@@ -16,38 +24,23 @@ const userSchema = new mongoose.Schema({
     unique: true,
     trim: true,
     lowercase: true,
-    required: [true, `Please provide your Email address`]
   },
   phoneNumber: {
     type: String,
     unique: true,
     required: [true, `Please provide your Phone Number`]
   },
-  username: {
-    type: String,
-    unique: true
-  },
   userType: {
     type: String,
-    enum: [
-      'admin',
-      'account',
-      'stock',
-      'user'
-    ],
+    enum: ['superadmin', 'admin', 'user'],
     default: 'user'
-  },
-  dataId: {
-    type: mongoose.Types.ObjectId,
-    ref: 'Data',
-    default: null
   }
 }, { timestamps: true });
 
 userSchema.plugin(validator);
 
 userSchema.pre('save', function(next) {
-	if (this.p && !this.isModified('password')) {
+	if (this.password && !this.isModified('password')) {
 		return next();
 	}
 	bcrypt.hash(this.password, 10, (err, hash) => {
@@ -59,5 +52,19 @@ userSchema.pre('save', function(next) {
 		next();
 	});
 });
+
+userSchema.methods.checkPassword = function(password) {
+  const passwordHash = this.password;
+  return new Promise((resolve, reject) => {
+    bcrypt.compare(password, passwordHash, (err, same) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(same);
+    });
+  });
+};
+
+
 
 export default mongoose.model('User', userSchema, 'user');

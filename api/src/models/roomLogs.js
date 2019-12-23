@@ -9,45 +9,54 @@ const roomLogsSchema = new mongoose.Schema({
     type: String,
     required: [true, `Please provide customer's name`]
   },
-  customerEmail: {
-    type: String
+  customerAddress:String,
+  customerProffesion: String,
+  customerEmail: String,
+  nationality: String,
+  city: String,
+  country: String,
+  comingFrom: String,
+  nextDestination: String,
+  passportNo: String,
+  issuedAt: String,
+  issueDate: String,
+  arrivalDate: {
+    type: Date
   },
-  customerPhone: {
-    type: String
+  departureDate: {
+    type: Date
   },
-  customerAddress: {
-    type: String
-  },
-  customerPurpose: {
-    type: String
-  },
-  room: {
+  customerNumber: String,
+  paymentMethod: String,
+  companyName: String,
+  companyAddress: String,
+  companyNumber: String,
+  purposeOfVisit: String,
+  roomNumber: String, //To be edited IMPORTANT
+  room: [{
     type: mongoose.Types.ObjectId,
     ref: 'Room'
-  },
+  }],
   checkedOutBy: {
     type: mongoose.Types.ObjectId,
     ref: 'User'
   },
+  numberOfPersons: Number,
   checkedInStatus: {
     type: String,
-    enum: ['checked in', 'checked out', 'reserved']
+    enum: ['occupied', 'available', 'reserved'],
   },
   amountPaid: {
     type: Number,
     required: [true, `Please provide amount to pay`]
   },
-  customerIDCard: {
-    type: String
+  receipt:{
+    type: String,
+    unique: true
   },
-  paymentMethod: {
-    type: String
-  },
-  customerTotalCharge: {
-    type: Number,
-    required: [true, `Please provide amount to charge customer`]
-  },
-  // otherServices: []
+  image: String
+  
+ 
 }, {timestamps: true})
 
 export default mongoose.model('RoomLogs', roomLogsSchema, 'roomLogs');

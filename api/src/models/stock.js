@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
-const inventorySchema = new mongoose.Schema({
-  stockName: {
+const stockSchema = new mongoose.Schema({
+  name: {
     type: String,
     required: [true, `Please provide name of Stock`]
   },
@@ -12,18 +12,9 @@ const inventorySchema = new mongoose.Schema({
     type: Number,
     required: [true, `Please provide quantity of stock`]
   },
-  department: {
-    type: String
-  },
-  condition: {
-    type: String
-  },
-  serialNumber: {
-    type: Number
-  },
+  
   manufacturer: String,
   valuePrice: Number,
-  image: String
 }, { timestamps: true });
 
-export default mongoose.model('Inventory', inventorySchema, 'inventory');
+export default mongoose.model('Stock', stockSchema, 'stock');

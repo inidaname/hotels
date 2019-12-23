@@ -38,7 +38,8 @@ export async function editRoom(req, res) {
 
 export async function getAllRooms(req, res) {
   try {
-    const getRooms = await roomModel.find().lean().select('-__v').exec();
+    const getRooms = await roomModel.find().lean().select('-__v').populate('roomTypeId', '-__v').exec();
+   
 
     return res.status(200).json({message: `List of all rooms`, data: getRooms});
   } catch (error) {
@@ -54,7 +55,7 @@ export async function getRoomById(req, res) {
       throw {message: `Rooms dose not exist`, status: 404};
     }
 
-    const getRoom = await roomModel.findById(id).lean().select('-__v').exec();
+    const getRoom = await roomModel.findById(id).lean().select('-__v').populate('roomTypeId', '-__v').exec();
 
     if (!getRoom) {
       throw {message: `Rooms dose not exist`, status: 404};

@@ -1,4 +1,4 @@
-import { expenditureModel } from '../models/index.js';
+import { expenditureModel } from '../models';
 
 export async function createExpen(req, res) {
   try {

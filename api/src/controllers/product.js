@@ -4,7 +4,7 @@ export async function createProduct(req, res) {
   try {
     const { manufacturedDate, expiryDate } = req.body;
 
-    req.body.manufacturedDate = new Date(manufacturedDate.year, manufacturedDate.month, manufacturedDate.day)
+    // req.body.manufacturedDate = new Date(manufacturedDate.year, manufacturedDate.month, manufacturedDate.day)
     req.body.expiryDate = new Date(expiryDate.year, expiryDate.month, expiryDate.day)
 
     const addProduct = await productModel.create({ ...req.body });

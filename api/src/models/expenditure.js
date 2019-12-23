@@ -39,7 +39,6 @@ const expenditureSchema = new mongoose.Schema({
   purpose: {
     type: String
   },
-  image: String,
   whenDue: Date,
   quantityRequest: {
     type: Number

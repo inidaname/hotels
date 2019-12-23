@@ -2,27 +2,20 @@ import mongoose from 'mongoose';
 import validator from 'mongoose-unique-validator';
 
 const roomSchema = new mongoose.Schema({
-  roomName: {
-    type: String,
-    unique: true
-  },
   roomNumber: {
     type: Number,
     unique: true
   },
-  roomType: String,
-  roomDescription: String,
+  roomTypeId: {
+    type: mongoose.Types.ObjectId,
+    ref: 'RoomType'
+  },
   roomStatus: {
     type: String,
-    enum: ['occupied', 'available'],
+    enum: ['occupied', 'available', 'reserved'],
     default: 'available'
   },
   roomCondition: String,
-  roomPrice: {
-    type: Number,
-    required: [true, `Please provide the price for the room`]
-  },
-  image: String
 }, {timestamps: true});
 
 roomSchema.plugin(validator);

@@ -6,11 +6,8 @@ const restaurantSchema = new mongoose.Schema({
     type: String,
     required: [true, `Please provide a name`]
   },
-  mealType: String,
-  mealNumber: Number,
   mealDescription: String,
   mealPrice: Number,
-  mealImage: String,
 });
 
 restaurantSchema.plugin(validator);

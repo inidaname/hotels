@@ -1,23 +1,23 @@
-import { salesLogModel } from '../models/index.js';
+import { restaurantLogModel } from '../models';
 import { genRandom } from '../utils/helper';
 
-export async function createSaleLog(req, res){
+export async function createRestaurantLog(req, res){
   try {
 
     const receipt = genRandom(5);
-    const addLog = await salesLogModel.create({...req.body, receipt});
-    
+    const addLog = await restaurantLogModel.create({...req.body, receipt});
+
     if (addLog) {
-      addLog.populate(['sellerId', 'productSold.productDetail', 'complimentVal'], function(err, doc) {
-        return res.status(200).json({message: `Log successfully`, data: doc});
-      })  
+      return res.status(200).json({message: `Log successfully`, data: addLog});
     }
   } catch (error) {
     return res.status(error.status || 500).json({message: error.message})
   }
 }
 
-export async function editSales(req, res) {
+
+
+export async function editRestaurants(req, res) {
   try {
     const { id } = req.params;
     if (!id) {
@@ -30,7 +30,7 @@ export async function editSales(req, res) {
       updates[option] = options[option];
     }
 
-    const updateLog = await salesLogModel.findByIdAndUpdate(id, updates, { new: true }).lean();
+    const updateLog = await RestaurantLogModel.findByIdAndUpdate(id, updates, { new: true }).lean();
 
     if (updateLog) {
       return res.status(200).json({ message: `Log updated successfully`, data: updateLog });
@@ -46,7 +46,7 @@ export async function deleteLog(req, res) {
     if (!id) {
       throw { message: `Log to edit must be selected`, status: 400 }
     }
-    const toDelete = await salesLogModel.findByIdAndDelete(id, {new: true});
+    const toDelete = await RestaurantLogModel.findByIdAndDelete(id, {new: true});
 
     if (toDelete) {
       return res.status(200).json({ message: `Log Deleted successfully`, data: toDelete });

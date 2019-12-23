@@ -5,8 +5,8 @@
   "main": "server/server.js",
   "type": "module",
   "scripts": {
-    "start": "node --experimental-modules server/server.js",
-    "dev": "nodemon --experimental-modules server/server.js"
+    "start": "node -r esm server/server.js",
+    "dev": "nodemon -r esm server/server.js"
   },
   "keywords": [],
   "author": "",
@@ -17,9 +17,11 @@
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^8.1.0",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "helmet": "^3.21.0",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
     "mongoose": "^5.7.0",
     "mongoose-unique-validator": "^2.0.3",
     "morgan": "^1.9.1",

@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import validator from 'mongoose-unique-validator';
 
 const productSchema = new mongoose.Schema({
-  productName: {
+  name: {
     required: [true, `Please provide product Name`],
     type: String,
     unique: true
@@ -11,7 +11,11 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: [true, `Please provide product manufacturer`]
   },
-  productPrice: {
+  poolBarPrice: {
+    type: Number,
+    required: [true, `Please provide the unit Price`]
+  },
+  mainBarPrice: {
     type: Number,
     required: [true, `Please provide the unit Price`]
   },
@@ -23,15 +27,6 @@ const productSchema = new mongoose.Schema({
     type: Date,
     required: [true, `Please provide Expiry date`]
   },
-  manufacturedDate: {
-    type: Date,
-    required: [true, `Please provide Expiry date`]
-  },
-  image: String,
-  serialNumber: {
-    type: String,
-    required: [true, `Please provide the Serial Number`]
-  },
   quantity: {
     type: Number
   },
@@ -41,7 +36,6 @@ const productSchema = new mongoose.Schema({
   }
 }, { timestamps: { createdAt: 'added_on', updatedAt: 'edited_on' } });
 
-// consider return policy for products
 
 productSchema.plugin(validator);
 
