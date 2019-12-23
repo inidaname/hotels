@@ -1,16 +1,15 @@
 <article class="m-4 row p-4">
-  <section class="mt-2 mb-5 shadow col-12 p-4 rounded-lg bg-white">
-    <h4 class="col-12 text-center">List of Rooms</h4>
-    <app-rooms-table [purpose]="'product'"></app-rooms-table>
-  </section>
-  <section class="row my-5 mx-auto col-12 p-4 rounded-lg shadow">
+  <section class="my-5 mx-auto col-12 p-4 rounded-lg shadow">
     <h4 class="col-12 text-center">Guest List <small>For the day</small></h4>
     <app-rooms-table [purpose]="'product'"></app-rooms-table>
   </section>
   <section class="row my-5 p-4 shadow col-12 mx-auto rounded-lg">
     <h4 class="col-12 text-center">Create and Manage Rooms</h4>
+    <ngb-alert *ngIf="message" [dismissible]="true" class="d-block col-12" (close)="close()" [type]="alertType">
+      {{message}}
+    </ngb-alert>
     <div class="col-12 my-3">
-      <button class="btn btn-primary" (click)="openModal(content)">Edit Room Types</button>
+      <button class="btn btn-primary" (click)="openModal(content)">Add Room Types</button>
     </div>
     <ng-template #content>
       <div class="modal-body">
@@ -74,6 +73,10 @@
         </div>
       </form>
     </div>
+  </section>
+  <section class="mt-2 mb-5 shadow col-12 p-4 rounded-lg bg-white">
+    <h4 class="col-12 text-center">List of Rooms</h4>
+    <app-rooms-table [purpose]="'product'"></app-rooms-table>
   </section>
   <section class="shadow rounded-lg col-12 my-5 mx-auto p-4 row">
     <h4 class="col-12 text-center">Hotel Services</h4>
