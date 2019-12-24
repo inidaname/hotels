@@ -23,6 +23,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { PrinterComponent } from './components/printer/printer.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { RequestTableComponent } from './components/request-table/request-table.component';
+import { InventorySortComponent } from './components/inventory-sort/inventory-sort.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { RequestTableComponent } from './components/request-table/request-table.
     FooterComponent,
     PrinterComponent,
     ImageUploadComponent,
-    RequestTableComponent
+    RequestTableComponent,
+    InventorySortComponent
   ],
   imports: [
     CommonModule,
@@ -74,7 +76,8 @@ import { RequestTableComponent } from './components/request-table/request-table.
     FooterComponent,
     PrinterComponent,
     ImageUploadComponent,
-    RequestTableComponent
+    RequestTableComponent,
+    InventorySortComponent
   ],
   providers: [DecimalPipe],
   entryComponents: [

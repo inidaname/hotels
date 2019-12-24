@@ -5,19 +5,18 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SortableDirective } from '@directives/sortable.directive';
 import { ProductFormComponent } from '@components/product-form/product-form.component';
 import { InventoryFormComponent } from '@components/inventory-form/inventory-form.component';
-import { CountryService } from '@services/countries.service';
 import { Observable } from 'rxjs';
 import { ProductInfo, SortEvent } from '@shared/interface';
 import { ApiService } from '@services/api.service';
 import { InventoryService } from '@services/inventory.service';
 
 @Component({
-  selector: 'app-sortable',
-  templateUrl: './sortable.component.html',
-  styleUrls: ['./sortable.component.scss'],
-  providers: [CountryService, DecimalPipe]
+  selector: 'app-inventory-sort',
+  templateUrl: './inventory-sort.component.html',
+  styleUrls: ['./inventory-sort.component.scss'],
+  providers: [InventoryService, DecimalPipe]
 })
-export class SortableComponent implements OnInit {
+export class InventorySortComponent implements OnInit {
 
   products: Observable<any>;
   total$: Observable<number>;
@@ -29,16 +28,15 @@ export class SortableComponent implements OnInit {
 
   constructor(
     private modal: NgbModal,
-    public service: CountryService,
-    public inventory: InventoryService,
+    public service: InventoryService,
     private api: ApiService
     ) {
-      this.total$ = (this.purpose === 'product') ? service.total$ : inventory.total$;
+      this.total$ = service.total$;
     }
 
     ngOnInit() {
       this.component = (this.purpose === 'product') ? ProductFormComponent : InventoryFormComponent;
-      this.products = (this.purpose === 'product') ? this.service.products$ : this.inventory.inventories$;
+      this.products = this.service.inventories$;
   }
 
   openModal() {
@@ -69,4 +67,5 @@ export class SortableComponent implements OnInit {
     console.log(da)
     return da._id
   }
+
 }

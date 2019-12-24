@@ -28,14 +28,16 @@ export class RoomsTableComponent implements OnInit {
   @Input() purpose: string;
   component: typeof ProductFormComponent | typeof InventoryFormComponent;
   guests: Observable<any[]>;
+  guestTotal$: Observable<number>;
 
   constructor(
     private modal: NgbModal,
     public service: RoomService,
     private api: ApiService,
-    private guestService: GuestService
+    public guestService: GuestService
   ) {
     this.total$ = service.total$;
+    this.guestTotal$ = guestService.total$;
     this.checkContent = false;
   }
 

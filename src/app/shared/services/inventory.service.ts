@@ -26,10 +26,11 @@ export class InventoryService {
   };
 
   constructor(private pipe: DecimalPipe, private api: ApiService) {
-    this.inventories = new BehaviorSubject(null)
+    this.inventories = new BehaviorSubject([])
 
-    this.api.getInventory().subscribe((inventories: InventoryInfo[]) => {
-      this.inventories.next(inventories)
+    const invent = this.api.getInventory().subscribe((inventories: InventoryInfo[]) => {
+      this.inventories.next(inventories);
+      invent.unsubscribe();
     });
 
     this._search$.pipe(
@@ -39,6 +40,7 @@ export class InventoryService {
       delay(200),
       tap(() => this._loading$.next(false))
     ).subscribe(result => {
+      console.log(result)
       this._inventories$.next(result.content);
       this._total$.next(result.total);
     });

@@ -26,7 +26,7 @@ export class CountryService {
   };
 
   constructor(private pipe: DecimalPipe, private api: ApiService) {
-    this.products = new BehaviorSubject(null);
+    this.products = new BehaviorSubject([]);
 
     this.api.getProduct().subscribe((products: ProductInfo[]) => {
       this.products.next(products);
