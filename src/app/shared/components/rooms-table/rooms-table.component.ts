@@ -8,12 +8,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from '@services/api.service';
 import { DecimalPipe } from '@angular/common';
 import { RoomService } from '@services/room.service';
+import { GuestService } from '@services/guest.service';
 
 @Component({
   selector: 'app-rooms-table',
   templateUrl: './rooms-table.component.html',
   styleUrls: ['./rooms-table.component.scss'],
-  providers: [RoomService, DecimalPipe]
+  providers: [RoomService, GuestService, DecimalPipe]
 })
 export class RoomsTableComponent implements OnInit {
 
@@ -26,18 +27,23 @@ export class RoomsTableComponent implements OnInit {
 
   @Input() purpose: string;
   component: typeof ProductFormComponent | typeof InventoryFormComponent;
+  guests: Observable<any[]>;
 
   constructor(
     private modal: NgbModal,
     public service: RoomService,
-    private api: ApiService
+    private api: ApiService,
+    private guestService: GuestService
   ) {
     this.total$ = service.total$;
     this.checkContent = false;
   }
 
   ngOnInit() {
-    this.rooms = this.service.roomsGet$;
+    console.log(this.purpose)
+    this.rooms = this.service.products$;
+    this.guests = this.guestService.products$;
+    this.guests.subscribe(e => console.log(e))
   }
 
   clickMe(value) {

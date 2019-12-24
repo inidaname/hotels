@@ -33,6 +33,7 @@ export class RoomService {
     this.rooms = new BehaviorSubject<RoomInfo[]>([]);
 
     const getRo = this.api.getRooms().subscribe((rooms: RoomInfo[]) => {
+      console.log(rooms)
       this.rooms.next(rooms);
       getRo.unsubscribe();
     });
@@ -51,7 +52,6 @@ export class RoomService {
     this._search$.next();
   }
 
-  get roomsGet$() { return this.rooms.asObservable(); }
   get products$() { return this.rooms$.asObservable(); }
   get total$() { return this._total$.asObservable(); }
   get loading$() { return this._loading$.asObservable(); }

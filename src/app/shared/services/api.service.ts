@@ -115,13 +115,18 @@ export class ApiService {
   }
 
   getGuest(id) {
-    console.log(id)
     return this.http
       .get(`${this.api}/roomlodge/${id}`)
       .pipe(map((guest: any) => {
         console.log(guest)
         return guest.data;
       }), catchError(this.handleError));
+  }
+
+  getGuests() {
+    return this.http
+      .get(`${this.api}/roomlodge`)
+      .pipe(map((guest: any) => guest.data), catchError(this.handleError));
   }
 
   createProduct(product: Products): Observable<ProductData> {
