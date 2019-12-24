@@ -189,7 +189,7 @@ export class ApiService {
   getRooms(id?: string): Observable<RoomInfo[] | RoomInfo> {
     return this.http
       .get(`${this.api}/room/?${id}`)
-      .pipe(map((room: RoomData) => room.data), catchError(this.handleError));
+      .pipe(map((room: RoomData) => room.data), catchError(this.handleError))
   }
 
   getMeals(id?: string): Observable<RoomInfo[] | RoomInfo> {

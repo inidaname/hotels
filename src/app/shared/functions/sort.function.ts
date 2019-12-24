@@ -22,6 +22,8 @@ export function matches(country: ProductInfo, term: string, pipe: PipeTransform)
   return values.map(f => {
     if (typeof f === 'number') {
      return pipe.transform(f).includes(term);
+    } else if (typeof f === 'object') {
+      return;
     }
     return f.toLowerCase().includes(term.toLowerCase());
   });

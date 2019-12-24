@@ -37,7 +37,8 @@ export class RoomsTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.rooms = this.service.roomsGet$;
+    this.rooms = this.service.products$;
+    console.log(this.purpose)
   }
 
   clickMe(value) {
