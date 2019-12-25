@@ -169,8 +169,7 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
       });
 
       this.roomService.currentReservation.subscribe((res) => {
-        this.reserve = res
-        console.log(this.reserve)
+        this.reserve = res;
       } );
 
       this.roomService.currentRoom.subscribe(data => {
@@ -185,8 +184,10 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
     this.roomService.currentProduct.subscribe((da) => {
       if (da) {
         this.product = da;
-        this.sumQuantity = da.reduce((a, b) => a + b.quantity, 0);
-        this.sumPrice = da.reduce((a, b) => a + (b.product.productPrice * b.quantity), 0);
+        console.log(da);
+        this.sumQuantity = this.product.sale.reduce((a, b) => a + b.quantity, 0);
+        this.sumPrice = this.product.sale.reduce((a, b) => a + ((this.product.bar === 'MainBar') ? b.product.mainBarPrice * b.quantity
+        : b.product.poolBarPrice * b.quantity), 0);
       }
     });
   }

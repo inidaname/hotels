@@ -80,10 +80,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of product; let i = index;">
-          <td>{{item.product.productName}}</td>
+        <tr *ngFor="let item of product.sale; let i = index;">
+          <td>{{item.product.name}}</td>
           <td>{{item.quantity}}</td>
-          <td>{{item.product.productPrice * item.quantity}}</td>
+          <td>{{(product.bar === 'MainBar') ? item.product.mainBarPrice * item.quantity : item.product.poolBarPrice * item.quantity}}</td>
         </tr>
       </tbody>
       <tfoot>

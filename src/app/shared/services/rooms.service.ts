@@ -36,7 +36,7 @@ export class RoomsService {
   }
 
   setTotalPrice(data: any) {
-    return this.currentProductSold.next(data)
+    return this.currentProductSold.next(data);
   }
 
   getTotalPrice() {
