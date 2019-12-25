@@ -32,8 +32,9 @@ export class MealService {
 
     this.meals = new BehaviorSubject<RestaurantInfo[]>([]);
 
-    this.api.getMeals().subscribe((meals: any) => {
+    const forMeal = this.api.getMeals().subscribe((meals: any) => {
       this.meals.next(meals);
+      forMeal.unsubscribe();
     });
 
     this._search$.pipe(
@@ -67,6 +68,16 @@ export class MealService {
   private _set(patch: Partial<State>) {
     Object.assign(this._state, patch);
     this._search$.next();
+  }
+
+  public updateProd() {
+    const forMeal = this.api.getMeals().subscribe((meals: any) => {
+      this.meals.next(meals);
+      this._search$.next();
+      forMeal.unsubscribe();
+    });
+
+    return forMeal;
   }
 
   private _search(): Observable<SearchResult> {

@@ -1,15 +1,15 @@
+<ngx-spinner></ngx-spinner>
 <article class="m-4 row bg-white p-4">
   <section class="mt-2 mb-5 shadow col-12 p-4 rounded-lg">
-    <h4 class="col-12 text-center">List of Meals</h4>
-    <app-meal-list [purpose]="'inventory'"></app-meal-list>
-  </section>
-  <section class="row my-5 mx-auto col-12 p-4 rounded-lg shadow">
     <h4 class="col-12 text-center">Sale Made <small>For the day</small></h4>
     <app-meal-list [purpose]="'sales'"></app-meal-list>
   </section>
   <section class="row my-5 p-4 shadow col-12 mx-auto rounded-lg">
     <h4 class="col-12 text-center">Create and Manage Restaurant Menu</h4>
     <div class="container">
+      <ngb-alert *ngIf="message" [dismissible]="true" class="col-12" (close)="close()" [type]="alertType">
+        {{message}}
+      </ngb-alert>
       <form [formGroup]="mealForm" class="row m-auto align-items-center justify-content-around">
         <div class="form-group col-3">
           <label for="mealName">Meal Name</label>
@@ -36,5 +36,9 @@
         </div>
       </form>
     </div>
+  </section>
+  <section class="mt-2 mb-5 shadow col-12 p-4 rounded-lg">
+    <h4 class="col-12 text-center">List of Meals</h4>
+    <app-meal-list [purpose]="'inventory'" [sett]="sett"></app-meal-list>
   </section>
 </article>

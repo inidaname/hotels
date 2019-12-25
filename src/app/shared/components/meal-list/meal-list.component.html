@@ -20,8 +20,7 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
-              <th scope="col" sortable="manufacturer" (sort)="onSort($event)">Manufactured By</th>
-              <th scope="col" sortable="quantity" (sort)="onSort($event)">Quantity</th>
+              <th scope="col">Description</th>
               <th scope="col" sortable="productPrice" (sort)="onSort($event)">Unit Price</th>
               <th scope="col">Actions</th>
             </tr>
@@ -30,15 +29,12 @@
             <tr *ngFor="let product of products | async; let i = index;">
               <th scope="row">{{i.valueOf() + 1}}</th>
               <td>
-                <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + product.flag" class="mr-2" style="width: 20px">
-                <ngb-highlight [result]="product.name" [term]="service.searchTerm"></ngb-highlight>
+                <ngb-highlight [result]="product.mealName" [term]="service.searchTerm"></ngb-highlight>
               </td>
-              <td><ngb-highlight [result]="product.manufacturer | uppercase" [term]="service.searchTerm"></ngb-highlight></td>
-              <td><ngb-highlight [result]="product.quantity | number" [term]="service.searchTerm"></ngb-highlight></td>
-              <td><ngb-highlight [result]="product.valuePrice | currency: 'NGN' : 'symbol-narrow'" [term]="service.searchTerm"></ngb-highlight></td>
+              <td><ngb-highlight [result]="product.mealDescription" [term]="service.searchTerm"></ngb-highlight></td>
+              <td><ngb-highlight [result]="product.mealPrice | currency: 'NGN' : 'symbol-narrow'" [term]="service.searchTerm"></ngb-highlight></td>
               <td>
-                <button type="button" class="btn btn-sm btn-outline-primary mx-2">Supplies</button>
-                <button type="button" class="btn btn-sm btn-outline-success mx-2">Edit</button>
+                <button type="button" class="btn btn-sm btn-outline-danger mx-2" disabled>Delete</button>
               </td>
             </tr>
             </tbody>

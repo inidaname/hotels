@@ -59,6 +59,7 @@ export class StaffComponent implements OnInit {
           this.spinner.hide('create');
           this.staff.updateUser();
           this.whatbring = true;
+          this.staffForm.reset();
           createUser.unsubscribe();
         }
       },
@@ -67,6 +68,8 @@ export class StaffComponent implements OnInit {
           this.alertType = 'danger';
           this.spinner.hide('create');
           this.staff.updateUser();
+          this.whatbring = true;
+          this.staffForm.reset();
           createUser.unsubscribe();
         });
     }
