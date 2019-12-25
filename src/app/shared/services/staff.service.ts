@@ -30,8 +30,9 @@ export class StaffService {
 
   constructor(private pipe: DecimalPipe, private api: ApiService) {
 
-    this.api.getAllStaff().subscribe((user) => {
+    const users = this.api.getAllStaff().subscribe((user) => {
       this.users.next(user);
+      users.unsubscribe()
     });
 
     this._search$.pipe(
@@ -68,9 +69,12 @@ export class StaffService {
   }
 
   public updateUser() {
-    return this.api.getAllStaff().subscribe((user) => {
+    const users = this.api.getAllStaff().subscribe((user) => {
       this.users.next(user);
+      this._search$.next();
+      users.unsubscribe()
     });
+    return users;
   }
 
   private _search(): Observable<SearchResult> {

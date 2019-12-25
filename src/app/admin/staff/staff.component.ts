@@ -3,6 +3,7 @@ import { ApiService } from '@services/api.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { StaffService } from '@services/staff.service';
+import { StaffListComponent } from '@components/staff-list/staff-list.component';
 
 @Component({
   templateUrl: './staff.component.html',
@@ -13,13 +14,17 @@ export class StaffComponent implements OnInit {
   staffForm: FormGroup;
   message: any;
   alertType: string;
+  component: StaffListComponent;
+  whatbring: boolean;
 
   constructor(
     private api: ApiService,
     private fb: FormBuilder,
     private spinner: NgxSpinnerService,
     private staff: StaffService
-  ) { }
+  ) {
+    this.whatbring = false;
+  }
 
   ngOnInit() {
     this.staffForm = this.fb.group({
@@ -53,6 +58,7 @@ export class StaffComponent implements OnInit {
           this.alertType = 'success';
           this.spinner.hide('create');
           this.staff.updateUser();
+          this.whatbring = true;
           createUser.unsubscribe();
         }
       },

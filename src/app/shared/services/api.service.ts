@@ -37,6 +37,12 @@ export class ApiService {
       }), catchError(this.handleError));
   }
 
+  deleteUser(id) {
+    return this.http
+      .delete(`${this.api}/users/${id}`, this.headersOpt)
+      .pipe(map(user => user), catchError(this.handleError));
+  }
+
   updateReq(data, id) {
     return this.http.put(`${this.api}/request/${id}`, data)
       .pipe(map((dat: any) => dat), catchError(this.handleError))

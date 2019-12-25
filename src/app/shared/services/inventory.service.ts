@@ -40,7 +40,6 @@ export class InventoryService {
       delay(200),
       tap(() => this._loading$.next(false))
     ).subscribe(result => {
-      console.log(result)
       this._inventories$.next(result.content);
       this._total$.next(result.total);
     });
