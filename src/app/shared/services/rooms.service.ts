@@ -35,7 +35,7 @@ export class RoomsService {
   }
 
   sendRoom(data: any) {
-    return this.currentSendSubject.next(data)
+    return this.currentSendSubject.next(data);
   }
 
   setData(data: any): void {

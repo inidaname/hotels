@@ -49,7 +49,7 @@ export class ProfileComponent implements OnInit {
       }
     });
 
-    const getRe = this.api.getRequestByUser(this.jwt.decodeToken().userId).subscribe((re: any) => console.log(re))
+    const getRe = this.api.getRequestByUser(this.jwt.decodeToken().userId).subscribe((re: any) => console.log(re));
 
     const adm = this.api.getAllStaff().subscribe( (admins: any) => {
       this.admin = admins.filter( v => v.userType === 'admin' || v.userType === 'superadmin');
@@ -93,7 +93,7 @@ export class ProfileComponent implements OnInit {
       requestBy: this.jwt.decodeToken().userId,
       productRequest: this.reqData,
       bar: 'Pool bar'
-    }
+    };
     const send = this.api.sendRequest(obs).subscribe(e => {
       if (e) {
         this.reqData = [];

@@ -26,7 +26,7 @@ export class InventoryService {
   };
 
   constructor(private pipe: DecimalPipe, private api: ApiService) {
-    this.inventories = new BehaviorSubject([])
+    this.inventories = new BehaviorSubject([]);
 
     const invent = this.api.getInventory().subscribe((inventories: InventoryInfo[]) => {
       this.inventories.next(inventories);

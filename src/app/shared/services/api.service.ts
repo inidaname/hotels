@@ -225,7 +225,7 @@ export class ApiService {
   getBills(id) {
     return this.http
       .get(`${this.api}/roomlodge/bill/${id}`)
-      .pipe(map((bills) => bills), catchError(this.handleError))
+      .pipe(map((bills) => bills), catchError(this.handleError));
   }
 
   private handleError(err: HttpErrorResponse) {

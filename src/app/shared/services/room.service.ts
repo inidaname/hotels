@@ -64,7 +64,7 @@ export class RoomService {
   set sortColumn(sortColumn: string) { this._set({ sortColumn }); }
   set sortDirection(sortDirection: SortDirection) { this._set({ sortDirection }); }
 
-  updateData(){
+  updateData() {
     const gt = this.api.getRooms().subscribe((rooms: RoomInfo[]) => {
       this.rooms.next(rooms);
       gt.unsubscribe();

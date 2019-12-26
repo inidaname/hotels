@@ -65,12 +65,12 @@ export class StaffListComponent implements OnInit, AfterViewChecked {
         this.service.updateUser();
         this.products = this.service.products$;
       }
-    })
+    });
   }
 
 
   trackById(i, da) {
-    console.log(da)
-    return da._id
+    console.log(da);
+    return da._id;
   }
 }

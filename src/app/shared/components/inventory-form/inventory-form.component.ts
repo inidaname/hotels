@@ -43,7 +43,7 @@ export class InventoryFormComponent implements OnInit {
   submitForm() {
     if (this.content.valid) {
       this.spinner.show();
-      const obs = this.api.createInventory(this.content.value)
+      const obs = this.api.createInventory(this.content.value);
       obs.subscribe((cl: any) => {
         this.inventory = cl.data;
         this.spinner.hide();

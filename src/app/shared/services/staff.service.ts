@@ -32,7 +32,7 @@ export class StaffService {
 
     const users = this.api.getAllStaff().subscribe((user) => {
       this.users.next(user);
-      users.unsubscribe()
+      users.unsubscribe();
     });
 
     this._search$.pipe(
@@ -72,7 +72,7 @@ export class StaffService {
     const users = this.api.getAllStaff().subscribe((user) => {
       this.users.next(user);
       this._search$.next();
-      users.unsubscribe()
+      users.unsubscribe();
     });
     return users;
   }

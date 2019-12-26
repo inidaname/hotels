@@ -32,6 +32,6 @@ export class SuperAdminGuard implements CanActivate, CanActivateChild, CanLoad {
         this.router.navigateByUrl('/admin');
         return false;
       }
-    return true;
+      return true;
   }
 }

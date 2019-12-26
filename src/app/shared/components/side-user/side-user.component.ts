@@ -89,7 +89,7 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
         fullScreen: true
       });
       this.api.searchGuest(value).subscribe((guest: any) => {
-        console.log(guest)
+        console.log(guest);
         this.guestName = guest.data.customerName;
         this.lodgeId = guest.data._id;
         this.spinner.hide('check');
@@ -145,7 +145,7 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
     if (this.setRestuarant === false) {
       this.api.makePurchase(purchase).subscribe((sale: any) => {
         localStorage.setItem('print', JSON.stringify(sale));
-        this.printer.setData(purchase)
+        this.printer.setData(purchase);
         if (sale) {
           window.open('/print', '_blank');
           this.message = 'Success';
@@ -171,7 +171,7 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
       this.api.makeMealSales(purchase).subscribe((sold: any) => {
         if (sold) {
           localStorage.setItem('print', JSON.stringify(sold));
-          this.printer.setData(purchase)
+          this.printer.setData(purchase);
           window.open('/print', '_blank');
           this.message = 'Success';
           this.alertType = 'success';
@@ -227,7 +227,7 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
         this.product = da;
         this.sumQuantity = this.product.reduce((a, b) => a + b.quantity, 0);
         if (this.setRestuarant === true) {
-          this.sumPrice = this.product.reduce((a, b) => a + b.product.mealPrice * b.quantity, 0)
+          this.sumPrice = this.product.reduce((a, b) => a + b.product.mealPrice * b.quantity, 0);
         } else {
           this.sumPrice = this.product.reduce((a, b) => a + ((b.place === 'mainBar') ? b.product.mainBarPrice * b.quantity
           : b.product.poolBarPrice * b.quantity), 0);

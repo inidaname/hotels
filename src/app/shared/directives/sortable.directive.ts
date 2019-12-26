@@ -1,7 +1,7 @@
 import { Directive, Input, Output, EventEmitter } from '@angular/core';
 import { SortDirection, SortEvent } from '@shared/interface';
 
-const rotate: {[key: string]: SortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };
+const rotate: {[key: string]: SortDirection} = { asc: 'desc', desc: '', '': 'asc' };
 
 
 @Directive({

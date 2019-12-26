@@ -37,12 +37,12 @@ export class SalesLogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.rooms.subscribe(re => console.log(re))
+    this.rooms.subscribe(re => console.log(re));
     this.sales.subscribe((er: any[]) => {
       if (er.length > 0) {
         for (let i = 0; i < er.length; i++) {
           const element = er[i];
-          let wt = element.productSold.reduce((a, b) => a + b.productQuantity, 0)
+          const wt = element.productSold.reduce((a, b) => a + b.productQuantity, 0);
           this.soldProduct.push(wt);
         }
       }

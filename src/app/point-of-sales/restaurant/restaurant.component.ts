@@ -34,9 +34,9 @@ export class RestaurantComponent implements OnInit {
   ngOnInit() {
     const getProducts = this.api.getMeals().subscribe((product: any) => {
       this.productArray = product;
-      console.log(product)
+      console.log(product);
       getProducts.unsubscribe();
-    })
+    });
     this.productsList = this.products.products$;
     this.productService.setTotalPrice('');
     this.productService.setProduct('');
@@ -53,7 +53,7 @@ export class RestaurantComponent implements OnInit {
   formatter = (x: {name: string}) => x.name;
 
   setProduct(set, ctr) {
-    console.log(set)
+    console.log(set);
     const index = this.cartProd.findIndex(val => val.product._id === set._id);
     const ind = this.productSold.findIndex(val => val.productDetail === set._id);
 

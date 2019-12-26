@@ -49,7 +49,7 @@ export class OtherServiceComponent implements OnInit, AfterViewChecked {
         this.guest$ = guest;
         this.amountToPay = guest.amountPaid;
       }
-    })
+    });
 
     // if (id) {
     //   const getG = this.api.getGuest(id).subscribe(guest => {
@@ -72,7 +72,7 @@ export class OtherServiceComponent implements OnInit, AfterViewChecked {
     this.message = '';
   }
 
-  modal(){
+  modal() {
     const modal = this.modalService.open(this.component, {size: 'lg'});
     modal.componentInstance.uploadLocation = 'GuestsID';
   }
@@ -116,7 +116,7 @@ export class OtherServiceComponent implements OnInit, AfterViewChecked {
         this.message = 'Something went wrong';
         this.alertType = 'danger';
       });
-    })
+    });
   }
 
   takeToPrint() {
@@ -124,7 +124,7 @@ export class OtherServiceComponent implements OnInit, AfterViewChecked {
     window.open('/print', '_blank');
   }
 
-  searchRoom(value){
+  searchRoom(value) {
     this.message = null;
     this.spinner.show('check',
       {
@@ -139,16 +139,16 @@ export class OtherServiceComponent implements OnInit, AfterViewChecked {
       const gu = this.api.searchGuest(value).subscribe((guest: any) => {
         this.guest$ = guest.data;
         this.setToPrint = guest.data;
-        this.spinner.hide()
+        this.spinner.hide();
         gu.unsubscribe();
       }, er => this.message = `No guest found`);
     }
   }
 
-  deleteItem = function(data, i){
+  deleteItem = function(data, i) {
     const url = `https://api.cloudinary.com/v1_1/${this.cloudinary.config().cloud_name}/delete_by_token`;
     const headers = new Headers({ 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' });
-    const options = { headers: headers };
+    const options = { headers };
     const body = {
       token: data.delete_token
     };
@@ -158,6 +158,6 @@ export class OtherServiceComponent implements OnInit, AfterViewChecked {
       this.setIt = false;
       this.image.splice(i, 1);
     });
-  }
+  };
 
 }

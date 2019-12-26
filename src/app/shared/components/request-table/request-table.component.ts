@@ -34,7 +34,7 @@ export class RequestTableComponent implements OnInit {
     private spinner: NgxSpinnerService
 
   ) {
-    if (this.jwt.decodeToken().userType === 'superadmin'){
+    if (this.jwt.decodeToken().userType === 'superadmin') {
       this.checkUser = true;
       this.total$ = service.total$;
     }
@@ -46,13 +46,13 @@ export class RequestTableComponent implements OnInit {
 
   approve(val) {
     val.status = 'approved';
-    this.spinner.show()
+    this.spinner.show();
     const ob = this.api.updateReq(val, val._id).subscribe(er => {
       if (er) {
         this.service.updateData();
       }
       ob.unsubscribe();
-    })
+    });
   }
 
   onSort({column, direction}: SortEvent) {
@@ -67,7 +67,7 @@ export class RequestTableComponent implements OnInit {
     this.service.sortDirection = direction;
   }
 
-  justOpen(id: ProductInfo){
+  justOpen(id: ProductInfo) {
     const newModal = this.modal.open(ProductFormComponent);
     newModal.componentInstance.name = 'Get';
     newModal.componentInstance.product = id;
@@ -75,8 +75,8 @@ export class RequestTableComponent implements OnInit {
   }
 
   trackById(i, da) {
-    console.log(da)
-    return da._id
+    console.log(da);
+    return da._id;
   }
 
 }

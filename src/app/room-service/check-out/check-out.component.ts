@@ -15,6 +15,7 @@ export class CheckOutComponent implements OnInit {
   lodgedId: any;
   bills: any[];
   checked: boolean;
+  checkedOut: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,6 +27,7 @@ export class CheckOutComponent implements OnInit {
     this.message = '';
     this.bills = [];
     this.checked = false;
+    this.checkedOut = false;
   }
 
   ngOnInit() {
@@ -39,9 +41,8 @@ export class CheckOutComponent implements OnInit {
 
   searchGuest() {
     if (this.searchCheck.length >= 2) {
-      this.spinner.show()
+      this.spinner.show();
       const gu = this.api.searchGuest(this.searchCheck).subscribe((guest: any) => {
-        console.log(guest)
         this.guest$ = guest.data;
         this.lodgedId = guest.data._id;
         this.spinner.hide();
@@ -69,6 +70,10 @@ export class CheckOutComponent implements OnInit {
 
   checkOut() {
     this.api.updateLodge(this.lodgedId, {room: this.guest$.room._id, checkedInStatus: 'available'})
-      .subscribe(e => console.log(e))
+      .subscribe(e => {
+        if (e) {
+          this.checkedOut = true;
+        }
+      });
   }
 }

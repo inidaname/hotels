@@ -90,7 +90,7 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
       this.customerForm.controls.checkedInBy.setValue(localStorage.getItem('currentUser'));
       this.customerForm.controls.image.setValue([]);
       this.roomService.sendRoom(this.customerForm.value);
-      this.router.navigateByUrl('/roomservice/otherservice')
+      this.router.navigateByUrl('/roomservice/otherservice');
     }
   }
 

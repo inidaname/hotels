@@ -48,10 +48,10 @@ export class ProductFormComponent implements OnInit {
   submitForm() {
     if (this.content.valid) {
       this.spinner.show();
-      const obs = this.api.createProduct(this.content.value)
+      const obs = this.api.createProduct(this.content.value);
       obs.subscribe((cl: any) => {
-        console.log(cl)
-        this.update.updateData()
+        console.log(cl);
+        this.update.updateData();
         this.product = cl.data;
         this.spinner.hide();
         this.alertType = 'success';

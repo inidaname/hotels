@@ -17,9 +17,9 @@ export class ImageUploadComponent implements OnInit {
   responses: Array<any>;
   @Input() uploadLocation: string;
 
-  private hasBaseDropZoneOver: boolean = false;
-  private uploader: FileUploader;
-  private title: string;
+  public hasBaseDropZoneOver = false;
+  public uploader: FileUploader;
+  public title: string;
 
   constructor(
     private cloudinary: Cloudinary,
@@ -131,10 +131,10 @@ export class ImageUploadComponent implements OnInit {
   // Delete an uploaded image
   // Requires setting "Return delete token" to "Yes" in your upload preset configuration
   // See also https://support.cloudinary.com/hc/en-us/articles/202521132-How-to-delete-an-image-from-the-client-side-
-  deleteImage = function (data: any, index: number) {
+  deleteImage = function(data: any, index: number) {
     const url = `https://api.cloudinary.com/v1_1/${this.cloudinary.config().cloud_name}/delete_by_token`;
     const headers = new Headers({ 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' });
-    const options = { headers: headers };
+    const options = { headers };
     const body = {
       token: data.delete_token
     };
@@ -160,6 +160,6 @@ export class ImageUploadComponent implements OnInit {
       return null;
     }
     return Object.keys(fileProperties)
-      .map((key) => ({ 'key': key, 'value': fileProperties[key] }));
+      .map((key) => ({ key, value: fileProperties[key] }));
   }
 }

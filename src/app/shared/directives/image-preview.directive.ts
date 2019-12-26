@@ -10,10 +10,10 @@ export class ImagePreviewDirective {
 
     ngOnChanges(changes: SimpleChanges) {
 
-        let reader = new FileReader();
-        let el = this.el;
+        const reader = new FileReader();
+        const el = this.el;
 
-        reader.onloadend = function (e) {
+        reader.onloadend = function(e) {
             el.nativeElement.src = reader.result;
         };
 

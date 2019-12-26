@@ -34,7 +34,7 @@ export class ProductListsComponent implements OnInit {
     const getProducts = this.api.getProduct().subscribe((product: any) => {
       this.productArray = product;
       getProducts.unsubscribe();
-    })
+    });
     this.productsList = this.products.products$;
     this.productService.setTotalPrice(null);
     this.productService.setProduct(null);
@@ -57,7 +57,7 @@ export class ProductListsComponent implements OnInit {
     if (ind >= 0) {
       this.productSold[ind].productQuantity = ctr;
     } else {
-      this.productSold.push({productDetail: set._id, productQuantity: ctr, place: 'mainBar'})
+      this.productSold.push({productDetail: set._id, productQuantity: ctr, place: 'mainBar'});
     }
     if (index >= 0) {
       this.cartProd[index].quantity = ctr;

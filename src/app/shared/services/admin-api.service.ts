@@ -31,13 +31,13 @@ export class AdminApiService {
   getRestaurant() {
     return this.http
       .get(`${this.api}/account/restaurant`)
-      .pipe(map((meals:any) => meals.data), catchError(this.handleError));
+      .pipe(map((meals: any) => meals.data), catchError(this.handleError));
   }
 
   getRooms() {
     return this.http
       .get(`${this.api}/account/rooms`)
-      .pipe(map((rooms:any) => rooms.data), catchError(this.handleError));
+      .pipe(map((rooms: any) => rooms.data), catchError(this.handleError));
   }
 
   private handleError(err: HttpErrorResponse) {

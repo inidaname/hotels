@@ -90,7 +90,7 @@ export class RoomsComponent implements OnInit {
   }
 
   openModal(content) {
-    this.modal.open(content)
+    this.modal.open(content);
   }
   close() {
     this.message = '';

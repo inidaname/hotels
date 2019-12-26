@@ -58,7 +58,7 @@ export class SortableComponent implements OnInit {
     this.service.sortDirection = direction;
   }
 
-  justOpen(id: ProductInfo){
+  justOpen(id: ProductInfo) {
     const newModal = this.modal.open(ProductFormComponent);
     newModal.componentInstance.name = 'Get';
     newModal.componentInstance.product = id;
@@ -66,7 +66,7 @@ export class SortableComponent implements OnInit {
   }
 
   trackById(i, da) {
-    console.log(da)
-    return da._id
+    console.log(da);
+    return da._id;
   }
 }
