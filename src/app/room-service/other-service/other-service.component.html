@@ -1,5 +1,8 @@
 <article class="shadow rounded-lg p-3 d-flex flex-column justify-content-start align-items-center">
   <h3 class="text-uppercase">Other Services</h3>
+  <ngb-alert *ngIf="message" [dismissible]="true" (close)="close()" [type]="alertType">
+    {{message}}
+  </ngb-alert>
   <section class="shadow-sm w-100 p-3 container">
     <div class="row p-4">
       <div class="col-12">
@@ -33,21 +36,35 @@
       <div class="col-12">
         <span [ngSwitch]="guest$?.checkedInStatus">
           <p *ngSwitchCase="'occupied'">
-            <button class="btn btn-success" (click)="upDate('checkout')">Check Guest Out</button>
+            <button class="btn btn-success" (click)="checkIn('checkout')">Check Guest Out</button>
           </p>
           <p *ngSwitchCase="'reserved'">
-            <button class="btn btn-success" (click)="upDate('checkin')">Check Guest In</button>
+            <button class="btn btn-success" (click)="checkIn('checkin')">Check Guest In</button>
           </p>
           <p *ngSwitchDefault>
             loading
           </p>
-          </span>
+        </span>
+        <ng-container *ngIf="guest$?.checkedInStatus === 'reserved'">
+          <div class="form-group">
+            <label for="complete">Add Money</label>
+            <input type="number" class="form-control" [(ngModel)]="payable">
+          </div>
+          <span>Amount Paid: {{guest$?.amountPaid | currency: 'NGN' : 'symbol-narrow'}}</span>
+          <span>Total To Pay: {{guest$?.amountPaid + payable | currency: 'NGN' : 'symbol-narrow'}}</span>
+        </ng-container>
       </div>
-      <figure class="figure rounded col-5 shadow-sm p-3 m-auto offset-5">
-        <img src="" class="figure-img img-fluid rounded" alt="">
-        <figcaption class="figure-caption text-xs-right">The ID Card</figcaption>
-      </figure>
-      <div class="col-12 p-3 shadow-sm my-5">
+      <button class="btn btn-primary my-3" (click)="modal()">Upload Image</button>
+      <div class="col-12 row">
+        <figure *ngFor="let item of image; let i = index" class="figure rounded col-5 shadow-sm p-3 m-auto offset-5">
+          <img [src]="item.data.url" class="figure-img img-fluid rounded" alt="">
+          <figcaption class="figure-caption text-xs-right">The ID Card <button class="btn btn-danger" *ngIf="!!item.data.delete_token" (click)="deleteItem(item?.data, i)">Delete</button></figcaption>
+        </figure>
+      </div>
+      <div class="group-btn mt-5">
+        <button class="btn btn-success" [disabled]="!image.length || !guest$" (click)="upDate()">Submit & Print</button>
+      </div>
+      <!-- <div class="col-12 p-3 shadow-sm my-5">
         <div class="form-group">
           <label for="meal">Meal To Serve</label>
           <select class="form-control" name="meal" id="meal">
@@ -57,7 +74,7 @@
             <option>All Meal</option>
           </select>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
 </article>

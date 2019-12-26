@@ -50,7 +50,7 @@
         </div>
         <div class="form-group row mt-5">
           <div class="offset-sm-2 col-sm-10" *ngIf="reserve !== null && reserve.reservation === 'reserved'">
-            <select [(ngModel)]="payfull" #pay="ngModel" [ngModelOptions]="{standalone: true}">
+            <select [(ngModel)]="payfull" #pay="ngModel" [ngModelOptions]="{standalone: true}" (change)="working()">
               <option value="fullpayment">Full Payment</option>
               <option value="reservation">Reservation Payment</option>
             </select>

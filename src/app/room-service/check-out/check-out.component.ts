@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from '@services/api.service';
+import { RoomsService } from '@services/rooms.service';
 
 @Component({
   templateUrl: './check-out.component.html',
@@ -15,17 +16,17 @@ export class CheckOutComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private spinner: NgxSpinnerService,
-    private api: ApiService
+    private api: ApiService,
+    private roomService: RoomsService
   ) {
     this.message = '';
   }
 
   ngOnInit() {
-    let id = this.route.snapshot.paramMap.get('id');
-    const getG = this.api.getGuest(id).subscribe(guest => {
-      this.guest$ = guest;
-      getG.unsubscribe();
-    });
+    this.roomService.currentRoom.subscribe(room => {
+      this.guest$ = room;
+      console.log(this.guest$)
+    })
   }
 
 }

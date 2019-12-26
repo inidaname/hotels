@@ -58,7 +58,8 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
       numberOfPersons: [''],
       checkedInStatus: ['', Validators.required],
       amountPaid: [''],
-      roomNumber: ['']
+      roomNumber: [''],
+      image: ['']
     });
     this.customerForm.controls.nationality.setValue(this.default, { onlySelf: true });
   }
@@ -84,23 +85,12 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
   get f() { return this.customerForm.controls; }
 
   bookARoom() {
-    this.spinner.show('room',
-    {
-      type: 'ball-scale-pulse',
-      size: 'large',
-      bdColor: 'rgba(105,105,105, .3)',
-      color: 'grey',
-      fullScreen: true
-    }
-  );
   // if (this.customerForm.valid) {
-    this.customerForm.controls.checkedInBy.setValue(localStorage.getItem('currentUser'));
-    this.api.createRoomLodge(this.customerForm.value).subscribe(e => {
-      this.spinner.hide();
-      if(e){
-        this.router.navigateByUrl(`otherservice/${e.data._id}`);
-      }
-    }, er => console.log(er));
+      this.customerForm.controls.checkedInBy.setValue(localStorage.getItem('currentUser'));
+      this.customerForm.controls.image.setValue([]);
+      this.roomService.sendRoom(this.customerForm.value);
+      localStorage.setItem('roombooking', JSON.stringify(this.customerForm.value));
+      this.router.navigateByUrl('/roomservice/otherservice')
     // }
   }
 

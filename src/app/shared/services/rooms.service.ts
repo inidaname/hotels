@@ -21,7 +21,22 @@ export class RoomsService {
   private currentReservationBeh: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   public currentReservation: Observable<any> = this.currentReservationBeh.asObservable();
 
+  private currentSendSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public currentSend: Observable<any> = this.currentSendSubject.asObservable();
+
+  private currentPriceSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public price: Observable<any> = this.currentPriceSubject.asObservable();
+
+
   constructor() { }
+
+  setThePrice(price) {
+    return this.currentPriceSubject.next(price);
+  }
+
+  sendRoom(data: any) {
+    return this.currentSendSubject.next(data)
+  }
 
   setData(data: any): void {
     return this.currentDataSubject.next(data);

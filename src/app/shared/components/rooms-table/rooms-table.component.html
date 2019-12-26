@@ -29,6 +29,7 @@
               </thead>
               <tbody>
               <tr *ngFor="let room of rooms | async; let i = index;" (click)="clickMe(room)">
+                <ng-container *ngIf="needed && room.roomStatus === 'available'">
                 <th scope="row">{{i.valueOf() + 1}}</th>
                 <td><ngb-highlight [result]="room.roomTypeId.roomType| uppercase" [term]="service.searchTerm"></ngb-highlight></td>
                 <td><ngb-highlight [result]="room.roomNumber" [term]="service.searchTerm"></ngb-highlight></td>
@@ -37,6 +38,7 @@
                   <!-- <button type="button" class="btn btn-sm btn-outline-primary mx-2">Supplies</button>
                   <button type="button" class="btn btn-sm btn-outline-success mx-2" (click)="justOpen(room)">Edit</button> -->
                 </td>
+              </ng-container>
               </tr>
               </tbody>
             </table>

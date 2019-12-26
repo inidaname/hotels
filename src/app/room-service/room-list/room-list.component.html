@@ -199,7 +199,7 @@
       </div>
 
       <hr class="my-5 w-100">
-      <app-rooms-table (tapRoom)="selectRoom($event)"></app-rooms-table>
+      <app-rooms-table [purpose]="'product'" [needed]="true" (tapRoom)="selectRoom($event)"></app-rooms-table>
 
       <hr class="my-5 w-100">
       <div class="form-group col-3 mx-auto my-4">

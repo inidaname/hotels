@@ -192,4 +192,8 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
     });
   }
 
+  working() {
+    this.roomService.setThePrice(this.payfull); // set reservation of fulkl payment
+  }
+
 }

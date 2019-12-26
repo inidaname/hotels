@@ -2,6 +2,8 @@ import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { Cloudinary } from '@cloudinary/angular-5.x';
 import { HttpClient } from '@angular/common/http';
+import { ImageService } from '@services/image.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-image-upload',
@@ -13,6 +15,7 @@ export class ImageUploadComponent implements OnInit {
 
   @Input()
   responses: Array<any>;
+  @Input() uploadLocation: string;
 
   private hasBaseDropZoneOver: boolean = false;
   private uploader: FileUploader;
@@ -21,10 +24,13 @@ export class ImageUploadComponent implements OnInit {
   constructor(
     private cloudinary: Cloudinary,
     private zone: NgZone,
-    private http: HttpClient
+    private http: HttpClient,
+    public modal: NgbModal,
+    private shareService: ImageService
   ) {
     this.responses = [];
     this.title = '';
+    this.uploadLocation = '';
   }
 
   ngOnInit(): void {
@@ -51,16 +57,16 @@ export class ImageUploadComponent implements OnInit {
       // Add Cloudinary's unsigned upload preset to the upload form
       form.append('upload_preset', this.cloudinary.config().upload_preset);
       // Add built-in and custom tags for displaying the uploaded photo in the list
-      let tags = 'myphotoalbum';
+      let tags = '';
       if (this.title) {
         form.append('context', `photo=${this.title}`);
-        tags = `myphotoalbum,${this.title}`;
+        tags = `hotel,${this.title}`;
       }
       // Upload to a custom folder
       // Note that by default, when uploading via the API, folders are not automatically created in your Media Library.
       // In order to automatically create the folders based on the API requests,
       // please go to your account upload settings and set the 'Auto-create folders' option to enabled.
-      form.append('folder', 'angular_sample');
+      form.append('folder', this.uploadLocation);
       // Add custom tags
       form.append('tags', tags);
       // Add file to upload
@@ -138,6 +144,11 @@ export class ImageUploadComponent implements OnInit {
       this.responses.splice(index, 1);
     });
   };
+
+  submitForDB() {
+    this.shareService.setData(this.responses);
+    this.modal.dismissAll();
+  }
 
   fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;

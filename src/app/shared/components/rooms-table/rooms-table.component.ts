@@ -26,6 +26,7 @@ export class RoomsTableComponent implements OnInit {
   @Output() tapRoom = new EventEmitter<any>();
 
   @Input() purpose: string;
+  @Input() needed: boolean;
   component: typeof ProductFormComponent | typeof InventoryFormComponent;
   guests: Observable<any[]>;
   guestTotal$: Observable<number>;

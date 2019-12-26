@@ -45,7 +45,12 @@ export class ApiService {
 
   updateReq(data, id) {
     return this.http.put(`${this.api}/request/${id}`, data)
-      .pipe(map((dat: any) => dat), catchError(this.handleError))
+      .pipe(map((dat: any) => dat), catchError(this.handleError));
+  }
+
+  updateLodge(id, data) {
+    return this.http.put(`${this.api}/roomlodge/${id}`, data)
+      .pipe(map((log: any) => log.data), catchError(this.handleError));
   }
 
   searchGuest(roomNumber: number) {
@@ -57,7 +62,7 @@ export class ApiService {
   makePurchase(data) {
     return this.http
     .post(`${this.api}/sales`, data)
-    .pipe(map((data: any) => data.data), catchError(this.handleError));
+    .pipe(map((log: any) => log.data), catchError(this.handleError));
   }
 
   createStaff(userReg: User): Observable<UserData> {
@@ -124,7 +129,6 @@ export class ApiService {
     return this.http
       .get(`${this.api}/roomlodge/${id}`)
       .pipe(map((guest: any) => {
-        console.log(guest)
         return guest.data;
       }), catchError(this.handleError));
   }
@@ -161,11 +165,9 @@ export class ApiService {
   }
 
   createRoomLodge(log): Observable<any> {
-    console.log('it came')
     return this.http
       .post(`${this.api}/roomlodge`, log)
       .pipe(map((lodged: any) => {
-        console.log(lodged)
         return lodged;
       }), catchError(this.handleError));
   }
@@ -180,14 +182,14 @@ export class ApiService {
     const id = localStorage.getItem('currentUser');
     return this.http
       .post<RoomData>(`${this.api}/roomtype`, room)
-      .pipe(map((room: RoomData) => room), catchError(this.handleError));
+      .pipe(map((log: RoomData) => log), catchError(this.handleError));
   }
 
   createMeal(meal) {
     const id = localStorage.getItem('currentUser');
     return this.http
       .post(`${this.api}/restaurant`, meal)
-      .pipe(map((meal) => meal), catchError(this.handleError));
+      .pipe(map((log) => log), catchError(this.handleError));
   }
 
   getProduct(id?: string): Observable<ProductInfo[] | ProductInfo> {

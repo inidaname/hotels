@@ -24,6 +24,10 @@ import { PrinterComponent } from './components/printer/printer.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { RequestTableComponent } from './components/request-table/request-table.component';
 import { InventorySortComponent } from './components/inventory-sort/inventory-sort.component';
+import { FileUploadModule } from 'ng2-file-upload';
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
+import * as  Cloudinary from 'cloudinary-core';
+import { ImagePreviewDirective } from './directives/image-preview.directive';
 
 
 @NgModule({
@@ -44,7 +48,8 @@ import { InventorySortComponent } from './components/inventory-sort/inventory-so
     PrinterComponent,
     ImageUploadComponent,
     RequestTableComponent,
-    InventorySortComponent
+    InventorySortComponent,
+    ImagePreviewDirective
   ],
   imports: [
     CommonModule,
@@ -53,7 +58,9 @@ import { InventorySortComponent } from './components/inventory-sort/inventory-so
     NgbModule,
     RouterModule,
     NgxSpinnerModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FileUploadModule,
+    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'ddn9xvzsb', upload_preset: 'ml_default'}),
   ],
   exports: [
     CommonModule,
@@ -77,12 +84,16 @@ import { InventorySortComponent } from './components/inventory-sort/inventory-so
     PrinterComponent,
     ImageUploadComponent,
     RequestTableComponent,
-    InventorySortComponent
+    InventorySortComponent,
+    FileUploadModule,
+    CloudinaryModule,
+    ImagePreviewDirective
   ],
   providers: [DecimalPipe],
   entryComponents: [
     ProductFormComponent,
-    InventoryFormComponent
+    InventoryFormComponent,
+    ImageUploadComponent
   ]
 })
 export class SharedModule { }
