@@ -1,8 +1,8 @@
 import { Component, OnInit, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ShareService } from '@services/share.service';
+import { ShareService } from '../shared/services/share.service';
 import { Router, NavigationEnd } from '@angular/router';
-import { UserDataService } from '@services/user-data.service';
+import { UserDataService } from '../shared/services/user-data.service';
 
 @Component({
   selector: 'app-auth',

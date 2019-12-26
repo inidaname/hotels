@@ -5,8 +5,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
-import { HeaderInterceptor } from '@interceptors/header.interceptor';
-import { SharedModule } from '@shared/shared.module';
+
+import { SharedModule } from './shared/shared.module';
 
 
 import { AppComponent } from './app.component';
@@ -15,8 +15,9 @@ import { HomeComponent } from './home/home.component';
 import { PointOfSalesComponent } from './point-of-sales/point-of-sales.component';
 import { AdminComponent } from './admin/admin.component';
 import { RoomServiceComponent } from './room-service/room-service.component';
-import { environment } from '@environments/environment';
+import { environment } from 'environments/environment';
 import { ProfileComponent } from './profile/profile.component';
+import { HeaderInterceptor } from './shared/interceptor/header.interceptor';
 
 export function tokenGetter() {
   return localStorage.getItem('token');

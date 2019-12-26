@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '@services/api.service';
+import { ApiService } from '../../shared/services/api.service';
 
 @Component({
   templateUrl: './rooms.component.html',

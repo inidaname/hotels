@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavList } from '@shared/interface';
+import { NavList } from '../shared/interface/nav-list.interface';
 
 @Component({
   templateUrl: './admin.component.html',

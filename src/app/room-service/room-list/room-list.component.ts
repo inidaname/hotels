@@ -1,9 +1,10 @@
 import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { RoomsService } from '@services/rooms.service';
-import { RoomInfo, Country } from '@shared/interface';
-import { COUNTRIES } from '@shared/json/countries';
-import { ApiService } from '@services/api.service';
+import { RoomsService } from '../../shared/services/rooms.service';
+import { RoomInfo } from '../../shared/interface/room.interface';
+import { Country } from '../../shared/interface/country.interface';
+import { COUNTRIES } from '../../shared/json/countries';
+import { ApiService } from '../../shared/services/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '@services/api.service';
+import { ApiService } from '../../shared/services/api.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { StaffService } from '@services/staff.service';
+import { StaffService } from '../../shared/services/staff.service';
 
 @Component({
   templateUrl: './staff.component.html',

@@ -2,13 +2,14 @@ import { Component, OnInit, ViewChildren, QueryList, Input, OnChanges } from '@a
 import { DecimalPipe } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { SortableDirective } from '@directives/sortable.directive';
-import { ProductFormComponent } from '@components/product-form/product-form.component';
-import { InventoryFormComponent } from '@components/inventory-form/inventory-form.component';
+import { SortableDirective } from '../../directives/sortable.directive';
+import { ProductFormComponent } from '../product-form/product-form.component';
+import { InventoryFormComponent } from '../inventory-form/inventory-form.component';
 import { Observable } from 'rxjs';
-import { ProductInfo, SortEvent } from '@shared/interface';
-import { ApiService } from '@services/api.service';
-import { InventoryService } from '@services/inventory.service';
+import { ProductInfo } from '../../interface/products.interface';
+import { SortEvent } from '../../interface/sort.interface';
+import { ApiService } from '../../services/api.service';
+import { InventoryService } from '../../services/inventory.service';
 
 @Component({
   selector: 'app-inventory-sort',

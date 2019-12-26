@@ -6,12 +6,12 @@ import {
   QueryList,
   AfterViewChecked
 } from '@angular/core';
-import { SortEvent } from '@shared/interface';
+import { SortEvent } from '../../interface/sort.interface';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ApiService } from '@services/api.service';
-import { SortableDirective } from '@directives/sortable.directive';
+import { ApiService } from '../../services/api.service';
+import { SortableDirective } from '../../directives/sortable.directive';
 import { Observable } from 'rxjs';
-import { MealService } from '@services/meal.service';
+import { MealService } from '../../services/meal.service';
 
 @Component({
   selector: 'app-meal-list',

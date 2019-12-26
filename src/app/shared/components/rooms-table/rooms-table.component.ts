@@ -1,14 +1,15 @@
 import { Component, OnInit, ViewChildren, QueryList, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SortEvent, RoomInfo } from '@shared/interface';
-import { SortableDirective } from '@directives/sortable.directive';
-import { ProductFormComponent } from '@components/product-form/product-form.component';
-import { InventoryFormComponent } from '@components/inventory-form/inventory-form.component';
+import { RoomInfo } from '../../interface/room.interface';
+import { SortEvent } from '../../interface/sort.interface';
+import { SortableDirective } from '../../directives/sortable.directive';
+import { ProductFormComponent } from '../product-form/product-form.component';
+import { InventoryFormComponent } from '../inventory-form/inventory-form.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ApiService } from '@services/api.service';
+import { ApiService } from '../../services/api.service';
 import { DecimalPipe } from '@angular/common';
-import { RoomService } from '@services/room.service';
-import { GuestService } from '@services/guest.service';
+import { RoomService } from '../../services/room.service';
+import { GuestService } from '../../services/guest.service';
 
 @Component({
   selector: 'app-rooms-table',

@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthenticateGuard } from '@shared/guards/authenticate.guard';
 
 import { AuthComponent } from './auth/auth.component';
 import { HomeComponent } from './home/home.component';
-import { PathNotFoundComponent } from '@components/path-not-found/path-not-found.component';
 import { PointOfSalesComponent } from './point-of-sales/point-of-sales.component';
 import { AdminComponent } from './admin/admin.component';
 import { RoomServiceComponent } from './room-service/room-service.component';
-import { AdminGuard } from '@shared/guards/admin.guard';
-import { AuthorizationGuard } from '@shared/guards/authorization.guard';
-import { SuperAdminGuard } from '@shared/guards/super-admin.guard';
-import { PrinterComponent } from '@components/printer/printer.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AuthenticateGuard } from './shared/guards/authenticate.guard';
+import { SuperAdminGuard } from './shared/guards/super-admin.guard';
+import { AuthorizationGuard } from './shared/guards/authorization.guard';
+import { AdminGuard } from './shared/guards/admin.guard';
+import { PrinterComponent } from './shared/components/printer/printer.component';
+import { PathNotFoundComponent } from './shared/components/path-not-found/path-not-found.component';
 
 const routes: Routes = [
   {

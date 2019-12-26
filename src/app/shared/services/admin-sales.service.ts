@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject, Observable, of } from 'rxjs';
-import { State, SortDirection, SearchResult } from '@shared/interface';
+import { State, SortDirection, SearchResult } from '../interface/sort.interface';
 import { DecimalPipe } from '@angular/common';
 import { AdminApiService } from './admin-api.service';
 import { tap, debounceTime, switchMap, delay } from 'rxjs/operators';
-import { sort, matches } from '@shared/functions/sort.function';
+import { sort, matches } from '../functions/sort.function';
 
 @Injectable({
   providedIn: 'root'

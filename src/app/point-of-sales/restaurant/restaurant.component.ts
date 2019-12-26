@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CountryService } from '@services/countries.service';
-import { RoomsService } from '@services/rooms.service';
-import { Router, NavigationEnd } from '@angular/router';
-import { ApiService } from '@services/api.service';
+import { RoomsService } from '../../shared/services/rooms.service';
+import { ApiService } from '../../shared/services/api.service';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { MealService } from '@services/meal.service';
+import { MealService } from '../../shared/services/meal.service';
 
 @Component({
   templateUrl: './restaurant.component.html',

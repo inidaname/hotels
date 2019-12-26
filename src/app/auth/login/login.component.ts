@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ApiService } from '@services/api.service';
-import { ShareService } from '@services/share.service';
+import { ApiService } from '../../shared/services/api.service';
+import { ShareService } from '../../shared/services/share.service';
 import { Router } from '@angular/router';
-import { UserDataService } from '@services/user-data.service';
+import { UserDataService } from '../../shared/services/user-data.service';
 
 @Component({
   templateUrl: './login.component.html',

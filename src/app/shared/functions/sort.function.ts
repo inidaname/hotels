@@ -1,5 +1,5 @@
 import { PipeTransform } from '@angular/core';
-import { ProductInfo } from '@shared/interface';
+import { ProductInfo } from '../interface/products.interface';
 
 export function compare(v1, v2) {
   return v1 < v2 ? -1 : v1 > v2 ? 1 : 0;

@@ -1,11 +1,10 @@
 import { Component, OnInit, AfterViewChecked, Input } from '@angular/core';
-import { RoomsService } from '@services/rooms.service';
+import { RoomsService } from '../../services/rooms.service';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
-import { ApiService } from '@services/api.service';
+import { ApiService } from '../../services/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgModel } from '@angular/forms';
-import { PrinterService } from '@services/printer.service';
-import * as print from 'print-js';
+import { PrinterService } from '../../services/printer.service';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({

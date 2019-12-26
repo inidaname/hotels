@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { ApiService } from '@services/api.service';
+import { ApiService } from '../shared/services/api.service';
 import { Cloudinary } from '@cloudinary/angular-5.x';
-import { CountryService } from '@services/countries.service';
+import { CountryService } from '../shared/services/countries.service';
 import { Observable } from 'rxjs';
 import { NgModel } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';

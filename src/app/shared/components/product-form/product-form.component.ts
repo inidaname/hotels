@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ApiService } from '@services/api.service';
+import { ApiService } from '../../services/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ProductInfo } from '@shared/interface';
-import { CountryService } from '@services/countries.service';
+import { ProductInfo } from '../../interface/products.interface';
+import { CountryService } from '../../services/countries.service';
 
 @Component({
   selector: 'app-product-form',

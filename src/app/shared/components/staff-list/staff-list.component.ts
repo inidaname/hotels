@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChildren, QueryList, Input, AfterViewChecked } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductInfo, SortEvent } from '@shared/interface';
-import { SortableDirective } from '@directives/sortable.directive';
-import { ApiService } from '@services/api.service';
-import { StaffService } from '@services/staff.service';
+import { SortEvent } from '../../interface/sort.interface';
+import { ProductInfo } from '../../interface/products.interface';
+import { SortableDirective } from '../../directives/sortable.directive';
+import { ApiService } from '../../services/api.service';
+import { StaffService } from '../../services/staff.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({

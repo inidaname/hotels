@@ -1,5 +1,5 @@
 import { Directive, Input, Output, EventEmitter } from '@angular/core';
-import { SortDirection, SortEvent } from '@shared/interface';
+import { SortDirection, SortEvent } from '../interface/sort.interface';
 
 const rotate: {[key: string]: SortDirection} = { asc: 'desc', desc: '', '': 'asc' };
 

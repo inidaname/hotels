@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserDataService } from '@services/user-data.service';
-import { ApiService } from '@services/api.service';
+import { UserDataService } from './shared/services/user-data.service';
+import { ApiService } from './shared/services/api.service';
 
 @Component({
   selector: 'app-root',

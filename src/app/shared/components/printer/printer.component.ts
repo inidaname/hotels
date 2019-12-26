@@ -1,8 +1,8 @@
 import { Component, OnInit, AfterViewChecked } from '@angular/core';
-import { PrinterService } from '@services/printer.service';
+import { PrinterService } from '../../services/printer.service';
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { RoomsService } from '@services/rooms.service';
+import { RoomsService } from '../../services/rooms.service';
 
 @Component({
   templateUrl: './printer.component.html',

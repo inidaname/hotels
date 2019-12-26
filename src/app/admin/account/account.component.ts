@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminApiService } from '@services/admin-api.service';
+import { AdminApiService } from '../../shared/services/admin-api.service';
 
 @Component({
   templateUrl: './account.component.html',

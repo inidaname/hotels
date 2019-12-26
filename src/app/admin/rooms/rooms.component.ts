@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ApiService } from '@services/api.service';
+import { ApiService } from '../../shared/services/api.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { RoomService } from '@services/room.service';
+import { RoomService } from '../../shared/services/room.service';
 
 @Component({
   templateUrl: './rooms.component.html',

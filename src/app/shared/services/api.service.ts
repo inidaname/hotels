@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { UserData, User, ProductData, Products, ProductInfo, Inventory, InventoryData, InventoryInfo, Room, RoomData, RoomInfo } from '@shared/interface';
-import { environment } from '@environments/environment';
+import { environment } from 'environments/environment';
 import { map, catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { UserDataService } from './user-data.service';
+import { User, UserData } from '../interface/user.interface';
+import { ProductData, Products, ProductInfo } from '../interface/products.interface';
+import { InventoryData, Inventory, InventoryInfo } from '../interface/inventory.interface';
+import { RoomData, Room, RoomInfo } from '../interface/room.interface';
 
 
 @Injectable({

@@ -4,8 +4,8 @@ import { BehaviorSubject, Observable, of, Subject, asyncScheduler } from 'rxjs';
 
 import { DecimalPipe } from '@angular/common';
 import { debounceTime, delay, switchMap, tap, observeOn } from 'rxjs/operators';
-import { State, SortDirection, SearchResult, User } from '@shared/interface';
-import { sort, matches } from '@shared/functions/sort.function';
+import { State, SortDirection, SearchResult} from '../interface/sort.interface';
+import { sort, matches } from '../functions/sort.function';
 import { ApiService } from './api.service';
 
 

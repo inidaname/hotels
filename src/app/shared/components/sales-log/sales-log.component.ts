@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChildren, QueryList, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SortableDirective } from '@directives/sortable.directive';
-import { AdminApiService } from '@services/admin-api.service';
-import { SortEvent } from '@shared/interface';
-import { AdminSalesService } from '@services/admin-sales.service';
+import { SortableDirective } from '../../directives/sortable.directive';
+import { AdminApiService } from '../../services/admin-api.service';
+import { SortEvent } from '../../interface/sort.interface';
+import { AdminSalesService } from '../../services/admin-sales.service';
 
 @Component({
   selector: 'app-sales-log',

@@ -1,4 +1,4 @@
-import { Country } from '@shared/interface';
+import { Country } from '../interface/country.interface';
 
 export const COUNTRIES: Country[] = [
   {name: 'Afghanistan', code: 'AF'},

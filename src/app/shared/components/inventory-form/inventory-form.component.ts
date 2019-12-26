@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ApiService } from '@services/api.service';
+import { ApiService } from '../../services/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { InventoryInfo } from '@shared/interface';
+import { InventoryInfo } from '../../interface/inventory.interface';
 
 @Component({
   selector: 'app-inventory-form',

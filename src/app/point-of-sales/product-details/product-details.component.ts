@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CountryService } from '@services/countries.service';
-import { RoomsService } from '@services/rooms.service';
-import { ApiService } from '@services/api.service';
+import { CountryService } from '../../shared/services/countries.service';
+import { RoomsService } from '../../shared/services/rooms.service';
+import { ApiService } from '../../shared/services/api.service';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 

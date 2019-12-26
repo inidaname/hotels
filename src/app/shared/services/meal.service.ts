@@ -4,8 +4,9 @@ import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 
 import { DecimalPipe } from '@angular/common';
 import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
-import { State, SortDirection, SearchResult, RestaurantInfo } from '@shared/interface';
-import { sort, matches } from '@shared/functions/sort.function';
+import { State, SortDirection, SearchResult } from '../interface/sort.interface';
+import { RestaurantInfo } from '../interface/restaurant.interface';
+import { sort, matches } from '../functions/sort.function';
 import { ApiService } from './api.service';
 
 

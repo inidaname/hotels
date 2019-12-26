@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NavList } from '@shared/interface';
+import { NavList } from '../../interface/nav-list.interface';
 
 @Component({
   selector: 'app-side-bar',

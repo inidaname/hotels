@@ -6,7 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { PathNotFoundComponent } from '@components/path-not-found/path-not-found.component';
+import { PathNotFoundComponent } from './components/path-not-found/path-not-found.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';

@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChildren, QueryList, Input } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
-import { SortableDirective } from '@directives/sortable.directive';
+import { SortableDirective } from '../../directives/sortable.directive';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RequestService } from '@services/request.service';
-import { InventoryService } from '@services/inventory.service';
-import { ApiService } from '@services/api.service';
-import { SortEvent, ProductInfo } from '@shared/interface';
-import { ProductFormComponent } from '@components/product-form/product-form.component';
+import { RequestService } from '../../services/request.service';
+import { InventoryService } from '../../services/inventory.service';
+import { ApiService } from '../../services/api.service';
+import { ProductInfo } from '../../interface/products.interface';
+import { SortEvent } from '../../interface/sort.interface';
+import { ProductFormComponent } from '../product-form/product-form.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({

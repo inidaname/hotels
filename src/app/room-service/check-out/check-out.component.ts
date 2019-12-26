@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ApiService } from '@services/api.service';
-import { RoomsService } from '@services/rooms.service';
+import { ApiService } from '../../shared/services/api.service';
+import { RoomsService } from '../../shared/services/rooms.service';
 
 @Component({
   templateUrl: './check-out.component.html',

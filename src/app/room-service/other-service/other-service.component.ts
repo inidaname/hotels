@@ -1,13 +1,13 @@
 import { Component, OnInit, AfterViewChecked } from '@angular/core';
-import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Cloudinary } from '@cloudinary/angular-5.x';
-import { ApiService } from '@services/api.service';
+import { ApiService } from '../../shared/services/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ImageUploadComponent } from '@components/image-upload/image-upload.component';
-import { ImageService } from '@services/image.service';
+import { ImageUploadComponent } from '../../shared/components/image-upload/image-upload.component';
+import { ImageService } from '../../shared/services/image.service';
 import { HttpClient } from '@angular/common/http';
-import { RoomsService } from '@services/rooms.service';
+import { RoomsService } from '../../shared/services/rooms.service';
 
 @Component({
   templateUrl: './other-service.component.html',
