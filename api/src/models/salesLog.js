@@ -29,6 +29,7 @@ const salesLogSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: 'User'
   },
+  place: String,
   receipt:{
     type: String
   }

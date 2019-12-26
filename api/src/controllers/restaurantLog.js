@@ -8,7 +8,9 @@ export async function createRestaurantLog(req, res){
     const addLog = await restaurantLogModel.create({...req.body, receipt});
 
     if (addLog) {
-      return res.status(200).json({message: `Log successfully`, data: addLog});
+      addLog.populate(['sellerId', 'productSold.productDetail', 'complimentVal'], function(err, doc) {
+        return res.status(200).json({message: `Log successfully`, data: doc});
+      })
     }
   } catch (error) {
     return res.status(error.status || 500).json({message: error.message})

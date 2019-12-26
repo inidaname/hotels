@@ -59,9 +59,9 @@ routes.put('/sales/:id', salesLog.editSales);
 routes.delete('/sales/:id', salesLog.deleteLog);
 
 // Restaurant routes
-routes.post('/restaurant', restaurantLogs.createRestaurantLog);
-routes.put('/restaurant/:id', restaurantLogs.editRestaurants);
-routes.delete('/restaurant/:id', restaurantLogs.deleteLog);
+routes.post('/restaurantlog', restaurantLogs.createRestaurantLog);
+routes.put('/restaurantlog/:id', restaurantLogs.editRestaurants);
+routes.delete('/restaurantlog/:id', restaurantLogs.deleteLog);
 
 // Expenditure routes
 routes.post('/expenditure', expenditure.createExpen);

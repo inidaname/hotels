@@ -25,6 +25,11 @@ const restaurantLogSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: 'roomLog'
   },
+  place: String,
+  complimentVal: {
+    type: mongoose.Types.ObjectId,
+    ref: 'User'
+  },
   receipt:{
     type: String
   }
