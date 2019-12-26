@@ -13,7 +13,10 @@ const stockRequestSchema = new mongoose.Schema({
       type: Number
     }
   }],
-  bar: String,
+  bar: {
+    type: String,
+    enum: ['poolBar', 'mainBar']
+  },
   approvedBy: {
     type: mongoose.Types.ObjectId,
     ref: 'User'

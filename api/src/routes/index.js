@@ -17,7 +17,6 @@ import {
 } from '../controllers/';
 
 import {auth} from '../utils/auth'
-import { productRequestModel } from '../models';
 
 const routes = express.Router();
 

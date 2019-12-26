@@ -35,7 +35,7 @@ export async function editRoom(req, res) {
     return res.status(error.status || 500).json({ message: error.message });
   }
 }
-
+ 
 export async function getAllRooms(req, res) {
   try {
     const getRooms = await roomModel.find().lean().select('-__v').populate('roomTypeId', '-__v').exec();

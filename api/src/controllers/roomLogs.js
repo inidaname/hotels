@@ -8,11 +8,18 @@ export async function createLogs(req, res){
     const {arrivalDate, departureDate} = req.body;
     req.body.arrivalDate = new Date(arrivalDate.year, arrivalDate.month, arrivalDate.day);
     req.body.departureDate = new Date(departureDate.year, departureDate.month, departureDate.day);
+
+
+    const { room, checkedInStatus } = req.body;
+    console.log(room);
+    console.log(checkedInStatus);
+    
+    
+    roomModel.findByIdAndUpdate({_id: room}, {roomStatus: checkedInStatus}, {new: true}).exec();
+
     const roomLogs = await roomLogsModel.create({...req.body, receipt});
 
-    const { room, checkedInStatus } = roomLogs;
-    roomModel.findByIdAndUpdate({id: room}, {roomStatus: checkedInStatus}, {new: true});
-    
+     
     return res.status(200).json({message: `Room log successfully`, data: roomLogs})
 
   } catch (error) {
@@ -23,7 +30,7 @@ export async function createLogs(req, res){
 export async function getGuestByRoomNumber(req, res) {
   try {
     const {number} = req.params;
-    const getRoom = await roomLogsModel.findOne({$or: [{roomNumber: number}, {customerName: number}, {customerEmail: number}, {customerNumber: number}], checkedInStatus: 'occupied'}).lean().select('-__v').populate('room', '-__v').exec();
+    const getRoom = await roomLogsModel.findOne({$or: [{roomNumber: number}, {customerName: number}, {customerEmail: number}, {customerNumber: number}]}).lean().select('-__v').populate('room', '-__v').populate('checkedInBy', '-__v').exec();
     if (!getRoom) {
       throw {message: 'Guest not found', status: 404}
     }
@@ -52,7 +59,7 @@ export async function getRoomLogById(req, res) {
       throw { message: `Can't find product`, status: 404 };
     }
 
-    const roomLog = await roomLogsModel.findById(id).lean().select('-__v').populate('room', '-__v').exec();
+    const roomLog = await roomLogsModel.findById(id).lean().select('-__v').populate('room', '-__v').populate('checkedInBy', '-__v').exec();
 
     if (!roomLog) {
       throw { message: `Could not find product`, status: 404 }
@@ -71,6 +78,8 @@ export async function editRoom(req, res) {
     if (!id) {
       throw { message: `Room to edit must be selected`, status: 400 }
     }
+
+
     let options = req.body;
     const updates = {};
 
@@ -78,8 +87,12 @@ export async function editRoom(req, res) {
       updates[option] = options[option];
     }
 
-    const updateRoom = await roomLogsModel.findByIdAndUpdate(id, updates, { new: true }).lean();
+    const {room, checkedInStatus} = updates;
+    if (checkedInStatus){
+      await roomModel.findByIdAndUpdate({_id: room}, {roomStatus: checkedInStatus}, { new: true }).lean();
+    }
 
+    const updateRoom = await roomLogsModel.findByIdAndUpdate(id, updates, { new: true }).lean().populate('room', '-__v').populate('checkedInBy', '-__v');
     if (updateRoom) {
       return res.status(200).json({ message: `Room updated successfully`, data: updateRoom });
     }
@@ -112,12 +125,12 @@ export async function getRoomLogBill(req, res) {
     const { id } = req.params;
 
   
-    const [ sales, restaurant ] = await Promise.all([
-         salesLogModel.find({roomNumber: id}).exec(),
-         restaurantLogModel.find({roomNumber: id}).exec()
+    let [ sales, restaurant ] = await Promise.all([
+         salesLogModel.find({roomNumber: id}).where('paymentMethod').equals('Bill').exec(),
+         restaurantLogModel.find({roomNumber: id}).where('paymentMethod').equals('Bill').exec()
     ])
 
-   const data = [ sales = {...sales}, restaurant = { ...restaurant}]
+   const data = [ sales = [...sales], restaurant = [...restaurant]]
     return res.status(200).json({ message: `Product found`, data  });
   } catch (error) {
     return res.status(error.status || 500).json({ message: error.message });

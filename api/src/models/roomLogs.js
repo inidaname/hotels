@@ -33,10 +33,10 @@ const roomLogsSchema = new mongoose.Schema({
   companyNumber: String,
   purposeOfVisit: String,
   roomNumber: String, //To be edited IMPORTANT
-  room: [{
+  room: {
     type: mongoose.Types.ObjectId,
     ref: 'Room'
-  }],
+  },
   checkedOutBy: {
     type: mongoose.Types.ObjectId,
     ref: 'User'
@@ -54,7 +54,7 @@ const roomLogsSchema = new mongoose.Schema({
     type: String,
     unique: true
   },
-  image: String
+  image: [String]
   
  
 }, {timestamps: true})
