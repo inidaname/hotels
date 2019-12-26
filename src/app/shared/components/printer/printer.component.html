@@ -1,39 +1,108 @@
-<div class="pr">
-  <img src="/assets/logo-sm.png">
-  <h1>Golden Sand Hotel and Suites</h1>
-  <h4>Ilorin Kwara, Nigeria</h4>
-  <p>Reciept for purchased made</p>
-  <p>Prepared By: {{printData.sellerId.fullName}}</p>
+<div class="w-100 col-12 d-flex flex-column justify-content-start align-items-center">
+<img src="/assets/logo-sm.png">
+<h1>Golden Sand Hotel and Suites</h1>
+<h4>Ilorin Kwara, Nigeria</h4>
+<p>Reciept for purchased made</p>
+<p>Prepared By: {{printData.sellerId.fullName}}</p>
 
-  <h5>PURCHASE</h5>
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Item</th>
-        <th>Qty</th>
-        <th>&#8358;</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of printData.productSold">
-        <td>{{item.productDetail.productName}}</td>
-        <td>{{item.productQuantity}}</td>
-        <td>{{item.productDetail.productPrice * item.productQuantity}}</td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td>Total Amoun Paid</td>
-        <td></td>
-        <td>{{printData.amountPaid}}</td>
-      </tr>
-    </tfoot>
-  </table>
-
-  <p>Method of Payment: {{printData.paymentMethod}}</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
+<h5>PURCHASE</h5>
 </div>
+  <ng-container *ngIf="roompage">
+    <div class="container border w-100 p-2 col-11 m-auto">
+      <section class="row">
+        <div class="col-6 row">
+          <div class="col-5 text-right my-1">Full Name:</div>
+          <div class="col-7 my-1">{{roompage.customerName}}</div>
+          <div class="col-5 text-right my-1">Phone Number:</div>
+          <div class="col-7 my-1">{{roompage.customerNumber}}</div>
+          <div class="col-5 text-right my-1">Email:</div>
+          <div class="col-7 my-1">{{roompage.customerEmail}}</div>
+          <div class="col-5 text-right my-1">Profession:</div>
+          <div class="col-7 my-1">{{roompage.customerProfession}}</div>
+          <div class="col-5 text-right my-1">Address:</div>
+          <div class="col-7 my-1">{{roompage.customerAddress}}</div>
+          <div class="col-5 text-right my-1">City:</div>
+          <div class="col-7 my-1">{{roompage.city}}</div>
+          <div class="col-5 text-right my-1">Country:</div>
+          <div class="col-7 my-1">{{roompage.country}}</div>
+          <div class="col-5 text-right my-1">Nationality:</div>
+          <div class="col-7 my-1">{{roompage.nationality}}</div>
+        </div>
+        <div class="col-6 row">
+          <div class="col-5 text-right my-1">Representing:</div>
+          <div class="col-7 my-1">{{roompage.representation}}</div>
+          <div class="col-5 text-right my-1">Purpose Of Visit:</div>
+          <div class="col-7 my-1">{{roompage.purposeOfVisit}}</div>
+          <div class="col-5 text-right my-1">Company Name:</div>
+          <div class="col-7 my-1">{{roompage.companyName}}</div>
+          <div class="col-5 text-right my-1">Compnay Contact:</div>
+          <div class="col-7 my-1">{{roompage.companyNumber}}</div>
+          <div class="col-5 text-right my-1">Address:</div>
+          <div class="col-7 my-1">{{roompage.companyAddress}}</div>
+          <div class="col-5 text-right my-1">Next of Kin:</div>
+          <div class="col-7 my-1">{{roompage.nextOfKin}}</div>
+          <div class="col-5 text-right my-1">Next of Kin Number:</div>
+          <div class="col-7 my-1">{{roompage.nextOfKinNumber}}</div>
+          <div class="col-5 text-right my-1">Next of Kin Relation:</div>
+          <div class="col-7 my-1">{{roompage.nextOfKinRelation}}</div>
+        </div>
+      </section>
+    </div>
+    <div class="row col-11 my-5 mx-auto">
+      <div class="col-6 row">
+        <div class="col-5 text-right my-1">Coming From:</div>
+        <div class="col-7 my-1">{{roompage.comingFrom}}</div>
+        <div class="col-5 text-right my-1">Next Destination:</div>
+        <div class="col-7 my-1">{{roompage.nextDestination}}</div>
+        <div class="col-5 text-right my-1">Arrival Date:</div>
+        <div class="col-7 my-1">{{roompage.arrivalDate.year + ' ' + roompage.arrivalDate.month + ' ' + roompage.arrivalDate.day | date}}</div>
+        <div class="col-5 text-right my-1">Departure Date:</div>
+        <div class="col-7 my-1">{{roompage.departureDate.year + ' ' + roompage.departureDate.month + ' ' + roompage.departureDate.day | date}}</div>
+        <div class="col-5 text-right my-1">Pasport Number:</div>
+        <div class="col-7 my-1">{{roompage.passportNumber}}</div>
+        <div class="col-5 text-right my-1">Issue At:</div>
+        <div class="col-7 my-1">{{roompage.issueAt}}</div>
+        <div class="col-5 text-right my-1">Issue Date:</div>
+        <div class="col-7 my-1">{{roompage.issueDate}}</div>
+      </div>
+      <div class="col-12 row">
+        <ng-container *ngFor="let item of roompage.image">
+          <img [src]="item" width="200" class="img-fluid col-5 mx-auto my-4" alt="">
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="printData">
+    <div class="pr">
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>&#8358;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of printData.productSold">
+            <td>{{item.productDetail.productName}}</td>
+            <td>{{item.productQuantity}}</td>
+            <td>{{item.productDetail.productPrice * item.productQuantity}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>Total Amoun Paid</td>
+            <td></td>
+            <td>{{printData.amountPaid}}</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <p>Method of Payment: {{printData.paymentMethod}}</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+    </div>
+  </ng-container>

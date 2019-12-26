@@ -39,7 +39,7 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
       nationality: ['', Validators.required],
       comingFrom: ['', Validators.required],
       nextDestination: ['', Validators.required],
-      passportNumber: ['', Validators.required],
+      passportNumber: [''],
       issuedAt: [''],
       issuedDate: [''],
       representation: [''],
@@ -62,6 +62,7 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
       image: ['']
     });
     this.customerForm.controls.nationality.setValue(this.default, { onlySelf: true });
+    this.customerForm.controls.country.setValue(this.default, { onlySelf: true });
   }
 
   ngAfterViewChecked(): void {
@@ -85,13 +86,12 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
   get f() { return this.customerForm.controls; }
 
   bookARoom() {
-  // if (this.customerForm.valid) {
+  if (this.customerForm.valid) {
       this.customerForm.controls.checkedInBy.setValue(localStorage.getItem('currentUser'));
       this.customerForm.controls.image.setValue([]);
       this.roomService.sendRoom(this.customerForm.value);
-      localStorage.setItem('roombooking', JSON.stringify(this.customerForm.value));
       this.router.navigateByUrl('/roomservice/otherservice')
-    // }
+    }
   }
 
   sendType() {

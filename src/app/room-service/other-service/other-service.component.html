@@ -15,7 +15,7 @@
       </div>
       <div class="col-12">
         <h5>Guest Name: {{guest$?.customerName}}</h5>
-        <p>Room Number: <span *ngFor="let item of guest$?.room" [innerText]="item.roomNumber"></span></p>
+        <p>Room Number: <span [innerText]="guest$?.room.roomNumber"></span></p>
         <p>Lodged Status:
         <span [ngSwitch]="guest$?.checkedInStatus">
         <p *ngSwitchCase="'occupied'">
@@ -62,7 +62,8 @@
         </figure>
       </div>
       <div class="group-btn mt-5">
-        <button class="btn btn-success" [disabled]="!image.length || !guest$" (click)="upDate()">Submit & Print</button>
+        <button class="btn btn-success mx-3" [disabled]="!image.length || !guest$ || guest$._id" (click)="upDate()">Submit</button>
+        <button class="btn btn-primary mx-3" [disabled]="!setToPrint" (click)="takeToPrint()">Print</button>
       </div>
       <!-- <div class="col-12 p-3 shadow-sm my-5">
         <div class="form-group">

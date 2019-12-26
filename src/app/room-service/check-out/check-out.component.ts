@@ -11,6 +11,10 @@ import { RoomsService } from '@services/rooms.service';
 export class CheckOutComponent implements OnInit {
   message: any;
   guest$: any;
+  searchCheck: any;
+  lodgedId: any;
+  bills: any[];
+  checked: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,13 +24,51 @@ export class CheckOutComponent implements OnInit {
     private roomService: RoomsService
   ) {
     this.message = '';
+    this.bills = [];
+    this.checked = false;
   }
 
   ngOnInit() {
-    this.roomService.currentRoom.subscribe(room => {
-      this.guest$ = room;
-      console.log(this.guest$)
-    })
+    this.roomService.currentSend.subscribe(room => {
+      if (room) {
+        this.lodgedId = room._id;
+        this.guest$ = room;
+      }
+    });
   }
 
+  searchGuest() {
+    if (this.searchCheck.length >= 2) {
+      this.spinner.show()
+      const gu = this.api.searchGuest(this.searchCheck).subscribe((guest: any) => {
+        console.log(guest)
+        this.guest$ = guest.data;
+        this.lodgedId = guest.data._id;
+        this.spinner.hide();
+        gu.unsubscribe();
+      }, er => this.message = `No guest found`);
+    }
+  }
+
+  loadBill() {
+    this.spinner.show();
+    this.checked = false;
+    this.api.getBills(this.lodgedId).subscribe((er: any) => {
+      er.data.forEach(d => {
+        if (d.length > 0) {
+          this.bills.push(d);
+        }
+        if (this.bills.length <= 0) {
+          this.checked = true;
+        } else {
+          this.checked = false;
+        }
+      });
+    });
+  }
+
+  checkOut() {
+    this.api.updateLodge(this.lodgedId, {room: this.guest$.room._id, checkedInStatus: 'available'})
+      .subscribe(e => console.log(e))
+  }
 }

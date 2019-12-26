@@ -216,6 +216,12 @@ export class ApiService {
       .pipe(map((meals: any) => meals.data), catchError(this.handleError));
   }
 
+  getBills(id) {
+    return this.http
+      .get(`${this.api}/roomlodge/bill/${id}`)
+      .pipe(map((bills) => bills), catchError(this.handleError))
+  }
+
   private handleError(err: HttpErrorResponse) {
     console.log(err);
     let errorMessage = '';

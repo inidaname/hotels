@@ -24,6 +24,7 @@ export class OtherServiceComponent implements OnInit, AfterViewChecked {
   amountToPay: any;
   alertType: string;
   payable: any;
+  setToPrint: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -79,7 +80,8 @@ export class OtherServiceComponent implements OnInit, AfterViewChecked {
   checkIn(doIn) {
     if (doIn === 'checkin' && this.guest$._id) {
       this.spinner.show();
-      this.api.updateLodge(this.guest$._id, {roomStatus: `occupied`, amountPaid: this.guest$.amountPaid + this.payable})
+      this.api.updateLodge(this.guest$._id,
+        {room: this.guest$.room._id, checkedInStatus: `occupied`, amountPaid: this.guest$.amountPaid + this.payable})
         .subscribe(ret => {
           if (ret) {
             this.spinner.hide();
@@ -105,6 +107,7 @@ export class OtherServiceComponent implements OnInit, AfterViewChecked {
       this.spinner.show();
       this.api.createRoomLodge(this.guest$).subscribe(log => {
         if (log) {
+          this.setToPrint = log.data;
           this.message = 'Customer booked';
           this.spinner.hide();
           this.alertType = 'success';
@@ -114,6 +117,11 @@ export class OtherServiceComponent implements OnInit, AfterViewChecked {
         this.alertType = 'danger';
       });
     })
+  }
+
+  takeToPrint() {
+    localStorage.setItem('roompage', JSON.stringify(this.setToPrint));
+    window.open('/print', '_blank');
   }
 
   searchRoom(value){
@@ -130,6 +138,7 @@ export class OtherServiceComponent implements OnInit, AfterViewChecked {
     if (value && value.length >= 3) {
       const gu = this.api.searchGuest(value).subscribe((guest: any) => {
         this.guest$ = guest.data;
+        this.setToPrint = guest.data;
         this.spinner.hide()
         gu.unsubscribe();
       }, er => this.message = `No guest found`);
@@ -137,7 +146,6 @@ export class OtherServiceComponent implements OnInit, AfterViewChecked {
   }
 
   deleteItem = function(data, i){
-    console.log(data)
     const url = `https://api.cloudinary.com/v1_1/${this.cloudinary.config().cloud_name}/delete_by_token`;
     const headers = new Headers({ 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' });
     const options = { headers: headers };

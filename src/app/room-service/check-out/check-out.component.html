@@ -1,41 +1,41 @@
 <article class="shadow rounded-lg p-3 d-flex flex-column justify-content-start align-items-center">
   <h5>Check Out</h5>
   <section class="my-4 shadow-sm w-100 p-3 container rounded-lg">
-    <form class="form-inline w-100">
+    <div class="form-inline w-100">
       <div class="form-group">
         <label for="searchCheck">Search</label>
-        <input type="search" name="searchCheck" id="searchCheck" class="form-control ml-3" placeholder="Check Out"
+        <input type="search" [(ngModel)]="searchCheck" id="searchCheck" class="form-control ml-3" (ngModelChange)="searchGuest()" placeholder="Check Out"
           aria-describedby="chSeach">
         <small id="chSeach" class="text-muted"></small>
       </div>
-      <button type="submit" class="btn btn-dark mx-3"> Search</button>
-    </form>
+      <button type="submit" class="btn btn-dark mx-3" [disabled]="!lodgedId" (click)="loadBill()"> Load Bill</button>
+    </div>
   </section>
   <section class="my-4 row shadow-sm w-100 p-3 container rounded-lg justify-content-around align-items-center">
    <div class="col-5">
      <div class="card">
        <div class="card-body">
          <h4 class="card-title">Customer Name: {{ guest$?.customerName }}</h4>
-         <p class="card-text">Room No: {{ guest$?.room }}</p>
-         <p class="card-text">Date Lodged: {{ guest$?.createdDate }}</p>
+         <p class="card-text">Room No: {{ guest$?.room.roomNumber }}</p>
+         <p class="card-text">Date Lodged: {{ guest$?.arrivalDate | date }}</p>
+         <p class="card-text" [ngSwitch]="guest$?.checkedInStatus">Lodged Status: <span *ngSwitchCase="'available'">Checked Out</span> <span *ngSwitchCase="'occupied'">Checked In</span> <span *ngSwitchCase="'reserved'">Reserved</span></p>
        </div>
      </div>
     </div>
     <div class="col-5">
       <ul class="container list-group">
-        <li class="row list-group-item d-flex justify-content-between align-items-center">
+        <li class="row list-group-item d-flex justify-content-between align-items-center" *ngFor="let item of bills">
           <div class="col-4">
-            Product Name
           </div>
           <div class="col-4">
-            Product Price
           </div>
-          <span class="badge badge-primary badge-pill">43</span>
+          <span class="badge badge-primary badge-pill"></span>
         </li>
       </ul>
+      <span *ngIf="checked">No Bills found</span>
     </div>
     <div class="col-12 my-5">
-      <button class="btn btn-success">Check Out</button>
+      <button class="btn btn-success" (click)="checkOut()">Check Out</button>
     </div>
   </section>
 </article>
