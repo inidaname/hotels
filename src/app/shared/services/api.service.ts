@@ -59,6 +59,12 @@ export class ApiService {
       .pipe(map((ret) => ret), catchError(this.handleError));
   }
 
+  makeMealSales(data) {
+    return this.http
+      .post(`${this.api}/restaurantlog`, data)
+      .pipe(map((sold: any) => sold.data), catchError(this.handleError));
+  }
+
   makePurchase(data) {
     return this.http
     .post(`${this.api}/sales`, data)

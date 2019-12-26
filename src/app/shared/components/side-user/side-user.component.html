@@ -8,44 +8,44 @@
         <div class="row mb-3">
           <span class="col-sm-6 small border-right">Full Name</span>
           <div class="col-sm-5">
-            <span class="small font-weight-bold">{{data.name}}</span>
+            <span class="small font-weight-bold">{{data?.name}}</span>
           </div>
         </div>
         <div class="row mb-3">
           <span class="col-sm-6 small border-right">Address</span>
           <div class="col-sm-5">
-            <span class="small font-weight-bold">{{data.address}}</span>
+            <span class="small font-weight-bold">{{data?.address}}</span>
           </div>
         </div>
         <div class="row mb-3">
           <span class="col-sm-6 small border-right">Phone</span>
           <div class="col-sm-5">
-            <span class="small font-weight-bold">{{data.phone}}</span>
+            <span class="small font-weight-bold">{{data?.phone}}</span>
           </div>
         </div>
         <div class="row mb-3">
           <span class="col-sm-6 small border-right">Email</span>
           <div class="col-sm-5">
-            <span class="small font-weight-bold">{{data.email}}</span>
+            <span class="small font-weight-bold">{{data?.email}}</span>
           </div>
         </div>
         <div class="row mb-3">
           <span class="col-sm-6 small border-right">Room Booked</span>
           <div class="col-sm-5">
-            <span class="small font-weight-bold">{{room.roomNumber}}</span>
+            <span class="small font-weight-bold">{{room?.roomNumber}}</span>
           </div>
         </div>
         <div class="row mb-3">
           <span class="col-sm-6 small border-right">Reservation</span>
           <div class="col-sm-5">
             <span
-              class="small font-weight-bold">{{(reserve && reserve.reservation === 'reserved')? 'Reservation' : 'Lodging'}}</span>
+              class="small font-weight-bold">{{(reserve && reserve?.reservation === 'reserved')? 'Reservation' : 'Lodging'}}</span>
           </div>
         </div>
         <div class="row mb-3">
           <span class="col-sm-6 small border-right">Other Services</span>
           <div class="col-sm-5">
-            <span class="small font-weight-bold">{{data.otherservice}}</span>
+            <span class="small font-weight-bold">{{data?.otherservice}}</span>
           </div>
         </div>
         <div class="form-group row mt-5">
@@ -60,17 +60,18 @@
     </div>
     <div class="w-100 mx-2 shadow-sm p-2">
       <p>Payable amount or deposit</p>
-      {{(reserve && reserve.reservation === 'reserved' && payfull && payfull === "reservation") ? (5000 | currency: 'NGN' : 'symbol-narrow') : room.price | currency: 'NGN' : 'symbol-narrow'}}
+      {{(reserve && reserve?.reservation === 'reserved' && payfull && payfull === "reservation") ? (5000 | currency: 'NGN' : 'symbol-narrow') : room.price | currency: 'NGN' : 'symbol-narrow'}}
     </div>
     <div class="w-100 mt-2 shadow-sm p-2">
       <p> Current Total:</p>
-      {{ (reserve && reserve.reservation === 'reserved' && payfull && payfull === "reservation") ? (5000 | currency: 'NGN' : 'symbol-narrow') :  (room.price | currency: 'NGN' : 'symbol-narrow')}}
+      {{ (reserve && reserve?.reservation === 'reserved' && payfull && payfull === "reservation") ? (5000 | currency: 'NGN' : 'symbol-narrow') :  (room.price | currency: 'NGN' : 'symbol-narrow')}}
     </div>
   </ng-container>
   <ng-template #pointofsale>
     <ngb-alert *ngIf="message" [dismissible]="true" (close)="close()" [type]="alertType">
       {{message}}
     </ngb-alert>
+
     <table class="table">
       <thead>
         <tr>
@@ -80,11 +81,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of product.sale; let i = index;">
-          <td>{{item.product.name}}</td>
-          <td>{{item.quantity}}</td>
-          <td>{{(product.bar === 'MainBar') ? item.product.mainBarPrice * item.quantity : item.product.poolBarPrice * item.quantity}}</td>
+        <ng-container *ngIf="setRestuarant; else barTemplate">
+          <tr *ngFor="let item of product?.sale; let i = index;">
+            <td>{{item?.product.mealName}}</td>
+            <td>{{item?.quantity}}</td>
+            <td>{{item?.product.mealPrice * item?.quantity }}</td>
+          </tr>
+        </ng-container>
+        <ng-template #barTemplate>
+        <tr *ngFor="let item of product; let i = index;">
+          <td>{{item?.product.name}}</td>
+          <td>{{item?.quantity}}</td>
+          <td>{{(product?.bar === 'MainBar') ? item?.product.mainBarPrice * item?.quantity : item?.product.poolBarPrice * item?.quantity}}</td>
         </tr>
+        </ng-template>
       </tbody>
       <tfoot>
         <tr>
@@ -108,7 +118,7 @@
     </div>
     <div [ngSwitch]="payMent.value">
       <ng-container *ngSwitchCase="'Bill'">
-        {{'Guest Name: ' + '' || guestName }}
+        {{'Guest Name: ' + guestName }}
         <div class="form-inline form-group">
           <input type="text" class="form-control form-control-sm" [(ngModel)]="roomNumber" (ngModelChange)="checkRoom(roomNum.value)" #roomNum="ngModel"
             aria-describedby="helpId" placeholder="Room Number">

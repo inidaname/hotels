@@ -26,7 +26,7 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
   productSold: any[] = [];
   message: string;
   alertType: string;
-  paymentMethod: NgModel;
+  paymentMethod: any;
   roomNumber: string;
   guestName: any;
   userAdmin: any[];
@@ -34,6 +34,8 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
   reserve: any;
   payfull: any;
   lodgeId: any;
+  setRestuarant: boolean;
+  place: any;
 
   constructor(
     private roomService: RoomsService,
@@ -43,16 +45,28 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
     private route: Router,
   ) {
     this.message = null;
-    this.guestName = null;
+    this.guestName = '';
     this.userAdmin = [];
     this.paymentMethod = null;
     this.compli = null;
     this.reserve = {reservation: ''};
     this.payfull = null;
+    this.setRestuarant = false;
   }
 
   ngOnInit() {
+    this.setRestuarant = false;
+    if (this.route.url === '/pointofsales/restaurant') {
+      this.setRestuarant = true;
+    } else {
+      this.setRestuarant = false;
+    }
     this.route.events.subscribe(n => {
+      if (n instanceof NavigationEnd && this.route.url === '/pointofsales/restaurant') {
+        this.setRestuarant = true;
+      } else {
+        this.setRestuarant = false;
+      }
       if (n instanceof NavigationEnd) {
         this.product = null;
         this.productSold = null;
@@ -77,7 +91,7 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
       this.api.searchGuest(value).subscribe((guest: any) => {
         console.log(guest)
         this.guestName = guest.data.customerName;
-        this.lodgeId = guest._id;
+        this.lodgeId = guest.data._id;
         this.spinner.hide('check');
       }, (err) => this.guestName = `Error:${err.message}`);
     }
@@ -115,7 +129,8 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
       amountPaid: this.sumPrice,
       paymentMethod: this.paymentMethod,
       complimentVal: this.compli,
-      roomNumber: this.lodgeId
+      roomNumber: this.lodgeId,
+      place: this.place
     };
 
     this.spinner.show('sales',
@@ -127,30 +142,55 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
         fullScreen: true
       }
     );
-    this.api.makePurchase(purchase).subscribe((sale: any) => {
-      localStorage.setItem('print', JSON.stringify(sale));
-      this.printer.setData(purchase)
-      if (sale) {
-        window.open('/print', '_blank');
-        this.message = 'Success';
-        this.alertType = 'success';
-        this.spinner.hide('sales');
-        this.product = null;
-        this.productSold = null;
-        this.sumQuantity = null;
-        this.sumPrice = null;
-        this.roomService.setProduct(null);
-        this.roomService.setTotalPrice(null);
-        // work.unsubscribe();
-      }
-    },
-      (er: any) => {
-        if (er) {
+    if (this.setRestuarant === false) {
+      this.api.makePurchase(purchase).subscribe((sale: any) => {
+        localStorage.setItem('print', JSON.stringify(sale));
+        this.printer.setData(purchase)
+        if (sale) {
+          window.open('/print', '_blank');
+          this.message = 'Success';
+          this.alertType = 'success';
+          this.spinner.hide('sales');
+          this.product = null;
+          this.productSold = null;
+          this.sumQuantity = null;
+          this.sumPrice = null;
+          this.roomService.setProduct(null);
+          this.roomService.setTotalPrice(null);
+          // work.unsubscribe();
+        }
+      },
+        (er: any) => {
+          if (er) {
+            this.spinner.hide('sales');
+            this.message = 'Error: Something went wrong please try again';
+            this.alertType = 'danger';
+          }
+        });
+    } else {
+      this.api.makeMealSales(purchase).subscribe((sold: any) => {
+        if (sold) {
+          localStorage.setItem('print', JSON.stringify(sold));
+          this.printer.setData(purchase)
+          window.open('/print', '_blank');
+          this.message = 'Success';
+          this.alertType = 'success';
+          this.spinner.hide('sales');
+          this.product = null;
+          this.productSold = null;
+          this.sumQuantity = null;
+          this.sumPrice = null;
+          this.roomService.setProduct(null);
+          this.roomService.setTotalPrice(null);
+        }
+      }, (err: any) => {
+        if (err) {
           this.spinner.hide('sales');
           this.message = 'Error: Something went wrong please try again';
           this.alertType = 'danger';
         }
-      });
+    });
+    }
   }
 
   ngAfterViewChecked() {
@@ -182,12 +222,16 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
 
 
     this.roomService.currentProduct.subscribe((da) => {
+      this.place = da[0].place;
       if (da) {
         this.product = da;
-        console.log(da);
-        this.sumQuantity = this.product.sale.reduce((a, b) => a + b.quantity, 0);
-        this.sumPrice = this.product.sale.reduce((a, b) => a + ((this.product.bar === 'MainBar') ? b.product.mainBarPrice * b.quantity
-        : b.product.poolBarPrice * b.quantity), 0);
+        this.sumQuantity = this.product.reduce((a, b) => a + b.quantity, 0);
+        if (this.setRestuarant === true) {
+          this.sumPrice = this.product.reduce((a, b) => a + b.product.mealPrice * b.quantity, 0)
+        } else {
+          this.sumPrice = this.product.reduce((a, b) => a + ((b.place === 'mainBar') ? b.product.mainBarPrice * b.quantity
+          : b.product.poolBarPrice * b.quantity), 0);
+        }
       }
     });
   }

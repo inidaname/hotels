@@ -12,8 +12,8 @@
     <div *ngIf="some === true"
       class="card col-sm-6 col-md-5 my-3 mx-auto bg-light border border-warning" style="width: 18rem;">
       <div class="card-body">
-        <h5 class="card-title">{{model?.name}} title</h5>
-        <p class="card-text">Some text</p>
+        <h5 class="card-title">{{model?.name}}</h5>
+        <p class="card-text">{{model?.description}}</p>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item bg-light">Quantity: <input type="number" [(ngModel)]="setMe"

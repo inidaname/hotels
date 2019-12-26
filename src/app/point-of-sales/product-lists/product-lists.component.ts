@@ -12,7 +12,7 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 export class ProductListsComponent implements OnInit {
 
   productsList;
-  cartProd: { product: any, quantity: number }[];
+  cartProd: { product: any, quantity: number, place: string }[];
   @ViewChild('quantity', { static: true }) quantity;
   productSold: any;
   productArray: [];
@@ -57,15 +57,15 @@ export class ProductListsComponent implements OnInit {
     if (ind >= 0) {
       this.productSold[ind].productQuantity = ctr;
     } else {
-      this.productSold.push({productDetail: set._id, productQuantity: ctr})
+      this.productSold.push({productDetail: set._id, productQuantity: ctr, place: 'mainBar'})
     }
     if (index >= 0) {
       this.cartProd[index].quantity = ctr;
     } else {
-      this.cartProd.push({ product: set, quantity: ctr });
+      this.cartProd.push({ product: set, quantity: ctr, place: 'mainBar' });
     }
-    this.productService.setTotalPrice({sales: this.productSold, bar: 'MainBar'});
-    this.productService.setProduct({sale: this.cartProd, bar: 'MainBar'});
+    this.productService.setTotalPrice(this.productSold);
+    this.productService.setProduct(this.cartProd);
   }
 
   removeProduct(item, val) {
