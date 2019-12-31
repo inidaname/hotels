@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api: `http://68.183.136.236:8888`
+  api: `https://app.goldensandshotelandsuite.com`
 };
 
 /*
