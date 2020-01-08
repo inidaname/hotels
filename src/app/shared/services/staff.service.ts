@@ -82,6 +82,11 @@ export class StaffService {
 
     // 1. sort
     let content = sort(this.users.value, sortColumn, sortDirection);
+
+    if (this.users.value.length <= 0) {
+      this._search$.next();
+    }
+
     // 2. filter
     content = content.filter(country => matches(country, searchTerm, this.pipe));
     const total = content.length;

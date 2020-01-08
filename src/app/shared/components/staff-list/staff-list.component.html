@@ -21,7 +21,6 @@
               <th scope="col">#</th>
               <th scope="col" sortable="fullName" (sort)="onSort($event)">Full Name</th>
               <th scope="col" sortable="email" (sort)="onSort($event)">Email</th>
-              <th scope="col" sortable="username" (sort)="onSort($event)">Username</th>
               <th scope="col" sortable="phoneNumber" (sort)="onSort($event)">Phone Number</th>
               <th>Action</th>
             </tr>
@@ -33,7 +32,6 @@
                 <ngb-highlight [result]="product.fullName" [term]="service.searchTerm"></ngb-highlight>
               </td>
               <td><ngb-highlight [result]="product.email| lowercase" [term]="service.searchTerm"></ngb-highlight></td>
-              <td><ngb-highlight [result]="product.username " [term]="service.searchTerm"></ngb-highlight></td>
               <td><ngb-highlight [result]="product.phoneNumber" [term]="service.searchTerm"></ngb-highlight></td>
               <td><button class="btn btn-outline-danger btn-sm" [disabled]="product._id === loggedInId || product.userType === 'superadmin'" (click)="userDelete(product._id)">Delete</button></td>
             </tr>
