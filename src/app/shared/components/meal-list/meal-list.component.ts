@@ -37,7 +37,6 @@ export class MealListComponent implements OnInit, AfterViewChecked {
 
   ngOnInit() {
     this.products = this.service.products$;
-    this.service.products$.subscribe(e => console.log(e));
   }
 
   ngAfterViewChecked() {
