@@ -83,6 +83,10 @@ export class RoomService {
 
     // 1. sort
     let content = sort(this.rooms.value, sortColumn, sortDirection);
+
+    if (this.rooms.value.length <= 0) {
+      this._search$.next();
+    }
     // 2. filter
     content = content.filter(country => matches(country, searchTerm, this.pipe));
     const total = content.length;

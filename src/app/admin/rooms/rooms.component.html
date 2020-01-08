@@ -1,3 +1,4 @@
+<ngx-spinner></ngx-spinner>
 <article class="m-4 row p-4">
   <section class="my-5 mx-auto col-12 p-4 rounded-lg shadow">
     <h4 class="col-12 text-center">Guest List <small>For the day</small></h4>
@@ -12,8 +13,9 @@
       <button class="btn btn-primary" (click)="openModal(content)">Add Room Types</button>
     </div>
     <ng-template #content>
+      <ngx-spinner name="ty"></ngx-spinner>
       <div class="modal-body">
-        <div class="container">
+        <div class="container" *ngIf="!roomTypeReady; else roomReady">
           <form [formGroup]="roomTypeForm">
             <div class="form-group col-12">
               <label for="roomType">Room Type</label>
@@ -36,11 +38,16 @@
             </div>
             <div class="form-group row">
               <div class="offset-sm-2 col-sm-10">
-                <button type="submit" class="btn btn-primary" (click)="createType()">Create Room</button>
+                <button type="submit" class="btn btn-primary" (click)="createType()">Create Room Type</button>
               </div>
             </div>
           </form>
         </div>
+        <ng-template #roomReady>
+          <div class="container">
+            <ngb-alert [dismissible]="true" type="success"> {{roomTypeName}} Room Type Created Successfully</ngb-alert>
+          </div>
+        </ng-template>
       </div>
     </ng-template>
     <div class="container">
@@ -62,9 +69,8 @@
         <div class="form-group col-3">
           <label for="roomCondition">Room Condition</label>
           <select class="form-control" formControlName="roomCondition" id="roomCondition">
-            <option></option>
-            <option></option>
-            <option></option>
+            <option value="good" selected>In Good Condition</option>
+            <option value="bad">To be Repaired</option>
           </select>
         </div>
         <div class="form-group col-12 text-center my-5">
@@ -76,11 +82,11 @@
   </section>
   <section class="mt-2 mb-5 shadow col-12 p-4 rounded-lg bg-white">
     <h4 class="col-12 text-center">List of Rooms</h4>
-    <app-rooms-table [purpose]="'product'"></app-rooms-table>
+    <app-rooms-table [purpose]="'product'" [needed]="false"></app-rooms-table>
   </section>
-  <section class="shadow rounded-lg col-12 my-5 mx-auto p-4 row">
+  <!-- <section class="shadow rounded-lg col-12 my-5 mx-auto p-4 row">
     <h4 class="col-12 text-center">Hotel Services</h4>
     <div class="col-7">List Room Service</div>
     <div class="col 4">Add Room Service</div>
-  </section>
+  </section> -->
 </article>
