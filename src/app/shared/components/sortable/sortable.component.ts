@@ -27,6 +27,7 @@ export class SortableComponent implements OnInit {
 
   @Input() purpose: string;
   component: typeof ProductFormComponent | typeof InventoryFormComponent;
+  dataEdit: ProductInfo;
 
   constructor(
     private modal: NgbModal,
@@ -34,17 +35,22 @@ export class SortableComponent implements OnInit {
     public inventory: InventoryService,
     private api: ApiService
     ) {
-      this.total$ = (this.purpose === 'product') ? service.total$ : inventory.total$;
     }
 
     ngOnInit() {
       this.component = (this.purpose === 'product') ? ProductFormComponent : InventoryFormComponent;
       this.products = (this.purpose === 'product') ? this.service.products$ : this.inventory.inventories$;
+      this.total$ = (this.purpose === 'product') ? this.service.total$ : this.inventory.total$;
   }
 
   openModal() {
     const newModal = this.modal.open(this.component);
     newModal.componentInstance.name = 'Get';
+  }
+
+  edit(content, data: ProductInfo) {
+    this.dataEdit = data;
+    const newModal = this.modal.open(content);
   }
 
   onSort({column, direction}: SortEvent) {

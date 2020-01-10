@@ -1,5 +1,6 @@
 export interface Products {
   readonly productName: string;
+  readonly name?: string;
   readonly productType: string;
   readonly productDept: string;
   readonly productImage: string;

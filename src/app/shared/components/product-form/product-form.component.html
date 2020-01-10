@@ -138,18 +138,6 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="valPrice" class="col-sm-5">Product Unit Price</label>
-          <div class="col-sm-6">
-            <input type="number" class="form-control"
-              [ngClass]="{'is-invalid': f.valuePrice.touched && f.valuePrice.invalid}"
-              formControlName="valuePrice" id="valPrice" aria-describedby="unitPrice"
-              placeholder="Amount Unit Price">
-            <small id="unitPrice" class="form-text text-muted d-none"
-              [ngClass]="{'d-block': f.valuePrice.touched && f.valuePrice.invalid}">Please provide Unit Price
-              Amount</small>
-          </div>
-        </div>
-        <div class="form-group row">
           <label for="manufacturer" class="col-sm-5">Manufacturer</label>
           <div class="col-sm-6">
             <input type="text" formControlName="manufacturer" id="manufacturer" class="form-control"

@@ -22,19 +22,21 @@
               <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
               <th scope="col" sortable="manufacturer" (sort)="onSort($event)">Manufactured By</th>
               <th scope="col" sortable="quantity" (sort)="onSort($event)">Quantity</th>
-              <th scope="col" sortable="productPrice" (sort)="onSort($event)">Unit Price</th>
+              <th scope="col" sortable="productPrice" (sort)="onSort($event)">Pool Bar Price</th>
+              <th scope="col" sortable="productPrice" (sort)="onSort($event)">Main Bar Price</th>
               <!-- <th scope="col">Actions</th> -->
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let product of products | async; let i = index;">
-              <th scope="row">{{i.valueOf() + 1}}</th>
+              <th scope="row">{{i.valueOf() + 1}} &nbsp; <button class="btn btn-sm btn-success" (click)="edit(editProduct, product)">Edit</button></th>
               <td>
                 <ngb-highlight [result]="product.name" [term]="service.searchTerm"></ngb-highlight>
               </td>
               <td><ngb-highlight [result]="product.manufacturer | uppercase" [term]="service.searchTerm"></ngb-highlight></td>
               <td><ngb-highlight [result]="product.quantity | number" [term]="service.searchTerm"></ngb-highlight></td>
-              <td><ngb-highlight [result]="product.valuePrice | currency: 'NGN' : 'symbol-narrow'" [term]="service.searchTerm"></ngb-highlight></td>
+              <td><ngb-highlight [result]="product.poolBarPrice | currency: 'NGN' : 'symbol-narrow'" [term]="service.searchTerm"></ngb-highlight></td>
+              <td><ngb-highlight [result]="product.mainBarPrice | currency: 'NGN' : 'symbol-narrow'" [term]="service.searchTerm"></ngb-highlight></td>
               <!-- <td>
                 <button type="button" class="btn btn-sm btn-outline-primary mx-2">Supplies</button>
                 <button type="button" class="btn btn-sm btn-outline-success mx-2" (click)="justOpen(product)">Edit</button>
@@ -58,3 +60,36 @@
   </div>
 </div>
 <button type="button" name="" id="" class="btn btn-secondary offset-5" (click)="openModal()">Add New</button>
+
+<ng-template #editProduct>
+    <div class="modal-header">
+      <h4>Edit {{dataEdit.name}}</h4>
+    </div>
+    <div class="modal-body">
+      <div class="container">
+        <form class="w-100">
+          <div class="form-group row">
+            <label for="inputName" class="col-4 col-form-label">Name</label>
+            <div class="col-6">
+              <input type="text" class="form-control" name="inputName" id="inputName" placeholder="" [value]="dataEdit.name">
+            </div>
+          </div>
+          <fieldset class="form-group row">
+            <legend class="col-form-legend col-sm-1-12">Group name</legend>
+            <div class="col-sm-1-12">
+
+            </div>
+          </fieldset>
+          <div class="form-group row">
+            <div class="offset-sm-2 col-sm-10">
+              <button type="submit" class="btn btn-primary">Action</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      {{dataEdit | json}}
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-small btn-success">Submit</button>
+    </div>
+</ng-template>
