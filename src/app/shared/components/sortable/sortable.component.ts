@@ -11,6 +11,7 @@ import { ProductInfo } from '../../interface/products.interface';
 import { SortEvent } from '../../interface/sort.interface';
 import { ApiService } from '../../services/api.service';
 import { InventoryService } from '../../services/inventory.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-sortable',
@@ -22,6 +23,7 @@ export class SortableComponent implements OnInit {
 
   products: Observable<any>;
   total$: Observable<number>;
+  updateProduct: FormGroup;
 
   @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
 
@@ -33,7 +35,8 @@ export class SortableComponent implements OnInit {
     private modal: NgbModal,
     public service: CountryService,
     public inventory: InventoryService,
-    private api: ApiService
+    private api: ApiService,
+    private fb: FormBuilder
     ) {
     }
 
@@ -41,6 +44,14 @@ export class SortableComponent implements OnInit {
       this.component = (this.purpose === 'product') ? ProductFormComponent : InventoryFormComponent;
       this.products = (this.purpose === 'product') ? this.service.products$ : this.inventory.inventories$;
       this.total$ = (this.purpose === 'product') ? this.service.total$ : this.inventory.total$;
+
+      this.updateProduct = this.fb.group({
+        name: [''],
+        poolBarPrice: [''],
+        mainBarPrice: [''],
+        manufacturer: [''],
+        quantity: ['']
+      });
   }
 
   openModal() {
@@ -70,6 +81,25 @@ export class SortableComponent implements OnInit {
     newModal.componentInstance.name = 'Get';
     newModal.componentInstance.product = id;
     newModal.componentInstance.productHere = true;
+  }
+
+  updateData(id: string, data: ProductInfo) {
+    this.updateProduct.controls = (!this.updateProduct.controls.name.touched) ?
+        this.updateProduct.controls.name.setValue(data.name)
+     :  this.updateProduct.controls.name.value;
+    this.updateProduct.controls = (!this.updateProduct.controls.poolBarPrice.touched) ?
+        this.updateProduct.controls.poolBarPrice.setValue(data.poolBarPrice)
+     :  this.updateProduct.controls.poolBarPrice.value;
+    this.updateProduct.controls = (!this.updateProduct.controls.mainBarPrice.touched) ?
+        this.updateProduct.controls.mainBarPrice.setValue(data.mainBarPrice)
+     :  this.updateProduct.controls.mainBarPrice.value;
+    this.updateProduct.controls = (!this.updateProduct.controls.manufacturer.touched) ?
+        this.updateProduct.controls.manufacturer.setValue(data.manufacturer)
+     :  this.updateProduct.controls.manufacturer.value;
+    this.updateProduct.controls = (!this.updateProduct.controls.quantity.touched) ?
+        this.updateProduct.controls.quantity.setValue(data.quantity)
+     :  this.updateProduct.controls.quantity.value;
+    console.log(this.updateProduct.value)
   }
 
   trackById(i, da) {

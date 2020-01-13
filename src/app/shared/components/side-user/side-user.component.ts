@@ -221,8 +221,8 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
 
 
     this.roomService.currentProduct.subscribe((da) => {
-      this.place = da[0].place;
       if (da) {
+      this.place = da[0].place;
         this.product = da;
         this.sumQuantity = this.product.reduce((a, b) => a + b.quantity, 0);
         if (this.setRestuarant === true) {

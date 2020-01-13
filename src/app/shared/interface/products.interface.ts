@@ -4,7 +4,8 @@ export interface Products {
   readonly productType: string;
   readonly productDept: string;
   readonly productImage: string;
-  readonly productPrice: number;
+  readonly mainBarPrice: number;
+  readonly poolBarPrice: number;
   readonly serialNumber: string;
   readonly manufacturer: string;
   readonly quantity: number;

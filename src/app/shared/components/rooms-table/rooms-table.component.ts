@@ -38,7 +38,7 @@ export class RoomsTableComponent implements OnInit {
     private api: ApiService,
     public guestService: GuestService
   ) {
-    this.total$ = service.total$;
+    this.total$ =  service.total$;
     this.guestTotal$ = guestService.total$;
     this.checkContent = false;
   }
@@ -46,6 +46,7 @@ export class RoomsTableComponent implements OnInit {
   ngOnInit() {
     this.rooms = this.service.products$;
     this.guests = this.guestService.products$;
+    this.guests.subscribe(e => console.log(e))
   }
 
   clickMe(value) {
