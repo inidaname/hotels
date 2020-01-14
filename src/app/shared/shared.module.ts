@@ -26,9 +26,12 @@ import { RequestTableComponent } from './components/request-table/request-table.
 import { InventorySortComponent } from './components/inventory-sort/inventory-sort.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
-import * as  Cloudinary from 'cloudinary-core';
+import { Cloudinary } from 'cloudinary-core';
 import { ImagePreviewDirective } from './directives/image-preview.directive';
 
+export const cloudinaryLib = {
+  Cloudinary: Cloudinary
+};
 
 @NgModule({
   declarations: [
@@ -60,7 +63,7 @@ import { ImagePreviewDirective } from './directives/image-preview.directive';
     NgxSpinnerModule,
     FontAwesomeModule,
     FileUploadModule,
-    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'ddn9xvzsb', upload_preset: 'ml_default'}),
+    CloudinaryModule.forRoot(cloudinaryLib, { cloud_name: 'ddn9xvzsb', upload_preset: 'ml_default'}),
   ],
   exports: [
     CommonModule,
