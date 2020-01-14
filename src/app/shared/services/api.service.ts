@@ -157,7 +157,6 @@ export class ApiService {
     return this.http
       .get(`${this.api}/roomlodge`)
       .pipe(map((guest: any) => {
-        console.log(guest.data)
         return guest.data;
       }), catchError(this.handleError));
   }

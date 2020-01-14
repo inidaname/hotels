@@ -83,6 +83,11 @@ export class GuestService {
 
     // 1. sort
     let content = sort(this.guests.value, sortColumn, sortDirection);
+
+
+    if (this.guests.value.length <= 0) {
+      this._search$.next();
+    }
     // 2. filter
     content = content.filter(country => matches(country, searchTerm, this.pipe));
     const total = content.length;
