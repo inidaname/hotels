@@ -109,7 +109,7 @@ export class SortableComponent implements OnInit {
         this.updateProduct.controls.quantity.setValue(data.quantity);
       }
 
-      this.api.updateProd(id, data).subscribe((dat: ProductInfo) => {
+      this.api.updateProd(id, this.updateProduct.value).subscribe((dat: ProductInfo) => {
         this.service.updateData();
         this.spinner.hide();
         console.log(dat)

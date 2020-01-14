@@ -28,7 +28,7 @@
               </thead>
               <tbody>
               <tr *ngFor="let product of products | async; let i = index;">
-                <th scope="row">{{i.valueOf() + 1}}</th>
+                <th scope="row">{{i.valueOf() + 1}} <button class="btn btn-sm btn-success" (click)="edit(editProduct, product)">Edit</button></th>
                 <td>
                   <ngb-highlight [result]="product.mealName" [term]="service.searchTerm"></ngb-highlight>
                 </td>
@@ -58,3 +58,36 @@
 </ng-template>
 
 <ng-container *ngIf="purpose === 'sales';else meals"></ng-container>
+<ng-template #editProduct>
+    <div class="modal-header">
+      <h4>Edit {{dataEdit.mealName}}</h4>
+    </div>
+    <div class="modal-body">
+      <div class="container">
+        <form class="w-100" [formGroup]="updateProduct">
+          <div class="form-group row">
+            <label for="mealName" class="col-4 col-form-label">Meal Name</label>
+            <div class="col-6">
+              <input type="text" class="form-control" formControlName="mealName" id="mealName" placeholder="" [value]="dataEdit.mealName">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="mainBarPrice" class="col-4 col-form-label">Meal Price</label>
+            <div class="col-6">
+              <input type="text" class="form-control" formControlName="mainBarPrice" id="mainBarPrice" placeholder="" [value]="dataEdit.mealPrice">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="mealDescription" class="col-4 col-form-label">Description</label>
+            <div class="col-6">
+              <textarea type="text" class="form-control" formControlName="mealDescription" id="mealDescription" placeholder="" [value]="dataEdit.mealDescription"></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-small btn-success" (click)="updateData(dataEdit._id, dataEdit)">Submit</button>
+      <button class="btn btn-small btn-danger" (click)="clearData()">Cancel</button>
+    </div>
+</ng-template>
