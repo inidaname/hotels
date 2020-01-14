@@ -12,6 +12,8 @@ import { SortEvent } from '../../interface/sort.interface';
 import { ApiService } from '../../services/api.service';
 import { InventoryService } from '../../services/inventory.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { NgxSpinner } from 'ngx-spinner/lib/ngx-spinner.enum';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-sortable',
@@ -36,7 +38,8 @@ export class SortableComponent implements OnInit {
     public service: CountryService,
     public inventory: InventoryService,
     private api: ApiService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private spinner: NgxSpinnerService
     ) {
     }
 
@@ -84,26 +87,43 @@ export class SortableComponent implements OnInit {
   }
 
   updateData(id: string, data: ProductInfo) {
-    this.updateProduct.controls = (!this.updateProduct.controls.name.touched) ?
-        this.updateProduct.controls.name.setValue(data.name)
-     :  this.updateProduct.controls.name.value;
-    this.updateProduct.controls = (!this.updateProduct.controls.poolBarPrice.touched) ?
-        this.updateProduct.controls.poolBarPrice.setValue(data.poolBarPrice)
-     :  this.updateProduct.controls.poolBarPrice.value;
-    this.updateProduct.controls = (!this.updateProduct.controls.mainBarPrice.touched) ?
-        this.updateProduct.controls.mainBarPrice.setValue(data.mainBarPrice)
-     :  this.updateProduct.controls.mainBarPrice.value;
-    this.updateProduct.controls = (!this.updateProduct.controls.manufacturer.touched) ?
-        this.updateProduct.controls.manufacturer.setValue(data.manufacturer)
-     :  this.updateProduct.controls.manufacturer.value;
-    this.updateProduct.controls = (!this.updateProduct.controls.quantity.touched) ?
-        this.updateProduct.controls.quantity.setValue(data.quantity)
-     :  this.updateProduct.controls.quantity.value;
-    console.log(this.updateProduct.value)
+    this.spinner.show();
+    if (this.updateProduct.touched) {
+      if (this.updateProduct.controls.name.value === '') {
+        this.updateProduct.controls.name.setValue(data.name);
+      }
+
+      if (this.updateProduct.controls.poolBarPrice.value === '') {
+        this.updateProduct.controls.poolBarPrice.setValue(data.poolBarPrice);
+      }
+
+      if (this.updateProduct.controls.mainBarPrice.value === '') {
+        this.updateProduct.controls.mainBarPrice.setValue(data.mainBarPrice);
+      }
+
+      if (this.updateProduct.controls.manufacturer.value === '') {
+        this.updateProduct.controls.manufacturer.setValue(data.manufacturer);
+      }
+
+      if (this.updateProduct.controls.quantity.value === '') {
+        this.updateProduct.controls.quantity.setValue(data.quantity);
+      }
+
+      this.api.updateProd(id, data).subscribe((dat: ProductInfo) => {
+        this.service.updateData();
+        this.spinner.hide();
+        console.log(dat)
+      });
+    }
   }
 
   trackById(i, da) {
     console.log(da);
     return da._id;
+  }
+
+  clearData(){
+    this.dataEdit = null;
+    this.modal.dismissAll();
   }
 }

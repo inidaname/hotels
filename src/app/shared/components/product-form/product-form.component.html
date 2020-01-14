@@ -45,10 +45,18 @@
           </div>
           <div class="row">
             <div class="col-sm-6">
-              Unit Price:
+              Pool Bar Price:
             </div>
             <div class="col-sm-6">
-              {{product.productPrice | currency: 'NGN' : 'symbol-narrow'}}
+              {{product.poolBarPrice | currency: 'NGN' : 'symbol-narrow'}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              Main Bar Price:
+            </div>
+            <div class="col-sm-6">
+              {{product.mainBarPrice | currency: 'NGN' : 'symbol-narrow'}}
             </div>
           </div>
           <div class="row">

@@ -51,6 +51,12 @@ export class ApiService {
       .pipe(map((dat: any) => dat), catchError(this.handleError));
   }
 
+
+  updateProd(id, data) {
+    return this.http.put(`${this.api}/product/${id}`, data)
+      .pipe(map((dat: any) => dat), catchError(this.handleError));
+  }
+
   updateLodge(id, data) {
     return this.http.put(`${this.api}/roomlodge/${id}`, data)
       .pipe(map((log: any) => log.data), catchError(this.handleError));
