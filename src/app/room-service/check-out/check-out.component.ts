@@ -55,7 +55,7 @@ export class CheckOutComponent implements OnInit {
     this.spinner.show();
     this.checked = false;
     this.api.getBills(this.lodgedId).subscribe((er: any) => {
-      er.data.forEach(d => {
+      er.data.forEach((d: any[]) => {
         if (d.length > 0) {
           this.bills.push(d);
         }

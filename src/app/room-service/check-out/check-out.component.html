@@ -25,12 +25,18 @@
     </div>
     <div class="col-5">
       <ul class="container list-group">
-        <li class="row list-group-item d-flex justify-content-between align-items-center" *ngFor="let item of bills">
-          <div class="col-4">
-          </div>
-          <div class="col-4">
-          </div>
-          <span class="badge badge-primary badge-pill"></span>
+        <li *ngFor="let item of bills">
+          <ng-container *ngFor="let bill of item; let i = index">
+            <ul>
+              <li class="row list-group-item d-flex justify-content-between align-items-center" *ngFor="let prod of bill.productDetail">
+                <div class="col-4" [innerText]="(prod.mealName) ? prod.mealName : prod.name"></div>
+                <div class="col-4" [innerText]="(prod.mealPrice) ? prod.mealPrice : (prod.place === 'mainBar') ? prod.mainBarPrice : prod.poolBarPrice"></div>
+                <span class="badge badge-primary badge-pill" [innerText]="bill[i].quantity"></span>
+              </li>
+              <li>Amount To Pay: {{bill.amountPaid}}</li>
+            </ul>
+          </ng-container>
+
         </li>
       </ul>
       <span *ngIf="checked">No Bills found</span>
