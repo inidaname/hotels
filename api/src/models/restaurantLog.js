@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const salesLogSchema = new mongoose.Schema({
+const restaurantLogSchema = new mongoose.Schema({
   sellerId: {
     type: mongoose.Types.ObjectId,
     ref: 'User'
@@ -25,14 +25,14 @@ const salesLogSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: 'roomLog'
   },
+  place: String,
   complimentVal: {
     type: mongoose.Types.ObjectId,
     ref: 'User'
   },
-  place: String,
   receipt:{
     type: String
   }
 }, { timestamps: true });
 
-export default mongoose.model('SalesLog', salesLogSchema, 'salesLog');
+export default mongoose.model('RestaurantLog', restaurantLogSchema, 'restaurantLog');

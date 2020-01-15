@@ -1,23 +1,31 @@
-import * as createAuth from './createAuth.js';
-import * as room from './room.js';
-import * as product from './product.js';
-import * as salesLog from './salesLog.js';
-import * as expenditure from './expenditure.js';
-import * as supply from './supply.js';
-import * as inventory from './inventory.js';
-import * as roomLogs from './roomLogs.js';
-import * as user from './user.js'
-import * as restaurant from './restaurant.js';
+import * as createAuth from './createAuth';
+import * as room from './room';
+import * as roomType from './roomType';
+import * as reservation from './reservation'
+import * as product from './product';
+import * as salesLog from './salesLog';
+import * as expenditure from './expenditure';
+import * as stock from './stock';
+import * as roomLogs from './roomLogs';
+import * as restaurantLogs from './restaurantLog'
+import * as user from './user'
+import * as restaurant from './restaurant';
+import * as account from './account'
+import * as productRequest from './productRequest'
 
 export {
   createAuth,
   room,
+  roomType,
+  reservation,
   product,
+  productRequest,
   salesLog,
   expenditure,
-  supply,
-  inventory,
+  stock,
   roomLogs,
   user,
-  restaurant
+  restaurant,
+  restaurantLogs,
+  account
 };

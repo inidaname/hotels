@@ -6,16 +6,20 @@ import logger from 'morgan';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+
+
+dotenv.config({path: '.env'});
+
 import db from './utils/db.js'
+
 
 mongoose.Promise = global.Promise;
 
 const app = express();
 
-import routes from './routes/index.js';
+import routes from './routes';
 
 app.use(logger('dev'));
-dotenv.config({path: '.env'});
 
 app.set('port', process.env.PORT || 3000);
 app.use(compression());

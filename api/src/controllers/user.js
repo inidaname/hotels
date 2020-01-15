@@ -1,14 +1,13 @@
-import { userModel, dataModel } from '../models/index.js';
+import { userModel } from '../models';
 
 export async function getUserById(req, res) {
   try {
     const { id } = req.params;
-
     if (!id) {
       throw { message: `User does not exist`, status: 404 };
     }
 
-    const findUser = await userModel.findById(id).lean().select('-password -__v').populate('dataId', '-__v').exec();
+    const findUser = await userModel.findById(id).lean().select('-password -__v').exec();
 
     if (!findUser) {
       throw { message: `Could not find user`, status: 404 };
@@ -45,14 +44,4 @@ export async function getAllUser(req, res) {
   }
 }
 
-export async function getData(req, res) {
-  try {
-    const allData = await dataModel.find();
 
-    if (allData) {
-      return res.status(200).json({ data: allData, message: `All data here` });
-    }
-  } catch (error) {
-    return res.status(error.status || 500).json({ message: error.message });
-  }
-}
