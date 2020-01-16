@@ -20,14 +20,15 @@
         <div class="form-group col-3 mx-auto my-4">
           <label for="customerEmail">Customer's Email</label>
           <input type="email" formControlName="customerEmail" id="customerEmail" class="form-control"
-            [ngClass]="{'is-invalid': f.customerEmail.touched && f.customerEmail.invalid}" placeholder="Email Address"
+            [ngClass]="{'is-invalid': f.customerEmail.touched && f.customerEmail.invalid}" (change)="checkValue()"
+             placeholder="Email Address"
             aria-describedby="typeHelp">
           <small id="typeHelp" class="text-muted">Please provide the room type</small>
         </div>
         <div class="form-group col-3 mx-auto my-4">
           <label for="customerNumber">Customer's Number</label>
           <input type="text" formControlName="customerNumber" id="customerNumber" class="form-control"
-            [ngClass]="{'is-invalid': f.customerNumber.touched && f.customerNumber.invalid}" placeholder="Phone Number"
+            [ngClass]="{'is-invalid': f.customerNumber.touched && f.customerNumber.invalid}" (change)="checkValue()" placeholder="Phone Number"
             aria-describedby="numberHelp">
           <small id="numberHelp" class="text-muted">A Phone Number must be provided</small>
         </div>

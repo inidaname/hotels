@@ -1,60 +1,68 @@
+<ngx-spinner></ngx-spinner>
 <article class="shadow rounded-lg p-3 d-flex flex-column justify-content-start align-items-center">
-  <h3 class="text-uppercase">Other Services</h3>
+  <h3 class="text-uppercase">Room Services</h3>
   <ngb-alert *ngIf="message" [dismissible]="true" (close)="close()" [type]="alertType">
     {{message}}
   </ngb-alert>
   <section class="shadow-sm w-100 p-3 container">
     <div class="row p-4">
-      <div class="col-12">
+      <div class="col-6">
         <div class="form-group">
           <label for="roomNumberSearch">Room Number</label>
           <input type="text"
-            class="form-control" [(ngModel)]="roomNumberSearch" (ngModelChange)="searchRoom(roomNumberSearch)" id="roomNumberSearch" aria-describedby="helpId" placeholder="Room Number">
+            class="form-control" (keydown.enter)="searchRoom(roomNumberSearch)" [value]="guest$?.roomNumber" [(ngModel)]="roomNumberSearch" id="roomNumberSearch" aria-describedby="helpId" placeholder="Room Number">
           <small id="helpId" class="form-text text-muted">Search By Room Number {{message}}</small>
         </div>
       </div>
-      <div class="col-12">
-        <h5>Guest Name: {{guest$?.customerName}}</h5>
-        <p>Room Number: <span [innerText]="guest$?.room.roomNumber"></span></p>
-        <p>Lodged Status:
-        <span [ngSwitch]="guest$?.checkedInStatus">
-        <p *ngSwitchCase="'occupied'">
-          Lodged
-        </p>
-        <p *ngSwitchCase="'reserved'">
-          Reserved
-        </p>
-        <p *ngSwitchCase="'available'">
-          Checked Out
-        </p>
-        <p *ngSwitchDefault>
-          loading
-        </p>
-        </span>
-      </p>
+      <div class="col-4">
+        <label>&nbsp;</label>
+        <button [disabled]="!roomNumberSearch || roomNumberSearch.length < 3" class="btn btn-block btn-primary" (click)="searchRoom(roomNumberSearch)">Search Guest</button>
       </div>
-      <div class="col-12">
-        <span [ngSwitch]="guest$?.checkedInStatus">
-          <p *ngSwitchCase="'occupied'">
-            <button class="btn btn-success" (click)="checkIn('checkout')">Check Guest Out</button>
-          </p>
-          <p *ngSwitchCase="'reserved'">
-            <button class="btn btn-success" (click)="checkIn('checkin')">Check Guest In</button>
-          </p>
-          <p *ngSwitchDefault>
-            loading
-          </p>
-        </span>
-        <ng-container *ngIf="guest$?.checkedInStatus === 'reserved'">
-          <div class="form-group">
-            <label for="complete">Add Money</label>
-            <input type="number" class="form-control" [(ngModel)]="payable">
+      <ng-container *ngIf="guest$">
+        <div class="card col-5 mb-5">
+          <div class=card-body>
+            <h4 class="card-title"> {{guest$?.customerName}} <span [class]="badgeClass" [innerText]="checkedForStatus"></span> </h4>
+            <h6 class="card-subtitle mb-2 text-muted">Room Number: {{guest$?.roomNumber}}</h6>
+            <span [ngSwitch]="guest$?.checkedInStatus">
+              <p class="card-text" *ngSwitchCase="'occupied'">
+                Guest is Lodged in Room Number {{guest$?.roomNumber}}
+              </p>
+              <p class="card-text" *ngSwitchCase="'reserved'">
+                Guest has Reserved Room Number {{guest$?.roomNumber}}
+              </p>
+              <p class="card-text" *ngSwitchCase="'available'">
+                Guest has Checked Out of Room Number {{guest$?.roomNumber}}
+              </p>
+              <p *ngSwitchDefault>
+                loading
+              </p>
+              </span>
           </div>
-          <span>Amount Paid: {{guest$?.amountPaid | currency: 'NGN' : 'symbol-narrow'}}</span>
-          <span>Total To Pay: {{guest$?.amountPaid + payable | currency: 'NGN' : 'symbol-narrow'}}</span>
-        </ng-container>
+          <div class="col-12">
+            <span [ngSwitch]="guest$?.checkedInStatus">
+              <p *ngSwitchCase="'occupied'">
+                <button class="btn btn-danger" (click)="checkIn('checkout')">Check Guest Out</button>
+              </p>
+              <p *ngSwitchCase="'reserved'">
+                <button class="btn btn-success" (click)="checkIn('checkin')">Check Guest In</button>
+              </p>
+            </span>
+            <ng-container *ngIf="guest$?.checkedInStatus === 'reserved'">
+              <div class="form-group">
+                <label for="complete">Add Money</label>
+                <input type="number" class="form-control" [(ngModel)]="payable">
+              </div>
+              <span>Amount Paid: {{guest$?.amountPaid | currency: 'NGN' : 'symbol-narrow'}}</span>
+              <span>Total To Pay: {{guest$?.amountPaid + payable | currency: 'NGN' : 'symbol-narrow'}}</span>
+            </ng-container>
+          </div>
+
+        </div>
+      </ng-container>
+
+      <div class="col-12" *ngIf="guest$">
+        <button class="btn btn-primary my-3" (click)="modal()">Upload Image</button>
       </div>
-      <button class="btn btn-primary my-3" (click)="modal()">Upload Image</button>
       <div class="col-12 row">
         <figure *ngFor="let item of image; let i = index" class="figure rounded col-5 shadow-sm p-3 m-auto offset-5">
           <img [src]="item.data.url" class="figure-img img-fluid rounded" alt="">

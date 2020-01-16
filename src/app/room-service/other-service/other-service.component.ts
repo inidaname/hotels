@@ -25,6 +25,8 @@ export class OtherServiceComponent implements OnInit, AfterViewChecked {
   alertType: string;
   payable: any;
   setToPrint: any;
+  badgeClass: string;
+  checkedForStatus: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,6 +48,19 @@ export class OtherServiceComponent implements OnInit, AfterViewChecked {
     this.component = ImageUploadComponent;
     this.roomService.currentSend.subscribe(guest => {
       if (guest) {
+
+        if (guest.checkedInStatus === 'occupied') {
+          this.badgeClass = 'badge badge-success';
+          this.checkedForStatus = 'Lodged';
+        }
+        if (guest.checkedInStatus === 'reserved') {
+          this.badgeClass = 'badge badge-warning';
+          this.checkedForStatus = 'Reserved';
+        }
+        if (guest.checkedInStatus === 'available') {
+          this.badgeClass = 'badge badge-danger';
+          this.checkedForStatus = 'Checked Out';
+        }
         this.guest$ = guest;
         this.amountToPay = guest.amountPaid;
       }
@@ -126,22 +141,31 @@ export class OtherServiceComponent implements OnInit, AfterViewChecked {
 
   searchRoom(value) {
     this.message = null;
-    this.spinner.show('check',
-      {
-        type: 'ball-scale-pulse',
-        size: 'large',
-        bdColor: 'rgba(105,105,105, .3)',
-        color: 'grey',
-        fullScreen: true
-      }
-    );
     if (value && value.length >= 3) {
+      this.spinner.show();
       const gu = this.api.searchGuest(value).subscribe((guest: any) => {
+        this.spinner.hide()
         this.guest$ = guest.data;
         this.setToPrint = guest.data;
+        if (guest.data.checkedInStatus === 'occupied') {
+          this.badgeClass = 'badge badge-success';
+          this.checkedForStatus = 'Lodged';
+        }
+        if (guest.data.checkedInStatus === 'reserved') {
+          this.badgeClass = 'badge badge-warning';
+          this.checkedForStatus = 'Reserved';
+        }
+        if (guest.data.checkedInStatus === 'available') {
+          this.badgeClass = 'badge badge-danger';
+          this.checkedForStatus = 'Checked Out';
+        }
+
+        gu.unsubscribe();
+      }, er => {
+        this.message = `No guest found`;
         this.spinner.hide();
         gu.unsubscribe();
-      }, er => this.message = `No guest found`);
+      });
     }
   }
 

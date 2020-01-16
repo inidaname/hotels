@@ -1,3 +1,4 @@
+<ngx-spinner></ngx-spinner>
 <article class="shadow rounded-lg p-3 d-flex flex-column justify-content-start align-items-center">
   <h5>Check Out</h5>
   <section class="my-4 shadow-sm w-100 p-3 container rounded-lg">
@@ -5,16 +6,17 @@
     <div class="form-inline w-100">
       <div class="form-group">
         <label for="searchCheck">Search</label>
-        <input type="search" [(ngModel)]="searchCheck" id="searchCheck" class="form-control ml-3" (ngModelChange)="searchGuest()" placeholder="Check Out"
+        <input type="search" [(ngModel)]="searchCheck" id="searchCheck" class="form-control ml-3" (keydown.enter)="searchGuest()" placeholder="Check Out"
           aria-describedby="chSeach">
         <small id="chSeach" class="text-muted"></small>
       </div>
+      <button (click)="searchGuest()" [disabled]="!searchCheck || searchCheck.length < 3" class="btn btn-primary mx-3">Search Room</button>
       <button type="submit" class="btn btn-dark mx-3" [disabled]="!lodgedId" (click)="loadBill()"> Load Bill</button>
     </div>
   </section>
   <section class="my-4 row shadow-sm w-100 p-3 container rounded-lg justify-content-around align-items-center">
    <div class="col-5">
-     <div class="card">
+     <div class="card" *ngIf="guest$">
        <div class="card-body">
          <h4 class="card-title">Customer Name: {{ guest$?.customerName }}</h4>
          <p class="card-text">Room No: {{ guest$?.room.roomNumber }}</p>
