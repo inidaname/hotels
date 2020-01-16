@@ -64,7 +64,13 @@
     </div>
     <div class="w-100 mt-2 shadow-sm p-2">
       <p> Current Total:</p>
-      {{ (reserve && reserve?.reservation === 'reserved' && payfull && payfull === "reservation") ? (5000 | currency: 'NGN' : 'symbol-narrow') :  (room.price | currency: 'NGN' : 'symbol-narrow')}}
+      <ng-container *ngIf="discount === true; else NonDiscount">
+        {{discountValue}}
+      </ng-container>
+
+      <ng-template #NonDiscount>
+        {{ (reserve && reserve?.reservation === 'reserved' && payfull && payfull === "reservation") ? (5000 | currency: 'NGN' : 'symbol-narrow') :  (room.price | currency: 'NGN' : 'symbol-narrow')}}
+      </ng-template>
     </div>
   </ng-container>
   <ng-template #pointofsale>
@@ -126,7 +132,7 @@
       </ng-container>
       <ng-container *ngSwitchCase="'Complimentry'">
         <div class="form-group">
-          <label for="compli">Compli</label>
+          <label for="compli">Complimentry</label>
           <select class="form-control" [(ngModel)]="compli" id="compli">
             <option>Room Service</option>
             <option *ngFor="let item of userAdmin" [value]="item._id">{{item.fullName}}</option>

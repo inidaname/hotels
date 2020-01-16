@@ -201,6 +201,19 @@
 
       <hr class="my-5 w-100">
       <app-rooms-table [purpose]="'product'" [needed]="true" (tapRoom)="selectRoom($event)"></app-rooms-table>
+      <div class="w-100">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" (change)="setDiscount()" formControlName="discount" id="discount" value="true">
+            Discount Provided
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="f.discount.value === true">
+        <label for="amountPaid">Set Amount Approved</label>
+        <input type="text" class="form-control" (change)="sendDiscount()" formControlName="amountPaid" id="amountPaid" placeholder="Amount To Pay">
+      </div>
 
       <hr class="my-5 w-100">
       <div class="form-group col-3 mx-auto my-4">

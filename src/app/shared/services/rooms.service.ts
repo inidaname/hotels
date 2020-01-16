@@ -21,11 +21,15 @@ export class RoomsService {
   private currentReservationBeh: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   public currentReservation: Observable<any> = this.currentReservationBeh.asObservable();
 
+  private currentDiscountBeh: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public currentDiscount: Observable<any> = this.currentDiscountBeh.asObservable();
+
   private currentSendSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   public currentSend: Observable<any> = this.currentSendSubject.asObservable();
 
   private currentPriceSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   public price: Observable<any> = this.currentPriceSubject.asObservable();
+
 
 
   constructor() { }
@@ -48,6 +52,10 @@ export class RoomsService {
 
   setReserve(data: any) {
     return this.currentReservationBeh.next(data);
+  }
+
+  setDiscount(data: any) {
+    return this.currentDiscountBeh.next(data);
   }
 
   setTotalPrice(data: any) {

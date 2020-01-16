@@ -35,6 +35,8 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
   lodgeId: any;
   setRestuarant: boolean;
   place: any;
+  discount: boolean;
+  discountValue: any;
 
   constructor(
     private roomService: RoomsService,
@@ -48,9 +50,10 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
     this.userAdmin = [];
     this.paymentMethod = null;
     this.compli = null;
-    this.reserve = {reservation: ''};
+    this.reserve = { reservation: '' };
     this.payfull = null;
     this.setRestuarant = false;
+    this.discount = false;
   }
 
   ngOnInit() {
@@ -80,13 +83,13 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
   checkRoom(value) {
     if (value && value.length >= 3) {
       this.spinner.show('check',
-      {
-        type: 'ball-scale-pulse',
-        size: 'large',
-        bdColor: 'rgba(105,105,105, .3)',
-        color: 'grey',
-        fullScreen: true
-      });
+        {
+          type: 'ball-scale-pulse',
+          size: 'large',
+          bdColor: 'rgba(105,105,105, .3)',
+          color: 'grey',
+          fullScreen: true
+        });
       this.api.searchGuest(value).subscribe((guest: any) => {
         console.log(guest);
         this.guestName = guest.data.customerName;
@@ -188,7 +191,7 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
           this.message = 'Error: Something went wrong please try again';
           this.alertType = 'danger';
         }
-    });
+      });
     }
   }
 
@@ -209,7 +212,12 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
 
       this.roomService.currentReservation.subscribe((res) => {
         this.reserve = res;
-      } );
+      });
+
+      this.roomService.currentDiscount.subscribe((res) => {
+        this.discount = res.discount;
+        this.discountValue = res.amountToPay;
+      });
 
       this.roomService.currentRoom.subscribe(data => {
         if (data) {
@@ -222,14 +230,14 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
 
     this.roomService.currentProduct.subscribe((da) => {
       if (da) {
-      this.place = da[0].place;
+        this.place = da[0].place;
         this.product = da;
         this.sumQuantity = this.product.reduce((a, b) => a + b.quantity, 0);
         if (this.setRestuarant === true) {
           this.sumPrice = this.product.reduce((a, b) => a + b.product.mealPrice * b.quantity, 0);
         } else {
           this.sumPrice = this.product.reduce((a, b) => a + ((b.place === 'mainBar') ? b.product.mainBarPrice * b.quantity
-          : b.product.poolBarPrice * b.quantity), 0);
+            : b.product.poolBarPrice * b.quantity), 0);
         }
       }
     });

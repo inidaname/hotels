@@ -19,6 +19,7 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
   default = 'Nigeria';
   setClass: boolean;
   @ViewChild('passportNumber', { static: true }) passportNumber: ElementRef;
+  roomPrice: any;
 
   constructor(
     private fb: FormBuilder,
@@ -26,7 +27,9 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
     private api: ApiService,
     private spinner: NgxSpinnerService,
     private router: Router
-  ) { }
+  ) {
+    this.roomPrice = 0;
+  }
 
   ngOnInit() {
     this.customerForm = this.fb.group({
@@ -60,7 +63,8 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
       checkedInStatus: ['', Validators.required],
       amountPaid: [''],
       roomNumber: [''],
-      image: ['']
+      image: [''],
+      discount: ['']
     });
     this.customerForm.controls.nationality.setValue(this.default, { onlySelf: true });
     this.customerForm.controls.country.setValue(this.default, { onlySelf: true });
@@ -90,6 +94,7 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
   if (this.customerForm.valid) {
       this.customerForm.controls.checkedInBy.setValue(localStorage.getItem('currentUser'));
       this.customerForm.controls.image.setValue([]);
+      // this.customerForm.controls.amountPaid.setValue(st.roomTypeId.roomPrice);
       this.roomService.sendRoom(this.customerForm.value);
       this.router.navigateByUrl('/roomservice/otherservice');
     }
@@ -101,9 +106,28 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
     });
   }
 
+  setDiscount() {
+    if (this.customerForm.controls.discount.value === true) {
+      this.customerForm.controls.amountPaid.setValidators([Validators.required]);
+      this.customerForm.updateValueAndValidity();
+    } else {
+      this.customerForm.controls.amountPaid.setValue(this.roomPrice);
+      this.customerForm.controls.amountPaid.setValidators(null);
+      this.customerForm.updateValueAndValidity();
+    }
+  }
+
+  sendDiscount() {
+    this.roomService.setDiscount({
+      discount: true,
+      amountToPay:  this.customerForm.controls.amountPaid.value
+    });
+  }
+
   selectRoom(st: RoomInfo) {
     this.customerForm.controls.roomNumber.setValue(st.roomNumber);
     this.customerForm.controls.room.setValue(st._id);
+    this.roomPrice = st.roomTypeId.roomPrice;
     this.customerForm.controls.amountPaid.setValue(st.roomTypeId.roomPrice);
     this.roomService.setRoom({
       roomNumber: st.roomNumber,
