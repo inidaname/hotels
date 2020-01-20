@@ -20,7 +20,7 @@ export class InventoryService {
 
   private _state: State = {
     page: 1,
-    pageSize: 4,
+    pageSize: 10,
     searchTerm: '',
     sortColumn: '',
     sortDirection: ''
@@ -72,6 +72,10 @@ export class InventoryService {
 
     // 1. sort
     let content = sort(this.inventories.value, sortColumn, sortDirection);
+    if (this.inventories.value.length <= 0) {
+      this._search$.next();
+    }
+
     // 2. filter
     content = content.filter(inventory => matches(inventory, searchTerm, this.pipe));
     const total = content.length;

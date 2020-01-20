@@ -23,7 +23,7 @@ export class MealService {
 
   private _state: State = {
     page: 1,
-    pageSize: 4,
+    pageSize: 10,
     searchTerm: '',
     sortColumn: '',
     sortDirection: ''
@@ -86,6 +86,10 @@ export class MealService {
 
     // 1. sort
     let content = sort(this.meals.value, sortColumn, sortDirection);
+    if (this.meals.value.length <= 0) {
+      this._search$.next();
+    }
+
     // 2. filter
     content = content.filter(country => matches(country, searchTerm, this.pipe));
     const total = content.length;

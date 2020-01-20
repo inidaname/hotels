@@ -46,7 +46,6 @@ export class RoomsTableComponent implements OnInit {
   ngOnInit() {
     this.rooms = this.service.products$;
     this.guests = this.guestService.products$;
-    this.guests.subscribe(e => console.log(e))
   }
 
   clickMe(value) {
