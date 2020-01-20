@@ -24,6 +24,8 @@ export function matches(country: ProductInfo, term: string, pipe: PipeTransform)
      return pipe.transform(f).includes(term);
     } else if (typeof f === 'object') {
       return;
+    } else if (typeof f === 'undefined') {
+      return ;
     }
     return f.toLowerCase().includes(term.toLowerCase());
   });

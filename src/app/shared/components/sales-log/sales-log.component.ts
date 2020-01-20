@@ -20,6 +20,7 @@ export class SalesLogComponent implements OnInit {
   soldProduct: any[];
   restaurant: Observable<any[]>;
   rooms: Observable<any[]>;
+  soldMeals: any[];
 
   constructor(
     public service: AdminSalesService,
@@ -37,13 +38,22 @@ export class SalesLogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.rooms.subscribe(re => console.log(re));
     this.sales.subscribe((er: any[]) => {
       if (er.length > 0) {
         for (let i = 0; i < er.length; i++) {
           const element = er[i];
           const wt = element.productSold.reduce((a, b) => a + b.productQuantity, 0);
           this.soldProduct.push(wt);
+        }
+      }
+    });
+
+    this.restaurant.subscribe((er: any[]) => {
+      if (er.length > 0) {
+        for (let i = 0; i < er.length; i++) {
+          const element = er[i];
+          const wt = element.productSold.reduce((a, b) => a + b.productQuantity, 0);
+          this.soldMeals.push(wt);
         }
       }
     });

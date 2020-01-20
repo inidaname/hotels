@@ -27,7 +27,6 @@ export class PrinterComponent implements OnInit, AfterViewChecked {
     if (localStorage.print) {
       localStorage.removeItem('print');
     }
-    console.log(this.roompage);
 
     if (localStorage.roompage) {
       localStorage.removeItem('roompage');

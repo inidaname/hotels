@@ -13,27 +13,37 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Meal Ordered</th>
-                <th scope="col" sortable="soldProduct" (sort)="onSort($event)">Method of Payment</th>
+                <th scope="col" sortable="paymentMethod" (sort)="onSort($event)">Method of Payment</th>
                 <th scope="col" sortable="amountPaid" (sort)="onSort($event)">Amount Paid</th>
                 <th scope="col" sortable="createdAt" (sort)="onSort($event)">Time of Purchase</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let sale of rooms | async; let i = index;">
+              <tr *ngFor="let sale of restaurant | async; let i = index;">
                 <th scope="row">{{i.valueOf() + 1}}</th>
-                <td class="text-center"><ngb-highlight [result]="sale.room.length" [term]="service.searchTerm"></ngb-highlight></td>
+                <td class="text-center"><ngb-highlight [result]="soldMeals" [term]="service.searchTerm"></ngb-highlight></td>
                 <td class="text-center"><ngb-highlight [result]="sale.paymentMethod" [term]="service.searchTerm"></ngb-highlight></td>
                 <td><ngb-highlight [result]="sale.amountPaid | currency: 'NGN' : 'symbol-narrow'" [term]="service.searchTerm"></ngb-highlight></td>
                 <td><ngb-highlight [result]="sale.createdAt | date" [term]="service.searchTerm"></ngb-highlight></td>
                 <td>
-                  <button type="button" class="btn btn-sm btn-outline-primary mx-2">Supplies</button>
-                  <button type="button" class="btn btn-sm btn-outline-success mx-2">Edit</button>
+                  <!-- <button type="button" class="btn btn-sm btn-outline-primary mx-2">Supplies</button>
+                  <button type="button" class="btn btn-sm btn-outline-success mx-2">Edit</button> -->
                 </td>
               </tr>
               </tbody>
-
           </table>
+          <div class="d-flex justify-content-between p-2">
+            <ngb-pagination
+              [collectionSize]="total$ | async" [(page)]="service.page" [pageSize]="service.pageSize">
+            </ngb-pagination>
+
+            <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+              <option [ngValue]="10">10 items per page</option>
+              <option [ngValue]="50">50 items per page</option>
+              <option [ngValue]="100">100 items per page</option>
+            </select>
+          </div>
         </form>
 
       </ng-container>
@@ -68,8 +78,18 @@
                 </td>
               </tr>
               </tbody>
-
           </table>
+          <div class="d-flex justify-content-between p-2">
+            <ngb-pagination
+              [collectionSize]="total$ | async" [(page)]="service.page" [pageSize]="service.pageSize">
+            </ngb-pagination>
+
+            <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+              <option [ngValue]="10">10 items per page</option>
+              <option [ngValue]="50">50 items per page</option>
+              <option [ngValue]="100">100 items per page</option>
+            </select>
+          </div>
         </form>
       </ng-template>
   </div>
