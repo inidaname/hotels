@@ -215,8 +215,10 @@ export class SideUserComponent implements OnInit, AfterViewChecked {
       });
 
       this.roomService.currentDiscount.subscribe((res) => {
-        this.discount = res.discount;
-        this.discountValue = res.amountToPay;
+        if (res) {
+          this.discount = res.discount;
+          this.discountValue = res.amountToPay;
+        }
       });
 
       this.roomService.currentRoom.subscribe(data => {
