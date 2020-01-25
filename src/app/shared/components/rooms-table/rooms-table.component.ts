@@ -41,6 +41,7 @@ export class RoomsTableComponent implements OnInit {
     this.total$ =  service.total$;
     this.guestTotal$ = guestService.total$;
     this.checkContent = false;
+    this.needed = false;
   }
 
   ngOnInit() {

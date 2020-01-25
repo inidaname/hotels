@@ -23,19 +23,24 @@
                 <th scope="col" sortable="roomTypeId.roomType" (sort)="onSort($event)">Room Type</th>
                 <th scope="col" sortable="roomNumber" (sort)="onSort($event)">Room Number</th>
                 <th scope="col" sortable="roomTypeId.roomPrice" (sort)="onSort($event)">Room Price</th>
-                <th scope="col">Actions</th>
+                <th scope="col" sortable="roomStatus" (sort)="onSort($event)">Status</th>
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let room of rooms | async; let i = index;" (click)="clickMe(room)">
+              <tr *ngFor="let room of rooms | async; let i = index;" (click)="clickMe(room)" [ngStyle]="{'cursor: pointer':  room.roomStatus === 'available'}" [ngClass]="{'text-muted': room.roomStatus === 'occupied' || room.roomStatus === 'reserved'}">
                 <!-- <ng-container *ngIf="needed && room.roomStatus === 'available'"> -->
                 <th scope="row">{{i.valueOf() + 1}}</th>
                 <td><ngb-highlight [result]="room.roomTypeId.roomType| uppercase" [term]="service.searchTerm"></ngb-highlight></td>
                 <td><ngb-highlight [result]="room.roomNumber" [term]="service.searchTerm"></ngb-highlight></td>
                 <td><ngb-highlight [result]="room.roomTypeId.roomPrice | currency: 'NGN' : 'symbol-narrow'" [term]="service.searchTerm"></ngb-highlight></td>
                 <td>
-                  <!-- <button type="button" class="btn btn-sm btn-outline-primary mx-2">Supplies</button>
-                  <button type="button" class="btn btn-sm btn-outline-success mx-2" (click)="justOpen(room)">Edit</button> -->
+                  <ng-container *ngIf="needed">
+                    <span [ngSwitch]="room.roomStatus">
+                      <span class="badge badge-danger" *ngSwitchCase="'occupied'">Occupied</span>
+                      <span class="badge badge-success" *ngSwitchCase="'available'">Available</span>
+                      <span class="badge badge-warning" *ngSwitchCase="'reserved'">Reserved</span>
+                    </span> &nbsp;
+                  </ng-container>
                 </td>
               <!-- </ng-container> -->
               </tr>
@@ -73,7 +78,7 @@
                 <th scope="col" sortable="roomNumber" (sort)="onSort($event)">Room Number</th>
                 <th scope="col" sortable="createdAt" (sort)="onSort($event)">Time Checked In</th>
                 <th scope="col" sortable="amountPaid" (sort)="onSort($event)">Amount Paid</th>
-                <th scope="col">Actions</th>
+                <th scope="col" sortable="room.roomTypeId.roomPrice" (sort)="onSort($event)">Room Price</th>
               </tr>
               </thead>
               <tbody>
@@ -83,10 +88,7 @@
                 <td><ngb-highlight [result]="room.roomNumber" [term]="service.searchTerm"></ngb-highlight></td>
                 <td><ngb-highlight [result]="room.createdAt | date: 'dd MMMM, hh:mm a'" [term]="service.searchTerm"></ngb-highlight></td>
                 <td><ngb-highlight [result]="room.amountPaid | currency: 'NGN' : 'symbol-narrow'" [term]="service.searchTerm"></ngb-highlight></td>
-                <td>
-                  <!-- <button type="button" class="btn btn-sm btn-outline-primary mx-2">Supplies</button>
-                  <button type="button" class="btn btn-sm btn-outline-success mx-2" (click)="justOpen(room)">Edit</button> -->
-                </td>
+                <td><ngb-highlight [result]="room.room?.roomTypeId.roomPrice | currency: 'NGN' : 'symbol-narrow'" [term]="service.searchTerm"></ngb-highlight></td>
               </tr>
               </tbody>
             </table>

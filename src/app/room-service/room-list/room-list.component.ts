@@ -125,14 +125,17 @@ export class RoomListComponent implements OnInit, AfterViewChecked {
   }
 
   selectRoom(st: RoomInfo) {
-    this.customerForm.controls.roomNumber.setValue(st.roomNumber);
-    this.customerForm.controls.room.setValue(st._id);
-    this.roomPrice = st.roomTypeId.roomPrice;
-    this.customerForm.controls.amountPaid.setValue(st.roomTypeId.roomPrice);
-    this.roomService.setRoom({
-      roomNumber: st.roomNumber,
-      roomPrice: st.roomTypeId.roomPrice
-    });
+    if (st.roomStatus === 'available'){
+      console.log(st)
+      this.customerForm.controls.roomNumber.setValue(st.roomNumber);
+      this.customerForm.controls.room.setValue(st._id);
+      this.roomPrice = st.roomTypeId.roomPrice;
+      this.customerForm.controls.amountPaid.setValue(st.roomTypeId.roomPrice);
+      this.roomService.setRoom({
+        roomNumber: st.roomNumber,
+        roomPrice: st.roomTypeId.roomPrice
+      });
+    }
   }
 
   checkValue() {
