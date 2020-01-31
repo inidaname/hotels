@@ -43,7 +43,7 @@ export async function getGuestByRoomNumber(req, res) {
 
 export async function getAllRoomLog(_, res) {
   try {
-    const roomLogs = await roomLogsModel.find().lean().select('-__v').exec();
+    const roomLogs = await roomLogsModel.find().lean().select('-__v').populate('room', '-__v').exec();
 
     return res.status(200).json({ message: `Product List return`, data: roomLogs });
   } catch (error) {
@@ -126,8 +126,8 @@ export async function getRoomLogBill(req, res) {
 
   
     let [ sales, restaurant ] = await Promise.all([
-         salesLogModel.find({roomNumber: id}).where('paymentMethod').equals('Bill').exec(),
-         restaurantLogModel.find({roomNumber: id}).where('paymentMethod').equals('Bill').exec()
+         salesLogModel.find({roomNumber: id}).where('paymentMethod').equals('Bill').populate(['sellerId', 'productSold.productDetail', 'complimentVal']).exec(),
+         restaurantLogModel.find({roomNumber: id}).where('paymentMethod').equals('Bill').populate(['sellerId', 'productSold.productDetail', 'complimentVal']).exec()
     ])
 
    const data = [ sales = [...sales], restaurant = [...restaurant]]

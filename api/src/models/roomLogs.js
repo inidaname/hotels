@@ -10,7 +10,7 @@ const roomLogsSchema = new mongoose.Schema({
     required: [true, `Please provide customer's name`]
   },
   customerAddress:String,
-  customerProffesion: String,
+  customerProfession: String,
   customerEmail: String,
   nationality: String,
   city: String,
@@ -20,6 +20,7 @@ const roomLogsSchema = new mongoose.Schema({
   passportNo: String,
   issuedAt: String,
   issueDate: String,
+  discount: Boolean,
   arrivalDate: {
     type: Date
   },
@@ -32,6 +33,9 @@ const roomLogsSchema = new mongoose.Schema({
   companyAddress: String,
   companyNumber: String,
   purposeOfVisit: String,
+  nextOfKin: String,
+  nextOfKinNumber: String,
+  nextOfKinRelation: String,
   roomNumber: String, //To be edited IMPORTANT
   room: {
     type: mongoose.Types.ObjectId,

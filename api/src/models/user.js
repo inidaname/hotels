@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema({
   userType: {
     type: String,
     enum: ['superadmin', 'admin', 'user'],
-    default: 'user'
+    default: 'superadmin'
   }
 }, { timestamps: true });
 
