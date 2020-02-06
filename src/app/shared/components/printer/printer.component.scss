@@ -1,22 +1,22 @@
 .pr {
-  width: 100vw;
+  width: 99vw;
 }
 
 @media print {
   .pr {
     font-style: oblique;
-    width: 100vw;
+    width: 99vw;
     margin: 2px;
   }
 
   h1 {
     font-size: 22px;
-    width: 100vw;
+    width: 99vw;
     text-align: center;
   }
   h4{
     font-size: 18px;
-    width: 100vw;
+    width: 99vw;
     text-align: center;
   }
   p{

@@ -2,9 +2,15 @@
 $shadowed: true;
 $customShadow: 0px 0px 5px #ccc;
 $radius: 6px;
+$enable-responsive-font-sizes: true;
 
 * {
   box-sizing: border-box;
+}
+
+body {
+  width: 97vw;
+  margin: auto;
 }
 
 button.calendar, button.calendar:active {

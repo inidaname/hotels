@@ -1,6 +1,6 @@
-<aside class="bg-white position-fixed d-flex flex-column border-right border-warning">
+<aside class="bg-light position-fixed d-none d-md-flex d-lg-flex flex-column border-right border-warning">
   <ul class="nav d-flex flex-column justify-content-around align-items-start pt-5">
-    <li class="nav-item" *ngFor="let item of items">
+    <li class="nav-item w-100 text-right pr-3 py-3 border-bottom border-warning" *ngFor="let item of items">
       <a class="py-2 nav-link text-dark font-weight-bold cap" [routerLink]="[ item.link ]" routerLinkActive="active" [innerText]="item.name"></a>
     </li>
   </ul>

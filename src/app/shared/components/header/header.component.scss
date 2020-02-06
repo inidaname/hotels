@@ -1,3 +1,18 @@
+@mixin mQ($arg...) {
+  @if length($arg)==2 {
+      @media screen and (min-width: nth($arg, 1)) and (max-width: nth($arg, 2)) {
+          @content;
+      }
+  }
+
+  @else {
+      @media screen and (max-width: nth($arg, 1)) {
+          @content;
+      }
+  }
+}
+
+
 header {
   box-shadow: 0px 2px 3px #ccc;
   height: 4.2em;
@@ -8,4 +23,7 @@ h1 {
   font-size: 1.8em;
   font-weight: bold;
   text-shadow: 2px 3px 5px #ccc;
+  @include mQ('1400px') {
+    font-size: 1.4em;
+  }
 }
