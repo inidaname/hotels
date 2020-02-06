@@ -8,3 +8,10 @@ aside {
 input[type="number"] {
   width: 42px;
 }
+
+.detail {
+  height: auto;
+  &-text {
+    font-size: 16px;
+  }
+}

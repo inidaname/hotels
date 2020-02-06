@@ -1,54 +1,54 @@
 <aside
-  class="shadow rounded p-3 d-flex flex-column justify-content-around align-items-center overflow-auto bg-white border border-warning"
+  class="shadow rounded p-2 d-flex flex-column justify-content-around align-items-center overflow-auto bg-white border border-warning"
   [ngClass]="{'position-fixed': purpose === 'roomservice'}">
   <h5 class="text-uppercase">Payment Details</h5>
   <ng-container *ngIf="purpose === 'roomservice'; else pointofsale">
-    <div class="h-75 my-2 shadow-sm w-100 p-3 container">
+    <div class="detail my-2 shadow-sm w-100 p-3 container">
       <form>
-        <div class="row mb-3">
+        <div class="row mb-2">
           <span class="col-sm-6 small border-right">Full Name</span>
           <div class="col-sm-5">
             <span class="small font-weight-bold">{{data?.name}}</span>
           </div>
         </div>
-        <div class="row mb-3">
+        <div class="row mb-2">
           <span class="col-sm-6 small border-right">Address</span>
           <div class="col-sm-5">
             <span class="small font-weight-bold">{{data?.address}}</span>
           </div>
         </div>
-        <div class="row mb-3">
+        <div class="row mb-2">
           <span class="col-sm-6 small border-right">Phone</span>
           <div class="col-sm-5">
             <span class="small font-weight-bold">{{data?.phone}}</span>
           </div>
         </div>
-        <div class="row mb-3">
+        <div class="row mb-2">
           <span class="col-sm-6 small border-right">Email</span>
           <div class="col-sm-5">
             <span class="small font-weight-bold">{{data?.email}}</span>
           </div>
         </div>
-        <div class="row mb-3">
+        <div class="row mb-2">
           <span class="col-sm-6 small border-right">Room Booked</span>
           <div class="col-sm-5">
             <span class="small font-weight-bold">{{room?.roomNumber}}</span>
           </div>
         </div>
-        <div class="row mb-3">
+        <div class="row mb-2">
           <span class="col-sm-6 small border-right">Reservation</span>
           <div class="col-sm-5">
             <span
               class="small font-weight-bold">{{(reserve && reserve?.reservation === 'reserved')? 'Reservation' : 'Lodging'}}</span>
           </div>
         </div>
-        <div class="row mb-3">
+        <div class="row mb-2">
           <span class="col-sm-6 small border-right">Other Services</span>
           <div class="col-sm-5">
             <span class="small font-weight-bold">{{data?.otherservice}}</span>
           </div>
         </div>
-        <div class="form-group row mt-5">
+        <div class="form-group row mt-3">
           <div class="offset-sm-2 col-sm-10" *ngIf="reserve !== null && reserve.reservation === 'reserved'">
             <select [(ngModel)]="payfull" #pay="ngModel" [ngModelOptions]="{standalone: true}" (change)="working()">
               <option value="fullpayment">Full Payment</option>
@@ -58,18 +58,22 @@
         </div>
       </form>
     </div>
-    <div class="w-100 mx-2 shadow-sm p-2">
-      <p>Payable amount or deposit</p>
-      {{(reserve && reserve?.reservation === 'reserved' && payfull && payfull === "reservation") ? (5000 | currency: 'NGN' : 'symbol-narrow') : room.price | currency: 'NGN' : 'symbol-narrow'}}
+    <div class="w-100 mx-2 shadow-sm p-1">
+      <p class="detail-text">
+        Payable amount or deposit:
+        <span class="detail-text font-weight-bold"> {{(reserve && reserve?.reservation === 'reserved' && payfull && payfull === "reservation") ? (5000 | currency: 'NGN' : 'symbol-narrow') : room.price | currency: 'NGN' : 'symbol-narrow'}} </span>
+      </p>
     </div>
-    <div class="w-100 mt-2 shadow-sm p-2">
-      <p> Current Total:</p>
-      <ng-container *ngIf="discount === true; else NonDiscount">
-        {{discountValue}}
-      </ng-container>
+    <div class="w-100 mt-2 shadow-sm p-1">
+      <p class="detail-text">
+        Current Total:
+        <ng-container *ngIf="discount === true; else NonDiscount">
+          <span class="detail-text font-weight-bold"> {{discountValue}}</span>
+        </ng-container>
+      </p>
 
       <ng-template #NonDiscount>
-        {{ (reserve && reserve?.reservation === 'reserved' && payfull && payfull === "reservation") ? (5000 | currency: 'NGN' : 'symbol-narrow') :  (room.price | currency: 'NGN' : 'symbol-narrow')}}
+        <span class="detail-text">{{ (reserve && reserve?.reservation === 'reserved' && payfull && payfull === "reservation") ? (5000 | currency: 'NGN' : 'symbol-narrow') :  (room.price | currency: 'NGN' : 'symbol-narrow')}}</span>
       </ng-template>
     </div>
   </ng-container>
