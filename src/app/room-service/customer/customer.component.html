@@ -1,17 +1,189 @@
 <article class="shadow rounded-lg p-3 d-flex flex-column justify-content-start align-items-center">
   <h3 class="h3">Guest Section</h3>
-  <section class="py-3 my-2">
-    <div class="form-group">
-      <label for="guestDetail">Search For Guest</label>
-      <div class="form-inline">
-        <input type="text" class="form-control" name="guestDetail" id="guestDetail" aria-describedby="helpId" placeholder="Phone Number or Email">
-        <button class="btn btn-primary btn-sm mx-3">Search</button>
-      </div>
-      <small id="helpId" class="form-text text-muted">Search with Phone Number or Email</small>
-    </div>
-  </section>
   <hr class="w-100">
-  <section>
-
-  </section>
+  <ngb-accordion #acc="ngbAccordion" activeIds="config-panel-one">
+    <ngb-panel title="Returning Guest" id="config-panel-one">
+      <ng-template ngbPanelContent>
+        <section class="py-3 my-2">
+          <div class="form-group">
+            <label for="guestDetail">Search For Existing Guest</label>
+            <div class="form-inline">
+              <input type="text" class="form-control" name="guestDetail" id="guestDetail" aria-describedby="helpId"
+                placeholder="Phone Number or Email">
+              <button class="btn btn-primary btn-sm mx-3">Search</button>
+            </div>
+            <small id="helpId" class="form-text text-muted">Search with Phone Number or Email</small>
+          </div>
+        </section>
+      </ng-template>
+    </ngb-panel>
+    <ngb-panel title="New Guest">
+      <ng-template ngbPanelContent>
+        <section>
+          <h4 class="h4">Create A New Customer</h4>
+          <section class="h-75 my-2 shadow-sm w-100 p-3 container">
+            <form [formGroup]="customerForm" class="row m-auto align-items-start justify-content-around">
+              <div class="col-12 row">
+                <div class="form-group col-3 mx-auto my-4">
+                  <label for="customerName">Customer Name</label>
+                  <input type="text" formControlName="customerName" id="customerName" class="form-control"
+                    [ngClass]="{'is-invalid': f.customerName.touched && f.customerName.invalid}" (change)="checkValue()"
+                    placeholder="Customer Name" aria-describedby="roomHelp">
+                  <small id="roomHelp" class="text-muted">Provide the Customer's name</small>
+                </div>
+                <div class="form-group col-3 mx-auto my-4">
+                  <label for="customerProfession">Profession</label>
+                  <input type="text" formControlName="customerProfession" id="customerProfession" class="form-control"
+                    [ngClass]="{'is-invalid': f.customerProfession.touched && f.customerProfession.invalid}"
+                    (change)="checkValue()" placeholder="Profession" aria-describedby="roomHelp">
+                  <small id="roomHelp" class="text-muted">Provide the Customer's name</small>
+                </div>
+                <div class="form-group col-3 mx-auto my-4">
+                  <label for="customerEmail">Customer's Email</label>
+                  <input type="email" formControlName="customerEmail" id="customerEmail" class="form-control"
+                    [ngClass]="{'is-invalid': f.customerEmail.touched && f.customerEmail.invalid}"
+                    (change)="checkValue()" placeholder="Email Address" aria-describedby="typeHelp">
+                  <small id="typeHelp" class="text-muted">Please provide the room type</small>
+                </div>
+                <div class="form-group col-3 mx-auto my-4">
+                  <label for="customerNumber">Customer's Number</label>
+                  <input type="text" formControlName="customerNumber" id="customerNumber" class="form-control"
+                    [ngClass]="{'is-invalid': f.customerNumber.touched && f.customerNumber.invalid}"
+                    (change)="checkValue()" placeholder="Phone Number" aria-describedby="numberHelp">
+                  <small id="numberHelp" class="text-muted">A Phone Number must be provided</small>
+                </div>
+                <div class="form-group col-6 mx-auto my-4">
+                  <label for="customerAddress">Address</label>
+                  <textarea (change)="checkValue()" formControlName="customerAddress" id="customerAddress"
+                    class="form-control" cols="5" rows="5"></textarea>
+                </div>
+                <div class="form-group col-6 mx-auto my-4">
+                  <label for="nationality">Nationality</label>
+                  <select class="form-control" formControlName="nationality">
+                    <option *ngFor="let item of countries" [value]="item.name">{{item.name}}</option>
+                  </select>
+                  <small id="typeHelp" class="text-muted">Please provide Nationality</small>
+                </div>
+                <div class="form-group col-6 mx-auto my-4">
+                  <label for="country">Country</label>
+                  <select class="form-control" formControlName="country">
+                    <option *ngFor="let item of countries" [value]="item.name">{{item.name}}</option>
+                  </select>
+                  <small id="typeHelp" class="text-muted">Please provide Country</small>
+                </div>
+                <div class="form-group col-5 mx-auto my-4">
+                  <label for="comingFrom">City</label>
+                  <input type="text" formControlName="city" id="city" class="form-control"
+                    [ngClass]="{'is-invalid': f.city.touched && f.city.invalid}" placeholder="City of the Customer"
+                    aria-describedby="numberHelp">
+                </div>
+                <div class="form-group col-3 mx-auto my-4">
+                  <label for="comingFrom">Coming From</label>
+                  <input type="text" formControlName="comingFrom" id="comingFrom" class="form-control"
+                    [ngClass]="{'is-invalid': f.comingFrom.touched && f.comingFrom.invalid}" placeholder="Coming from"
+                    aria-describedby="numberHelp">
+                </div>
+                <div class="form-group col-3 mx-auto my-4">
+                  <label for="nextDestination">Next Destination</label>
+                  <input type="text" formControlName="nextDestination" id="nextDestination" class="form-control"
+                    [ngClass]="{'is-invalid': f.nextDestination.touched && f.nextDestination.invalid}"
+                    placeholder="Destination" aria-describedby="numberHelp">
+                </div>
+                <div class="col-12 row">
+                  <ng-container *ngIf="setClass === true">
+                    <div class="form-group col-3 mx-auto my-4">
+                      <label for="passportNumber">Passport Number</label>
+                      <input #passportNumber type="text" formControlName="passportNumber" id="passportNumber"
+                        class="form-control"
+                        [ngClass]="{ 'is-invalid': f.passportNumber.touched && f.passportNumber.invalid }"
+                        placeholder="Passport Number" aria-describedby="numberHelp">
+                      <small id="numberHelp" class="text-muted">A Passport Number must be provided</small>
+                    </div>
+                    <div class="form-group col-3 mx-auto my-4">
+                      <label for="issuedAt">Issue At</label>
+                      <input type="text" formControlName="issuedAt" id="issuedAt" class="form-control"
+                        [ngClass]="{ 'is-invalid': f.issuedAt.touched && f.issuedAt.invalid }"
+                        placeholder="Place of Issue" aria-describedby="numberHelp">
+                      <small id="numberHelp" class="text-muted">A place of issue must be provided</small>
+                    </div>
+                    <div class="form-group col-3 mx-auto my-4">
+                      <label for="issuedDate">Issue Date</label>
+                      <div class="input-group">
+                        <input type="text" formControlName="issuedDate" class="form-control" ngbDatepicker
+                          #issue="ngbDatepicker" placeholder="Expiry Date: dd/mm/yyyy">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-success calendar" (click)="issue.toggle()"
+                            type="button"></button>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
+                <hr class="w-100 my-5">
+                <div class="col-12 mx-auto">
+                  <div class="form-group col-6 mx-auto my-4">
+                    <label for="representation">Representation</label>
+                    <select class="form-control" formControlName="representation">
+                      <option value="Personal">Personal</option>
+                      <option value="Company">Company</option>
+                    </select>
+                    <small id="typeHelp" class="text-muted">Please provide Representation</small>
+                  </div>
+                  <div class="col-12 row">
+                    <ng-container *ngIf="f.representation.value === 'Company'">
+                      <div class="form-group col-3 mx-auto my-4">
+                        <label for="companyName">Company's Name</label>
+                        <input type="text" formControlName="companyName" id="companyName" class="form-control"
+                          [ngClass]="{'is-invalid': f.companyName.touched && f.companyName.invalid}"
+                          (change)="checkValue()" placeholder="Company's Name" aria-describedby="roomHelp">
+                        <small id="roomHelp" class="text-muted">Provide the Company's name</small>
+                      </div>
+                      <div class="form-group col-3 mx-auto my-4">
+                        <label for="companyNumber">Company's Number</label>
+                        <input type="text" formControlName="companyNumber" id="companyNumber" class="form-control"
+                          [ngClass]="{'is-invalid': f.companyNumber.touched && f.companyNumber.invalid}"
+                          placeholder="Company Number" aria-describedby="numberHelp">
+                      </div>
+                      <div class="form-group col-6 mx-auto my-4">
+                        <label for="companyAddress">Address</label>
+                        <textarea (change)="checkValue()" formControlName="companyAddress" id="companyAddress"
+                          class="form-control" cols="5" rows="5"></textarea>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+                <hr class="w-100 my-5">
+                <div class="col-12 row">
+                  <div class="form-group col-3 mx-auto my-4">
+                    <label for="purposeOfVisit">Purpose of Visit</label>
+                    <input type="text" formControlName="purposeOfVisit" id="purposeOfVisit" class="form-control"
+                      [ngClass]="{'is-invalid': f.purposeOfVisit.touched && f.purposeOfVisit.invalid}"
+                      placeholder="Purpose of visit" aria-describedby="typeHelp">
+                  </div>
+                  <div class="form-group col-3 mx-auto my-4">
+                    <label for="nextOfKin">Next of Kin</label>
+                    <input type="text" formControlName="nextOfKin" id="nextOfKin" class="form-control"
+                      [ngClass]="{'is-invalid': f.nextOfKin.touched && f.nextOfKin.invalid}" placeholder="Next of Kin"
+                      aria-describedby="typeHelp">
+                  </div>
+                  <div class="form-group col-3 mx-auto my-4">
+                    <label for="nextOfKinNumber">Next of Kin's Number</label>
+                    <input type="text" formControlName="nextOfKinNumber" id="nextOfKinNumber" class="form-control"
+                      [ngClass]="{'is-invalid': f.nextOfKinNumber.touched && f.nextOfKinNumber.invalid}"
+                      placeholder="Next of Kin Number" aria-describedby="typeHelp">
+                  </div>
+                  <div class="form-group col-3 mx-auto my-4">
+                    <label for="nextOfKinRelation">Next of Kin's Relationship</label>
+                    <input type="text" formControlName="nextOfKinRelation" id="nextOfKinRelation" class="form-control"
+                      [ngClass]="{'is-invalid': f.nextOfKinRelation.touched && f.nextOfKinRelation.invalid}"
+                      placeholder="Next of Kin relation" aria-describedby="typeHelp">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </section>
+        </section>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
 </article>
