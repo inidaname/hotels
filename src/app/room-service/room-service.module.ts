@@ -6,6 +6,7 @@ import { RoomListComponent } from './room-list/room-list.component';
 import { OtherServiceComponent } from './other-service/other-service.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { CustomerComponent } from './customer/customer.component';
+import { ListRoomsComponent } from './components/list-rooms/list-rooms.component';
 
 
 @NgModule({
@@ -13,11 +14,15 @@ import { CustomerComponent } from './customer/customer.component';
     RoomListComponent,
     OtherServiceComponent,
     CheckOutComponent,
-    CustomerComponent
+    CustomerComponent,
+    ListRoomsComponent
   ],
   imports: [
     SharedModule,
     RoomServiceRoutingModule
+  ],
+  entryComponents: [
+    ListRoomsComponent
   ]
 })
 export class RoomServiceModule { }

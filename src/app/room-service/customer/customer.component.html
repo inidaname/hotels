@@ -1,6 +1,5 @@
 <article class="shadow rounded-lg p-3 d-flex flex-column justify-content-start align-items-center">
   <h3 class="h3">Guest Section</h3>
-  <hr class="w-100">
   <ngb-accordion #acc="ngbAccordion" activeIds="config-panel-one">
     <ngb-panel title="Returning Guest" id="config-panel-one">
       <ng-template ngbPanelContent>
@@ -154,30 +153,34 @@
                 </div>
                 <hr class="w-100 my-5">
                 <div class="col-12 row">
-                  <div class="form-group col-3 mx-auto my-4">
+                  <div class="form-group col-4 mx-auto my-4">
                     <label for="purposeOfVisit">Purpose of Visit</label>
                     <input type="text" formControlName="purposeOfVisit" id="purposeOfVisit" class="form-control"
                       [ngClass]="{'is-invalid': f.purposeOfVisit.touched && f.purposeOfVisit.invalid}"
                       placeholder="Purpose of visit" aria-describedby="typeHelp">
                   </div>
-                  <div class="form-group col-3 mx-auto my-4">
+                  <div class="form-group col-4 mx-auto my-4">
                     <label for="nextOfKin">Next of Kin</label>
                     <input type="text" formControlName="nextOfKin" id="nextOfKin" class="form-control"
                       [ngClass]="{'is-invalid': f.nextOfKin.touched && f.nextOfKin.invalid}" placeholder="Next of Kin"
                       aria-describedby="typeHelp">
                   </div>
-                  <div class="form-group col-3 mx-auto my-4">
+                  <div class="form-group col-4 mx-auto my-4">
                     <label for="nextOfKinNumber">Next of Kin's Number</label>
                     <input type="text" formControlName="nextOfKinNumber" id="nextOfKinNumber" class="form-control"
                       [ngClass]="{'is-invalid': f.nextOfKinNumber.touched && f.nextOfKinNumber.invalid}"
                       placeholder="Next of Kin Number" aria-describedby="typeHelp">
                   </div>
-                  <div class="form-group col-3 mx-auto my-4">
+                  <div class="form-group col-4 mx-auto my-4">
                     <label for="nextOfKinRelation">Next of Kin's Relationship</label>
                     <input type="text" formControlName="nextOfKinRelation" id="nextOfKinRelation" class="form-control"
                       [ngClass]="{'is-invalid': f.nextOfKinRelation.touched && f.nextOfKinRelation.invalid}"
                       placeholder="Next of Kin relation" aria-describedby="typeHelp">
                   </div>
+                </div>
+                <hr class="w-100 my-5">
+                <div class="col-12">
+                  <button class="btn btn-primary" (click)="createCustomer()">Create Guest</button>
                 </div>
               </div>
             </form>
@@ -187,3 +190,7 @@
     </ngb-panel>
   </ngb-accordion>
 </article>
+
+<ng-template #roomContent>
+ The Rooms
+</ng-template>

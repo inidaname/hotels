@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RoomsService } from '../../shared/services/rooms.service';
 import { RoomInfo } from '../../shared/interface/room.interface';
@@ -7,7 +7,8 @@ import { COUNTRIES } from '../../shared/json/countries';
 import { ApiService } from '../../shared/services/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
-import { NgbAccordion, NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ListRoomsComponent } from '../components/list-rooms/list-rooms.component';
 
 @Component({
   templateUrl: './customer.component.html',
@@ -21,16 +22,20 @@ export class CustomerComponent implements OnInit {
   default = 'Nigeria';
   setClass: boolean;
   @ViewChild('passportNumber', { static: true }) passportNumber: ElementRef;
+  @ViewChild('roomContent', { static: true }) roomContent: ElementRef;
+  component: typeof ListRoomsComponent;
   roomPrice: any;
 
   constructor(
     private fb: FormBuilder,
     private roomService: RoomsService,
     private router: Router,
-    private config: NgbAccordionConfig
+    private config: NgbAccordionConfig,
+    private modal: NgbModal
   ) {
     this.roomPrice = 0;
     config.closeOthers = true;
+    this.component = ListRoomsComponent;
   }
 
   ngOnInit() {
@@ -91,6 +96,13 @@ export class CustomerComponent implements OnInit {
   }
 
   get f() { return this.customerForm.controls; }
+
+  createCustomer() {
+    this.modal.open(this.component, {size: 'xl'});
+    // if (this.customerForm.valid) {
+    //   this.modal.open(this.roomContent);
+    // }
+  }
 
   bookARoom() {
   if (this.customerForm.valid) {
