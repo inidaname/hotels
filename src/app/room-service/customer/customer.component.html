@@ -1,7 +1,7 @@
 <article class="shadow rounded-lg p-3 d-flex flex-column justify-content-start align-items-center">
   <h3 class="h3">Guest Section</h3>
-  <ngb-accordion #acc="ngbAccordion" activeIds="config-panel-one">
-    <ngb-panel title="Returning Guest" id="config-panel-one">
+  <ngb-accordion #acc="ngbAccordion">
+    <ngb-panel title="Returning Guest">
       <ng-template ngbPanelContent>
         <section class="py-3 my-2">
           <div class="form-group">
@@ -190,7 +190,3 @@
     </ngb-panel>
   </ngb-accordion>
 </article>
-
-<ng-template #roomContent>
- The Rooms
-</ng-template>

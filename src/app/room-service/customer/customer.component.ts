@@ -39,6 +39,8 @@ export class CustomerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.modal.open(this.component, {size: 'xl', container: 'div'});
+
     this.customerForm = this.fb.group({
       customerName: ['', Validators.required],
       city: [''],
@@ -98,7 +100,7 @@ export class CustomerComponent implements OnInit {
   get f() { return this.customerForm.controls; }
 
   createCustomer() {
-    this.modal.open(this.component, {size: 'xl'});
+    // this.modal.open(this.component, {size: 'xl'});
     // if (this.customerForm.valid) {
     //   this.modal.open(this.roomContent);
     // }

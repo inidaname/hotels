@@ -9,10 +9,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class ListRoomsComponent implements OnInit {
 
   roomLogForm: FormGroup;
+  position: boolean;
 
   constructor(
     private fb: FormBuilder
-  ) {}
+  ) {
+    this.position = false;
+  }
 
   ngOnInit() {
     this.roomLogForm = this.fb.group({
@@ -21,11 +24,18 @@ export class ListRoomsComponent implements OnInit {
       amountPaid: [''],
       numberOfPersons: [''],
       purposeOfVisit: [''],
-      paymentMethod: ['']
+      paymentMethod: [''],
+      arrivalDate: [''],
+      departureDate: ['']
     });
   }
 
   get f() { return this.roomLogForm.controls; }
 
-
+  goNext(){
+    this.position = true;
+  }
+  goBack() {
+    this.position = false;
+  }
 }
