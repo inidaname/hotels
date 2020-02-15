@@ -13,13 +13,13 @@ export async function createLogs(req, res){
     const { room, checkedInStatus } = req.body;
     console.log(room);
     console.log(checkedInStatus);
-    
-    
+
+
     roomModel.findByIdAndUpdate({_id: room}, {roomStatus: checkedInStatus}, {new: true}).exec();
 
     const roomLogs = await roomLogsModel.create({...req.body, receipt});
 
-     
+
     return res.status(200).json({message: `Room log successfully`, data: roomLogs})
 
   } catch (error) {
@@ -59,7 +59,7 @@ export async function getRoomLogById(req, res) {
       throw { message: `Can't find product`, status: 404 };
     }
 
-    const roomLog = await roomLogsModel.findById(id).lean().select('-__v').populate('room', '-__v').populate('checkedInBy', '-__v').exec();
+    const roomLog = await roomLogsModel.findById(id).lean().select('-__v').populate('room', '-__v').populate('customer', '-__v').populate('checkedInBy', '-__v').exec();
 
     if (!roomLog) {
       throw { message: `Could not find product`, status: 404 }
@@ -124,7 +124,7 @@ export async function getRoomLogBill(req, res) {
   try {
     const { id } = req.params;
 
-  
+
     let [ sales, restaurant ] = await Promise.all([
          salesLogModel.find({roomNumber: id}).where('paymentMethod').equals('Bill').populate(['sellerId', 'productSold.productDetail', 'complimentVal']).exec(),
          restaurantLogModel.find({roomNumber: id}).where('paymentMethod').equals('Bill').populate(['sellerId', 'productSold.productDetail', 'complimentVal']).exec()

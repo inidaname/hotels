@@ -5,21 +5,6 @@ const roomLogsSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: 'User'
   },
-  customerName: {
-    type: String,
-    required: [true, `Please provide customer's name`]
-  },
-  customerAddress:String,
-  customerProfession: String,
-  customerEmail: String,
-  nationality: String,
-  city: String,
-  country: String,
-  comingFrom: String,
-  nextDestination: String,
-  passportNo: String,
-  issuedAt: String,
-  issueDate: String,
   discount: Boolean,
   arrivalDate: {
     type: Date
@@ -27,15 +12,8 @@ const roomLogsSchema = new mongoose.Schema({
   departureDate: {
     type: Date
   },
-  customerNumber: String,
   paymentMethod: String,
-  companyName: String,
-  companyAddress: String,
-  companyNumber: String,
   purposeOfVisit: String,
-  nextOfKin: String,
-  nextOfKinNumber: String,
-  nextOfKinRelation: String,
   roomNumber: String, //To be edited IMPORTANT
   room: {
     type: mongoose.Types.ObjectId,
@@ -54,13 +32,20 @@ const roomLogsSchema = new mongoose.Schema({
     type: Number,
     required: [true, `Please provide amount to pay`]
   },
+  customer: {
+    type: mongoose.Types.ObjectId,
+    ref: 'Customer'
+  },
   receipt:{
     type: String,
     unique: true
   },
-  image: [String]
-  
- 
+  image: [String],
+  comingFrom: String,
+  nextDestination: String,
+  purposeOfVisit: String,
+
+
 }, {timestamps: true})
 
 export default mongoose.model('RoomLogs', roomLogsSchema, 'roomLogs');

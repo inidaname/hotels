@@ -13,7 +13,8 @@ import {
   restaurant,
   roomLogs,
   restaurantLogs,
-  productRequest
+  productRequest,
+  customer
 } from '../controllers/';
 
 import {auth} from '../utils/auth'
@@ -78,6 +79,12 @@ routes.route('/roomlodge/:id').get(roomLogs.getRoomLogById);
 routes.route('/roomlodge/bill/:id').get(roomLogs.getRoomLogBill);
 routes.route('/roomlodge/:id').put(roomLogs.editRoom).delete(roomLogs.deleteRoom);
 routes.route('/roomlodge/room/:number').get(roomLogs.getGuestByRoomNumber);
+
+// customer
+const { createCustomer, getAllCustomer, getCustmerBy, updateCustomer, deleteCustomer, getcustomergById } = customer;
+routes.route('/customer').post(createCustomer).get(getAllCustomer);
+routes.route('/customer/:id').get(getcustomergById).put(updateCustomer).delete(deleteCustomer)
+routes.get('/searchCustomer', getCustmerBy)
 
 // Account
 routes.get('/account/sales', account.getAllSaleslog);

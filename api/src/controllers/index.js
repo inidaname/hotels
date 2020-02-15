@@ -12,6 +12,7 @@ import * as user from './user'
 import * as restaurant from './restaurant';
 import * as account from './account'
 import * as productRequest from './productRequest'
+import * as customer from './customer'
 
 export {
   createAuth,
@@ -27,5 +28,6 @@ export {
   user,
   restaurant,
   restaurantLogs,
-  account
+  account,
+  customer,
 };

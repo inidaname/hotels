@@ -10,6 +10,7 @@ import roomLogsModel from './roomLogs';
 import restaurantModel from './restaurant';
 import restaurantLogModel from './restaurantLog'
 import productRequestModel from './productRequest'
+import customerModel from './customer'
 
 export {
   userModel,
@@ -23,5 +24,6 @@ export {
   roomLogsModel,
   restaurantModel,
   restaurantLogModel,
-  productRequestModel
+  productRequestModel,
+  customerModel
 };
