@@ -7,13 +7,13 @@ import { COUNTRIES } from '../../shared/json/countries';
 import { ApiService } from '../../shared/services/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
-import { NgbAccordionConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionConfig, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ListRoomsComponent } from '../components/list-rooms/list-rooms.component';
 
 @Component({
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.scss'],
-  providers: [NgbAccordionConfig]
+  providers: [NgbAccordionConfig, NgbModalConfig]
 })
 export class CustomerComponent implements OnInit {
 
@@ -31,16 +31,18 @@ export class CustomerComponent implements OnInit {
     private roomService: RoomsService,
     private router: Router,
     private config: NgbAccordionConfig,
-    private modal: NgbModal
+    private modal: NgbModal,
+    private modalConfig: NgbModalConfig
   ) {
     this.roomPrice = 0;
-    config.closeOthers = true;
+    this.config.closeOthers = true;
     this.component = ListRoomsComponent;
+    this.modalConfig.backdrop = 'static';
+    this.modalConfig.size = 'lg';
+    this.modalConfig.keyboard = false;
   }
 
   ngOnInit() {
-    this.modal.open(this.component, {size: 'xl', container: 'div'});
-
     this.customerForm = this.fb.group({
       customerName: ['', Validators.required],
       city: [''],
@@ -100,6 +102,7 @@ export class CustomerComponent implements OnInit {
   get f() { return this.customerForm.controls; }
 
   createCustomer() {
+    this.modal.open(this.component, { keyboard: false, backdrop: false, size: 'xl' });
     // this.modal.open(this.component, {size: 'xl'});
     // if (this.customerForm.valid) {
     //   this.modal.open(this.roomContent);
