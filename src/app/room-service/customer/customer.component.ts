@@ -7,8 +7,10 @@ import { COUNTRIES } from '../../shared/json/countries';
 import { ApiService } from '../../shared/services/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
-import { NgbAccordionConfig, NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionConfig, NgbModal, NgbModalConfig, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ListRoomsComponent } from '../components/list-rooms/list-rooms.component';
+import { CustomerInterface } from '../../shared/interface/customer.interface';
+
 
 @Component({
   templateUrl: './customer.component.html',
@@ -23,8 +25,15 @@ export class CustomerComponent implements OnInit {
   setClass: boolean;
   @ViewChild('passportNumber', { static: true }) passportNumber: ElementRef;
   @ViewChild('roomContent', { static: true }) roomContent: ElementRef;
+  @ViewChild('resultSearch', { static: true }) resultSearch: ElementRef;
   component: typeof ListRoomsComponent;
   roomPrice: any;
+  searchExisting: any;
+  alertClass: string;
+  alertMessage: string;
+  alertType: boolean;
+  customerDetail: CustomerInterface;
+  openedModal: NgbModalRef;
 
   constructor(
     private fb: FormBuilder,
@@ -32,7 +41,9 @@ export class CustomerComponent implements OnInit {
     private router: Router,
     private config: NgbAccordionConfig,
     private modal: NgbModal,
-    private modalConfig: NgbModalConfig
+    private modalConfig: NgbModalConfig,
+    private api: ApiService,
+    private spinner: NgxSpinnerService
   ) {
     this.roomPrice = 0;
     this.config.closeOthers = true;
@@ -52,8 +63,6 @@ export class CustomerComponent implements OnInit {
       customerAddress: [''],
       customerNumber: ['', Validators.required],
       nationality: ['', Validators.required],
-      comingFrom: ['', Validators.required],
-      nextDestination: ['', Validators.required],
       passportNumber: [''],
       issuedAt: [''],
       issuedDate: [''],
@@ -61,21 +70,11 @@ export class CustomerComponent implements OnInit {
       companyName: [''],
       companyNumber: [''],
       companyAddress: [''],
-      paymentMethod: ['', Validators.required],
-      purposeOfVisit: [''],
       nextOfKin: [''],
       nextOfKinNumber: [''],
       nextOfKinRelation: [''],
-      arrivalDate: ['', Validators.required],
-      departureDate: ['', Validators.required],
-      room: [''],
-      checkedInBy: [''],
-      numberOfPersons: [''],
-      checkedInStatus: ['', Validators.required],
-      amountPaid: [''],
-      roomNumber: [''],
+      createdBy: [''],
       image: [''],
-      discount: ['']
     });
     this.customerForm.controls.nationality.setValue(this.default, { onlySelf: true });
     this.customerForm.controls.country.setValue(this.default, { onlySelf: true });
@@ -102,22 +101,50 @@ export class CustomerComponent implements OnInit {
   get f() { return this.customerForm.controls; }
 
   createCustomer() {
-    this.modal.open(this.component, { keyboard: false, backdrop: false, size: 'xl' });
-    // this.modal.open(this.component, {size: 'xl'});
-    // if (this.customerForm.valid) {
-    //   this.modal.open(this.roomContent);
-    // }
-  }
-
-  bookARoom() {
-  if (this.customerForm.valid) {
-      this.customerForm.controls.checkedInBy.setValue(localStorage.getItem('currentUser'));
-      this.customerForm.controls.image.setValue([]);
-      // this.customerForm.controls.amountPaid.setValue(st.roomTypeId.roomPrice);
-      this.roomService.sendRoom(this.customerForm.value);
-      this.router.navigateByUrl('/roomservice/otherservice');
+    if (this.customerForm.valid) {
+      this.customerForm.controls.createdBy.setValue(localStorage.getItem('currentUser'));
+      this.spinner.show();
+      this.api.createCustomer(this.customerForm.value).subscribe((customer: CustomerInterface) => {
+        this.spinner.hide();
+        const listRoom = this.modal.open(this.component, { keyboard: false, backdrop: false, size: 'xl' });
+        listRoom.componentInstance.userData = customer;
+      }, err => {
+        this.spinner.hide();
+      });
     }
   }
+
+  searchCustomer() {
+    console.log(this.searchExisting.length)
+    if (this.searchExisting && this.searchExisting.length >= 3) {
+      this.spinner.show();
+      this.api.searchCustomer(this.searchExisting).subscribe((customer: CustomerInterface) => {
+        this.customerDetail = customer;
+        this.spinner.hide();
+        this.alertClass = 'success';
+        this.alertMessage = `${customer.customerName} Found.`;
+        this.alertType = true;
+        this.openedModal = this.modal.open(this.resultSearch);
+      },
+        err => {
+          this.alertClass = 'danger';
+          this.alertMessage = `No Customer with that info was Found.`;
+          this.alertType = false;
+          this.openedModal = this.modal.open(this.resultSearch);
+
+          this.spinner.hide();
+        });
+    }
+  }
+
+  openModalCustomer() {
+    if (this.customerDetail) {
+      this.openedModal.dismiss();
+      const listRoom = this.modal.open(this.component, { keyboard: false, backdrop: false, size: 'xl' });
+      listRoom.componentInstance.userData = this.customerDetail;
+    }
+  }
+
 
   sendType() {
     this.roomService.setReserve({
@@ -125,37 +152,6 @@ export class CustomerComponent implements OnInit {
     });
   }
 
-  setDiscount() {
-    if (this.customerForm.controls.discount.value === true) {
-      this.customerForm.controls.amountPaid.setValidators([Validators.required]);
-      this.customerForm.updateValueAndValidity();
-    } else {
-      this.customerForm.controls.amountPaid.setValue(this.roomPrice);
-      this.customerForm.controls.amountPaid.setValidators(null);
-      this.customerForm.updateValueAndValidity();
-    }
-  }
-
-  sendDiscount() {
-    this.roomService.setDiscount({
-      discount: true,
-      amountToPay:  this.customerForm.controls.amountPaid.value
-    });
-  }
-
-  selectRoom(st: RoomInfo) {
-    if (st.roomStatus === 'available'){
-      console.log(st)
-      this.customerForm.controls.roomNumber.setValue(st.roomNumber);
-      this.customerForm.controls.room.setValue(st._id);
-      this.roomPrice = st.roomTypeId.roomPrice;
-      this.customerForm.controls.amountPaid.setValue(st.roomTypeId.roomPrice);
-      this.roomService.setRoom({
-        roomNumber: st.roomNumber,
-        roomPrice: st.roomTypeId.roomPrice
-      });
-    }
-  }
 
   checkValue() {
     this.roomService.setData({

@@ -7,9 +7,9 @@
           <div class="form-group">
             <label for="guestDetail">Search For Existing Guest</label>
             <div class="form-inline">
-              <input type="text" class="form-control" name="guestDetail" id="guestDetail" aria-describedby="helpId"
+              <input type="text" class="form-control" [(ngModel)]="searchExisting" (keyup.enter)="searchCustomer()" name="guestDetail" id="guestDetail" aria-describedby="helpId"
                 placeholder="Phone Number or Email">
-              <button class="btn btn-primary btn-sm mx-3">Search</button>
+              <button class="btn btn-primary btn-sm mx-3" [disabled]="!searchExisting || searchExisting.length < 3" (click)="searchCustomer()">Search</button>
             </div>
             <small id="helpId" class="form-text text-muted">Search with Phone Number or Email</small>
           </div>
@@ -75,18 +75,6 @@
                   <input type="text" formControlName="city" id="city" class="form-control"
                     [ngClass]="{'is-invalid': f.city.touched && f.city.invalid}" placeholder="City of the Customer"
                     aria-describedby="numberHelp">
-                </div>
-                <div class="form-group col-3 mx-auto my-4">
-                  <label for="comingFrom">Coming From</label>
-                  <input type="text" formControlName="comingFrom" id="comingFrom" class="form-control"
-                    [ngClass]="{'is-invalid': f.comingFrom.touched && f.comingFrom.invalid}" placeholder="Coming from"
-                    aria-describedby="numberHelp">
-                </div>
-                <div class="form-group col-3 mx-auto my-4">
-                  <label for="nextDestination">Next Destination</label>
-                  <input type="text" formControlName="nextDestination" id="nextDestination" class="form-control"
-                    [ngClass]="{'is-invalid': f.nextDestination.touched && f.nextDestination.invalid}"
-                    placeholder="Destination" aria-describedby="numberHelp">
                 </div>
                 <div class="col-12 row">
                   <ng-container *ngIf="setClass === true">
@@ -154,12 +142,6 @@
                 <hr class="w-100 my-5">
                 <div class="col-12 row">
                   <div class="form-group col-4 mx-auto my-4">
-                    <label for="purposeOfVisit">Purpose of Visit</label>
-                    <input type="text" formControlName="purposeOfVisit" id="purposeOfVisit" class="form-control"
-                      [ngClass]="{'is-invalid': f.purposeOfVisit.touched && f.purposeOfVisit.invalid}"
-                      placeholder="Purpose of visit" aria-describedby="typeHelp">
-                  </div>
-                  <div class="form-group col-4 mx-auto my-4">
                     <label for="nextOfKin">Next of Kin</label>
                     <input type="text" formControlName="nextOfKin" id="nextOfKin" class="form-control"
                       [ngClass]="{'is-invalid': f.nextOfKin.touched && f.nextOfKin.invalid}" placeholder="Next of Kin"
@@ -190,3 +172,48 @@
     </ngb-panel>
   </ngb-accordion>
 </article>
+
+
+<ng-template #resultSearch>
+  <div class="modal-header">
+    <h4 class="h4">Result of Search</h4>
+  </div>
+  <div class="modal-body">
+    <ngb-alert *ngIf="alertMessage" [type]="alertClass" (close)="alertMessage = null">{{ alertMessage }}</ngb-alert>
+    <div *ngIf="alertType" class="mt-3 container">
+      <div class="row">
+        <div class="col-4">
+          Name
+        </div>
+        <div class="col-6">
+          {{customerDetail.customerName}}
+        </div>
+        <div class="col-4">
+          Email
+        </div>
+        <div class="col-6">
+          {{customerDetail.customerEmail}}
+        </div>
+        <div class="col-4">
+          Phone Number
+        </div>
+        <div class="col-6">
+          {{customerDetail.customerNumber}}
+        </div>
+        <div class="col-4">
+          Address
+        </div>
+        <div class="col-6">
+          {{customerDetail.customerAddress}}
+        </div>
+        <div class="col-10" *ngFor="let item of customerDetail.image">
+          <img [src]="item" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button *ngIf="alertType" class="btn btn-sm btn-success" (click)="openModalCustomer()">Book A Room</button>
+    <button class="btn btn-sm btn-danger" (click)="openedModal.close()">Cancel</button>
+  </div>
+</ng-template>

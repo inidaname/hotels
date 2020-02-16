@@ -30,6 +30,22 @@ export class ApiService {
     private userData: UserDataService
   ) { }
 
+  createCustomer(customer: any): Observable<any>{
+    return this.http
+      .post(`${this.api}/customer`, customer)
+      .pipe(map((data: any) => {
+        return data.data;
+      }), catchError(this.handleError));
+  }
+
+  searchCustomer(detail: any): Observable<any>{
+    return this.http
+      .get(`${this.api}/searchcustomer/${detail}`)
+      .pipe(map((data: any) => {
+        return data.data;
+      }), catchError(this.handleError));
+  }
+
   registerUser(userReg: User): Observable<UserData> {
     return this.http
       .post<UserData>(`${this.api}/create/user`, userReg)
