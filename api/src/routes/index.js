@@ -84,7 +84,7 @@ routes.route('/roomlodge/room/:number').get(roomLogs.getGuestByRoomNumber);
 const { createCustomer, getAllCustomer, getCustmerBy, updateCustomer, deleteCustomer, getcustomergById } = customer;
 routes.route('/customer').post(createCustomer).get(getAllCustomer);
 routes.route('/customer/:id').get(getcustomergById).put(updateCustomer).delete(deleteCustomer)
-routes.get('/searchCustomer', getCustmerBy)
+routes.get('/searchcustomer/:search', getCustmerBy)
 
 // Account
 routes.get('/account/sales', account.getAllSaleslog);

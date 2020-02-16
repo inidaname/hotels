@@ -14,9 +14,9 @@ export async function createCustomer(req, res) {
 
 export async function getCustmerBy(req, res) {
   try {
-    const { guestDetail } = req.body;
+    const { search } = req.params;
     const customer = await customerModel
-      .findOne({ $or: [{ customerEmail: guestDetail }, { customerNumber: guestDetail }] })
+      .findOne({ $or: [{ customerEmail: search }, { customerNumber: search }] })
       .lean()
       .select("-__v")
       .populate("createdBy", "-__v")
