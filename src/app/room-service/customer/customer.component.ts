@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import { NgbAccordionConfig, NgbModal, NgbModalConfig, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ListRoomsComponent } from '../components/list-rooms/list-rooms.component';
 import { CustomerInterface } from '../../shared/interface/customer.interface';
+import { ImageUploadComponent } from '../../shared/components/image-upload/image-upload.component';
+import { ImageService } from '../../shared/services/image.service';
 
 
 @Component({
@@ -27,6 +29,7 @@ export class CustomerComponent implements OnInit {
   @ViewChild('roomContent', { static: true }) roomContent: ElementRef;
   @ViewChild('resultSearch', { static: true }) resultSearch: ElementRef;
   component: typeof ListRoomsComponent;
+  imageUpload: typeof ImageUploadComponent;
   roomPrice: any;
   searchExisting: any;
   alertClass: string;
@@ -43,11 +46,13 @@ export class CustomerComponent implements OnInit {
     private modal: NgbModal,
     private modalConfig: NgbModalConfig,
     private api: ApiService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private shareService: ImageService
   ) {
     this.roomPrice = 0;
     this.config.closeOthers = true;
     this.component = ListRoomsComponent;
+    this.imageUpload = ImageUploadComponent;
     this.modalConfig.backdrop = 'static';
     this.modalConfig.size = 'lg';
     this.modalConfig.keyboard = false;
@@ -101,21 +106,23 @@ export class CustomerComponent implements OnInit {
   get f() { return this.customerForm.controls; }
 
   createCustomer() {
+    this.spinner.show();
     if (this.customerForm.valid) {
-      this.customerForm.controls.createdBy.setValue(localStorage.getItem('currentUser'));
-      this.spinner.show();
-      this.api.createCustomer(this.customerForm.value).subscribe((customer: CustomerInterface) => {
-        this.spinner.hide();
-        const listRoom = this.modal.open(this.component, { keyboard: false, backdrop: false, size: 'xl' });
-        listRoom.componentInstance.userData = customer;
-      }, err => {
-        this.spinner.hide();
+      this.shareService.currentData.subscribe(val => {
+        this.customerForm.controls.image.setValue(val);
+        this.customerForm.controls.createdBy.setValue(localStorage.getItem('currentUser'));
+        this.api.createCustomer(this.customerForm.value).subscribe((customer: CustomerInterface) => {
+          this.spinner.hide();
+          const listRoom = this.modal.open(this.component, { keyboard: false, backdrop: false, size: 'xl' });
+          listRoom.componentInstance.userData = customer;
+        }, err => {
+          this.spinner.hide();
+        });
       });
     }
   }
 
   searchCustomer() {
-    console.log(this.searchExisting.length)
     if (this.searchExisting && this.searchExisting.length >= 3) {
       this.spinner.show();
       this.api.searchCustomer(this.searchExisting).subscribe((customer: CustomerInterface) => {
@@ -136,6 +143,12 @@ export class CustomerComponent implements OnInit {
         });
     }
   }
+
+  UploadModal() {
+    const modal = this.modal.open(this.imageUpload, {size: 'lg'});
+    modal.componentInstance.uploadLocation = 'GuestsID';
+  }
+
 
   openModalCustomer() {
     if (this.customerDetail) {

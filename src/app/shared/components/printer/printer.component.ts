@@ -3,6 +3,7 @@ import { PrinterService } from '../../services/printer.service';
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { RoomsService } from '../../services/rooms.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   templateUrl: './printer.component.html',
@@ -17,6 +18,7 @@ export class PrinterComponent implements OnInit, AfterViewChecked {
   constructor(
     private jwt: JwtHelperService,
     private printer: PrinterService,
+    private spinner: NgxSpinnerService
   ) {
     this.currentUser = this.jwt.decodeToken().fullName;
     this.printData = (localStorage.getItem('print')) ? JSON.parse(localStorage.print) : '';

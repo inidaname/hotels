@@ -1,5 +1,5 @@
 <div class="modal-header">
-  Room Details {{ userData?.customerName }}
+  <h4 class="h4">Room Details for {{ userData?.customerName }}</h4>
 </div>
 <form [formGroup]="roomLogForm">
   <ng-container *ngIf="!position;else nextContent">
@@ -90,6 +90,7 @@
   </ng-container>
   <ng-template #nextContent>
     <div class="modal-body">
+      <app-rooms-table [purpose]="'product'" [needed]="true" (tapRoom)="selectRoom($event)"></app-rooms-table>
       <div class="w-100 my-4">
         <div class="custom-control custom-switch my-auto w-100 text-center">
           <input type="checkbox" class="custom-control-input" id="customSwitch1" (change)="setDiscount()"
@@ -102,16 +103,18 @@
             placeholder="Amount To Pay">
         </div>
       </div>
-      <app-rooms-table [purpose]="'product'" [needed]="true" (tapRoom)="selectRoom($event)"></app-rooms-table>
     </div>
   </ng-template>
 </form>
 <div class="modal-footer">
   <button class="btn btn-danger mx-5" (click)="confirmCancelModal()">Cancel</button>
-  <ng-container *ngIf="position">
-    <button class="btn btn-secondary mx-2 justify-self" (click)="goBack()">Back</button>
+  <ng-container *ngIf="position; else notPosition">
+    <button class="btn btn-secondary mx-2" (click)="goBack()">Back</button>
+    <button class="btn btn-success mx-2" (click)="lodgeRoom()">Book Guest</button>
   </ng-container>
-  <button class="btn btn-success mx-2" (click)="goNext()">Next</button>
+  <ng-template #notPosition>
+    <button class="btn btn-success mx-2" (click)="goNext()">Next</button>
+  </ng-template>
 </div>
 
 
@@ -124,5 +127,19 @@
       <button class="btn btn-danger my-5" ngbAutofocus (click)="cancalModal()">Yes</button>
       <button class="btn btn-secondary my-5" (click)="notReady()">No</button>
     </div>
+  </div>
+</ng-template>
+
+<ng-template #lodgedRoom>
+  <div class="modal-header">
+    <h4 class="h4">Room Lodged Successfully</h4>
+  </div>
+  <div class="modal-body border border-success">
+    <p class="lead">
+      {{userData.customerName}} was lodged into room no {{f.roomNumber.value}}
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success" (click)="setForPrint()">Done</button>
   </div>
 </ng-template>

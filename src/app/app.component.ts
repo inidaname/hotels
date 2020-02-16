@@ -34,5 +34,6 @@ export class AppComponent implements OnInit {
     } else {
       this.spinner.hide();
     }
+    this.spinner.hide();
   }
 }

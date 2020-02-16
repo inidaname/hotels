@@ -43,9 +43,10 @@ export class CheckOutComponent implements OnInit {
     if (this.searchCheck.length >= 2) {
       this.spinner.show();
       const gu = this.api.searchGuest(this.searchCheck).subscribe((guest: any) => {
+        this.spinner.hide();
+        console.log(guest)
         this.guest$ = guest.data;
         this.lodgedId = guest.data._id;
-        this.spinner.hide();
         gu.unsubscribe();
       }, er => this.message = `No guest found`);
     }

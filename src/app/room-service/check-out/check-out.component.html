@@ -18,7 +18,7 @@
    <div class="col-5">
      <div class="card" *ngIf="guest$">
        <div class="card-body">
-         <h4 class="card-title">Customer Name: {{ guest$?.customerName }}</h4>
+         <h4 class="card-title">Customer Name: {{ guest$?.customer?.customerName }}</h4>
          <p class="card-text">Room No: {{ guest$?.room.roomNumber }}</p>
          <p class="card-text">Date Lodged: {{ guest$?.arrivalDate | date }}</p>
          <p class="card-text" [ngSwitch]="guest$?.checkedInStatus">Lodged Status: <span *ngSwitchCase="'available'">Checked Out</span> <span *ngSwitchCase="'occupied'">Checked In</span> <span *ngSwitchCase="'reserved'">Reserved</span></p>
@@ -43,8 +43,10 @@
       </ul>
       <span *ngIf="checked">No Bills found</span>
     </div>
-    <div class="col-12 my-5">
-      <button class="btn btn-success" (click)="checkOut()">Check Out</button>
-    </div>
+    <ng-container *ngIf="guest$?.checkedInStatus === 'occupied'">
+      <div class="col-12 my-5">
+        <button class="btn btn-success" (click)="checkOut()">Check Out</button>
+      </div>
+    </ng-container>
   </section>
 </article>
