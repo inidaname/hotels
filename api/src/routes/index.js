@@ -75,10 +75,10 @@ routes.route('/stock/:id').put(stock.editStock).delete(stock.deleteStock);
 
 // Room logs for booking and reservation
 routes.route('/roomlodge').post(roomLogs.createLogs).get(roomLogs.getAllRoomLog);
-routes.route('/roomlodge/:id').get(roomLogs.getRoomLogById);
 routes.route('/roomlodge/bill/:id').get(roomLogs.getRoomLogBill);
 routes.route('/roomlodge/:id').put(roomLogs.editRoom).delete(roomLogs.deleteRoom);
 routes.route('/roomlodge/room/:number').get(roomLogs.getGuestByRoomNumber);
+routes.route('/roomlodge/:id').get(roomLogs.getRoomLogById);
 
 // customer
 const { createCustomer, getAllCustomer, getCustmerBy, updateCustomer, deleteCustomer, getcustomergById } = customer;
