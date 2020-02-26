@@ -6,10 +6,12 @@ import { OtherServiceComponent } from './other-service/other-service.component';
 import { PathNotFoundComponent } from '../shared/components/path-not-found/path-not-found.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { CustomerComponent } from './customer/customer.component';
+import { SearchCheckoutComponent } from './search-checkout/search-checkout.component';
 
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'roomslist' },
+  { path: 'search', component: SearchCheckoutComponent },
   { path: 'customer', component: CustomerComponent },
   { path: 'roomslist', component: RoomListComponent },
   { path: 'otherservice', component: OtherServiceComponent },

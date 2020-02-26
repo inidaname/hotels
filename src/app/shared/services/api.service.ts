@@ -9,6 +9,7 @@ import { User, UserData } from '../interface/user.interface';
 import { ProductData, Products, ProductInfo } from '../interface/products.interface';
 import { InventoryData, Inventory, InventoryInfo } from '../interface/inventory.interface';
 import { RoomData, Room, RoomInfo } from '../interface/room.interface';
+import { RoomLodge } from '../interface/customer.interface';
 
 
 @Injectable({
@@ -83,10 +84,10 @@ export class ApiService {
       .pipe(map((log: any) => log.data), catchError(this.handleError));
   }
 
-  searchGuest(roomNumber: number) {
+  searchGuest(roomNumber: number): Observable<RoomLodge> {
     return this.http
       .get(`${this.api}/roomlodge/room/${roomNumber}`)
-      .pipe(map((ret) => ret), catchError(this.handleError));
+      .pipe(map((ret: any) => ret.data), catchError(this.handleError));
   }
 
   makeMealSales(data) {

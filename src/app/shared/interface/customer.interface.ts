@@ -1,3 +1,6 @@
+import { RoomInfo } from './room.interface';
+import { User } from './user.interface';
+
 export interface CustomerInterface {
   _id: string;
   customerName: string;
@@ -17,6 +20,28 @@ export interface CustomerInterface {
   nextOfKinRelation: string;
   image: string[];
   createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface RoomLodge {
+  _id: string;
+  image: string[];
+  checkedInStatus: string;
+  discount: boolean;
+  amountPaid: number;
+  numberOfPersons: number;
+  purposeOfVisit: string;
+  paymentMethod: string;
+  arrivalDate: string;
+  departureDate: string;
+  comingFrom: string;
+  nextDestination: string;
+  room: RoomInfo;
+  roomNumber: string;
+  checkedInBy: User
+  customer: CustomerInterface;
+  receipt: string;
   createdAt: string;
   updatedAt: string;
 }

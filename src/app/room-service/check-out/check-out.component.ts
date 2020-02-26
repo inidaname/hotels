@@ -18,8 +18,6 @@ export class CheckOutComponent implements OnInit {
   checkedOut: boolean;
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
     private spinner: NgxSpinnerService,
     private api: ApiService,
     private roomService: RoomsService
@@ -44,7 +42,6 @@ export class CheckOutComponent implements OnInit {
       this.spinner.show();
       const gu = this.api.searchGuest(this.searchCheck).subscribe((guest: any) => {
         this.spinner.hide();
-        console.log(guest)
         this.guest$ = guest.data;
         this.lodgedId = guest.data._id;
         gu.unsubscribe();

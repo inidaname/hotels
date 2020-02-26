@@ -28,6 +28,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import { Cloudinary } from 'cloudinary-core';
 import { ImagePreviewDirective } from './directives/image-preview.directive';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 export const cloudinaryLib = {
   Cloudinary: Cloudinary
@@ -52,7 +53,8 @@ export const cloudinaryLib = {
     ImageUploadComponent,
     RequestTableComponent,
     InventorySortComponent,
-    ImagePreviewDirective
+    ImagePreviewDirective,
+    CheckoutComponent
   ],
   imports: [
     CommonModule,
@@ -90,13 +92,15 @@ export const cloudinaryLib = {
     InventorySortComponent,
     FileUploadModule,
     CloudinaryModule,
-    ImagePreviewDirective
+    ImagePreviewDirective,
+    CheckoutComponent
   ],
   providers: [DecimalPipe],
   entryComponents: [
     ProductFormComponent,
     InventoryFormComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    CheckoutComponent
   ]
 })
 export class SharedModule { }

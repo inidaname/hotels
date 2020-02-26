@@ -7,6 +7,7 @@ import { OtherServiceComponent } from './other-service/other-service.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { CustomerComponent } from './customer/customer.component';
 import { ListRoomsComponent } from './components/list-rooms/list-rooms.component';
+import { SearchCheckoutComponent } from './search-checkout/search-checkout.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ListRoomsComponent } from './components/list-rooms/list-rooms.component
     OtherServiceComponent,
     CheckOutComponent,
     CustomerComponent,
-    ListRoomsComponent
+    ListRoomsComponent,
+    SearchCheckoutComponent
   ],
   imports: [
     SharedModule,
