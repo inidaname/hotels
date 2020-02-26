@@ -1,0 +1,10 @@
+article {
+    width: 67vw;
+    min-height: auto;
+    >:first-child {
+        min-height: 25vh !important;
+    }
+    &:nth-child(2) {
+        height: 65vh !important;
+    }
+}

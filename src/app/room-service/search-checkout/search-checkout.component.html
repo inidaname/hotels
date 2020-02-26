@@ -1,0 +1,29 @@
+<article class="row">
+    <section class="col-10 p-3 my-3 mx-auto shadow-lg rounded">
+        <h4 class="h4 col-12 text-center">Search For Guest</h4>
+        <div class="form-inline text-center w-100 mb-4">
+            <label class="sr-only" for="inlineFormInputName2">Name</label>
+            <input type="text" [(ngModel)]="searchCheck" (keydown.enter)="searchGuest()" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+            <button type="submit" (click)="searchGuest()" [disabled]="!searchCheck || searchCheck.length < 3" class="btn btn-primary mb-2">Submit</button>
+        </div>
+        <ngb-alert *ngIf="message" [type]="alertType" (close)="message = null">
+            <span [innerHTML]="message"></span>
+        </ngb-alert>
+    </section>
+    <section *ngIf="guest$" class="shadow rounded col-10 mx-auto mt-5 p-4 row">
+        <div class="col-12 row">
+            <div class="col-4">Name of Guest</div>
+            <div class="col-6">{{ guest$?.customer.customerName }}</div>
+            <div class="col-4">Days Spent</div>
+            <div class="col-6">{{ (daysSpent >= 2) ? daysSpent + ' Days' : daysSpent + 'Day' }}</div>
+            <div class="col-4">Date Lodge</div>
+            <div class="col-6">{{ guest$?.createdAt | date }}</div>
+            <div class="col-4">Amount Paid</div>
+            <div class="col-6">{{ guest$?.amountPaid | currency: 'NGN' : 'symbol-narrow' }}</div>
+            <div class="col-4">Duration Cost</div>
+            <div class="col-6">{{ (guest$?.room.roomTypeId.roomPrice * daysSpent) - guest$?.amountPaid | currency: 'NGN' : 'symbol-narrow' }} <span class="small">* Previous amount paid deducted</span></div>
+            <div class="col-4 mt-5"></div>
+            <div class="col-6 mt-5"><button class="btn btn-danger" (click)="checkModal()">Check Out</button> </div>
+        </div>
+    </section>
+</article>

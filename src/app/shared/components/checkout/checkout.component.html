@@ -1,0 +1,42 @@
+<div class="modal-header">
+    Check Out details for {{userData.customer.customerName}} from Room No {{userData.roomNumber}}
+</div>
+<div class="modal-body row">
+    <ng-container *ngIf="billList;else noBills">
+
+        <ul class="list-group col-8" *ngFor="let bills of billsList">
+            <li class="list-group-item" *ngFor="let bill of bills">
+                <h5 class="h5">Purchased at <span [ngSwitch]="bill.place">
+          <em *ngSwitchCase="'poolBar'">Pool Bar</em>
+          <em *ngSwitchCase="'mainBar'">Main Bar</em>
+          <em *ngSwitchCase="'restaurant'">Restaurant</em>
+        </span>
+                    <span class="badge badge-info">{{bill.productSold.length}}</span>
+                </h5>
+                <ng-container [ngSwitch]="bill.place">
+                    <div *ngSwitchCase="'poolBar'" class="list-group">
+                        <p class="list-group-item" *ngFor="let product of bill.productSold">
+                            {{product.productQuantity}} {{ product.productDetail.name }}, for {{ product.productQuantity * product.productDetail.poolBarPrice | currency: 'NGN' : 'symbol-narrow' }}
+                        </p>
+                    </div>
+                    <div *ngSwitchCase="'mainBar'" class="list-group">
+                        <p class="list-group-item" *ngFor="let product of bill.productSold">
+                            {{product.productQuantity}} {{ product.productDetail.name }}, for {{ product.productQuantity * product.productDetail.mainBarPrice | currency: 'NGN' : 'symbol-narrow' }}
+                        </p>
+                    </div>
+                    <div *ngSwitchCase="'restaurant'" class="list-group">
+                        <p class="list-group-item" *ngFor="let product of bill.productSold">
+                            {{product.productQuantity}} {{ product.productDetail.mealName }}, for {{ product.productQuantity * product.productDetail.mealPrice | currency: 'NGN' : 'symbol-narrow' }}
+                        </p>
+                    </div>
+                </ng-container>
+            </li>
+        </ul>
+    </ng-container>
+    <ng-template #noBills>
+        <p>The Guest has no outstanding bills</p>
+    </ng-template>
+</div>
+<div class="modal-footer">
+    Check Total Bill {{roomBill + totalBill }}
+</div>
