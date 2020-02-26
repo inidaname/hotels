@@ -30,7 +30,7 @@ export async function createLogs(req, res) {
 export async function getGuestByRoomNumber(req, res) {
     try {
         const { number } = req.params;
-        const getRoom = await roomLogsModel.findOne({ roomNumber: number, $or: [{ checkedInStatus: "occupied" }, { checkedInStatus: "reserved" }] }).lean().select('-__v').populate('customer', '-__v').populate('room', '-__v').populate('room.roomTypeId', '-__v').populate('checkedInBy', '-__v').exec();
+        const getRoom = await roomLogsModel.findOne({ roomNumber: number, $or: [{ checkedInStatus: "occupied" }, { checkedInStatus: "reserved" }] }).lean().select('-__v').populate('customer', '-__v').populate({ path: 'room', populate: { path: 'roomTypeId' } }).populate('checkedInBy', '-__v').exec();
         if (!getRoom) {
             throw { message: 'Guest not found', status: 404 }
         }
