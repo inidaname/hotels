@@ -1,42 +1,52 @@
 <div class="modal-header">
-    Check Out details for {{userData.customer.customerName}} from Room No {{userData.roomNumber}}
+    Check Out details for {{userData.customer.customerName}} in Room No {{userData.roomNumber}}
 </div>
 <div class="modal-body row">
-    <ng-container *ngIf="billList;else noBills">
-
-        <ul class="list-group col-8" *ngFor="let bills of billsList">
-            <li class="list-group-item" *ngFor="let bill of bills">
-                <h5 class="h5">Purchased at <span [ngSwitch]="bill.place">
-          <em *ngSwitchCase="'poolBar'">Pool Bar</em>
-          <em *ngSwitchCase="'mainBar'">Main Bar</em>
-          <em *ngSwitchCase="'restaurant'">Restaurant</em>
-        </span>
-                    <span class="badge badge-info">{{bill.productSold.length}}</span>
-                </h5>
-                <ng-container [ngSwitch]="bill.place">
-                    <div *ngSwitchCase="'poolBar'" class="list-group">
-                        <p class="list-group-item" *ngFor="let product of bill.productSold">
-                            {{product.productQuantity}} {{ product.productDetail.name }}, for {{ product.productQuantity * product.productDetail.poolBarPrice | currency: 'NGN' : 'symbol-narrow' }}
-                        </p>
-                    </div>
-                    <div *ngSwitchCase="'mainBar'" class="list-group">
-                        <p class="list-group-item" *ngFor="let product of bill.productSold">
-                            {{product.productQuantity}} {{ product.productDetail.name }}, for {{ product.productQuantity * product.productDetail.mainBarPrice | currency: 'NGN' : 'symbol-narrow' }}
-                        </p>
-                    </div>
-                    <div *ngSwitchCase="'restaurant'" class="list-group">
-                        <p class="list-group-item" *ngFor="let product of bill.productSold">
-                            {{product.productQuantity}} {{ product.productDetail.mealName }}, for {{ product.productQuantity * product.productDetail.mealPrice | currency: 'NGN' : 'symbol-narrow' }}
-                        </p>
-                    </div>
-                </ng-container>
-            </li>
-        </ul>
-    </ng-container>
-    <ng-template #noBills>
-        <p>The Guest has no outstanding bills</p>
-    </ng-template>
+    <div class="my-5 col-8 offset-2" *ngIf="totalBill === 0">
+        The guest has no outstanding bill
+    </div>
+    <div class="list-group col-8 offset-2" *ngFor="let bills of billsList | async">
+        <div class="list-group-item list-group-item-action" *ngFor="let bill of bills">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Purchased at the <span [ngSwitch]="bill.place">
+            <em *ngSwitchCase="'poolBar'">Pool Bar</em>
+            <em *ngSwitchCase="'mainBar'">Main Bar</em>
+            <em *ngSwitchCase="'restaurant'">Restaurant</em>
+          </span></h5>
+                <small>{{bill.productSold.length}} items</small>
+            </div>
+            <ng-container [ngSwitch]="bill.place">
+                <div *ngSwitchCase="'poolBar'" class="list-group">
+                    <p class="list-group-item" *ngFor="let product of bill.productSold">
+                        {{product.productQuantity}} {{ product.productDetail.name }}, for {{ product.productQuantity * product.productDetail.poolBarPrice | currency: 'NGN' : 'symbol-narrow' }}
+                    </p>
+                </div>
+                <div *ngSwitchCase="'mainBar'" class="list-group">
+                    <p class="list-group-item" *ngFor="let product of bill.productSold">
+                        {{product.productQuantity}} {{ product.productDetail.name }}, for {{ product.productQuantity * product.productDetail.mainBarPrice | currency: 'NGN' : 'symbol-narrow' }}
+                    </p>
+                </div>
+                <div *ngSwitchCase="'restaurant'" class="list-group">
+                    <p class="list-group-item" *ngFor="let product of bill.productSold">
+                        {{product.productQuantity}} {{ product.productDetail.mealName }}, for {{ product.productQuantity * product.productDetail.mealPrice | currency: 'NGN' : 'symbol-narrow' }}
+                    </p>
+                </div>
+            </ng-container>
+        </div>
+    </div>
 </div>
-<div class="modal-footer">
-    Check Total Bill {{roomBill + totalBill }}
+<div class="modal-footer d-flex flex-row justify-content-between align-items-center">
+    <span>
+    {{ (totalBill === 0) ? 'No Purchases' : 'Purchases Total: ' + totalBill | currency: 'NGN' : 'symbol-narrow'}}
+  </span>
+    <span>
+    {{ (roomBill === 0 && totalBill === 0) ? 'Room Paid' : 'Room Total: ' + (roomBill + totalBill | currency: 'NGN' : 'symbol-narrow') }}
+  </span>
+    <div>
+        <ng-container *ngIf="roomBill > 0 || totalBill > 0">
+            <button class="btn btn-danger mx-1" (click)="makePayment()">Pay Bills</button>
+        </ng-container>
+        <button class="btn btn-primary mx-1" [disabled]="unpaid === true" (click)="checkoutGuest()">Check Out</button>
+        <button class="btn btn-dark mx-1" (click)="activeModal.dismiss()">Cancel</button>
+    </div>
 </div>

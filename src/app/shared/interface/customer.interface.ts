@@ -19,6 +19,10 @@ export interface CustomerInterface {
   nextOfKinNumber: string;
   nextOfKinRelation: string;
   image: string[];
+  representation: string;
+  passportNumber: string;
+  issueAt: string;
+  issueDate: string;
   createdBy: string;
   createdAt: string;
   updatedAt: string;
@@ -39,7 +43,7 @@ export interface RoomLodge {
   nextDestination: string;
   room: RoomInfo;
   roomNumber: string;
-  checkedInBy: User
+  checkedInBy: User;
   customer: CustomerInterface;
   receipt: string;
   createdAt: string;

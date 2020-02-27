@@ -10,7 +10,7 @@ import { SearchCheckoutComponent } from './search-checkout/search-checkout.compo
 
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'roomslist' },
+  { path: '', pathMatch: 'full', redirectTo: 'search' },
   { path: 'search', component: SearchCheckoutComponent },
   { path: 'customer', component: CustomerComponent },
   { path: 'roomslist', component: RoomListComponent },

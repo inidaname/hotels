@@ -10,6 +10,7 @@ import { ProductData, Products, ProductInfo } from '../interface/products.interf
 import { InventoryData, Inventory, InventoryInfo } from '../interface/inventory.interface';
 import { RoomData, Room, RoomInfo } from '../interface/room.interface';
 import { RoomLodge } from '../interface/customer.interface';
+import { SalesInterface } from '../interface/sales.interface';
 
 
 @Injectable({
@@ -255,11 +256,18 @@ export class ApiService {
       .pipe(map((meals: any) => meals.data), catchError(this.handleError));
   }
 
-  getBills(id) {
+  getBills(id: string): Observable<SalesInterface[][]> {
     return this.http
       .get(`${this.api}/roomlodge/bill/${id}`)
-      .pipe(map((bills) => bills), catchError(this.handleError));
+      .pipe(map((bills: any) => bills.data), catchError(this.handleError));
   }
+
+  makePayment(payment: any): Observable<any> {
+    return this.http
+      .post(`${this.api}/income`, payment)
+      .pipe(map(income => income), catchError(this.handleError));
+  }
+
 
   private handleError(err: HttpErrorResponse) {
     console.log(err);

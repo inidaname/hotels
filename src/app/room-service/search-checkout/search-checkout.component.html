@@ -21,7 +21,12 @@
             <div class="col-4">Amount Paid</div>
             <div class="col-6">{{ guest$?.amountPaid | currency: 'NGN' : 'symbol-narrow' }}</div>
             <div class="col-4">Duration Cost</div>
-            <div class="col-6">{{ (guest$?.room.roomTypeId.roomPrice * daysSpent) - guest$?.amountPaid | currency: 'NGN' : 'symbol-narrow' }} <span class="small">* Previous amount paid deducted</span></div>
+            <ng-container *ngIf="guest$?.discount === true; else noDiscounted">
+                <div class="col-6">{{ (guest$?.amountPaid * daysSpent) - guest$?.amountPaid | currency: 'NGN' : 'symbol-narrow' }} <span class="small">* Previous amount paid deducted</span></div>
+            </ng-container>
+            <ng-template #noDiscounted>
+                <div class="col-6">{{ (guest$?.room.roomTypeId.roomPrice * daysSpent) - guest$?.amountPaid | currency: 'NGN' : 'symbol-narrow' }} <span class="small">* Previous amount paid deducted</span></div>
+            </ng-template>
             <div class="col-4 mt-5"></div>
             <div class="col-6 mt-5"><button class="btn btn-danger" (click)="checkModal()">Check Out</button> </div>
         </div>

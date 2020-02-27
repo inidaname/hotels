@@ -1,16 +1,17 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'app/shared/services/api.service';
 import { RoomLodge } from 'app/shared/interface/customer.interface';
 import { calculateDate } from 'app/shared/functions/dateCalculate';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutComponent } from '../../shared/components/checkout/checkout.component';
+import { ShareService } from 'app/shared/services/share.service';
 
 @Component({
   templateUrl: './search-checkout.component.html',
   styleUrls: ['./search-checkout.component.scss']
 })
-export class SearchCheckoutComponent implements OnInit {
+export class SearchCheckoutComponent implements OnInit, AfterViewChecked {
 
   message: any;
   alertType: string;
@@ -26,12 +27,26 @@ export class SearchCheckoutComponent implements OnInit {
   constructor(
     private spinner: NgxSpinnerService,
     private api: ApiService,
-    private modal: NgbModal
+    private modal: NgbModal,
+    private service: ShareService
   ) {
     this.checkout = CheckoutComponent;
   }
 
   ngOnInit() {
+  }
+
+  ngAfterViewChecked() {
+    const dataCH = this.service.currentData.subscribe(data => {
+      if (data) {
+        if (this.guest$ !== null){
+          localStorage.setItem('roompage', JSON.stringify(this.guest$));
+          window.open('/print', '_blank');
+        }
+        this.guest$ = null;
+        this.service.changeData(false);
+      }
+    });
   }
 
   searchGuest() {
@@ -82,8 +97,12 @@ export class SearchCheckoutComponent implements OnInit {
   }
 
   checkModal() {
-    const modal = this.modal.open(this.checkout);
+    const amount = (this.guest$.discount === true) ?
+      (this.guest$.amountPaid * this.daysSpent) - this.guest$.amountPaid :
+      (this.guest$.room.roomTypeId.roomPrice * this.daysSpent) - this.guest$.amountPaid;
+
+    const modal = this.modal.open(this.checkout, {size: 'lg'});
     modal.componentInstance.userData = this.guest$;
-    modal.componentInstance.roomBill = (this.guest$.room.roomTypeId.roomPrice * this.daysSpent) - this.guest$.amountPaid;
+    modal.componentInstance.roomBill = amount;
   }
 }
