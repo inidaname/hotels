@@ -8,22 +8,24 @@ import expenditureModel from './expenditure';
 import stockModel from './stock';
 import roomLogsModel from './roomLogs';
 import restaurantModel from './restaurant';
-import restaurantLogModel from './restaurantLog'
-import productRequestModel from './productRequest'
-import customerModel from './customer'
+import restaurantLogModel from './restaurantLog';
+import productRequestModel from './productRequest';
+import customerModel from './customer';
+import incomeModel from './income';
 
 export {
-  userModel,
-  roomModel,
-  reservationModel,
-  roomTypeModel,
-  productModel,
-  salesLogModel,
-  expenditureModel,
-  stockModel,
-  roomLogsModel,
-  restaurantModel,
-  restaurantLogModel,
-  productRequestModel,
-  customerModel
+    userModel,
+    roomModel,
+    reservationModel,
+    roomTypeModel,
+    productModel,
+    salesLogModel,
+    expenditureModel,
+    stockModel,
+    roomLogsModel,
+    restaurantModel,
+    restaurantLogModel,
+    productRequestModel,
+    customerModel,
+    incomeModel
 };

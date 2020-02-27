@@ -1,30 +1,31 @@
 import express from 'express';
 import {
-  account,
-  createAuth,
-  room,
-  product,
-  salesLog,
-  expenditure,
-  stock,
-  roomType,
-  reservation,
-  user,
-  restaurant,
-  roomLogs,
-  restaurantLogs,
-  productRequest,
-  customer
+    account,
+    createAuth,
+    room,
+    product,
+    salesLog,
+    expenditure,
+    stock,
+    roomType,
+    reservation,
+    user,
+    restaurant,
+    roomLogs,
+    restaurantLogs,
+    productRequest,
+    customer,
+    income
 } from '../controllers/';
 
-import {auth} from '../utils/auth'
+import { auth } from '../utils/auth'
 
 const routes = express.Router();
 
-routes.all('/', function (req, res) {
-  res.status(200).json({
-    message: `You are on Hotel`
-  });
+routes.all('/', function(req, res) {
+    res.status(200).json({
+        message: `You are on Hotel`
+    });
 });
 
 // Create Hotel and user
@@ -36,8 +37,8 @@ routes.route('/login').post(createAuth.login);
 // User routes
 routes.route('/users').get(auth, user.getAllUser);
 routes.route('/users/:id')
-.delete(auth, user.deleteUser)
-.get(auth, user.getUserById);
+    .delete(auth, user.deleteUser)
+    .get(auth, user.getUserById);
 
 // Create product and room
 routes.route('/room').post(room.createRoom).get(room.getAllRooms);
@@ -94,5 +95,8 @@ routes.get('/account/restaurant', account.getAllRestaurantlog);
 // request product
 routes.route('/request').post(productRequest.createProductRequest).put(productRequest.editProductRequest).delete(productRequest.editProductRequest).get(productRequest.allProductRequest);
 routes.get('/request/:id', productRequest.getProductRequestById);
+
+// income route
+routes.route('/income').post(income.createIncome);
 
 export default routes;

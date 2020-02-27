@@ -10,24 +10,26 @@ import * as roomLogs from './roomLogs';
 import * as restaurantLogs from './restaurantLog'
 import * as user from './user'
 import * as restaurant from './restaurant';
-import * as account from './account'
-import * as productRequest from './productRequest'
-import * as customer from './customer'
+import * as account from './account';
+import * as productRequest from './productRequest';
+import * as customer from './customer';
+import * as income from './income';
 
 export {
-  createAuth,
-  room,
-  roomType,
-  reservation,
-  product,
-  productRequest,
-  salesLog,
-  expenditure,
-  stock,
-  roomLogs,
-  user,
-  restaurant,
-  restaurantLogs,
-  account,
-  customer,
+    createAuth,
+    room,
+    roomType,
+    reservation,
+    product,
+    productRequest,
+    salesLog,
+    expenditure,
+    stock,
+    roomLogs,
+    user,
+    restaurant,
+    restaurantLogs,
+    account,
+    customer,
+    income
 };
