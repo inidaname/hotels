@@ -9,14 +9,14 @@ const incomeSchema = new mongoose.Schema({
     paymentMethod: {
         type: String
     },
-    barSales: {
+    barSales: [{
         type: mongoose.Types.ObjectId,
         ref: 'SalesLog'
-    },
-    mealSales: {
+    }],
+    mealSales: [{
         type: mongoose.Types.ObjectId,
         ref: 'RestaurantLog'
-    },
+    }],
     checkOut: {
         type: mongoose.Types.ObjectId,
         ref: 'RoomLogs'
