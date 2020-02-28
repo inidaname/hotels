@@ -3,7 +3,7 @@
         <h4 class="h4 col-12 text-center">Search For Guest</h4>
         <div class="form-inline text-center w-100 mb-4">
             <label class="sr-only" for="inlineFormInputName2">Name</label>
-            <input type="text" [(ngModel)]="searchCheck" (keydown.enter)="searchGuest()" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+            <input type="text" [(ngModel)]="searchCheck" (keydown.enter)="searchGuest()" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Search Room Number">
             <button type="submit" (click)="searchGuest()" [disabled]="!searchCheck || searchCheck.length < 3" class="btn btn-primary mb-2">Submit</button>
         </div>
         <ngb-alert *ngIf="message" [type]="alertType" (close)="message = null">
