@@ -1,4 +1,121 @@
 <div class="w-100 col-12 d-flex flex-column justify-content-start align-items-center">
+
+    <div id="invoice-POS">
+
+        <center id="top">
+            <div class="logo"></div>
+            <div class="info">
+                <h2>Golden Sands Hotel and Suite</h2>
+            </div>
+            <!--End Info-->
+        </center>
+        <!--End InvoiceTop-->
+
+        <div id="mid">
+            <div class="info">
+                <h2>Contact Info</h2>
+                <p>
+                    Address : Ilorin, Kwara Nigeria<br> Email : contact@goldensandshotelandsuite.com<br>
+                </p>
+            </div>
+        </div>
+        <!--End Invoice Mid-->
+        <ng-container *ngIf="printData">
+            <div class="pr" id="bot">
+                <div id="table">
+                    <table>
+                        <tr class="tabletitle">
+                            <td class="item">
+                                <h2>Item</h2>
+                            </td>
+                            <td class="Hours">
+                                <h2>Qty</h2>
+                            </td>
+                            <td class="Rate">
+                                <h2>Sub Total</h2>
+                            </td>
+                        </tr>
+                        <tbody>
+                            <ng-container [ngSwitch]="printData?.place">
+                                <ng-template ngSwitchCase="poolBar">
+                                    <tr class="service" *ngFor="let item of printData?.productSold">
+                                        <td class="tableitem">
+                                            <p class="itemtext">{{item?.productDetail.name}}</p>
+                                        </td>
+                                        <td class="tableitem">
+                                            <p class="itemtext">{{item?.productQuantity}}</p>
+                                        </td>
+                                        <td class="tableitem">
+                                            <p class="itemtext">{{item?.productDetail.poolBarPrice * item?.productQuantity}}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template ngSwitchCase="mainBar">
+                                    <tr class="service" *ngFor="let item of printData?.productSold">
+                                        <td class="tableitem">
+                                            <p class="itemtext">{{item?.productDetail.name}}</p>
+                                        </td>
+                                        <td class="tableitem">
+                                            <p class="itemtext">{{item?.productQuantity}}</p>
+                                        </td>
+                                        <td class="tableitem">
+                                            <p class="itemtext">{{item?.productDetail.mainBarPrice * item?.productQuantity}}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template ngSwitchCase="restaurant">
+                                    <tr class="service" *ngFor="let item of printData?.productSold">
+                                        <td class="tableitem">
+                                            <p class="itemtext">{{item?.productDetail.mealName}}</p>
+                                        </td>
+                                        <td class="tableitem">
+                                            <p class="itemtext">{{item?.productQuantity}}</p>
+                                        </td>
+                                        <td class="tableitem">
+                                            <p class="itemtext">{{item?.productDetail.mealPrice * item?.productQuantity}}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </ng-container>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>Total Amoun Paid</td>
+                                <td></td>
+                                <td>{{printData.amountPaid}}</td>
+                            </tr>
+                        </tfoot>
+
+                    </table>
+                </div>
+                <!--End Table-->
+
+                <div id="legalcopy">
+                    <p class="legal"><strong>Thank you for your business!</strong>
+                    </p>
+                    <p>Method of Payment: {{printData.paymentMethod}}</p>
+                </div>
+
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+            </div>
+        </ng-container>
+        <div>
+
+
+        </div>
+        <!--End InvoiceBot-->
+    </div>
+    <!--End Invoice-->
+
+</div>
+
+<div class="w-100 col-12 d-flex flex-column justify-content-start align-items-center">
     <img src="/assets/logo-sm.png">
     <h1>Golden Sand Hotel and Suites</h1>
     <h4>Ilorin Kwara, Nigeria</h4>
@@ -70,57 +187,5 @@
                 <img [src]="item" width="200" class="img-fluid col-5 mx-auto my-4" alt="">
             </ng-container>
         </div>
-    </div>
-</ng-container>
-<ng-container *ngIf="printData">
-    <div class="pr">
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Item</th>
-                    <th>Qty</th>
-                    <th>&#8358;</th>
-                </tr>
-            </thead>
-            <tbody>
-                <ng-container [ngSwitch]="printData?.place">
-                    <ng-template ngSwitchCase="poolBar">
-                        <tr *ngFor="let item of printData?.productSold">
-                            <td>{{item?.productDetail.name}}</td>
-                            <td>{{item?.productQuantity}}</td>
-                            <td>{{item?.productDetail.poolBarPrice * item?.productQuantity}}</td>
-                        </tr>
-                    </ng-template>
-                    <ng-template ngSwitchCase="mainBar">
-                        <tr *ngFor="let item of printData?.productSold">
-                            <td>{{item?.productDetail.name}}</td>
-                            <td>{{item?.productQuantity}}</td>
-                            <td>{{item?.productDetail.mainBarPrice * item?.productQuantity}}</td>
-                        </tr>
-                    </ng-template>
-                    <ng-template ngSwitchCase="restaurant">
-                        <tr *ngFor="let item of printData?.productSold">
-                            <td>{{item?.productDetail.mealName}}</td>
-                            <td>{{item?.productQuantity}}</td>
-                            <td>{{item?.productDetail.mealPrice * item?.productQuantity}}</td>
-                        </tr>
-                    </ng-template>
-                </ng-container>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td>Total Amoun Paid</td>
-                    <td></td>
-                    <td>{{printData.amountPaid}}</td>
-                </tr>
-            </tfoot>
-        </table>
-
-        <p>Method of Payment: {{printData.paymentMethod}}</p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
     </div>
 </ng-container>

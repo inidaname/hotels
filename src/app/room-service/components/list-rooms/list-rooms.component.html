@@ -1,145 +1,126 @@
 <div class="modal-header">
-  <h4 class="h4">Room Details for {{ userData?.customerName }}</h4>
+    <h4 class="h4">Room Details for {{ userData?.customerName }}</h4>
 </div>
 <form [formGroup]="roomLogForm">
-  <ng-container *ngIf="!position;else nextContent">
-    <div class="row col-10 my-4 mx-auto modal-content p-4">
-      <div class="row col-8 text-center">
-        <div class="form-check mx-auto form-check-inline">
-          <label class="form-check-label">
+    <ng-container *ngIf="!position;else nextContent">
+        <div class="row col-10 my-4 mx-auto modal-content p-4">
+            <div class="row col-8 text-center">
+                <div class="form-check mx-auto form-check-inline">
+                    <label class="form-check-label">
             <input class="form-check-input" type="radio" formControlName="checkedInStatus" value="reserved"> Reservation
           </label>
-        </div>
-        <div class="form-check mx-auto form-check-inline">
-          <label class="form-check-label">
+                </div>
+                <div class="form-check mx-auto form-check-inline">
+                    <label class="form-check-label">
             <input class="form-check-input" type="radio" formControlName="checkedInStatus" value="occupied"> Check In
           </label>
-        </div>
-      </div>
-      <div class="form-group col-4 mx-auto my-4">
-        <label for="purposeOfVisit">Purpose of Visit</label>
-        <input type="text" formControlName="purposeOfVisit" id="purposeOfVisit" class="form-control"
-          [ngClass]="{'is-invalid': f.purposeOfVisit.touched && f.purposeOfVisit.invalid}"
-          placeholder="Purpose of visit" aria-describedby="typeHelp">
-      </div>
-
-      <hr class="w-75 mx-auto-my-5">
-      <div class="col-12 row">
-        <div class="form-group col-5 mx-auto my-4">
-          <label for="arrivalDate">Arrival Date</label>
-          <div class="input-group">
-            <input type="text" formControlName="arrivalDate" class="form-control" ngbDatepicker #arrival="ngbDatepicker"
-              placeholder="Arrival Date: dd/mm/yyyy">
-            <div class="input-group-append">
-              <button class="btn btn-outline-success calendar" (click)="arrival.toggle()" type="button"></button>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="form-group col-5 mx-auto my-4">
-          <label for="departureDate">Departure Date</label>
-          <div class="input-group">
-            <input type="text" formControlName="departureDate" class="form-control" ngbDatepicker
-              #departure="ngbDatepicker" placeholder="Departure Date: dd/mm/yyyy">
-            <div class="input-group-append">
-              <button class="btn btn-outline-success calendar" (click)="departure.toggle()" type="button"></button>
+            <div class="form-group col-4 mx-auto my-4">
+                <label for="purposeOfVisit">Purpose of Visit</label>
+                <input type="text" formControlName="purposeOfVisit" id="purposeOfVisit" class="form-control" [ngClass]="{'is-invalid': f.purposeOfVisit.touched && f.purposeOfVisit.invalid}" placeholder="Purpose of visit" aria-describedby="typeHelp">
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 row">
-        <div class="form-group col-3 mx-auto my-4">
-          <label for="comingFrom">Coming From</label>
-          <input type="text" formControlName="comingFrom" id="comingFrom" class="form-control"
-            [ngClass]="{'is-invalid': f.comingFrom.touched && f.comingFrom.invalid}" placeholder="Coming from"
-            aria-describedby="numberHelp">
-        </div>
-        <div class="form-group col-3 mx-auto my-4">
-          <label for="nextDestination">Next Destination</label>
-          <input type="text" formControlName="nextDestination" id="nextDestination" class="form-control"
-            [ngClass]="{'is-invalid': f.nextDestination.touched && f.nextDestination.invalid}" placeholder="Destination"
-            aria-describedby="numberHelp">
-        </div>
-      </div>
-      <div class="col-12 row">
-        <div class="col-12 row">
-          <div class="form-group col-3 mx-auto my-4">
-            <label for="numberOfPersons">Number of Persons</label>
-            <input type="number" formControlName="numberOfPersons" id="numberOfPersons" class="form-control"
-              [ngClass]="{'is-invalid': f.numberOfPersons.touched && f.numberOfPersons.invalid}"
-              placeholder="Number of Person" aria-describedby="typeHelp">
-          </div>
 
-          <div class="form-group col-3 mx-auto my-4">
-            <label for="purposeOfVisit">Purpose of Visit</label>
-            <input type="text" formControlName="purposeOfVisit" id="purposeOfVisit" class="form-control"
-              [ngClass]="{'is-invalid': f.purposeOfVisit.touched && f.purposeOfVisit.invalid}"
-              placeholder="Purpose of visit" aria-describedby="typeHelp">
-          </div>
-        </div>
+            <hr class="w-75 mx-auto-my-5">
+            <div class="col-12 row">
+                <div class="form-group col-5 mx-auto my-4">
+                    <label for="arrivalDate">Arrival Date</label>
+                    <div class="input-group">
+                        <input type="text" formControlName="arrivalDate" class="form-control" ngbDatepicker #arrival="ngbDatepicker" placeholder="Arrival Date: dd/mm/yyyy">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-success calendar" (click)="arrival.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-5 mx-auto my-4">
+                    <label for="departureDate">Departure Date</label>
+                    <div class="input-group">
+                        <input type="text" formControlName="departureDate" class="form-control" ngbDatepicker #departure="ngbDatepicker" placeholder="Departure Date: dd/mm/yyyy">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-success calendar" (click)="departure.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 row">
+                <div class="form-group col-3 mx-auto my-4">
+                    <label for="comingFrom">Coming From</label>
+                    <input type="text" formControlName="comingFrom" id="comingFrom" class="form-control" [ngClass]="{'is-invalid': f.comingFrom.touched && f.comingFrom.invalid}" placeholder="Coming from" aria-describedby="numberHelp">
+                </div>
+                <div class="form-group col-3 mx-auto my-4">
+                    <label for="nextDestination">Next Destination</label>
+                    <input type="text" formControlName="nextDestination" id="nextDestination" class="form-control" [ngClass]="{'is-invalid': f.nextDestination.touched && f.nextDestination.invalid}" placeholder="Destination" aria-describedby="numberHelp">
+                </div>
+            </div>
+            <div class="col-12 row">
+                <div class="col-12 row">
+                    <div class="form-group col-3 mx-auto my-4">
+                        <label for="numberOfPersons">Number of Persons</label>
+                        <input type="number" formControlName="numberOfPersons" id="numberOfPersons" class="form-control" [ngClass]="{'is-invalid': f.numberOfPersons.touched && f.numberOfPersons.invalid}" placeholder="Number of Person" aria-describedby="typeHelp">
+                    </div>
+                </div>
 
-        <div class="form-group col-5 mx-auto my-4">
-          <label for="paymentMethod">Payment Method</label>
-          <select class="form-control" formControlName="paymentMethod">
+                <div class="form-group col-5 mx-auto my-4">
+                    <label for="paymentMethod">Payment Method</label>
+                    <select class="form-control" formControlName="paymentMethod">
             <option value="ATM Card">ATM Card</option>
             <!-- <option *ngIf="f.representation.value === 'Company'" value="Company">Company</option> -->
             <option value="Cash">Cash</option>
           </select>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </ng-container>
-  <ng-template #nextContent>
-    <div class="modal-body">
-      <app-rooms-table [purpose]="'product'" [needed]="true" (tapRoom)="selectRoom($event)"></app-rooms-table>
-      <div class="w-100 my-4">
-        <div class="custom-control custom-switch my-auto w-100 text-center">
-          <input type="checkbox" class="custom-control-input" id="customSwitch1" (change)="setDiscount()"
-            formControlName="discount" value="true">
-          <label class="custom-control-label" for="customSwitch1">Toggle Discount</label>
+    </ng-container>
+    <ng-template #nextContent>
+        <div class="modal-body">
+            <app-rooms-table [purpose]="'product'" [needed]="true" (tapRoom)="selectRoom($event)"></app-rooms-table>
+            <div class="w-100 my-4">
+                <div class="custom-control custom-switch my-auto w-100 text-center">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1" (change)="setDiscount()" formControlName="discount" value="true">
+                    <label class="custom-control-label" for="customSwitch1">Toggle Discount</label>
+                </div>
+                <div class="form-group col-12" *ngIf="f.discount.value === true">
+                    <label for="amountPaid">Set Amount Approved</label>
+                    <input type="text" class="form-control" (change)="sendDiscount()" formControlName="amountPaid" id="amountPaid" placeholder="Amount To Pay">
+                </div>
+            </div>
         </div>
-        <div class="form-group col-12" *ngIf="f.discount.value === true">
-          <label for="amountPaid">Set Amount Approved</label>
-          <input type="text" class="form-control" (change)="sendDiscount()" formControlName="amountPaid" id="amountPaid"
-            placeholder="Amount To Pay">
-        </div>
-      </div>
-    </div>
-  </ng-template>
+    </ng-template>
 </form>
 <div class="modal-footer">
-  <button class="btn btn-danger mx-5" (click)="confirmCancelModal()">Cancel</button>
-  <ng-container *ngIf="position; else notPosition">
-    <button class="btn btn-secondary mx-2" (click)="goBack()">Back</button>
-    <button class="btn btn-success mx-2" (click)="lodgeRoom()">Book Guest</button>
-  </ng-container>
-  <ng-template #notPosition>
-    <button class="btn btn-success mx-2" (click)="goNext()">Next</button>
-  </ng-template>
+    <button class="btn btn-danger mx-5" (click)="confirmCancelModal()">Cancel</button>
+    <ng-container *ngIf="position; else notPosition">
+        <button class="btn btn-secondary mx-2" (click)="goBack()">Back</button>
+        <button class="btn btn-success mx-2" (click)="lodgeRoom()">Book Guest</button>
+    </ng-container>
+    <ng-template #notPosition>
+        <button class="btn btn-success mx-2" (click)="goNext()">Next</button>
+    </ng-template>
 </div>
 
 
 <ng-template #confirmCancel>
-  <div class="modal-body">
-    <p class="lead">
-      Are You Sure You want to cancel? You will have to search for the user.
-    </p>
-    <div class="w-100 d-flex justify-content-around">
-      <button class="btn btn-danger my-5" ngbAutofocus (click)="cancalModal()">Yes</button>
-      <button class="btn btn-secondary my-5" (click)="notReady()">No</button>
+    <div class="modal-body">
+        <p class="lead">
+            Are You Sure You want to cancel? You will have to search for the user.
+        </p>
+        <div class="w-100 d-flex justify-content-around">
+            <button class="btn btn-danger my-5" ngbAutofocus (click)="cancalModal()">Yes</button>
+            <button class="btn btn-secondary my-5" (click)="notReady()">No</button>
+        </div>
     </div>
-  </div>
 </ng-template>
 
 <ng-template #lodgedRoom>
-  <div class="modal-header">
-    <h4 class="h4">Room Lodged Successfully</h4>
-  </div>
-  <div class="modal-body border border-success">
-    <p class="lead">
-      {{userData.customerName}} was lodged into room no {{f.roomNumber.value}}
-    </p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-success" (click)="setForPrint()">Done</button>
-  </div>
+    <div class="modal-header">
+        <h4 class="h4">Room Lodged Successfully</h4>
+    </div>
+    <div class="modal-body border border-success">
+        <p class="lead">
+            {{userData.customerName}} was lodged into room no {{f.roomNumber.value}}
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" (click)="setForPrint()">Done</button>
+    </div>
 </ng-template>

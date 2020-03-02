@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -101,6 +101,7 @@ export const cloudinaryLib = {
     InventoryFormComponent,
     ImageUploadComponent,
     CheckoutComponent
-  ]
+  ],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class SharedModule { }

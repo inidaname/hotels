@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModalConfig, NgbModal, NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { CustomerInterface } from '../../../shared/interface/customer.interface';
+import { CustomerInterface, RoomLodge } from '../../../shared/interface/customer.interface';
 import { ApiService } from 'app/shared/services/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PrinterService } from 'app/shared/services/printer.service';
@@ -20,6 +20,7 @@ export class ListRoomsComponent implements OnInit, OnDestroy {
   @ViewChild('confirmCancel', {static: true}) confirmCancel: ElementRef;
   @ViewChild('lodgedRoom', {static: true}) lodgedRoom: ElementRef;
   confirm: NgbModalRef;
+  lodged: RoomLodge;
 
   constructor(
     private fb: FormBuilder,
@@ -62,6 +63,7 @@ export class ListRoomsComponent implements OnInit, OnDestroy {
     this.roomLogForm.controls.checkedInBy.setValue(localStorage.getItem('currentUser'));
     this.roomLogForm.controls.customer.setValue(this.userData._id);
     this.api.createRoomLodge(this.roomLogForm.value).subscribe((lodged: any) => {
+      this.lodged = lodged.data;
       this.modal.open(this.lodgedRoom);
       this.spinner.hide();
     });
@@ -69,8 +71,8 @@ export class ListRoomsComponent implements OnInit, OnDestroy {
 
   setForPrint() {
     this.spinner.hide();
-    this.modal.dismissAll()
-    localStorage.setItem('roompage', JSON.stringify(this.userData));
+    this.modal.dismissAll();
+    localStorage.setItem('roompage', JSON.stringify(this.lodged));
     window.open('/print', '_blank');
   }
 
